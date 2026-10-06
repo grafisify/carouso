@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<!-- ============================================================
+  BASE TEMPLATE — Carousel Post Designer skill
+  Cara pakai:
+  1. Salin file ini menjadi <topik>.html
+  2. Ubah token desain di :root (warna, font, brand, handle)
+  3. Isi slot <!-- EDIT --> per slide; slot gambar <!-- IMG: ... -->
+     diganti <img> yang menunjuk ke file lokal di images/
+  4. Render dengan scripts/render_carousel.py (quality gate otomatis)
+  PENTING soal font: boleh Google Fonts (uncomment blok <link> di atas) ATAU font
+  lokal. Cek ketersediaan dengan `fc-list | grep -i "<nama-font>"`. Jangan biarkan
+  judul jatuh ke font fallback — render_carousel.py --check-fonts akan menolaknya.
+============================================================= -->
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carousel</title>
+<!-- ============================================================
+  GOOGLE FONTS (opsional): hapus komentar di bawah untuk memakai webfont.
+  Ganti family/weight sesuai kebutuhan brief. Selalu pakai display=swap.
+  Syarat: mesin render harus bisa mencapai fonts.googleapis.com.
+  render_carousel.py --check-fonts akan MENGGAGALKAN render bila webfont
+  tidak termuat (agar judul tidak jatuh ke font fallback).
+  Jika lingkunganmu memblokir Google Fonts, install TTF-nya secara lokal
+  (https://github.com/google/fonts) — nama family-nya tetap sama.
+============================================================= -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
+<style>
+/* ============ EDIT: TOKEN DESAIN ============ */
+:root{
+  --bg:#1c1a17;            /* warna dasar slide */
+  --bg2:#2a251e;           /* warna sekunder background */
+  --paper:rgba(255,252,245,.92);  /* panel kartu */
+  --ink:#2e2620;           /* teks utama */
+  --ink-soft:#6b5d4d;      /* teks sekunder */
+  --accent:#c0701f;        /* warna aksen: sorotan kata, garis, CTA */
+  --brand:#7a5a32;         /* warna nama brand */
+  --font-display:'Baloo 2','Caveat',cursive;   /* judul — boleh Google Fonts (uncomment <link>) atau nama font lokal */
+  --font-body:'Quicksand','Plus Jakarta Sans',system-ui,sans-serif; /* isi */
+  --handle:'@brandkamu';   /* EDIT: handle akun */
+  --radius:30px;
+}
+/* ============ /EDIT ============ */
+
+*{box-sizing:border-box}
+body{margin:0;background:#111;font-family:var(--font-body);color:var(--ink)}
+.carousel{display:flex;flex-direction:column;gap:40px;align-items:center;padding:40px}
+
+/* ---- bingkai slide: 1080x1350, ganti via --slide-w/h bila perlu ---- */
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;border-radius:48px;
+  background:
+    radial-gradient(circle at 20% 12%, var(--bg2), transparent 45%),
+    radial-gradient(circle at 85% 88%, var(--bg2), transparent 40%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+  box-shadow:0 40px 90px rgba(0,0,0,.35);}
+.paper{position:absolute;inset:42px;border-radius:var(--radius);
+  background:linear-gradient(160deg, var(--paper), rgba(247,238,220,.82));
+  border:1px solid rgba(120,90,55,.22);
+  box-shadow:0 24px 60px rgba(60,40,20,.18), inset 0 1px 0 rgba(255,255,255,.6);
+  display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:88px;flex:none;display:flex;align-items:center;justify-content:space-between;
+  padding:0 44px;border-bottom:2px dashed rgba(120,90,55,.30)}
+.brand{font-family:var(--font-display);font-size:38px;font-weight:700;color:var(--brand)}
+.counter{font-family:var(--font-display);font-size:32px;font-weight:600;color:var(--ink-soft)}
+.content{padding:44px 60px;display:flex;flex-direction:column;justify-content:center;flex:1;min-height:0}
+.eyebrow{display:inline-flex;align-self:flex-start;padding:10px 20px;border-radius:999px;
+  background:color-mix(in srgb, var(--accent) 16%, transparent);
+  border:1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  font-size:15px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--accent)}
+h1{margin:26px 0 0;font-family:var(--font-display);font-size:92px;line-height:.98;
+  letter-spacing:-1px;color:var(--ink);max-width:840px}
+h1 .accent{color:var(--accent)}
+p{color:var(--ink-soft);font-size:25px;line-height:1.5;font-weight:500;margin:18px 0 0}
+.card{margin-top:38px;padding:32px 40px;background:rgba(255,252,245,.7);
+  border:1px solid rgba(120,90,55,.22);border-radius:26px;
+  box-shadow:0 16px 40px rgba(60,40,20,.10), inset 0 1px 0 rgba(255,255,255,.6);
+  display:flex;flex-direction:column;gap:8px}
+.card .emoji{font-size:70px;line-height:1;margin-bottom:6px}
+.label{font-size:14px;font-weight:700;color:var(--brand);letter-spacing:.10em;text-transform:uppercase}
+.footer{position:absolute;bottom:26px;left:64px;right:64px;display:flex;
+  justify-content:space-between;align-items:center;
+  color:var(--brand);font-size:15px;font-weight:600}
+.cta{font-family:var(--font-display);font-size:24px;color:var(--accent)}
+
+/* ---- cover: judul rata tengah, lebih besar ---- */
+.cover .content{padding:48px 64px;align-items:center;text-align:center}
+.cover .eyebrow{align-self:center}
+.cover h1{font-size:132px;line-height:.92;letter-spacing:-2px;max-width:900px}
+.cover p{font-size:27px;max-width:760px}
+.cover .accent-line{width:120px;height:8px;border-radius:99px;background:var(--accent);margin:28px 0 4px}
+.cover .card{align-items:center;text-align:center;margin-top:44px}
+
+/* ---- slot gambar: bingkai rasio tetap, tidak pernah stretch ---- */
+.img-frame{position:relative;overflow:hidden;border-radius:20px;background:#0002}
+.img-frame img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.img-hero{aspect-ratio:4/3;margin-top:32px}          /* gambar besar */
+.img-ilustrasi{aspect-ratio:1/1;margin-top:28px}      /* gambar kecil */
+.img-frame .scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));}
+.img-frame .caption{position:absolute;left:20px;bottom:16px;right:20px;
+  color:#fff;font-size:20px;font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.takeaway{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:18px}
+.takeaway li{display:flex;gap:16px;align-items:flex-start;font-size:24px;color:var(--ink);font-weight:600}
+.takeaway li::before{content:"✓";flex:none;width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:#fff;background:var(--accent);
+  font-size:24px;font-weight:800}
+</style>
+</head>
+<body>
+<div class="carousel">
+
+<!-- ================= SLIDE 01 COVER — EDIT ================= -->
+<section class="slide cover">
+  <div class="paper">
+    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">01 / 10</div></div>
+    <div class="content">
+      <div class="eyebrow">✦ Kategori</div>
+      <h1>Judul Hook <span class="accent">3–7 Kata</span></h1>
+      <div class="accent-line"></div>
+      <p>Satu kalimat penjelas, maksimal dua baris, bikin penasaran.</p>
+      <div class="card">
+        <div class="emoji">✨</div>
+        <p>Satu fakta teaser yang bikin orang mau swipe.</p>
+      </div>
+    </div>
+    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 02 — EDIT (contoh slot gambar hero) ================= -->
+<section class="slide">
+  <div class="paper">
+    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">02 / 10</div></div>
+    <div class="content">
+      <div class="eyebrow">✦ Poin 01</div>
+      <h1>Judul Deskriptif <span class="accent">Singkat.</span></h1>
+      <p>Satu-dua kalimat penjelasan inti.</p>
+      <!-- IMG: hero slide 2 — ganti src ke file lokal, mis. images/slide02_hero_bawang.jpg -->
+      <div class="img-frame img-hero">
+        <img src="images/placeholder.jpg" alt="deskripsi gambar">
+        <div class="scrim"></div>
+        <div class="caption">Caption singkat 1 baris (opsional)</div>
+      </div>
+    </div>
+    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 03–09 — EDIT: duplikasi pola slide 02 ================= -->
+<section class="slide">
+  <div class="paper">
+    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">03 / 10</div></div>
+    <div class="content">
+      <div class="eyebrow">✦ Poin 02</div>
+      <h1>Judul Poin <span class="accent">Berikutnya.</span></h1>
+      <p>Penjelasan singkat 1–2 kalimat.</p>
+      <div class="card">
+        <div class="emoji">💡</div>
+        <div class="label">Fakta / Langkah</div>
+        <p>Detail pendukung yang konkret dan actionable.</p>
+      </div>
+    </div>
+    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+  </div>
+</section>
+
+<!-- (duplikasi section .slide untuk slide 04–09, update counter & konten) -->
+
+<!-- ================= SLIDE 10 PENUTUP — EDIT ================= -->
+<section class="slide">
+  <div class="paper">
+    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">10 / 10</div></div>
+    <div class="content">
+      <div class="eyebrow">✦ Rangkuman</div>
+      <h1>Ingat <span class="accent">4 Hal Ini.</span></h1>
+      <ul class="takeaway">
+        <li>Poin rangkuman pertama yang actionable</li>
+        <li>Poin rangkuman kedua yang actionable</li>
+        <li>Poin rangkuman ketiga yang actionable</li>
+        <li>Poin rangkuman keempat yang actionable</li>
+      </ul>
+      <div class="card">
+        <div class="emoji">📤</div>
+        <p><b>Share</b> ke yang butuh + <b>Follow</b> biar nggak ketinggalan.</p>
+      </div>
+    </div>
+    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>
