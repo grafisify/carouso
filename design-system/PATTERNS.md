@@ -75,3 +75,20 @@ Use when: closing with a recap and an action.
   content into a pattern that fights it.
 - Track usage per design system in `last-used.json` (cover pattern plus full
   sequence). Read it before composing the next carousel.
+
+## Two modes
+
+Every slide can be light or dark. Add the `mode-dark` class to the
+`<section class="slide ...">` to flip that slide to the system's dark
+tokens. All patterns read tokens, so the flip needs no other changes.
+
+Rules:
+- Alternate modes: no two adjacent slides share a mode.
+- Each new carousel starts with the opposite mode of the previous
+  carousel's first slide (recorded in `last-used.json` as `modes`).
+- Use the flip deliberately: contrast pairs (myth vs fact, problem vs
+  solution, before vs after) read naturally as mode changes.
+
+`system.css` must define `.slide.mode-dark` with the brand's dark
+tokens. The shipped file's block matches its dark theme; light systems
+override it with their own dark palette.

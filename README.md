@@ -64,7 +64,7 @@ Font choices stay at the feel level. The agent maps them to real fonts internall
 
 ## The pattern library
 
-Twelve structural patterns in `design-system/`, all token-driven:
+Twelve structural patterns in `design-system/`, all token-driven. Each slide can also flip to the system's dark mode with one class (`mode-dark` on the `<section>`), so a carousel can alternate light and dark slides without any redesign.
 
 | Pattern | Use for |
 |---|---|
@@ -89,6 +89,7 @@ Every slide is held to the same bar:
 - **Color.** 60 percent base, 30 percent secondary, 10 percent accent.
 - **Copy.** Short declarative sentences. Concrete nouns and strong verbs. No AI tells: no em dashes, no "delve", no "unlock", no filler openers.
 - **Consistency.** Tokens never change across slides. Patterns vary. That is the whole trick.
+- **Two modes.** Every system ships a light and a dark token set. Slides alternate modes, and each new carousel opens with the opposite mode of the last one.
 
 ## Quick start
 

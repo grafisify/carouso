@@ -48,7 +48,8 @@ Read the system's `last-used.json` and the pattern catalog in `design-system/PAT
 - No two adjacent slides share a pattern.
 - Never repeat the cover pattern of the previous carousel for the same brand.
 - Match pattern to content: numbers to stat-band or big-number, sequences to process-steps, a single line to quote. Do not force content into a fighting pattern.
-Write the plan as a simple list (slide number, pattern name, one-line content) before building anything.
+- Alternate the two modes across slides: assign `mode-dark` to a slide or leave it light so no two adjacent slides share a mode. Start with the opposite mode of the previous carousel's first slide (read `last-used.json`). One carousel might open light, the next opens dark. Let the content guide which slides go dark: contrast pairs (myth vs fact, problem vs solution) are natural dark slides.
+Write the plan as a simple list (slide number, pattern name, mode, one-line content) before building anything.
 
 ### 3. Write the copy
 One idea per slide. Headlines stay under 8 words. Body stays under 25 words per slide. Follow the copy standards below.
@@ -73,7 +74,7 @@ python3 scripts/render_carousel.py --html <file.html> --out <dir-output> \
 The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, or when a checked font failed to load. Fix the HTML and re-render until it passes. Never waive the gate manually.
 
 ### 7. Final visual check and record
-Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern and full pattern sequence.
+Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern, full pattern sequence, and the mode of each slide (for example `{"cover": "cover-big-type", "sequence": ["cover-big-type", "two-cards", "takeaway"], "modes": ["light", "dark", "light"]}`).
 
 ## Design thinking
 Apply this reasoning at every step. It is what keeps the output from reading as AI slop.
@@ -115,7 +116,7 @@ Apply this reasoning at every step. It is what keeps the output from reading as 
 ## Operating rules
 1. No design system, no production. Phase 1 approval comes before any carousel.
 2. Compose from the pattern library. Do not invent per-carousel layouts.
-3. Variety rules are hard rules: no adjacent duplicate patterns, no repeated cover in a row, always update `last-used.json`.
+3. Variety rules are hard rules: no adjacent duplicate patterns, no repeated cover in a row, alternate light/dark modes with no two adjacent slides sharing a mode, invert the starting mode each carousel, always update `last-used.json`.
 4. Images come from user uploads or URLs/articles only. No generative AI imagery, no exceptions.
 5. Use an image only after visual verification. Replace a failed slot with a graphic element.
 6. A failed render gate means fix the HTML, not bypass the gate.
