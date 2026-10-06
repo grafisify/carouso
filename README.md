@@ -7,7 +7,9 @@
 Turn a topic into a designed, ready-to-post carousel for Instagram, TikTok, or Facebook.
 One locked template. Zero design drift. Real images only. No AI slop.
 
-<img src="assets/preview-cover.jpg" width="420" alt="Carouso template cover preview">
+<img src="assets/preview-all.jpg" width="860" alt="Carouso carousel preview: all five slides in the dark-elegant impsycholy style, including an empty image slot">
+
+*Five slides, one locked template. Slide 3 shows the empty image slot where user uploads land.*
 
 </div>
 
@@ -70,8 +72,6 @@ Every slide is held to the same bar:
 - **Copy.** Short declarative sentences. Concrete nouns and strong verbs. No AI tells: no em dashes, no "delve", no "unlock", no filler openers.
 - **Consistency.** Topbar, footer, cards, radius, and shadows never change across slides.
 
-<img src="assets/preview-content.jpg" width="420" alt="Carouso content slide with placed image">
-
 ## Quick start
 
 1. Copy the `carouso/` folder into your agent's skills directory (`~/.claude/skills/`, `~/workspace/skills/`, or your platform's skills folder).
@@ -86,8 +86,7 @@ carouso/
 ├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
 ├── assets/
 │   ├── base-template.html    ← starting scaffold for phase 1
-│   ├── preview-cover.jpg     ← rendered cover sample
-│   └── preview-content.jpg   ← rendered content slide sample
+│   └── preview-all.jpg       ← all five sample slides in one strip
 ├── scripts/
 │   └── render_carousel.py    ← Playwright render with quality gates
 └── examples/
