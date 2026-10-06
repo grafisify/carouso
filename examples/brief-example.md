@@ -11,6 +11,7 @@ The agent studies the screenshot (layout zones, type scale, spacing, color roles
 ### Input brief (from the user)
 
 > Topic: "5 mistakes that ruin Turkish coffee at home"
+> Template: morningcup-playful
 > Slides: 10, size 1080x1350
 > Images:
 > - Upload: `brewing.jpg` → slide 2, hero role (the brewing process)

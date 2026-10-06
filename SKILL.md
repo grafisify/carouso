@@ -9,7 +9,7 @@ description: "Use when you need a carousel post for Instagram, TikTok, or Facebo
 Produce carousel posts in two phases. Phase 1 designs and locks one template with the user. Phase 2 reuses that template for every carousel: write copy, place images, render through quality gates.
 
 ## First-run onboarding
-When this skill triggers and no locked template exists yet for the user's brand or project, do not start designing. Open the onboarding dialog first. Ask one question at a time, in this order, each with the listed choices. Accept a custom answer at any point. Six questions, then design. If the user sends a screenshot or HTML reference instead of answering, skip the dialog and go to Phase 1, option B.
+When this skill triggers and no locked template exists yet for the user's brand or project, do not start designing. Open the onboarding dialog first. Ask one question at a time, in this order, each with the listed choices. Accept a custom answer at any point. Seven questions, then design. If the user sends a screenshot or HTML reference instead of answering, skip the dialog and go to Phase 1, option B.
 
 1. **Style.** "What vibe should the carousel have?" Choices: Playful and friendly / Clean and minimal / Bold and striking / Warm and elegant / Dark and premium.
 2. **Colors.** "Pick a color mood." Choices: Warm earth (browns, cream, orange) / Fresh natural (greens, cream) / Ocean calm (blues, white) / Bold contrast (black, white, one strong accent) / Soft pastel.
@@ -17,10 +17,11 @@ When this skill triggers and no locked template exists yet for the user's brand 
 4. **Brand.** "Brand name and handle for the watermark?" Free text, one message. Example: "Morning Cup / @morningcup".
 5. **Topic.** "What are the carousels usually about?" Free text, one line. This sets the copy tone and the sample content.
 6. **Language.** "Indonesian or English?" Two choices. This sets every template string: headings, CTA, footer.
+7. **Template name.** "What should we call this template?" Free text, one message. Suggest a default from the brand and style, for example "morningcup-playful". The name matters because the user may create more templates later and pick one per carousel.
 
-After the sixth answer, summarize the locked choices in one short message, then move to Phase 1: draft the template, render three sample slides (cover, content, closer), and ask for approval.
+After the seventh answer, summarize the locked choices in one short message, then move to Phase 1: draft the template, render three sample slides (cover, content, closer), and ask for approval.
 
-## Phase 1: lock the template (once per brand)
+## Phase 1: lock a template
 
 Two ways in. Pick one.
 
@@ -28,13 +29,14 @@ Two ways in. Pick one.
 
 **B. Adapt from a reference.** The user sends a screenshot or an HTML file of a carousel they like. Study it: layout zones, type scale, spacing rhythm, color roles, recurring elements. Rebuild it as a clean template with CSS variables for every brand token (colors, fonts, radius), so future carousels can reskin it without touching the layout.
 
-**Approval gate.** The template enters production only after the user approves the rendered samples. Save the approved file as the project's canonical template (for example `template.html`). Every future carousel starts as a copy of this file. When the brand evolves, repeat Phase 1 and re-lock.
+**Approval gate.** The template enters production only after the user approves the rendered samples. Save the approved file under its template name (for example `templates/morningcup-playful.html`). Every future carousel starts as a copy of a locked template. To create another template later, run the onboarding dialog again from question 1. When the brand evolves, repeat Phase 1 and re-lock.
 
 ## Phase 2: produce a carousel
 
 ### 1. Collect the brief
 Get this clear before starting. Ask about anything missing. Do not guess.
 - Topic and angle, as one hook sentence.
+- Template: which locked template to use. Default to the most recently approved one. Ask when several exist.
 - Slide count (default 10) and size (default 1080x1350, alternative 1080x1440).
 - Images. For each image: the source (uploaded file path, direct URL, or article URL), the target slide, and the role (hero, full-bleed, or card illustration). Without an explicit placement map, use no images.
 
@@ -96,7 +98,7 @@ Apply this reasoning at every step. It is what keeps the output from reading as 
 - Anti-collision: fixed zones (topbar, content, footer) with vertical flex flow. Elements that touch are a failed design.
 
 ## Output contract
-- The locked `template.html` (approved, versioned with the project).
+- Locked templates, saved by name under `templates/` (for example `templates/morningcup-playful.html`).
 - Per carousel: `slide_01.jpg` through `slide_NN.jpg` (exactly N files at the requested size), the source HTML, `images/` with local copies, and `provenance.log`.
 
 ## Operating rules
