@@ -96,11 +96,13 @@ async def main() -> int:
                 quality=args.quality,
             )
 
-            # Overflow gate: overflowing content means clipped text or collisions
+            # Overflow gate: overflowing content means clipped text or collisions.
+            # Falls back to .inner or the slide itself, so freely composed
+            # patterns without a .content wrapper do not crash the gate.
             ovf = await page.evaluate(
                 f"""(()=>{{
                     const s = document.querySelectorAll('.slide')[{i}];
-                    const inner = s.querySelector('.content');
+                    const inner = s.querySelector('.content') || s.querySelector('.inner') || s;
                     return {{ scrollW: inner.scrollWidth, clientW: inner.clientWidth,
                               scrollH: inner.scrollHeight, clientH: inner.clientHeight }};
                 }})()"""

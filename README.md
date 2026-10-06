@@ -5,11 +5,11 @@
 **An AI agent skill for scroll-stopping carousel posts.**
 
 Turn a topic into a designed, ready-to-post carousel for Instagram, TikTok, or Facebook.
-One locked template. Zero design drift. Real images only. No AI slop.
+One locked design system. Every carousel composed fresh. Real images only. No AI slop.
 
-<img src="assets/preview-all.jpg" width="860" alt="Carouso carousel preview: all five slides in the dark-elegant impsycholy style, including an empty image slot">
+<img src="assets/preview-all.jpg" width="860" alt="Carouso demo carousel: six slides, six different layout patterns, one brand identity">
 
-*Five slides, one locked template. Slide 3 shows the empty image slot where user uploads land.*
+*Six slides, six different patterns, one brand. Tokens stay locked. Composition stays free.*
 
 </div>
 
@@ -19,8 +19,8 @@ One locked template. Zero design drift. Real images only. No AI slop.
 
 | | |
 |---|---|
-| **Template-first** | Design the system once with the user, then every carousel inherits it. Layouts never drift. |
-| **Guided onboarding** | A 7-question dialog (style, colors, type feel, brand, topic, language, template name) locks the brand before any pixel is placed. |
+| **Design system, not a template** | Brand tokens (colors, fonts, spacing) stay locked. Layouts are composed per topic from a 12-pattern library. Consistent, never templated. |
+| **Guided onboarding** | A 7-question dialog (style, colors, type feel, brand, topic, language, system name) locks the brand before any pixel is placed. |
 | **Real images only** | Images come from user uploads or URLs. Every image passes visual verification. Generative AI imagery is banned, no exceptions. |
 | **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, or an unloaded webfont. Defects never ship silently. |
 
@@ -28,24 +28,25 @@ One locked template. Zero design drift. Real images only. No AI slop.
 
 ```mermaid
 flowchart TD
-    A[Install the skill] --> B{Template locked?}
+    A[Install the skill] --> B{Design system locked?}
     B -->|No| C[Onboarding dialog: 7 questions]
-    C --> D[Agent drafts the template]
-    D --> E[Render 3 sample slides]
+    C --> D[Agent sets brand tokens]
+    D --> E[Render sample patterns]
     E --> F{User approves?}
     F -->|No| D
-    F -->|Yes| G[Template locked by name]
+    F -->|Yes| G[Design system locked by name]
     B -->|Yes| G
     G --> H[Topic brief + image map]
-    H --> I[Copywriting + image verification]
-    I --> J[Fill the locked template]
-    J --> K[Render through quality gates]
-    K --> L[Ready-to-post JPGs]
+    H --> I[Composition plan: one pattern per slide]
+    I --> J[Copywriting + image verification]
+    J --> K[Compose HTML from patterns]
+    K --> L[Render through quality gates]
+    L --> M[Ready-to-post JPGs]
 ```
 
-**Phase 1 — lock a template (once per brand).** Answer 7 quick questions, or send a screenshot or HTML file you like as reference. The agent drafts the template, renders samples, and iterates with you until you approve it. Name it (for example `morningcup-playful`) and it becomes the design system for everything after. Create more named templates anytime and pick one per carousel.
+**Phase 1 — lock a design system.** Answer 7 quick questions, or send a screenshot or HTML file you like as reference. The agent sets your brand tokens, renders sample patterns in them, and iterates with you until you approve. Name it (for example `morningcup-playful`). Build more named systems anytime and pick one per carousel.
 
-**Phase 2 — produce carousels.** For each new topic the agent writes the copy, verifies and places your images on the slides you choose, and renders print-clean JPGs. The layout never drifts, because every carousel starts from your locked template.
+**Phase 2 — compose carousels.** For each new topic the agent plans a composition (one pattern per slide, never repeating the previous carousel's cover), writes the copy, verifies and places your images, and renders print-clean JPGs. Variety is enforced by hard rules, not left to chance.
 
 ## The onboarding dialog
 
@@ -57,9 +58,26 @@ flowchart TD
 | 4 | Brand name and handle for the watermark? | Free text |
 | 5 | What are the carousels usually about? | Free text |
 | 6 | Indonesian or English? | Two choices |
-| 7 | What should we call this template? | Free text |
+| 7 | What should we call this design system? | Free text |
 
 Font choices stay at the feel level. The agent maps them to real fonts internally. No font names, no jargon.
+
+## The pattern library
+
+Twelve structural patterns in `design-system/`, all token-driven:
+
+| Pattern | Use for |
+|---|---|
+| cover-big-type, cover-split | Opening hooks |
+| kicker-statement | Editorial openers, strong claims |
+| stat-band, big-number | Numbers and research |
+| concept-number | One big idea per slide |
+| quote | A line worth remembering |
+| two-cards | Paired ideas, do vs don't |
+| image-hero | A photo that carries the slide |
+| process-steps | Sequences and how-tos |
+| myth-fact | Correcting a misconception |
+| takeaway | Closers, recaps, CTAs |
 
 ## Design standards
 
@@ -70,13 +88,13 @@ Every slide is held to the same bar:
 - **Typography.** Two font families maximum. Every font must load, or the render fails.
 - **Color.** 60 percent base, 30 percent secondary, 10 percent accent.
 - **Copy.** Short declarative sentences. Concrete nouns and strong verbs. No AI tells: no em dashes, no "delve", no "unlock", no filler openers.
-- **Consistency.** Topbar, footer, cards, radius, and shadows never change across slides.
+- **Consistency.** Tokens never change across slides. Patterns vary. That is the whole trick.
 
 ## Quick start
 
 1. Copy the `carouso/` folder into your agent's skills directory (`~/.claude/skills/`, `~/workspace/skills/`, or your platform's skills folder).
-2. Trigger the skill. If no template is locked yet, the onboarding dialog opens.
-3. Approve the rendered samples. Your template is locked.
+2. Trigger the skill. If no design system is locked yet, the onboarding dialog opens.
+3. Approve the rendered samples. Your design system is locked.
 4. Send a topic brief. Get back rendered JPGs.
 
 ## Package contents
@@ -84,9 +102,12 @@ Every slide is held to the same bar:
 ```
 carouso/
 ├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
+├── design-system/
+│   ├── system.css            ← brand tokens + all 12 pattern styles
+│   ├── patterns.html         ← the 12 patterns as full slides
+│   └── PATTERNS.md           ← catalog: what each pattern is for
 ├── assets/
-│   ├── base-template.html    ← starting scaffold for phase 1
-│   └── preview-all.jpg       ← all five sample slides in one strip
+│   └── preview-all.jpg       ← six demo slides in one strip
 ├── scripts/
 │   └── render_carousel.py    ← Playwright render with quality gates
 └── examples/
@@ -102,8 +123,9 @@ No references folder. Everything the agent needs lives in `SKILL.md`.
 
 ## Rules the skill never breaks
 
-1. No template, no production.
-2. Images from uploads or URLs only. No generative AI imagery.
-3. Every image is visually verified before use.
-4. A failed quality gate means fix the HTML, never bypass the gate.
-5. No per-carousel redesigns. Template changes go through Phase 1.
+1. No design system, no production.
+2. Compose from the pattern library. No per-carousel layout inventions.
+3. Variety rules are hard rules: no adjacent duplicate patterns, no repeated cover in a row.
+4. Images from uploads or URLs only. No generative AI imagery.
+5. Every image is visually verified before use.
+6. A failed quality gate means fix the HTML, never bypass the gate.
