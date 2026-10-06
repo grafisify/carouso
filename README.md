@@ -4,7 +4,7 @@ Carouso lets an AI agent produce **ready-to-post carousel posts** (Instagram, Ti
 
 ## How it works: lock one template, then produce
 
-**Step 1. Generate one template.** Give the agent your brand: name, handle, colors, fonts, and the feel you want. Or send a screenshot or HTML file of a carousel you like as reference. The agent designs the template, renders sample slides, and iterates with you until you approve it. That one approved template becomes the design system for everything after. When your brand evolves, repeat this step and re-lock.
+**Step 1. Generate one template.** On first run the agent opens a short onboarding dialog: six quick questions with tappable choices (style vibe, color mood, type feel, brand name and handle, usual topic, language). Or send a screenshot or HTML file of a carousel you like as reference instead. The agent designs the template, renders sample slides, and iterates with you until you approve it. That one approved template becomes the design system for everything after. When your brand evolves, repeat this step and re-lock.
 
 **Step 2. Produce carousels.** For each new topic, the agent writes the copy, places your images on the slides you choose, and renders JPGs through automatic quality gates. The layout never drifts, because every carousel starts from your locked template.
 

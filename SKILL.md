@@ -8,11 +8,23 @@ description: "Use when you need a carousel post for Instagram, TikTok, or Facebo
 ## Purpose
 Produce carousel posts in two phases. Phase 1 designs and locks one template with the user. Phase 2 reuses that template for every carousel: write copy, place images, render through quality gates.
 
+## First-run onboarding
+When this skill triggers and no locked template exists yet for the user's brand or project, do not start designing. Open the onboarding dialog first. Ask one question at a time, in this order, each with the listed choices. Accept a custom answer at any point. Six questions, then design. If the user sends a screenshot or HTML reference instead of answering, skip the dialog and go to Phase 1, option B.
+
+1. **Style.** "What vibe should the carousel have?" Choices: Playful and friendly / Clean and minimal / Bold and striking / Warm and elegant / Dark and premium.
+2. **Colors.** "Pick a color mood." Choices: Warm earth (browns, cream, orange) / Fresh natural (greens, cream) / Ocean calm (blues, white) / Bold contrast (black, white, one strong accent) / Soft pastel.
+3. **Fonts.** "Pick a type feel. No need to name fonts." Choices: Rounded and playful / Elegant serif / Bold and modern / Clean and simple. Map internally, never show font names: rounded-playful to Baloo 2 + Quicksand; elegant-serif to Playfair Display + Plus Jakarta Sans; bold-modern to Albert Sans + Plus Jakarta Sans; clean-simple to Plus Jakarta Sans + Quicksand.
+4. **Brand.** "Brand name and handle for the watermark?" Free text, one message. Example: "Morning Cup / @morningcup".
+5. **Topic.** "What are the carousels usually about?" Free text, one line. This sets the copy tone and the sample content.
+6. **Language.** "Indonesian or English?" Two choices. This sets every template string: headings, CTA, footer.
+
+After the sixth answer, summarize the locked choices in one short message, then move to Phase 1: draft the template, render three sample slides (cover, content, closer), and ask for approval.
+
 ## Phase 1: lock the template (once per brand)
 
 Two ways in. Pick one.
 
-**A. Generate from a brand brief.** Collect: brand name, handle, two main colors plus one accent, one display font plus one body font, audience, and 2-3 adjectives for the feel (playful, premium, warm). Draft the template as HTML: a cover, one content slide, one closer. Render those three slides and show them to the user. Iterate until approved.
+**A. Generate from the onboarding answers.** The dialog above already collected the brand. Draft the template as HTML: a cover, one content slide, one closer. Render those three slides and show them to the user. Iterate until approved.
 
 **B. Adapt from a reference.** The user sends a screenshot or an HTML file of a carousel they like. Study it: layout zones, type scale, spacing rhythm, color roles, recurring elements. Rebuild it as a clean template with CSS variables for every brand token (colors, fonts, radius), so future carousels can reskin it without touching the layout.
 
