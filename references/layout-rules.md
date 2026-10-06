@@ -1,64 +1,62 @@
-# Aturan Layout & Konten Carousel
+# Layout and copy rules
 
-## Anatomi slide (wajib sama di semua slide)
+## Slide anatomy (identical on every slide)
 ```
-┌─────────────────────────────────┐
-│ topbar: brand (kiri) │ 01 / 10  │  ← tinggi tetap, garis pemisah
-├─────────────────────────────────┤
-│ eyebrow pill (kategori slide)   │
-│                                 │
-│ JUDUL (display font, dominan)   │  ← zona content: flex vertikal,
-│ subjudul/body (1–2 kalimat)     │     konten mengalir, tidak absolut
-│ ┌─────────────────────────────┐ │
-│ │ kartu pendukung             │ │  ← fakta / langkah / kutipan /
-│ │ (ikon/gambar + teks pendek) │ │     gambar ilustrasi
-│ └─────────────────────────────┘ │
-├─────────────────────────────────┤
-│ footer: @handle │ CTA            │  ← absolut bawah, zona aman
-└─────────────────────────────────┘
++-----------------------------------+
+| topbar: brand (left) | 01 / 10    |  fixed height, divider line
++-----------------------------------+
+| eyebrow pill (slide category)     |
+|                                   |
+| HEADLINE (display font, dominant) |  content zone: vertical flex flow,
+| subhead/body (1-2 sentences)      |  no absolute positioning
+| +-------------------------------+ |
+| | support card                  | |  fact, step, quote, or
+| | (icon/image + short text)     | |  illustration image
+| +-------------------------------+ |
++-----------------------------------+
+| footer: @handle | CTA              |  absolute bottom, safe zone
++-----------------------------------+
 ```
 
-## Aturan cover (slide 1)
-- Judul cover rata tengah horizontal DAN vertikal (blok teks duduk di tengah
-  slide, sekitar 53% tinggi) — bukan menempel ke atas.
-- Ukuran judul 1,3–1,5× judul slide isi; boleh ada garis aksen di bawah judul
-  (hanya di cover, sebagai pemanis).
-- Struktur: eyebrow kategori → judul hook (3–7 kata) → 1 kalimat penjelas →
-  1 kartu teaser. CTA footer berbentuk pill yang mengajak (mis. "Simpan ya").
-- Cover TIDAK memuat isi/detail — tugasnya membuat orang swipe.
+## Cover rules (slide 1)
+- The headline block centers horizontally and vertically (it sits mid-slide, around 53 percent height), not pinned to the top.
+- Cover headline runs 1.3-1.5x the size of content-slide headlines. An accent line may sit under the headline (cover only, as decoration).
+- Structure: category eyebrow, hook headline (3-7 words), one explanatory sentence, one teaser card. The footer CTA is a pill that invites action (for example "Save this").
+- The cover carries no details. Its job is to earn the swipe.
 
-## Aturan slide isi (2..N-1)
-- Satu slide = satu ide. Judul memakai label deskriptif, bukan nomor:
-  "Dinginkan Bawang 15 Menit" — bukan "Tips 1".
-- Kartu pendukung berisi SATU dari: fakta singkat, langkah konkret, kutipan
-  pendek, atau gambar ilustrasi + caption 1 baris.
-- Slide kutipan: teks pendek dan punchy, bukan paragraf.
-- Slide rangkuman/takeaway: 4 poin, masing-masing 1 baris dengan label jelas.
+## Content slide rules (2 to N-1)
+- One slide holds one idea. Headlines use descriptive labels, not numbers: "Chill the onion for 15 minutes", not "Tip 1".
+- The support card holds one of: a short fact, a concrete step, a brief quote, or an illustration image with a one-line caption.
+- Quote slides stay short and punchy, never a paragraph.
+- Recap/takeaway slides hold 4 points, each one line with a clear label.
 
-## Aturan penutup (slide N)
-- Rangkuman 3–4 poin + CTA eksplisit: Simpan / Share ke grup / Follow.
-- CTA ditulis natural sesuai audiens, bukan template kaku.
+## Closer rules (slide N)
+- A 3-4 point recap plus an explicit CTA: Save, Share, Follow.
+- Write the CTA in the audience's own voice, not from a template.
 
-## Budget teks per slide
-| Elemen | Maksimal |
+## Text budget per slide
+| Element | Maximum |
 |---|---|
-| Judul | 8 kata |
-| Subjudul/body | 25 kata |
-| Kartu pendukung | 30 kata |
-| Total selain footer | ~60 kata |
+| Headline | 8 words |
+| Subhead/body | 25 words |
+| Support card | 30 words |
+| Total above the footer | about 60 words |
 
-Kalau konten brief melebihi budget: pangkas kalimatnya, JANGAN perkecil font
-di bawah minimum dan JANGAN memadatkan spacing.
+When the brief copy exceeds the budget, cut the sentences. Do not shrink the font below the minimum and do not compress the spacing.
 
-## Gambar di dalam layout
-- Slot gambar punya bingkai berasio tetap (lihat `.img-frame` di template).
-  Gambar mengisi bingkai dengan `object-fit: cover` — tidak pernah stretch.
-- Peran yang didukung:
-  - **hero**: gambar besar di kartu/area konten (rasio 4:3 atau 16:10).
-  - **ilustrasi**: gambar kecil berdampingan dengan teks (rasio 1:1 / 4:3).
-  - **full-bleed**: gambar memenuhi sebagian slide dengan scrim gradient
-    agar teks di atasnya tetap terbaca.
-- Objek utama foto jangan sampai kepotong bingkai — pilih crop yang aman
-  (lihat panduan crop di `image-workflow.md`).
-- Tiap slide yang memakai gambar: 1 gambar dominan saja. Dua foto besar dalam
-  satu slide hampir selalu terlihat berantakan.
+## Copy standards
+Carousel copy follows the same bar as any prose surface. Concrete beats clever.
+- Hooks use one of three patterns: a curiosity gap ("The 15-minute onion trick"), a specific number ("5 mistakes that ruin pour-over"), or direct address ("Your sourdough is overproofed").
+- Prefer concrete nouns and verbs over adjectives. "Chill the onion" beats "prepare the onion properly".
+- One specific detail beats three vague ones. Name the time, the temperature, the amount.
+- Cut AI tells from slide copy: no "delve", "unlock", "elevate", "game-changer"; no "not just X, but Y" constructions; no forced triads; no emojis as bullet substitutes.
+- The subhead makes a promise, not a summary. It tells the reader what they get from swiping, not what the carousel contains.
+
+## Images inside the layout
+- Image slots use fixed-ratio frames (see `.img-frame` in the template). Images fill the frame with `object-fit: cover`. Never stretch.
+- Supported roles:
+  - **hero**: a large image in the content area (4:3 or 16:10 ratio).
+  - **illustration**: a small image beside text (1:1 or 4:3 ratio).
+  - **full-bleed**: an image covering part of the slide with a scrim gradient so overlaid text stays readable.
+- Keep the photo's subject inside the frame. Choose a safe crop (see the crop guide in `image-workflow.md`).
+- One dominant image per slide that uses images. Two large photos on one slide almost always look messy.

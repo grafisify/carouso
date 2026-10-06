@@ -1,70 +1,48 @@
-# Alur Kerja Gambar: Upload User & URL/Artikel
+# Image workflow: user uploads and URLs/articles
 
-> Prinsip: gambar di skill ini HANYA berasal dari dua sumber — file yang
-> diupload user, atau gambar yang diambil dari URL/artikel. **Dilarang memakai
-> gambar hasil generative AI dalam bentuk apa pun.**
+> Principle: images in this skill come from two sources only. Files the user uploads, or images taken from a URL or article. **Never use generative AI imagery in any form.**
 
-## 1. Ingest (kumpulkan ke lokal)
+## 1. Ingest (collect locally)
 
-### Dari file upload user
-- Baca file dari path yang diberikan user. Catat nama file asli di `provenance.log`.
-- Format yang didukung: JPG, PNG, WebP. Selain itu, konversi dulu ke JPG/PNG.
+### From a user upload
+- Read the file from the path the user gives. Record the original filename in `provenance.log`.
+- Supported formats: JPG, PNG, WebP. Convert anything else to JPG or PNG first.
 
-### Dari URL langsung (gambar)
-- Download dengan `curl` (bukan urllib bila lewat proxy — urllib sering gagal
-  di tengah jalan untuk body besar):
+### From a direct URL (an image)
+- Download with `curl` (avoid urllib behind a proxy for large bodies, it often dies mid-transfer):
   ```
-  curl -sL -m 60 -o images/slide03_hero.jpg "<url-gambar>"
+  curl -sL -m 60 -o images/slide03_hero.jpg "<image-url>"
   ```
-- Verifikasi hasil download: buka file-nya dan pastikan itu gambar valid
-  (bukan halaman HTML error / 1KB redirect).
+- Verify the download: open the file and confirm it is a valid image (not an HTML error page or a 1KB redirect).
 
-### Dari URL artikel
-1. Buka artikelnya, identifikasi gambar yang RELEVAN dengan topik slide
-   (foto isi, bukan logo situs, bukan banner iklan, bukan avatar penulis).
-2. Prioritaskan foto yang terlihat natural/autentik dibanding foto studio
-   yang terlalu dipoles — kecuali brief meminta kesan premium.
-3. Download gambarnya ke lokal seperti URL langsung.
-4. Catat `page_url` artikel sebagai provenance. Jika artikel mencantumkan
-   kredit fotografer/sumber, cantumkan kredit kecil di caption gambar.
+### From an article URL
+1. Open the article and pick the image that fits the slide topic (a content photo, not the site logo, ad banner, or author avatar).
+2. Prefer photos that look natural and authentic over over-polished studio shots, unless the brief asks for a premium feel.
+3. Download the image locally, same as a direct URL.
+4. Record the article `page_url` as provenance. When the article credits a photographer or source, add a small credit in the image caption.
 
-### Aturan umum ingest
-- SEMUA gambar disalin ke folder lokal `images/` sebelum render. Render tidak
-  boleh hotlink ke URL eksternal (hasil tidak deterministik, bisa gagal offline).
-- Beri nama file yang jelas: `slide<NN>_<peran>_<deskripsi-singkat>.jpg`
-  (contoh: `slide03_hero_bawang-merah.jpg`).
+### General ingest rules
+- Copy every image into the local `images/` folder before rendering. The render must not hotlink external URLs (nondeterministic output, fails offline).
+- Name files clearly: `slide<NN>_<role>_<short-desc>.jpg` (example: `slide03_hero_red-onion.jpg`).
 
-## 2. Verifikasi visual (HARD GATE — tidak boleh dilewati)
+## 2. Visual verification (hard gate, never skipped)
 
-Sebelum gambar dipakai di slide mana pun, LIHAT gambarnya dan jawab checklist:
-- [ ] Isinya cocok dengan topik slide yang diminta? (foto bawang untuk slide
-      tentang bawang — bukan foto generik yang "mirip-mirip")
-- [ ] Tidak ada watermark, logo, atau teks asing di dalam foto?
-- [ ] Tidak buram/pecah? Sisi terpendek ≥ 900px untuk pemakaian besar (hero /
-      full-bleed), ≥ 500px untuk ilustrasi kecil.
-- [ ] Komposisi memungkinkan crop aman? (objek utama tidak menempel ke tepi)
+Before an image goes on any slide, look at it and answer this checklist:
+- [ ] Does the content fit the requested slide topic? (An onion photo for an onion slide, not a vaguely similar generic photo.)
+- [ ] Free of watermarks, logos, and foreign text?
+- [ ] Sharp, not blurry? Shortest side at least 900px for large use (hero or full-bleed), at least 500px for small illustrations.
+- [ ] Croppable safely? The main subject does not touch the frame edges.
 
-**Satu saja jawaban "tidak" → gambar DITOLAK.** Pilihannya:
-(a) minta gambar lain ke user, (b) cari alternatif dari URL/artikel lain, atau
-(c) ganti slot gambar dengan elemen grafis (ikon, kartu warna, pola).
-Jangan pernah memaksa memakai gambar yang gagal verifikasi.
+**One "no" rejects the image.** The options then: ask the user for another image, find an alternative from another URL or article, or replace the image slot with a graphic element (icon, color card, pattern). Never force a failed image into the design.
 
-## 3. Penempatan & crop
+## 3. Placement and cropping
+- Place images inside `.img-frame` (fixed-ratio frame) with `object-fit: cover; object-position: center;`. Never stretch.
+- When the subject sits off-center (a face on the left side), adjust `object-position` (for example `20% 50%`) so the frame does not cut it.
+- Full-bleed: add a scrim gradient (dark where the text sits). Text on a photo without a scrim fails readability.
+- One dominant image per slide that uses images. The only exception is a collage the brief explicitly requests, with uniform frames.
 
-- Gambar dipasang di dalam `.img-frame` (rasio bingkai tetap) dengan
-  `object-fit: cover; object-position: center;` — tidak pernah di-stretch.
-- Kalau objek utama bukan di tengah (mis. wajah di kiri), ubah
-  `object-position` (mis. `20% 50%`) agar objek tidak kepotong.
-- Full-bleed: tambahkan scrim gradient (gelap di area teks) — teks di atas foto
-  tanpa scrim = gagal keterbacaan.
-- Satu slide = satu gambar dominan. Pengecualian hanya untuk kolase yang
-  memang diminta brief, dengan bingkai seragam.
-
-## 4. Larangan
-
-1. Tidak men-generate gambar dengan AI untuk alasan apa pun.
-2. Tidak memakai gambar yang belum dilihat/diverifikasi secara visual.
-3. Tidak hotlink gambar eksternal saat render.
-4. Tidak memakai gambar yang jelas-jelas berlisensi restrictif/berbayar
-   (tanda watermark adalah sinyal paling jelas) — pilih sumber bebas lisensi
-   atau foto milik user sendiri.
+## 4. Prohibitions
+1. No AI-generated images, for any reason.
+2. No image goes in before visual verification.
+3. No hotlinked external images at render time.
+4. No images with clearly restrictive or paid licensing (a watermark is the clearest signal). Choose freely licensed sources or the user's own photos.

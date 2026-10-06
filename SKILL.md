@@ -1,97 +1,63 @@
 ---
 name: "carouso"
-description: "Carouso: buat carousel post (Instagram/TikTok/Facebook) dengan fundamental desain grafis — hierarki, tipografi, layout anti-tabrakan — dan penempatan gambar. Gambar HANYA dari upload user atau URL/artikel, bukan generative AI. Render deterministik ke JPG via Playwright dengan quality gate."
+description: "Use when you need a carousel post for Instagram, TikTok, or Facebook. Carouso turns a topic brief into a designed, rendered set of JPG slides, with images placed from user uploads or URLs."
 ---
 
 # Carouso
 
 ## Purpose
-Mengubah sebuah brief topik menjadi carousel siap posting: konten per slide ditulis,
-layout dirancang dengan fundamental desain grafis, gambar (upload user / URL)
-ditempatkan di slide yang diminta, lalu di-render ke JPG dengan quality gate yang
-menolak hasil cacat.
+Turn a topic brief into a ready-to-post carousel. Write the copy per slide. Lay it out with graphic design fundamentals. Place images from user uploads or URLs. Render to JPG through a quality gate that rejects defective output.
 
 ## Workflow
 
-### 1. Kumpulkan brief
-Wajib jelas sebelum mulai. Kalau ada yang kosong, tanya — jangan menebak:
-- **Topik + angle** (1 kalimat hook)
-- **Jumlah slide** (default 10) dan **ukuran** (default 1080×1350; alternatif 1080×1440)
-- **Gaya/merek**: nama brand, handle, 2 warna utama + 1 warna aksen, font display + font body
-  (kalau tidak disebut, pakai token default di `assets/base-template.html`)
-- **Gambar**: untuk tiap gambar — sumbernya (path file upload ATAU url langsung ATAU url
-  artikel) + slide ke berapa + peran (hero/full-bleed, ilustrasi kartu, thumbnail).
-  Tanpa peta penempatan yang eksplisit, JANGAN memakai gambar.
+### 1. Collect the brief
+Get this clear before starting. Ask about anything missing. Do not guess.
+- Topic and angle, as one hook sentence.
+- Slide count (default 10) and size (default 1080x1350, alternative 1080x1440).
+- Brand style: brand name, handle, two main colors plus one accent color, one display font plus one body font. When the brief omits these, use the defaults in `assets/base-template.html`.
+- Images. For each image: the source (uploaded file path, direct URL, or article URL), the target slide, and the role (hero, full-bleed, or card illustration). Without an explicit placement map, use no images.
 
-### 2. Tulis konten per slide
-Struktur baku:
-- **Slide 1 (cover)**: hook 3–7 kata, 1 subjudul penjelas maks 2 baris, TANPA isi detail.
-  Cover harus beda dan paling hookable dibanding slide lain.
-- **Slide 2..N-1**: 1 ide per slide. Judul deskriptif (bukan "Tips 1", melainkan
-  "Dinginkan Bawang 15 Menit"), 1–2 kalimat penjelasan, 1 kartu pendukung
-  (fakta singkat / langkah / kutipan).
-- **Slide N (penutup)**: rangkuman 3–4 poin + CTA (Simpan / Share / Follow).
-- Budget teks: judul ≤ 8 kata, body ≤ 25 kata per slide. Prinsipnya ~80% visual,
-  teks seminimal mungkin. Detail aturan konten ada di
-  [references/layout-rules.md](references/layout-rules.md).
+### 2. Write the copy per slide
+Follow the copy rules in [references/layout-rules.md](references/layout-rules.md). The fixed structure:
+- Slide 1 (cover): a 3-7 word hook, one explanatory subhead of max two lines, no details. The cover must stand out from every other slide.
+- Slides 2 to N-1: one idea per slide. A descriptive headline, 1-2 explanatory sentences, one support card (short fact, step, or quote).
+- Slide N (closer): a 3-4 point recap plus a CTA (Save, Share, Follow).
+- Text budget: headlines stay under 8 words, body under 25 words per slide. Aim for roughly 80 percent visual and minimal text.
 
-### 3. Ingest & verifikasi gambar (HARD GATE)
-Ikuti persis [references/image-workflow.md](references/image-workflow.md):
-1. Download/salin tiap gambar ke folder kerja lokal (JANGAN hotlink saat render).
-2. **Lihat gambarnya secara visual** sebelum dipakai. Tolak bila: tidak cocok dengan
-   topik slide, ada watermark/logo asing, buram, atau resolusi sisi terpendek < 900px
-   untuk pemakaian besar.
-3. Catat provenance (sumber URL / nama file upload) di log.
-4. **DILARANG KERAS memakai gambar hasil generative AI.** Skill ini tidak men-generate
-   gambar dalam bentuk apa pun.
+### 3. Ingest and verify images (hard gate)
+Follow [references/image-workflow.md](references/image-workflow.md) exactly.
+1. Download or copy every image into the local working folder. Never hotlink during render.
+2. Look at each image before use. Reject it when the content does not match the slide topic, when it carries a watermark or foreign logo, when it is blurry, or when its shortest side is under 900px for large use.
+3. Log provenance (source URL or upload filename) in `provenance.log`.
+4. Never use generative AI imagery. This skill generates no images, without exception.
 
-### 4. Bangun HTML dari template
-- Salin `assets/base-template.html` → file kerja. Jangan menulis layout dari nol
-  kecuali brief meminta gaya yang template tidak dukung.
-- Isi slot konten dan slot gambar (`<!-- IMG: ... -->`). Gambar direferensikan
-  sebagai **path file lokal** relatif terhadap HTML.
-- Terapkan fundamental desain di [references/design-fundamentals.md](references/design-fundamentals.md):
-  hierarki (judul dominan), kontras, alignment konsisten, whitespace, dan zona aman.
-- Font: boleh **Google Fonts** (uncomment blok `<link>` di template, selalu
-  pakai `display=swap`) ATAU font yang terinstal lokal (cek `fc-list`). Render
-  dengan flag `--check-fonts "Baloo 2,Quicksand"` agar webfont yang gagal
-  dimuat menggagalkan render — jangan biarkan judul jatuh ke font fallback.
-  Di lingkungan tanpa akses fonts.googleapis.com, install TTF font-nya lokal
-  (nama family tetap sama).
+### 4. Build the HTML from the template
+- Copy `assets/base-template.html` to a working file. Do not hand-write a layout unless the brief asks for a style the template cannot support.
+- Fill the content slots and image slots (`<!-- IMG: ... -->`). Reference images by local file paths relative to the HTML.
+- Apply the fundamentals in [references/design-fundamentals.md](references/design-fundamentals.md): dominant headline, contrast, consistent alignment, whitespace, safe zones.
+- Fonts: Google Fonts is allowed (uncomment the link block in the template, always use `display=swap`), or use locally installed fonts (check with `fc-list`). Render with `--check-fonts "Baloo 2,Quicksand"` so a webfont that fails to load fails the render instead of silently falling back. Where `fonts.googleapis.com` is unreachable, install the TTFs locally. The family names stay the same.
 
-### 5. Render dengan quality gate
-Jalankan `scripts/render_carousel.py`:
+### 5. Render with the quality gate
+Run `scripts/render_carousel.py`:
 ```
 python3 scripts/render_carousel.py --html <file.html> --out <dir-output> \
     --width 1080 --height 1350 --slides 10 \
     --check-fonts "Baloo 2,Quicksand"
 ```
-Script ini otomatis menggagalkan (exit 1) bila:
-- jumlah `.slide` ≠ jumlah yang diminta,
-- ada konten yang overflow keluar zona (teks kepotong / elemen tabrakan),
-- dimensi bounding box slide ≠ width×height yang diminta.
-Perbaiki HTML dan render ulang sampai lolos. Jangan pernah "meloloskan manual".
+The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, or when a checked font failed to load. Fix the HTML and re-render until it passes. Never waive the gate manually.
 
-### 6. Verifikasi visual akhir
-Buka 3 file: slide 1 (cover), 1 slide tengah, slide terakhir. Cek:
-- font display ter-render sesuai (bukan fallback serif),
-- tidak ada teks kepotong atau elemen bertumpuk,
-- gambar tampil benar (tidak stretch, objek utama tidak kepotong),
-- brand/handle/CTA konsisten di semua slide.
+### 6. Final visual check
+Open three files: slide 1, one middle slide, the last slide. Check that the display font rendered (not a fallback), that no text is clipped and no elements overlap, that images are undistorted with their subject intact, and that brand, handle, and CTA stay consistent.
 
-## Output Contract
-- `<dir-output>/slide_01.jpg … slide_NN.jpg` — tepat N file, dimensi sesuai brief.
-- File HTML sumber yang dipakai render (simpan di samping output).
-- `images/` berisi semua gambar yang dipakai (lokal), + `provenance.log`
-  (gambar → sumber URL / nama file upload).
+## Output contract
+- `<dir-output>/slide_01.jpg` through `slide_NN.jpg`: exactly N files at the requested size.
+- The source HTML used for the render, stored next to the output.
+- `images/` with every image used (local copies), plus `provenance.log` mapping each image to its source URL or upload filename.
 
-## Operating Rules
-1. Gambar hanya dari upload user atau URL/artikel. Tidak ada gambar AI-generatif,
-   tanpa pengecualian.
-2. Setiap gambar dipakai HANYA setelah verifikasi visual. Gambar tak terverifikasi
-   = tidak dipakai, dan slotnya diganti elemen grafis (ikon/kartu).
-3. Render gagal di quality gate = perbaiki, bukan bypass.
-4. Teks minimal; satu slide satu ide; cover selalu paling menonjol.
-5. Konsistensi antar slide: topbar (brand + nomor), footer (handle + CTA),
-   palet, dan pasangan font yang sama di seluruh carousel.
-6. Jangan menebak brief yang kosong — tanya dulu.
+## Operating rules
+1. Images come from user uploads or URLs/articles only. No generative AI imagery, no exceptions.
+2. Use an image only after visual verification. Replace an unverified image slot with a graphic element (icon or card).
+3. A failed render gate means fix the HTML, not bypass the gate.
+4. Minimal text. One idea per slide. The cover always stands out.
+5. Keep every slide consistent: same topbar, footer, palette, and font pairing throughout.
+6. Ask about a missing brief detail instead of guessing it.

@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <!-- ============================================================
-  BASE TEMPLATE — Carousel Post Designer skill
-  Cara pakai:
-  1. Salin file ini menjadi <topik>.html
-  2. Ubah token desain di :root (warna, font, brand, handle)
-  3. Isi slot <!-- EDIT --> per slide; slot gambar <!-- IMG: ... -->
-     diganti <img> yang menunjuk ke file lokal di images/
-  4. Render dengan scripts/render_carousel.py (quality gate otomatis)
-  PENTING soal font: boleh Google Fonts (uncomment blok <link> di atas) ATAU font
-  lokal. Cek ketersediaan dengan `fc-list | grep -i "<nama-font>"`. Jangan biarkan
-  judul jatuh ke font fallback — render_carousel.py --check-fonts akan menolaknya.
+  BASE TEMPLATE — Carouso skill
+  How to use:
+  1. Copy this file to <topic>.html
+  2. Set the design tokens in :root (colors, fonts, brand, handle)
+  3. Fill the <!-- EDIT --> slots per slide; replace each <!-- IMG: ... -->
+     slot with an <img> pointing at a local file in images/
+  4. Render with scripts/render_carousel.py (automatic quality gate)
+  Font note: Google Fonts is allowed (uncomment the <link> block below)
+  or use locally installed fonts. Check with
+  `fc-list | grep -i "<font-name>"`. Never let a headline fall back
+  silently — render_carousel.py --check-fonts rejects that.
 ============================================================= -->
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Carousel</title>
 <!-- ============================================================
-  GOOGLE FONTS (opsional): hapus komentar di bawah untuk memakai webfont.
-  Ganti family/weight sesuai kebutuhan brief. Selalu pakai display=swap.
-  Syarat: mesin render harus bisa mencapai fonts.googleapis.com.
-  render_carousel.py --check-fonts akan MENGGAGALKAN render bila webfont
-  tidak termuat (agar judul tidak jatuh ke font fallback).
-  Jika lingkunganmu memblokir Google Fonts, install TTF-nya secara lokal
-  (https://github.com/google/fonts) — nama family-nya tetap sama.
+  GOOGLE FONTS (optional): uncomment below to use a webfont.
+  Swap family/weights to fit the brief. Always use display=swap.
+  Requirement: the render machine must reach fonts.googleapis.com.
+  render_carousel.py --check-fonts FAILS the render when the webfont
+  does not load (so headlines never fall back silently).
+  When your environment blocks Google Fonts, install the TTFs locally
+  (https://github.com/google/fonts) — the family names stay the same.
 ============================================================= -->
 <!-- <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
 <style>
-/* ============ EDIT: TOKEN DESAIN ============ */
+/* ============ EDIT: DESIGN TOKENS ============ */
 :root{
-  --bg:#1c1a17;            /* warna dasar slide */
-  --bg2:#2a251e;           /* warna sekunder background */
-  --paper:rgba(255,252,245,.92);  /* panel kartu */
-  --ink:#2e2620;           /* teks utama */
-  --ink-soft:#6b5d4d;      /* teks sekunder */
-  --accent:#c0701f;        /* warna aksen: sorotan kata, garis, CTA */
-  --brand:#7a5a32;         /* warna nama brand */
-  --font-display:'Baloo 2','Caveat',cursive;   /* judul — boleh Google Fonts (uncomment <link>) atau nama font lokal */
-  --font-body:'Quicksand','Plus Jakarta Sans',system-ui,sans-serif; /* isi */
-  --handle:'@brandkamu';   /* EDIT: handle akun */
+  --bg:#1c1a17;            /* slide base color */
+  --bg2:#2a251e;           /* secondary background color */
+  --paper:rgba(255,252,245,.92);  /* card panel */
+  --ink:#2e2620;           /* main text */
+  --ink-soft:#6b5d4d;      /* secondary text */
+  --accent:#c0701f;        /* accent: keyword highlights, lines, CTA */
+  --brand:#7a5a32;         /* brand name color */
+  --font-display:'Baloo 2','Caveat',cursive;   /* headlines — Google Fonts (uncomment <link>) or a local font name */
+  --font-body:'Quicksand','Plus Jakarta Sans',system-ui,sans-serif; /* body */
+  --handle:'@yourhandle';  /* EDIT: account handle */
   --radius:30px;
 }
 /* ============ /EDIT ============ */
@@ -47,7 +48,7 @@
 body{margin:0;background:#111;font-family:var(--font-body);color:var(--ink)}
 .carousel{display:flex;flex-direction:column;gap:40px;align-items:center;padding:40px}
 
-/* ---- bingkai slide: 1080x1350, ganti via --slide-w/h bila perlu ---- */
+/* ---- slide frame: 1080x1350, change via --slide-w/h if needed ---- */
 .slide{width:1080px;height:1350px;position:relative;overflow:hidden;border-radius:48px;
   background:
     radial-gradient(circle at 20% 12%, var(--bg2), transparent 45%),
@@ -83,7 +84,7 @@ p{color:var(--ink-soft);font-size:25px;line-height:1.5;font-weight:500;margin:18
   color:var(--brand);font-size:15px;font-weight:600}
 .cta{font-family:var(--font-display);font-size:24px;color:var(--accent)}
 
-/* ---- cover: judul rata tengah, lebih besar ---- */
+/* ---- cover: centered, larger headline ---- */
 .cover .content{padding:48px 64px;align-items:center;text-align:center}
 .cover .eyebrow{align-self:center}
 .cover h1{font-size:132px;line-height:.92;letter-spacing:-2px;max-width:900px}
@@ -91,11 +92,11 @@ p{color:var(--ink-soft);font-size:25px;line-height:1.5;font-weight:500;margin:18
 .cover .accent-line{width:120px;height:8px;border-radius:99px;background:var(--accent);margin:28px 0 4px}
 .cover .card{align-items:center;text-align:center;margin-top:44px}
 
-/* ---- slot gambar: bingkai rasio tetap, tidak pernah stretch ---- */
+/* ---- image slots: fixed-ratio frames, never stretched ---- */
 .img-frame{position:relative;overflow:hidden;border-radius:20px;background:#0002}
 .img-frame img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
-.img-hero{aspect-ratio:4/3;margin-top:32px}          /* gambar besar */
-.img-ilustrasi{aspect-ratio:1/1;margin-top:28px}      /* gambar kecil */
+.img-hero{aspect-ratio:4/3;margin-top:32px}          /* large image */
+.img-ilustrasi{aspect-ratio:1/1;margin-top:28px}      /* small image */
 .img-frame .scrim{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));}
 .img-frame .caption{position:absolute;left:20px;bottom:16px;right:20px;
@@ -113,79 +114,79 @@ p{color:var(--ink-soft);font-size:25px;line-height:1.5;font-weight:500;margin:18
 <!-- ================= SLIDE 01 COVER — EDIT ================= -->
 <section class="slide cover">
   <div class="paper">
-    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">01 / 10</div></div>
+    <div class="topbar"><div class="brand">Brand Name</div><div class="counter">01 / 10</div></div>
     <div class="content">
-      <div class="eyebrow">✦ Kategori</div>
-      <h1>Judul Hook <span class="accent">3–7 Kata</span></h1>
+      <div class="eyebrow">✦ Kitchen tips</div>
+      <h1>Stop Crying Over <span class="accent">Onions</span></h1>
       <div class="accent-line"></div>
-      <p>Satu kalimat penjelas, maksimal dua baris, bikin penasaran.</p>
+      <p>7 tricks that keep the sting out of your eyes.</p>
       <div class="card">
-        <div class="emoji">✨</div>
-        <p>Satu fakta teaser yang bikin orang mau swipe.</p>
+        <div class="emoji">🧅</div>
+        <p>The sting is a gas released by broken onion cells. Control the gas, save your eyes.</p>
       </div>
     </div>
-    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+    <div class="footer"><span>@yourhandle</span><span class="cta">♡ Save this</span></div>
   </div>
 </section>
 
-<!-- ================= SLIDE 02 — EDIT (contoh slot gambar hero) ================= -->
+<!-- ================= SLIDE 02 — EDIT (hero image slot example) ================= -->
 <section class="slide">
   <div class="paper">
-    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">02 / 10</div></div>
+    <div class="topbar"><div class="brand">Brand Name</div><div class="counter">02 / 10</div></div>
     <div class="content">
-      <div class="eyebrow">✦ Poin 01</div>
-      <h1>Judul Deskriptif <span class="accent">Singkat.</span></h1>
-      <p>Satu-dua kalimat penjelasan inti.</p>
-      <!-- IMG: hero slide 2 — ganti src ke file lokal, mis. images/slide02_hero_bawang.jpg -->
+      <div class="eyebrow">✦ Trick 01</div>
+      <h1>Chill the Onion <span class="accent">15 Minutes.</span></h1>
+      <p>Cold onion, slower sting.</p>
+      <!-- IMG: slide 2 hero — point src at a local file, e.g. images/slide02_hero_onion.jpg -->
       <div class="img-frame img-hero">
-        <img src="images/placeholder.jpg" alt="deskripsi gambar">
+        <img src="images/placeholder.jpg" alt="Onion chilling in the fridge">
         <div class="scrim"></div>
-        <div class="caption">Caption singkat 1 baris (opsional)</div>
+        <div class="caption">15-30 min in the fridge does it</div>
       </div>
     </div>
-    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+    <div class="footer"><span>@yourhandle</span><span class="cta">♡ Save this</span></div>
   </div>
 </section>
 
-<!-- ================= SLIDE 03–09 — EDIT: duplikasi pola slide 02 ================= -->
+<!-- ================= SLIDES 03–09 — EDIT: duplicate the slide 02 pattern ================= -->
 <section class="slide">
   <div class="paper">
-    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">03 / 10</div></div>
+    <div class="topbar"><div class="brand">Brand Name</div><div class="counter">03 / 10</div></div>
     <div class="content">
-      <div class="eyebrow">✦ Poin 02</div>
-      <h1>Judul Poin <span class="accent">Berikutnya.</span></h1>
-      <p>Penjelasan singkat 1–2 kalimat.</p>
+      <div class="eyebrow">✦ Trick 02</div>
+      <h1>Use a <span class="accent">Sharp Knife.</span></h1>
+      <p>Clean cuts keep onion cells intact.</p>
       <div class="card">
-        <div class="emoji">💡</div>
-        <div class="label">Fakta / Langkah</div>
-        <p>Detail pendukung yang konkret dan actionable.</p>
+        <div class="emoji">🔪</div>
+        <div class="label">Why it works</div>
+        <p>A dull knife crushes cells and releases more sting gas. Sharpen before you slice.</p>
       </div>
     </div>
-    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+    <div class="footer"><span>@yourhandle</span><span class="cta">♡ Save this</span></div>
   </div>
 </section>
 
-<!-- (duplikasi section .slide untuk slide 04–09, update counter & konten) -->
+<!-- (duplicate the .slide section for slides 04–09, update counter and copy) -->
 
-<!-- ================= SLIDE 10 PENUTUP — EDIT ================= -->
+<!-- ================= SLIDE 10 CLOSER — EDIT ================= -->
 <section class="slide">
   <div class="paper">
-    <div class="topbar"><div class="brand">Nama Brand</div><div class="counter">10 / 10</div></div>
+    <div class="topbar"><div class="brand">Brand Name</div><div class="counter">10 / 10</div></div>
     <div class="content">
-      <div class="eyebrow">✦ Rangkuman</div>
-      <h1>Ingat <span class="accent">4 Hal Ini.</span></h1>
+      <div class="eyebrow">✦ Recap</div>
+      <h1>Remember <span class="accent">These 4.</span></h1>
       <ul class="takeaway">
-        <li>Poin rangkuman pertama yang actionable</li>
-        <li>Poin rangkuman kedua yang actionable</li>
-        <li>Poin rangkuman ketiga yang actionable</li>
-        <li>Poin rangkuman keempat yang actionable</li>
+        <li>Chill onions 15-30 minutes before cutting</li>
+        <li>Sharpen your knife first</li>
+        <li>Cut near running water or a fan</li>
+        <li>Save the root end for last</li>
       </ul>
       <div class="card">
         <div class="emoji">📤</div>
-        <p><b>Share</b> ke yang butuh + <b>Follow</b> biar nggak ketinggalan.</p>
+        <p><b>Share</b> this with someone who cries over onions. <b>Follow</b> for more.</p>
       </div>
     </div>
-    <div class="footer"><span>@brandkamu</span><span class="cta">♡ Simpan ya</span></div>
+    <div class="footer"><span>@yourhandle</span><span class="cta">♡ Save this</span></div>
   </div>
 </section>
 

@@ -1,46 +1,37 @@
-# Carouso — skill untuk AI agent
+# Carouso: a skill for AI agents
 
-Skill ini membuat AI agent bisa memproduksi **carousel post siap publish**
-(Instagram / TikTok / Facebook) dengan fundamental desain grafis yang benar,
-plus **penempatan gambar dari upload user atau URL/artikel** — bukan dari
-generative AI.
+Carouso lets an AI agent produce **ready-to-post carousel posts** (Instagram, TikTok, Facebook) with real graphic design fundamentals, plus **image placement from user uploads or URLs/articles**. No generative AI imagery.
 
-## Isi paket
+## Package contents
 
 ```
 carouso/
-├── SKILL.md                      ← dibaca agent saat skill di-trigger
+├── SKILL.md                      ← read by the agent when the skill triggers
 ├── references/
-│   ├── design-fundamentals.md    ← hierarki, kontras, tipografi, warna, zona aman
-│   ├── layout-rules.md           ← anatomi slide, aturan cover/isi/penutup, budget teks
-│   └── image-workflow.md         ← ingest upload/URL, verifikasi visual, crop & placement
+│   ├── design-fundamentals.md    ← hierarchy, contrast, typography, color, safe zones
+│   ├── layout-rules.md           ← slide anatomy, cover/content/closer rules, copy standards
+│   └── image-workflow.md         ← upload/URL ingest, visual verification, crop and placement
 ├── assets/
-│   └── base-template.html        ← template 10 slide + slot gambar, siap diisi
+│   └── base-template.html        ← 10-slide template with image slots, ready to fill
 ├── scripts/
-│   └── render_carousel.py        ← render Playwright + quality gate (jumlah/overflow/dimensi)
+│   └── render_carousel.py        ← Playwright render with quality gates (count, overflow, size, fonts)
 └── examples/
-    └── brief-example.md          ← contoh brief lengkap → output
+    └── brief-example.md          ← a complete brief and how the skill handles it
 ```
 
-## Cara pasang
+## Install
 
-Salin folder `carouso/` ke direktori skills AI agent kamu
-(mis. `~/.claude/skills/`, `~/workspace/skills/`, atau folder skills milik
-platform agent yang dipakai). Tidak ada dependensi khusus selain **Playwright +
-Chromium** untuk render (lihat `scripts/render_carousel.py`).
+Copy the `carouso/` folder into your agent's skills directory (for example `~/.claude/skills/`, `~/workspace/skills/`, or your agent platform's skills folder). The only extra dependency is **Playwright plus Chromium** for rendering (see `scripts/render_carousel.py`).
 
-## Prinsip kunci
+## Key principles
 
-1. Gambar **hanya** dari upload user atau URL/artikel — tidak ada gambar AI.
-2. Setiap gambar **wajib diverifikasi visual** sebelum dipakai.
-3. Render memakai **quality gate otomatis**: jumlah slide, overflow, dan dimensi
-   yang salah = render ditolak, bukan diloloskan manual.
-4. Font boleh Google Fonts atau lokal — tapi **wajib termuat**: render gate
-   `--check-fonts` menolak hasil bila webfont gagal diunduh (mencegah judul
-   jatuh ke font fallback).
-5. Teks minimal (~80% visual), satu slide satu ide, cover selalu paling hookable.
+1. Images come **only** from user uploads or URLs/articles. No AI-generated images.
+2. Every image passes **visual verification** before use.
+3. Rendering runs through **automatic quality gates**: wrong slide count, overflow, wrong dimensions, or an unloaded webfont fails the render. The gate is fixed, never waived.
+4. Fonts may come from Google Fonts or local installs, but they **must load**. The `--check-fonts` gate rejects output where a webfont failed and the headline fell back.
+5. Minimal text (roughly 80 percent visual), one idea per slide, and a cover that earns the swipe.
 
-## Kebutuhan render
+## Render requirements
 
-- Python 3 + `playwright` (`pip install playwright && playwright install chromium`)
-- Font display & body terinstal di sistem (cek: `fc-list | grep -i "<nama-font>"`)
+- Python 3 plus `playwright` (`pip install playwright && playwright install chromium`)
+- The display and body fonts installed on the system (check: `fc-list | grep -i "<font-name>"`)

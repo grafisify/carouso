@@ -1,64 +1,44 @@
-# Fundamental Desain Grafis untuk Carousel
+# Graphic design fundamentals for carousels
 
-Aturan main yang dipakai skill ini saat menyusun setiap slide. Ditulis sebagai
-checklist keputusan, bukan teori.
+Decision rules for laying out every slide. Written as a checklist, not theory.
 
-## 1. Hierarki visual
-Setiap slide punya SATU hal yang dilihat pertama. Urutan baca yang ditargetkan:
-**judul → visual → body → kartu pendukung → footer.**
-Caranya:
-- Judul = elemen terbesar dan paling tebal di slide (display font, 84–132px pada
-  kanvas 1080×1350; cover 1,3–1,5× lebih besar dari slide isi).
-- Satu kata/frasa kunci dalam judul diberi warna aksen — jangan lebih dari itu.
-- Body copy jauh lebih kecil (24–28px) dan lebih muda warnanya dari judul.
+## 1. Visual hierarchy
+Each slide has one thing the eye meets first. The target reading order is headline, then visual, then body, then support card, then footer.
+- The headline is the largest and boldest element on the slide (display font, 84-132px on a 1080x1350 canvas; the cover runs 1.3-1.5x larger than content slides).
+- One key word or phrase in the headline gets the accent color. Nothing else does.
+- Body copy is far smaller (24-28px) and lighter in color than the headline.
 
-## 2. Kontras
-- Teks di atas gambar/foto: wajib ada lapisan (scrim gradient atau kartu solid
-  semi-transparan) — jangan pernah taruh teks langsung di atas foto yang ramai.
-- Rasio kontras teks-body minimal terasa "jelas dibaca sekilas"; kalau ragu,
-  gelapkan background atau terangkan teks.
-- Warna aksen dipakai hemat: 1 warna aksen untuk sorotan kata kunci, garis aksen,
-  dan CTA. Sisanya netral.
+## 2. Contrast
+- Text over a photo needs a layer between them (a gradient scrim or a semi-solid card). Never place text directly on a busy photo.
+- Body text must read at a glance. When in doubt, darken the background or lighten the text.
+- Spend the accent color sparingly: one accent for keyword highlights, accent lines, and the CTA. Everything else stays neutral.
 
-## 3. Alignment & grid
-- Semua slide memakai margin dalam yang SAMA (contoh: 60–64px kiri/kanan).
-- Elemen rata kiri sebagai default; cover boleh rata tengah sebagai pengecualian
-  yang disengaja (judul cover rata tengah horizontal DAN vertikal).
-- Jangan campur rata kiri dan rata tengah dalam satu slide isi.
+## 3. Alignment and grid
+- Every slide uses the same inner margins (for example 60-64px left and right).
+- Default to left alignment. Centered text is allowed on the cover only, as a deliberate exception (the cover headline block centers horizontally and vertically).
+- Do not mix left and centered alignment inside one content slide.
 
 ## 4. Whitespace
-- Jarak antar blok minimal 1× tinggi baris body. Slide yang sesak = konten
-  dipangkas, bukan diperkecil fontnya sampai tak terbaca.
-- Kartu pendukung selalu punya padding dalam (≥ 32px) dan radius sudut konsisten.
+- Keep at least one body line-height of space between blocks. A cramped slide means the copy needs cutting, not a smaller font.
+- Support cards always get inner padding (32px minimum) and a consistent corner radius.
 
-## 5. Tipografi
-- Pasangan baku: 1 display font (judul, berkarakter — mis. handwritten/bold
-  rounded untuk kesan playful) + 1 body font (bersih, sangat terbaca).
-- Maksimal 2 family font per carousel. Jangan tambah font ketiga.
-- Sumber font: Google Fonts (via `<link>` dengan `display=swap`) atau font lokal.
-  Yang dilarang adalah font yang TIDAK termuat — render gate (`--check-fonts`)
-  menolak hasil bila webfont gagal diunduh dan judul jatuh ke fallback.
-- Ukuran minimum: body 24px, label kecil 14–15px HANYA untuk teks non-esensial
-  (counter, footer). Semua yang harus dibaca ≥ 24px.
+## 5. Typography
+- The standard pairing is one display font for headlines (characterful: a handwritten or bold rounded face reads playful) plus one clean, highly legible body font.
+- Two font families per carousel, maximum. Never add a third.
+- Source: Google Fonts (via a `link` tag with `display=swap`) or locally installed fonts. A font that fails to load is the failure. The render gate (`--check-fonts`) rejects output where a webfont did not load and the headline fell back.
+- Minimum sizes: 24px for body, 14-15px only for non-essential text (counters, footer). Everything that must be read is 24px or larger.
 
-## 6. Warna (aturan 60-30-10)
-- 60% warna dasar background, 30% warna sekunder (kartu/panel), 10% aksen.
-- Background boleh berlapis (gradient + tekstur halus + vignette) asal tidak
-  mengganggu keterbacaan — tekstur harus nyaris tak terlihat.
-- Teks utama = warna tergelap dari palet; teks sekunder = versi dimudakannya.
+## 6. Color (the 60-30-10 rule)
+- 60 percent base background color, 30 percent secondary color (cards and panels), 10 percent accent.
+- Backgrounds may layer (gradient plus subtle texture plus vignette) as long as readability holds. Texture should be barely visible.
+- Main text uses the darkest color of the palette. Secondary text uses a muted version of it.
 
-## 7. Konsistensi & repetisi
-Elemen yang muncul di SEMUA slide dan tidak boleh berubah gaya:
-topbar (brand + penomoran `01 / 10`), footer (handle + CTA), eyebrow pill,
-gaya kartu, radius sudut, dan shadow. Konsistensi inilah yang membuat 10 slide
-terasa sebagai satu kesatuan, bukan 10 desain lepas.
+## 7. Consistency and repetition
+These elements appear on every slide and never change style: the topbar (brand plus `01 / 10` numbering), the footer (handle plus CTA), the eyebrow pill, card styling, corner radius, and shadows. That repetition is what makes ten slides feel like one piece instead of ten loose designs.
 
-## 8. Zona aman
-- 64px dari tiap tepi = zona aman. Tidak ada teks penting di luar zona ini.
-- Footer diposisikan absolut di bawah dengan jarak aman dari tepi bawah.
+## 8. Safe zones
+- 64px from each edge is the safe zone. No important text sits outside it.
+- The footer is absolutely positioned at the bottom with safe clearance from the lower edge.
 
-## 9. Prinsip anti-tabrakan
-Layout memakai zona tetap (topbar / content / footer), bukan posisi absolut
-bebas antar elemen konten. Konten mengalir vertikal dengan flex; overflow
-tersembunyi dan terdeteksi otomatis saat render (lihat `scripts/render_carousel.py`).
-Elemen yang "nempel" satu sama lain = desain gagal, perbaiki spacing-nya.
+## 9. Anti-collision
+Layout uses fixed zones (topbar, content, footer), not free absolute positioning between content elements. Content flows vertically with flex. Overflow is hidden and detected automatically at render time (see `scripts/render_carousel.py`). Elements that touch each other are a failed design. Fix the spacing.

@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-render_carousel.py — render HTML carousel menjadi JPG per slide via Playwright.
+render_carousel.py: render an HTML carousel to one JPG per slide with Playwright.
 
-Quality gate (exit 1 bila gagal):
-  1. jumlah elemen .slide harus == --slides
-  2. tidak boleh ada konten yang overflow (teks kepotong / elemen tabrakan)
-  3. bounding box tiap slide harus == --width x --height
-  4. font di --check-fonts harus termuat (tolak fallback tak disengaja)
+Quality gates (exit 1 on failure):
+  1. the .slide count must equal --slides
+  2. no content may overflow its zone (clipped text or colliding elements)
+  3. every slide bounding box must equal --width x --height
+  4. every font in --check-fonts must be loaded (reject silent fallback)
 
-Contoh:
-  python3 scripts/render_carousel.py --html topik.html --out out/ \\
-      --width 1080 --height 1350 --slides 10
+Example:
+  python3 scripts/render_carousel.py --html topic.html --out out/ \
+      --width 1080 --height 1350 --slides 10 \
+      --check-fonts "Baloo 2,Quicksand"
 """
 import argparse
 import asyncio
@@ -22,21 +23,21 @@ from playwright.async_api import async_playwright
 
 async def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--html", required=True, help="file HTML carousel")
-    ap.add_argument("--out", required=True, help="direktori output JPG")
+    ap.add_argument("--html", required=True, help="carousel HTML file")
+    ap.add_argument("--out", required=True, help="JPG output directory")
     ap.add_argument("--width", type=int, default=1080)
     ap.add_argument("--height", type=int, default=1350)
     ap.add_argument("--slides", type=int, default=10)
     ap.add_argument("--quality", type=int, default=88)
     ap.add_argument("--check-fonts", default="",
-                    help="daftar family font (koma) yang wajib termuat, "
-                         'cth: "Baloo 2,Quicksand". Gagal = exit 1.')
+                    help="comma-separated font families that must be loaded, "
+                         'e.g. "Baloo 2,Quicksand". Missing = exit 1.')
     args = ap.parse_args()
 
     html = Path(args.html).resolve()
     out = Path(args.out)
     if not html.exists():
-        print(f"HTML tidak ditemukan: {html}", flush=True)
+        print(f"HTML not found: {html}", flush=True)
         return 1
     out.mkdir(parents=True, exist_ok=True)
 
@@ -45,16 +46,16 @@ async def main() -> int:
         page = await browser.new_page(
             viewport={"width": args.width, "height": args.height}
         )
-        # file:// agar path gambar lokal relatif selalu bisa dibaca
+        # file:// so relative local image paths always resolve
         await page.goto(html.as_uri())
-        await page.wait_for_timeout(2500)  # beri waktu font/gambar lokal termuat
+        await page.wait_for_timeout(2500)  # let local fonts/images load
         try:
             await page.evaluate("document.fonts.ready.then(()=>1)")
         except Exception:
             pass
 
-        # gate font: webfont (mis. Google Fonts) yang gagal dimuat membuat
-        # judul jatuh ke fallback — tolak sebelum render.
+        # Font gate: a webfont (e.g. Google Fonts) that fails to load drops
+        # headlines to a fallback. Reject before rendering.
         if args.check_fonts.strip():
             missing = []
             for fam in [f.strip() for f in args.check_fonts.split(",") if f.strip()]:
@@ -64,15 +65,15 @@ async def main() -> int:
                 if not ok:
                     missing.append(fam)
             if missing:
-                print(f"GATE GAGAL font: tidak termuat: {missing}. "
-                      f"Pakai font lokal atau perbaiki akses webfont.", flush=True)
+                print(f"GATE FAILED (font): not loaded: {missing}. "
+                      f"Use local fonts or fix webfont access.", flush=True)
                 await browser.close()
                 return 1
-            print(f"font OK: {args.check_fonts}", flush=True)
+            print(f"fonts OK: {args.check_fonts}", flush=True)
 
         n = await page.evaluate("document.querySelectorAll('.slide').length")
         if n != args.slides:
-            print(f"GATE GAGAL: jumlah slide {n}, diminta {args.slides}", flush=True)
+            print(f"GATE FAILED (count): got {n} slides, expected {args.slides}", flush=True)
             await browser.close()
             return 1
 
@@ -84,7 +85,7 @@ async def main() -> int:
             )
             el = page.locator(".slide").nth(i)
 
-            # gate dimensi via bounding box (tanpa dependensi PIL)
+            # Size gate via bounding box (no PIL dependency)
             box = await el.bounding_box()
             if not box or int(box["width"]) != args.width or int(box["height"]) != args.height:
                 bad_size.append(i + 1)
@@ -95,7 +96,7 @@ async def main() -> int:
                 quality=args.quality,
             )
 
-            # gate overflow: konten yang meluber = teks kepotong / tabrakan
+            # Overflow gate: overflowing content means clipped text or collisions
             ovf = await page.evaluate(
                 f"""(()=>{{
                     const s = document.querySelectorAll('.slide')[{i}];
@@ -112,20 +113,20 @@ async def main() -> int:
 
     failed = False
     if bad_size:
-        print(f"GATE GAGAL dimensi: slide {bad_size} (minta {args.width}x{args.height})", flush=True)
+        print(f"GATE FAILED (size): slides {bad_size} (expected {args.width}x{args.height})", flush=True)
         failed = True
     if bad_overflow:
-        print(f"GATE GAGAL overflow: slide {bad_overflow} (konten meluber/kepotong)", flush=True)
+        print(f"GATE FAILED (overflow): slides {bad_overflow} (content clipped or colliding)", flush=True)
         failed = True
     if failed:
         return 1
 
     files = sorted(out.glob("slide_*.jpg"))
     if len(files) != args.slides:
-        print(f"GATE GAGAL: file output {len(files)}, diminta {args.slides}", flush=True)
+        print(f"GATE FAILED (output): {len(files)} files, expected {args.slides}", flush=True)
         return 1
 
-    print(f"OK: {len(files)} slide ter-render ke {out}", flush=True)
+    print(f"OK: {len(files)} slides rendered to {out}", flush=True)
     return 0
 
 
