@@ -1,23 +1,27 @@
 # Carouso: a skill for AI agents
 
-Carouso lets an AI agent produce **ready-to-post carousel posts** (Instagram, TikTok, Facebook) with real graphic design fundamentals, plus **image placement from user uploads or URLs/articles**. No generative AI imagery.
+Carouso lets an AI agent produce **ready-to-post carousel posts** (Instagram, TikTok, Facebook) with real graphic design fundamentals, plus **image placement from user uploads or URLs**. No generative AI imagery.
+
+## How it works: lock one template, then produce
+
+**Step 1. Generate one template.** Give the agent your brand: name, handle, colors, fonts, and the feel you want. Or send a screenshot or HTML file of a carousel you like as reference. The agent designs the template, renders sample slides, and iterates with you until you approve it. That one approved template becomes the design system for everything after. When your brand evolves, repeat this step and re-lock.
+
+**Step 2. Produce carousels.** For each new topic, the agent writes the copy, places your images on the slides you choose, and renders JPGs through automatic quality gates. The layout never drifts, because every carousel starts from your locked template.
 
 ## Package contents
 
 ```
 carouso/
-├── SKILL.md                      ← read by the agent when the skill triggers
-├── references/
-│   ├── design-fundamentals.md    ← hierarchy, contrast, typography, color, safe zones
-│   ├── layout-rules.md           ← slide anatomy, cover/content/closer rules, copy standards
-│   └── image-workflow.md         ← upload/URL ingest, visual verification, crop and placement
+├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
 ├── assets/
-│   └── base-template.html        ← 10-slide template with image slots, ready to fill
+│   └── base-template.html    ← starting scaffold for step 1 (not the final design)
 ├── scripts/
-│   └── render_carousel.py        ← Playwright render with quality gates (count, overflow, size, fonts)
+│   └── render_carousel.py    ← Playwright render with quality gates
 └── examples/
-    └── brief-example.md          ← a complete brief and how the skill handles it
+    └── brief-example.md      ← a complete brief and how the skill handles it
 ```
+
+There is no references folder. Everything the agent needs lives in `SKILL.md`: the two-phase workflow, the design thinking protocol, copy standards, layout fundamentals, and the operating rules.
 
 ## Install
 
@@ -25,11 +29,12 @@ Copy the `carouso/` folder into your agent's skills directory (for example `~/.c
 
 ## Key principles
 
-1. Images come **only** from user uploads or URLs/articles. No AI-generated images.
-2. Every image passes **visual verification** before use.
-3. Rendering runs through **automatic quality gates**: wrong slide count, overflow, wrong dimensions, or an unloaded webfont fails the render. The gate is fixed, never waived.
-4. Fonts may come from Google Fonts or local installs, but they **must load**. The `--check-fonts` gate rejects output where a webfont failed and the headline fell back.
-5. Minimal text (roughly 80 percent visual), one idea per slide, and a cover that earns the swipe.
+1. One locked template per brand. No template, no production.
+2. Images come **only** from user uploads or URLs. No AI-generated images.
+3. Every image passes **visual verification** before use.
+4. Rendering runs through **automatic quality gates**: wrong slide count, overflow, wrong dimensions, or an unloaded webfont fails the render. The gate is fixed, never waived.
+5. Fonts may come from Google Fonts or local installs, but they **must load**.
+6. Minimal text (roughly 80 percent visual), one idea per slide, and a cover that earns the swipe.
 
 ## Render requirements
 
