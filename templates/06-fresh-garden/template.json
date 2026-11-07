@@ -1,0 +1,60 @@
+{
+  "number": 6,
+  "id": "06-fresh-garden",
+  "name": "Fresh Garden",
+  "vibe": "Fresh and natural, sage and leaf green, soft rounded type",
+  "fonts": [
+    "Quicksand",
+    "Plus Jakarta Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "concept-number",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "stat-band",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/06-fresh-garden.jpg"
+}

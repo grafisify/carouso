@@ -1,0 +1,60 @@
+{
+  "number": 1,
+  "id": "01-morning-cup",
+  "name": "Morning Cup",
+  "vibe": "Playful and friendly, warm earth tones, rounded type",
+  "fonts": [
+    "Baloo 2",
+    "Quicksand"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Morning Cup",
+  "handle_placeholder": "@morningcup",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "concept-number",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/01-morning-cup.jpg"
+}

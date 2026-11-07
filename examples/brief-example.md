@@ -1,5 +1,21 @@
 # Example: how the skill works
 
+## Fast path: a template
+
+> "template 1, topic: 5 mistakes that ruin Turkish coffee at home"
+
+The agent reads `templates/01-morning-cup/template.json`, asks once for brand and handle (it uses the placeholders if you decline), plans from the 8-slide sequence, writes the copy, builds `carousels/turkish-coffee/index.html` from the template's `sample.html`, and renders:
+
+```
+python3 scripts/render_carousel.py --html carousels/turkish-coffee/index.html \
+    --out carousels/turkish-coffee/ --width 1080 --height 1440 --slides 8 \
+    --check-fonts "Baloo 2,Quicksand"
+```
+
+No onboarding, no font install. The rest of this file shows the custom path.
+
+---
+
 ## Phase 1: lock the design system (once)
 
 The user answers the 7 onboarding questions: playful and friendly, warm earth colors, rounded type feel, "Morning Cup / @morningcup", coffee topics, English, named "morningcup-playful".
@@ -12,7 +28,7 @@ The agent sets the `:root` tokens in `design-system/system.css` to the brand, re
 
 > Topic: "5 mistakes that ruin Turkish coffee at home"
 > Design system: morningcup-playful
-> Slides: 6, size 1080x1350
+> Slides: 6, size 1080x1440
 > Images:
 > - Upload: `brewing.jpg` → slide 3, hero role (the brewing process)
 > - Article URL: https://example.com/grind-size-guide → take the grind-size photo → slide 5, inline role
@@ -25,7 +41,7 @@ The agent sets the `:root` tokens in `design-system/system.css` to the brand, re
 4. **Ingest images**: `brewing.jpg` → `images/slide03_hero_brewing.jpg`. From the article URL, pick the grind-size photo (not the site logo) → download → record the page_url.
 5. **Visual verification**: both images match their slides, no watermarks, sharp enough. Pass.
 6. **Build HTML**: copy the `<style>` from the locked `system.css`, copy the six chosen `<section>` blocks from `patterns.html`, fill copy and image slots. Point each `img` at a local file.
-7. **Render**: `python3 scripts/render_carousel.py --html turkish-coffee.html --out out/ --width 1080 --height 1350 --slides 6 --check-fonts "Baloo 2,Quicksand"`. All gates pass.
+7. **Render**: `python3 scripts/render_carousel.py --html turkish-coffee.html --out out/ --width 1080 --height 1440 --slides 6 --check-fonts "Baloo 2,Quicksand"`. All gates pass.
 8. **Final check and record**: slides 1, 3, 6 look right. Write the pattern sequence to `last-used.json`. Done.
 
 ### What the agent does NOT do

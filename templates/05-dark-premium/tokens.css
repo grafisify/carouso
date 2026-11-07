@@ -1,0 +1,34 @@
+/* Template 05: Dark Premium. Dark and premium, near-black, antique gold, editorial serif quotes.
+   Tokens and type tweaks only. Structure lives in design-system/system.css. */
+:root{
+  --font-display:"Albert Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Albert Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Playfair Display",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --radius:14px;
+  --bg:#efe9dd;
+  --bg2:#e5ddcd;
+  --panel:#f8f3e9;
+  --text:#121212;
+  --muted:#58544c;
+  --soft:#8f8a7e;
+  --accent:#8f6f2f;
+  --line:rgba(18,18,18,.20);
+  --line2:rgba(18,18,18,.11);
+}
+.slide.mode-dark{
+  --bg:#0f1011;
+  --bg2:#161718;
+  --panel:#1c1d1f;
+  --text:#f1eee7;
+  --muted:#a5a39d;
+  --soft:#73736f;
+  --accent:#c7a66a;
+  --line:rgba(241,238,231,.16);
+  --line2:rgba(241,238,231,.09);
+}
+
+/* type tweaks */
+h1,h2,h3{font-weight:500}
+h1,.p-cover-bt h1{letter-spacing:-4px}
+.p-bignumber .giant{font-weight:300}
+.p-quote .quote{font-weight:500;font-style:italic}

@@ -18,6 +18,7 @@
   --line2:rgba(241,238,231,.08);
   --font-display:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
   --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:Georgia,serif;  /* quote pattern */
   --radius:18px;
 }
 
@@ -94,8 +95,8 @@ p{color:var(--muted);font-size:24px;line-height:1.55;margin-top:24px;max-width:8
 .p-concept .concept-body p{max-width:650px}
 
 /* ---------- 06 quote ---------- */
-.p-quote .quote-mark{color:var(--accent);font-family:Georgia,serif;font-size:110px;line-height:.5}
-.p-quote .quote{margin-top:35px;color:var(--text);font-family:Georgia,serif;font-size:60px;line-height:1.17;letter-spacing:-1.5px;max-width:860px}
+.p-quote .quote-mark{color:var(--accent);font-family:var(--font-serif);font-size:110px;line-height:.5;margin-top:56px}
+.p-quote .quote{margin-top:35px;color:var(--text);font-family:var(--font-serif);font-size:60px;line-height:1.17;letter-spacing:-1.5px;max-width:860px}
 .p-quote .quote-source{margin-top:35px;color:var(--muted);font-size:13px;letter-spacing:2px;text-transform:uppercase}
 
 /* ---------- 07 two-cards ---------- */

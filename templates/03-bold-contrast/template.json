@@ -1,0 +1,59 @@
+{
+  "number": 3,
+  "id": "03-bold-contrast",
+  "name": "Bold Contrast",
+  "vibe": "Bold and striking, black and off-white, one hot accent",
+  "fonts": [
+    "Albert Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "stat-band",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/03-bold-contrast.jpg"
+}

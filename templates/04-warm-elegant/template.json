@@ -1,0 +1,60 @@
+{
+  "number": 4,
+  "id": "04-warm-elegant",
+  "name": "Warm Elegant",
+  "vibe": "Warm and elegant, cream and burgundy, serif headlines",
+  "fonts": [
+    "Playfair Display",
+    "Plus Jakarta Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "concept-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "stat-band",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/04-warm-elegant.jpg"
+}

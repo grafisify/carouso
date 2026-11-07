@@ -1,0 +1,39 @@
+/* Template 03: Bold Contrast. Bold and striking, black and off-white, one hot accent.
+   Tokens and type tweaks only. Structure lives in design-system/system.css. */
+:root{
+  --font-display:"Albert Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Albert Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Albert Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --radius:4px;
+  --bg:#f5f3ec;
+  --bg2:#e9e6dc;
+  --panel:#ffffff;
+  --text:#0b0b0b;
+  --muted:#4a4a46;
+  --soft:#8a8a84;
+  --accent:#ff3b1f;
+  --line:rgba(11,11,11,.22);
+  --line2:rgba(11,11,11,.12);
+}
+.slide.mode-dark{
+  --bg:#0b0b0b;
+  --bg2:#151515;
+  --panel:#1a1a1a;
+  --text:#f5f3ec;
+  --muted:#b5b3ab;
+  --soft:#77756f;
+  --accent:#ff4a2e;
+  --line:rgba(245,243,236,.22);
+  --line2:rgba(245,243,236,.12);
+}
+
+/* type tweaks */
+h1,h2,h3{font-weight:800}
+h1,.p-cover-bt h1{letter-spacing:-5px}
+.p-cover-bt h1{font-size:122px;line-height:.92}
+h2{font-size:88px;letter-spacing:-4px;line-height:.98}
+.p-statement h2{font-size:108px;letter-spacing:-5px}
+h3{font-size:36px}
+.kicker{letter-spacing:4px}
+.p-quote .quote{font-weight:800;letter-spacing:-2px}
+.p-bignumber .giant{font-size:400px;font-weight:800;letter-spacing:-16px;-webkit-text-stroke:3px var(--accent)}

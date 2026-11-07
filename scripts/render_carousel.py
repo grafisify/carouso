@@ -10,7 +10,7 @@ Quality gates (exit 1 on failure):
 
 Example:
   python3 scripts/render_carousel.py --html topic.html --out out/ \
-      --width 1080 --height 1350 --slides 10 \
+      --width 1080 --height 1440 --slides 10 \
       --check-fonts "Baloo 2,Quicksand"
 """
 import argparse
@@ -26,7 +26,7 @@ async def main() -> int:
     ap.add_argument("--html", required=True, help="carousel HTML file")
     ap.add_argument("--out", required=True, help="JPG output directory")
     ap.add_argument("--width", type=int, default=1080)
-    ap.add_argument("--height", type=int, default=1350)
+    ap.add_argument("--height", type=int, default=1440)
     ap.add_argument("--slides", type=int, default=10)
     ap.add_argument("--quality", type=int, default=88)
     ap.add_argument("--check-fonts", default="",
