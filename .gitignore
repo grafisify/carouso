@@ -1,2 +1,4 @@
 design-systems/
 carousels/
+__pycache__/
+*.pyc
