@@ -1,0 +1,146 @@
+/* Template 07: Vietnam 3D. Vietnam red and gold, chunky extruded type, glossy inflated shapes.
+   Tokens, type and decor only. Structure lives in design-system/system.css.
+   Decor shapes are SVG files in ./decor/ (relative to this file), drawn behind the content. */
+:root{
+  --font-display:"Be Vietnam Pro",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Be Vietnam Pro",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Be Vietnam Pro",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --radius:28px;
+  --bg:#fff2cf;
+  --bg2:#ffe6a8;
+  --panel:#fffaf0;
+  --text:#2b0905;
+  --muted:#5a2a1c;
+  --soft:#7a4332;
+  --accent:#c4140d;
+  --line:rgba(43,9,5,.30);
+  --line2:rgba(43,9,5,.16);
+  /* 3D type: ink = outlines and hard shadows, ext = extrusion color, ext-a = extrusion of accent words */
+  --ink:#2b0905;
+  --ext:#f2a900;
+  --ext-a:#f2a900;
+  --gold:#ffc61a;
+  --on-accent:#fff6dc;
+  /* decor slots (light slide) */
+  --d-star:url("decor/star-red.svg");
+  --d-ball:url("decor/ball-gold.svg");
+  --d-cube:url("decor/cube-teal.svg");
+  --d-ring:url("decor/ring-red.svg");
+  --d-lotus:url("decor/lotus.svg");
+  --d-hat:url("decor/non-la.svg");
+  --d-lantern:url("decor/lantern.svg");
+  --d-spark:url("decor/sparkle-gold.svg");
+}
+.slide.mode-dark{
+  --bg:#a50f0a;
+  --bg2:#8c0c08;
+  --panel:#7a0905;
+  --text:#fff6dc;
+  --muted:#ffe0ad;
+  --soft:#ffcf9a;
+  --accent:#ffd23f;
+  --line:rgba(255,246,220,.34);
+  --line2:rgba(255,246,220,.18);
+  --ink:#3d0503;
+  --ext:#4a0503;
+  --ext-a:#4a0503;
+  --on-accent:#3d0503;
+  --d-star:url("decor/star-gold.svg");
+  --d-ball:url("decor/ball-teal.svg");
+  --d-cube:url("decor/cube-gold.svg");
+  --d-ring:url("decor/ring-gold.svg");
+  --d-spark:url("decor/sparkle-cream.svg");
+}
+
+/* backgrounds: warm cream with a gold glow, or flag red with a lighter bloom */
+.slide{background:
+  radial-gradient(circle at 88% 6%, rgba(255,198,26,.38), transparent 32%),
+  radial-gradient(circle at 6% 96%, rgba(211,24,15,.12), transparent 30%), var(--bg)}
+.slide.mode-dark{background:
+  radial-gradient(circle at 78% 22%, #d82419 0, transparent 46%),
+  radial-gradient(circle at 10% 92%, #6f0805 0, transparent 40%), var(--bg)}
+
+/* type tweaks: heavy, wide, extruded */
+body{font-weight:500}
+p{font-weight:500;line-height:1.5}
+h1,h2,h3{font-weight:900}
+h1,h2{text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext)}
+h1 .accent,h2 .accent{text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext)}
+h1{font-size:96px;letter-spacing:-3px;line-height:1.02}
+h2{font-size:82px;letter-spacing:-3px;line-height:1.04}
+h3{font-size:38px;letter-spacing:-.5px;line-height:1.15}
+.p-cover-bt h1{font-size:120px;line-height:1;letter-spacing:-4px;text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext),4.8px 8.0px 0 var(--ext),5.4px 9.0px 0 var(--ext),6.0px 10.0px 0 var(--ext)}
+.p-statement h2{font-size:96px;letter-spacing:-3px;text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext),4.8px 8.0px 0 var(--ext),5.4px 9.0px 0 var(--ext),6.0px 10.0px 0 var(--ext)}
+.p-quote .quote{font-weight:800;font-size:68px;letter-spacing:-2px;line-height:1.16}
+.p-quote .quote-mark{font-weight:900;font-size:150px;line-height:.6;text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext),4.8px 8.0px 0 var(--ext),5.4px 9.0px 0 var(--ext),6.0px 10.0px 0 var(--ext);color:var(--accent)}
+.p-bignumber .giant{font-size:430px;font-weight:900;letter-spacing:-14px;line-height:.95;color:var(--accent);
+  -webkit-text-stroke:0;text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext),4.8px 8.0px 0 var(--ext),5.4px 9.0px 0 var(--ext),6.0px 10.0px 0 var(--ext),6.6px 11.0px 0 var(--ext),7.2px 12.0px 0 var(--ext),7.8px 13.0px 0 var(--ext),8.4px 14.0px 0 var(--ext),9.0px 15.0px 0 var(--ext),9.6px 16.0px 0 var(--ext),10.2px 17.0px 0 var(--ext),10.8px 18.0px 0 var(--ext),11.4px 19.0px 0 var(--ext),12.0px 20.0px 0 var(--ext),12.6px 21.0px 0 var(--ext),13.2px 22.0px 0 var(--ext),13.8px 23.0px 0 var(--ext),14.4px 24.0px 0 var(--ext),0 30px 40px rgba(0,0,0,.18)}
+.p-bignumber h2{margin-top:34px}
+.p-stats .stat-number{font-size:84px;font-weight:900;letter-spacing:-3px;text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext)}
+.p-concept .concept-number{font-size:120px;white-space:nowrap;font-weight:900;text-shadow:0.6px 1.0px 0 var(--ext),1.2px 2.0px 0 var(--ext),1.8px 3.0px 0 var(--ext),2.4px 4.0px 0 var(--ext),3.0px 5.0px 0 var(--ext),3.6px 6.0px 0 var(--ext),4.2px 7.0px 0 var(--ext)}
+.accent{color:var(--accent)}
+h1 .accent,h2 .accent,.giant,.stat-number .accent,.concept-number{--ext:var(--ext-a)}
+
+/* sticker kicker */
+.kicker{align-self:flex-start;background:var(--accent);color:var(--on-accent);padding:9px 20px 8px;border-radius:999px;
+  border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);letter-spacing:2.5px}
+.p-cover-bt .kicker{align-self:center}
+.p-bignumber .kicker,.p-statement .kicker{margin-bottom:6px}
+
+/* flag star before the brand */
+.topbar .b::before{content:"";display:inline-block;width:24px;height:24px;margin-right:12px;vertical-align:-3px;background:var(--accent);
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.topbar{border-bottom:3px solid var(--line)}
+.topbar,.footer{font-weight:800}
+
+/* chunky panels with hard offset shadows */
+.p-cards .card{border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);border-radius:var(--radius)}
+.p-cards .card .index{font-size:22px}
+.p-cards .card h3{font-size:44px}
+.p-cards .card{min-height:420px}
+.p-concept .concept{grid-template-columns:200px 1fr}
+.p-mythfact .myth-grid{border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink);border-radius:var(--radius)}
+.p-mythfact .myth:first-child{border-right:4px solid var(--ink);background:var(--bg2)}
+.p-mythfact .myth:last-child{background:var(--panel)}
+.p-mythfact .myth-label{color:var(--muted);font-size:22px}
+.p-process .process-item{border-bottom:3px solid var(--line)}
+.p-process .process-item:first-child{border-top:3px solid var(--line)}
+.p-process .process-no{display:flex;align-items:center;justify-content:center;width:62px;height:62px;border-radius:50%;
+  background:var(--accent);color:var(--on-accent);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);font-size:24px;font-weight:900}
+.p-process .process-tag{background:var(--gold);color:#2b0905;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);font-weight:800}
+.p-process .process-item{grid-template-columns:80px 1fr 200px}
+.p-takeaway .takeaway-dot{width:26px;height:26px;margin-top:8px;border:3px solid var(--ink);
+  background:radial-gradient(circle at 35% 30%, #fff6b8, var(--accent) 60%)}
+.p-takeaway .takeaway-item{border-bottom:3px solid var(--line)}
+.p-takeaway .closer-cta .accent{display:inline-block;background:var(--accent);color:var(--on-accent);padding:14px 30px;border-radius:999px;
+  border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+.p-stats .stat-row{border-top:3px solid var(--line);border-bottom:3px solid var(--line)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .meta span:first-child{color:var(--accent)}
+.photo{border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.photo-top::after{display:none}
+
+/* decor layer: glossy 3D shapes, kept in the margins, behind the text */
+.slide::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-repeat:no-repeat}
+.p-cover-bt::after{background-image:var(--d-star),var(--d-hat),var(--d-spark),var(--d-ball);
+  background-size:340px auto,330px auto,100px auto,150px auto;
+  background-position:690px 120px,10px 1010px,610px 330px,880px 1090px}
+.p-bignumber::after{background-image:var(--d-lantern),var(--d-ball),var(--d-spark);
+  background-size:150px auto,170px auto,90px auto;background-position:860px 165px,850px 1170px,720px 200px}
+.p-mythfact::after{background-image:var(--d-ring),var(--d-cube);
+  background-size:230px auto,190px auto;background-position:810px 175px,-20px 1130px}
+.p-cards::after{background-image:var(--d-star),var(--d-cube),var(--d-spark);
+  background-size:230px auto,200px auto,80px auto;background-position:800px 175px,-30px 1150px,930px 1210px}
+.p-process::after{background-image:var(--d-ball),var(--d-star);
+  background-size:210px auto,200px auto;background-position:820px 175px,830px 1170px}
+.p-concept::after{background-image:var(--d-lotus),var(--d-ring),var(--d-spark);
+  background-size:300px auto,200px auto,80px auto;background-position:700px 1110px,0px 1150px,880px 190px}
+.p-quote::after{background-image:var(--d-lotus),var(--d-star),var(--d-spark);
+  background-size:280px auto,200px auto,90px auto;background-position:-30px 1130px,830px 175px,700px 1190px}
+.p-takeaway::after{background-image:var(--d-hat),var(--d-star),var(--d-spark);
+  background-size:280px auto,200px auto,90px auto;background-position:760px 1060px,830px 175px,40px 1130px}
+.p-statement::after{background-image:var(--d-star),var(--d-ball);
+  background-size:260px auto,190px auto;background-position:790px 175px,830px 1120px}
+.p-stats::after{background-image:var(--d-cube),var(--d-ball);
+  background-size:220px auto,170px auto;background-position:800px 175px,-20px 1150px}
+.p-imghero::after,.p-cover-split::after{background-image:var(--d-spark);background-size:90px auto;background-position:900px 190px}

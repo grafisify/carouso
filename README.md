@@ -20,7 +20,7 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 | | |
 |---|---|
 | **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 12-pattern library, so every carousel is consistent without looking copy-pasted. |
-| **Ready to use** | Six numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
+| **Ready to use** | Seven numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
@@ -65,6 +65,11 @@ Dark and premium. Near-black and antique gold, editorial quotes. Good for financ
 Fresh and natural. Sage and leaf green, soft rounded type. Good for health, nature, how-tos.
 
 <img src="assets/templates/06-fresh-garden.jpg" width="860" alt="Template 06 · Fresh Garden: eight sample slides">
+
+### 07 · Vietnam 3D
+Vietnam red and gold with chunky 3D type and glossy, inflated shapes (star, nón lá hat, lantern, lotus, cubes, rings) drawn as SVG, so no generated imagery. Be Vietnam Pro is bundled with the Vietnamese subset, so full diacritics render correctly. Good for food, travel, culture, events, campaigns.
+
+<img src="assets/templates/07-vietnam-3d.jpg" width="860" alt="Template 07 · Vietnam 3D: eight sample slides">
 
 Need a different slide count (5 to 10), your own photos, or another pattern for one slide? Say so in the brief. Templates stay locked, so the look never drifts. The previews above use sample copy and no photos. See [Adding photos](#adding-photos).
 
@@ -171,18 +176,18 @@ Want your own brand instead? Ask for a custom design system and answer the 7 que
 carouso/
 ├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
 ├── templates/
-│   └── NN-name/              ← six templates, each with:
-│       ├── tokens.css        ←   colors, fonts, light and dark modes
+│   └── NN-name/              ← seven templates, each with:
+│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 also has decor/ SVG shapes)
 │       ├── template.json     ←   name, fonts, size, slide sequence
 │       └── sample.html       ←   the finished 8-slide sample to copy from
 ├── design-system/
 │   ├── system.css            ← structure + all 12 pattern styles (shared by every template)
 │   ├── patterns.html         ← the 12 patterns as full slides
 │   └── PATTERNS.md           ← catalog: what each pattern is for
-├── fonts/                    ← bundled variable fonts (SIL OFL) + fonts.css
+├── fonts/                    ← bundled fonts (SIL OFL) + fonts.css
 ├── assets/
 │   ├── preview-all.jpg       ← six demo slides in one strip
-│   └── templates/            ← the six template previews
+│   └── templates/            ← the seven template previews
 ├── scripts/
 │   └── render_carousel.py    ← Playwright render with quality gates
 └── examples/

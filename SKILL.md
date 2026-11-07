@@ -11,7 +11,7 @@ Produce carousel posts in two phases. Phase 1 locks a design system with the use
 Lock the tokens. Free the composition. That is what keeps every carousel on-brand without looking templated.
 
 ## Using a template (default path)
-Six ready-made templates ship in `templates/`. Each is a locked look (colors, fonts, light and dark tokens) plus a slide skeleton, so no onboarding is needed. The preview gallery is in `README.md`.
+Seven ready-made templates ship in `templates/`. Each is a locked look (colors, fonts, light and dark tokens) plus a slide skeleton, so no onboarding is needed. The preview gallery is in `README.md`.
 
 Triggers: "template 3", "template no 3", "pakai template 3", "use template 2 for ...", or a template name ("morning cup"). Match the number or name against `templates/NN-slug/template.json`.
 
@@ -31,9 +31,9 @@ python3 scripts/render_carousel.py --html carousels/<slug>/index.html --out caro
 Fix the HTML until every gate passes. Never waive a gate.
 8. **Final visual check** as in Phase 2 step 7, then deliver `slide_01.jpg` to `slide_NN.jpg`. Templates need no `last-used.json`, because modes come from the template.
 
-Fonts are bundled in `fonts/`, so nothing needs installing besides Playwright.
+Fonts are bundled in `fonts/`, so nothing needs installing besides Playwright. Template 07 (Vietnam 3D) draws its 3D shapes from `templates/07-vietnam-3d/decor/` through `tokens.css`, so the slide markup needs no decor elements. Keep new slide content out of the corners where the shapes sit, and use Vietnamese diacritics freely: Be Vietnam Pro includes them.
 
-A person who wants their own look instead of the six templates uses the custom path below.
+A person who wants their own look instead of the seven templates uses the custom path below.
 
 ## Custom design system (optional path)
 Use this path only when the person asks for their own look, or sends a reference screenshot or HTML, instead of picking a template. When no template was chosen and no locked design system exists yet, offer the templates first, and run the onboarding below only if they want a custom one. When this path runs, do not start designing. Open the onboarding dialog first. Ask one question at a time, in this order, each with the listed choices. Accept a custom answer at any point. Seven questions, then design. If the user sends a screenshot or HTML reference instead of answering, skip the dialog and go to Phase 1, option B.
