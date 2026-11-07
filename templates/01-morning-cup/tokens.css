@@ -1,0 +1,37 @@
+/* Template 01: Morning Cup. Playful and friendly, warm earth tones, rounded type.
+   Tokens and type tweaks only. Structure lives in design-system/system.css. */
+:root{
+  --font-display:"Baloo 2",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Quicksand",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Baloo 2",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --radius:30px;
+  --bg:#fbf1e1;
+  --bg2:#f4e4cc;
+  --panel:#fffaf1;
+  --text:#3a2418;
+  --muted:#7a5a45;
+  --soft:#7a614f;
+  --accent:#b35219;
+  --line:rgba(58,36,24,.18);
+  --line2:rgba(58,36,24,.10);
+}
+.slide.mode-dark{
+  --bg:#2b1b12;
+  --bg2:#35231a;
+  --panel:#3f2b20;
+  --text:#fbf1e1;
+  --muted:#cdb59c;
+  --soft:#a89480;
+  --accent:#ff9248;
+  --line:rgba(251,241,225,.18);
+  --line2:rgba(251,241,225,.10);
+}
+
+/* type tweaks */
+h1,h2,h3{font-weight:700}
+h1,.p-cover-bt h1{letter-spacing:-2px}
+h2,.p-statement h2{letter-spacing:-1.5px}
+h3{letter-spacing:-.3px}
+p{font-weight:500}
+.p-bignumber .giant{letter-spacing:-6px}
+.p-quote .quote{font-weight:600;letter-spacing:-.5px}

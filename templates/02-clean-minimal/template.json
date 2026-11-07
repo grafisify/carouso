@@ -1,0 +1,59 @@
+{
+  "number": 2,
+  "id": "02-clean-minimal",
+  "name": "Clean Minimal",
+  "vibe": "Clean and minimal, white space, one cool blue accent",
+  "fonts": [
+    "Plus Jakarta Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "stat-band",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "concept-number",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "myth-fact",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/02-clean-minimal.jpg"
+}

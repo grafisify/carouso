@@ -1,0 +1,60 @@
+{
+  "number": 5,
+  "id": "05-dark-premium",
+  "name": "Dark Premium",
+  "vibe": "Dark and premium, near-black, antique gold, editorial serif quotes",
+  "fonts": [
+    "Albert Sans",
+    "Playfair Display"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "concept-number",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/05-dark-premium.jpg"
+}

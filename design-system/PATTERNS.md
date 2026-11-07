@@ -65,6 +65,26 @@ Use when: a single jaw-dropping number makes the point alone.
 Dot list of takeaways plus a centered CTA line.
 Use when: closing with a recap and an action.
 
+## Photo slot (any body pattern)
+
+Not a pattern but an add-on. Drop `<figure class="photo"><img src="images/x.jpg" alt=""></figure>`
+at the end of a slide's `.content` to add a picture under the copy.
+
+- `.photo` is 16:10, `.photo.wide` is 5:2, `.photo.band` is 3:1. Use the flatter ones
+  on dense slides (`myth-fact`, `big-number`, `two-cards`).
+- `style="--focus:50% 40%"` sets which part of the photo survives the crop.
+- A `<figcaption>` gets a scrim automatically and stays legible on any photo.
+- Radius, border, and background come from the template tokens, so the frame matches
+  every template without extra CSS.
+- Two photos: `<div class="photos">` with two `<figure class="photo">` inside. Square, side by side,
+  24px gutter (the same as `two-cards`). Add `short` (4:3) on dense slides such as `myth-fact`
+  and `big-number`. Each figure takes its own `--focus` and optional `<figcaption>`.
+- Full-bleed on top: add `photo-top` and `style="--bleed-h:600px"` to the `<section>`, and put
+  `<figure class="photo-bleed"><img src="images/x.jpg" alt=""></figure>` first inside it. The photo runs
+  edge to edge with rounded bottom corners (from the template radius), the topbar turns white on a scrim,
+  and `.content` starts 64px below the photo. Use about 440px on dense slides. Optional `<figcaption>`.
+- Slides that are the photo itself use `image-hero` or `cover-split` instead.
+
 ## Composition rules
 
 - A carousel opens with one cover pattern and closes with one closer pattern.

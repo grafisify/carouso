@@ -1,0 +1,32 @@
+/* Template 02: Clean Minimal. Clean and minimal, white space, one cool blue accent.
+   Tokens and type tweaks only. Structure lives in design-system/system.css. */
+:root{
+  --font-display:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --radius:10px;
+  --bg:#fafaf8;
+  --bg2:#f0f0ec;
+  --panel:#ffffff;
+  --text:#111418;
+  --muted:#5b616b;
+  --soft:#696e74;
+  --accent:#2a5bff;
+  --line:rgba(17,20,24,.16);
+  --line2:rgba(17,20,24,.10);
+}
+.slide.mode-dark{
+  --bg:#0e1014;
+  --bg2:#14171c;
+  --panel:#171a20;
+  --text:#f4f5f7;
+  --muted:#a2a8b2;
+  --soft:#7d838e;
+  --accent:#7a9bff;
+  --line:rgba(244,245,247,.16);
+  --line2:rgba(244,245,247,.09);
+}
+
+/* type tweaks */
+h1,h2,h3{font-weight:600}
+.p-quote .quote{font-weight:500;letter-spacing:-2px}

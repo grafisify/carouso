@@ -1,0 +1,36 @@
+/* Template 04: Warm Elegant. Warm and elegant, cream and burgundy, serif headlines.
+   Tokens and type tweaks only. Structure lives in design-system/system.css. */
+:root{
+  --font-display:"Playfair Display",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Playfair Display",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --radius:6px;
+  --bg:#f6efe4;
+  --bg2:#ece1d0;
+  --panel:#fbf6ec;
+  --text:#2b1d1a;
+  --muted:#6e5a52;
+  --soft:#71615a;
+  --accent:#8c2f39;
+  --line:rgba(43,29,26,.20);
+  --line2:rgba(43,29,26,.11);
+}
+.slide.mode-dark{
+  --bg:#231716;
+  --bg2:#2b1d1b;
+  --panel:#2f201e;
+  --text:#f6efe4;
+  --muted:#c9b8ab;
+  --soft:#99887d;
+  --accent:#d9a15b;
+  --line:rgba(246,239,228,.20);
+  --line2:rgba(246,239,228,.11);
+}
+
+/* type tweaks */
+h1,h2,h3{font-weight:600}
+h1,.p-cover-bt h1{letter-spacing:-2px;line-height:1.02}
+h2,.p-statement h2{letter-spacing:-1.5px;line-height:1.06}
+h3{letter-spacing:-.4px}
+.p-quote .quote{font-style:italic;font-weight:500;letter-spacing:-1px}
+.p-concept .concept-number{font-weight:400;font-style:italic}

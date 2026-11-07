@@ -1,0 +1,13 @@
+/* Bundled fonts (SIL Open Font License 1.1, see fonts/licenses/).
+   Latin subset, variable weight. Family names match the names used in
+   template.json and --check-fonts, so no system install is needed. */
+@font-face{font-family:"Baloo 2";font-style:normal;font-weight:400 800;font-display:block;
+  src:url("baloo-2-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Quicksand";font-style:normal;font-weight:300 700;font-display:block;
+  src:url("quicksand-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;font-display:block;
+  src:url("playfair-display-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:200 800;font-display:block;
+  src:url("plus-jakarta-sans-latin-wght-normal.woff2") format("woff2")}
+@font-face{font-family:"Albert Sans";font-style:normal;font-weight:100 900;font-display:block;
+  src:url("albert-sans-latin-wght-normal.woff2") format("woff2")}

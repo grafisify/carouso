@@ -7,10 +7,11 @@ Quality gates (exit 1 on failure):
   2. no content may overflow its zone (clipped text or colliding elements)
   3. every slide bounding box must equal --width x --height
   4. every font in --check-fonts must be loaded (reject silent fallback)
+  5. no visible text may be smaller than --min-font px (default 20, readable on a phone)
 
 Example:
   python3 scripts/render_carousel.py --html topic.html --out out/ \
-      --width 1080 --height 1350 --slides 10 \
+      --width 1080 --height 1440 --slides 10 \
       --check-fonts "Baloo 2,Quicksand"
 """
 import argparse
@@ -26,9 +27,11 @@ async def main() -> int:
     ap.add_argument("--html", required=True, help="carousel HTML file")
     ap.add_argument("--out", required=True, help="JPG output directory")
     ap.add_argument("--width", type=int, default=1080)
-    ap.add_argument("--height", type=int, default=1350)
+    ap.add_argument("--height", type=int, default=1440)
     ap.add_argument("--slides", type=int, default=10)
     ap.add_argument("--quality", type=int, default=88)
+    ap.add_argument("--min-font", type=int, default=20,
+                    help="smallest allowed text size in px at 1080 wide. 0 disables.")
     ap.add_argument("--check-fonts", default="",
                     help="comma-separated font families that must be loaded, "
                          'e.g. "Baloo 2,Quicksand". Missing = exit 1.')
@@ -59,9 +62,23 @@ async def main() -> int:
         if args.check_fonts.strip():
             missing = []
             for fam in [f.strip() for f in args.check_fonts.split(",") if f.strip()]:
+                # Declared fonts load lazily, so a family unused on these slides
+                # would look "missing". Force the load, then check.
+                try:
+                    await page.evaluate(f'document.fonts.load(\'700 48px "{fam}"\')')
+                except Exception:
+                    pass
+                # document.fonts.check() is true for unknown families, so compare
+                # rendered widths against bare generic fallbacks instead.
                 ok = await page.evaluate(
-                    f'document.fonts.check(\'700 48px "{fam}"\')'
-                )
+                    """(fam)=>{
+                        const c=document.createElement('canvas').getContext('2d');
+                        const t='mmmmmmmmmmlliWQ@#0123456789';
+                        return ['monospace','serif','sans-serif'].some(g=>{
+                          c.font='700 48px '+g; const a=c.measureText(t).width;
+                          c.font='700 48px "'+fam+'",'+g; return c.measureText(t).width!==a;
+                        });
+                    }""", fam)
                 if not ok:
                     missing.append(fam)
             if missing:
@@ -70,6 +87,33 @@ async def main() -> int:
                 await browser.close()
                 return 1
             print(f"fonts OK: {args.check_fonts}", flush=True)
+
+        # Type-size gate: a 1080px slide is viewed at roughly a third of its size
+        # on a phone, so anything under ~20px is unreadable there.
+        if args.min_font > 0:
+            small = await page.evaluate(
+                """(min)=>{
+                    const out=[];
+                    for (const s of document.querySelectorAll('.slide')){
+                      const idx=[...document.querySelectorAll('.slide')].indexOf(s)+1;
+                      const w=document.createTreeWalker(s,NodeFilter.SHOW_TEXT);
+                      while(w.nextNode()){
+                        const n=w.currentNode; if(!n.textContent.trim()) continue;
+                        const el=n.parentElement; const cs=getComputedStyle(el);
+                        if(cs.display==='none'||cs.visibility==='hidden') continue;
+                        const fs=parseFloat(cs.fontSize);
+                        if(fs<min) out.push(`slide ${idx} ${el.tagName.toLowerCase()}.${el.className||''} ${fs}px "${n.textContent.trim().slice(0,24)}"`);
+                      }
+                    }
+                    return out;
+                }""", args.min_font)
+            if small:
+                print(f"GATE FAILED (type size): text under {args.min_font}px:", flush=True)
+                for line in small[:12]:
+                    print("  " + line, flush=True)
+                await browser.close()
+                return 1
+            print(f"type size OK: nothing under {args.min_font}px", flush=True)
 
         n = await page.evaluate("document.querySelectorAll('.slide').length")
         if n != args.slides:
