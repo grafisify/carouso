@@ -167,6 +167,13 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
 .photo figcaption{position:absolute;left:28px;right:28px;bottom:22px;z-index:1;color:#fff;
   font-size:24px;font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,.6)}
 
+/* two photos side by side: <div class="photos"><figure class="photo">..</figure><figure class="photo">..</figure></div>
+   Same 24px gutter as .two-column, so it lines up with two-cards. Default is
+   square. .short (4:3) is for dense slides (myth-fact, big-number, stat-band). */
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:none;margin-top:48px}
+.photos .photo{margin-top:0;aspect-ratio:1/1}
+.photos.short .photo{aspect-ratio:4/3}
+
 /* ---------- subtle background variants ----------
    Assign ONE per slide so backgrounds differ without
    fighting the content. All token-driven. */

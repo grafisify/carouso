@@ -76,6 +76,9 @@ at the end of a slide's `.content` to add a picture under the copy.
 - A `<figcaption>` gets a scrim automatically and stays legible on any photo.
 - Radius, border, and background come from the template tokens, so the frame matches
   every template without extra CSS.
+- Two photos: `<div class="photos">` with two `<figure class="photo">` inside. Square, side by side,
+  24px gutter (the same as `two-cards`). Add `short` (4:3) on dense slides such as `myth-fact`
+  and `big-number`. Each figure takes its own `--focus` and optional `<figcaption>`.
 - Slides that are the photo itself use `image-hero` or `cover-split` instead.
 
 ## Composition rules
