@@ -174,6 +174,23 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
 .photos .photo{margin-top:0;aspect-ratio:1/1}
 .photos.short .photo{aspect-ratio:4/3}
 
+/* full-bleed photo on top: <section class="slide ... photo-top" style="--bleed-h:600px">
+     <figure class="photo-bleed"><img src="images/x.jpg" alt=""></figure> ...pattern markup... </section>
+   The photo runs edge to edge from the top, the topbar sits on it (white, on a scrim),
+   and .content starts below it. Use a smaller --bleed-h (about 440px) on dense slides. */
+.photo-top .photo-bleed{position:absolute;left:0;right:0;top:0;height:var(--bleed-h,600px);z-index:1;overflow:hidden;
+  border-radius:0 0 calc(var(--radius)*1.6) calc(var(--radius)*1.6);background:var(--bg2)}
+.photo-top .photo-bleed img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--focus,50% 50%);display:block}
+.photo-top .photo-bleed::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,.4) 18%,rgba(0,0,0,.1) 34%,transparent 46%)}
+.photo-top .photo-bleed figcaption{position:absolute;left:82px;right:82px;bottom:26px;z-index:2;color:#fff;
+  font-size:24px;font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.photo-top .photo-bleed:has(figcaption)::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(0deg,rgba(0,0,0,.55),transparent 35%)}
+.photo-top .topbar{color:#fff;border-bottom-color:transparent;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.photo-top .topbar .b{color:#fff}
+.photo-top .content{justify-content:flex-start;padding-top:calc(var(--bleed-h,600px) - 138px + 64px)}
+
 /* ---------- subtle background variants ----------
    Assign ONE per slide so backgrounds differ without
    fighting the content. All token-driven. */
