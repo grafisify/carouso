@@ -19,7 +19,7 @@ Files per template: `tokens.css` (the skin), `template.json` (name, fonts, size,
 
 1. **Resolve the template.** Read `templates/NN-slug/template.json`. If the person gave no number and no custom system exists, list every template (number, name, vibe) from the `template.json` files and ask which one. An unknown number gets the same list.
 2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle (the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change.
-3. **Plan from the sequence.** Start from the template `sequence`. Keep the cover first, the takeaway last, and the mode of each slide as listed. For a different slide count, drop or repeat middle slides in sequence order, keeping modes alternating and no two adjacent slides on the same pattern. Swap a middle pattern when the content fits another one better (numbers to `stat-band` or `big-number`, steps to `process-steps`, one line to `quote`), keeping that slide's mode. Use `cover-split` only when a verified cover image is supplied, and `image-hero` only for a placed image. Write the plan as a list (slide number, pattern, mode, one-line content) before building.
+3. **Plan from the sequence.** Start from the template `sequence`. Keep the cover first, the takeaway last, and the mode of each slide as listed. For a different slide count, drop or repeat middle slides in sequence order, keeping modes alternating and no two adjacent slides on the same pattern. Swap a middle pattern when the content fits another one better (numbers to `stat-band` or `big-number`, steps to `process-steps`, one line to `quote`), keeping that slide's mode. Use `cover-split` only when a verified cover image is supplied. A placed image goes on the slide as a `.photo` slot (see below), or on an `image-hero` slide when the photo is the point. Write the plan as a list (slide number, pattern, mode, one-line content) before building.
 4. **Write the copy** under the copy standards below. Replace every sample line. Nothing from the sample topic may remain.
 5. **Build the HTML.** Create `carousels/<slug>/index.html` by copying the chosen template's `sample.html`. Change only the `tokens.css` link to `../../templates/NN-slug/tokens.css`. The `fonts.css` and `system.css` links already resolve from that depth. Keep or remove `<section>` blocks per the plan, copy pattern blocks from `design-system/patterns.html` for added slides, apply the `mode-dark` class per the plan, fill in brand, handle, and the `NN / TT` counters.
 6. **Images** pass the hard gate in Phase 2 step 4 below. Put local copies in `carousels/<slug>/images/` and log provenance in `carousels/<slug>/provenance.log`.
@@ -85,6 +85,8 @@ One idea per slide. Headlines stay under 8 words. Body stays under 25 words per 
 3. Log provenance (source URL or upload filename) in `provenance.log`.
 4. Never use generative AI imagery. This skill generates no images, without exception.
 
+**Photo slot.** To add a picture to any body pattern, put `<figure class="photo"><img src="images/<file>.jpg" alt="..."></figure>` as the last child of that slide's `.content`. It sizes to the content width at 16:10 and takes the template's radius and colors. Use `class="photo wide"` (5:2) or `class="photo band"` (3:1) on dense slides such as `myth-fact` or `big-number`, `style="--focus:50% 40%"` to set the crop point, and a `<figcaption>` for a caption on a scrim. Check that the slide still passes the overflow gate and keeps at least 40px of air above and below the content.
+
 ### 5. Build the HTML
 Start from the locked `system.css` (copy the `<style>` content or link the file) and copy the chosen `<section>` blocks from `patterns.html`. Fill copy and image slots. Reference images by local paths relative to the HTML. Do not invent new layouts per carousel. When the brief needs a structure no pattern covers, that is a Phase 1 discussion, not a Phase 2 improvisation.
 
@@ -96,7 +98,7 @@ python3 scripts/render_carousel.py --html <file.html> --out <dir-output> \
     --check-fonts "Plus Jakarta Sans"
 ```
 (Adjust width, height, slides, and fonts to the brief and the system tokens.)
-The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, or when a checked font failed to load. Fix the HTML and re-render until it passes. Never waive the gate manually.
+The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, or when a checked font failed to load. Fix the HTML and re-render until it passes. Never waive the gate manually.
 
 ### 7. Final visual check and record
 Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern, full pattern sequence, and the mode of each slide (for example `{"cover": "cover-big-type", "sequence": ["cover-big-type", "two-cards", "takeaway"], "modes": ["light", "dark", "light"]}`).
@@ -129,6 +131,8 @@ Apply this reasoning at every step. It is what keeps the output from reading as 
 - Contrast: text over photos sits on a scrim or semi-solid card. Never on a busy photo directly.
 - Alignment: one consistent inner margin everywhere. Left-aligned by default; covers center deliberately.
 - Typography: two font families maximum. Every font must load; the render gate rejects silent fallback.
+- Type size: designed for a phone, where a 1080px slide shows at about a third of its size. Body copy 28 to 32px, secondary text (labels, captions, stat labels, footers, tags) 20px or more, never smaller. The render gate rejects any text under 20px (`--min-font`).
+- Contrast: body, muted, footer, and accent text hold at least 4.5:1 against their background and panel (WCAG AA). Templates already comply, so a custom system must check its own tokens in both modes.
 - Color: 60 percent base, 30 percent secondary, 10 percent accent.
 - Consistency: topbar, footer, kicker, cards, radius, and shadows never change style across slides. Patterns vary. Tokens do not.
 - Safe zones: 64px from each edge. Nothing important outside them.

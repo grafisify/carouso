@@ -23,7 +23,7 @@ One locked design system. Every carousel composed fresh. Real images only. No AI
 | **Ready to use** | Six numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs. Every image passes visual verification. Generative AI imagery is banned, no exceptions. |
-| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, or an unloaded webfont. Defects never ship silently. |
+| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, text under 20px, or an unloaded webfont. Defects never ship silently. |
 
 ## Pick a template
 
@@ -135,7 +135,8 @@ Every slide is held to the same bar:
 
 - **Hierarchy.** The headline is the largest, boldest element. One accent-colored word per headline.
 - **Contrast.** Text over photos sits on a scrim or card. Never on a busy photo directly.
-- **Typography.** Two font families maximum. Every font must load, or the render fails.
+- **Typography.** Two font families maximum. Every font must load, or the render fails. Body copy is 28 to 32px and nothing is smaller than 20px, so it stays readable on a phone.
+- **Contrast.** Body, muted, footer, and accent text hold at least 4.5:1 against their background in both modes (WCAG AA).
 - **Color.** 60 percent base, 30 percent secondary, 10 percent accent.
 - **Copy.** Short declarative sentences. Concrete nouns and strong verbs. No AI tells: no em dashes, no "delve", no "unlock", no filler openers.
 - **Consistency.** Tokens never change across slides. Patterns vary. That is the whole trick.

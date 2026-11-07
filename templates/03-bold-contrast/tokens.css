@@ -10,8 +10,8 @@
   --panel:#ffffff;
   --text:#0b0b0b;
   --muted:#4a4a46;
-  --soft:#8a8a84;
-  --accent:#ff3b1f;
+  --soft:#666662;
+  --accent:#d13019;
   --line:rgba(11,11,11,.22);
   --line2:rgba(11,11,11,.12);
 }
@@ -21,7 +21,7 @@
   --panel:#1a1a1a;
   --text:#f5f3ec;
   --muted:#b5b3ab;
-  --soft:#77756f;
+  --soft:#84827c;
   --accent:#ff4a2e;
   --line:rgba(245,243,236,.22);
   --line2:rgba(245,243,236,.12);
@@ -33,7 +33,6 @@ h1,.p-cover-bt h1{letter-spacing:-5px}
 .p-cover-bt h1{font-size:122px;line-height:.92}
 h2{font-size:88px;letter-spacing:-4px;line-height:.98}
 .p-statement h2{font-size:108px;letter-spacing:-5px}
-h3{font-size:36px}
 .kicker{letter-spacing:4px}
 .p-quote .quote{font-weight:800;letter-spacing:-2px}
 .p-bignumber .giant{font-size:400px;font-weight:800;letter-spacing:-16px;-webkit-text-stroke:3px var(--accent)}
