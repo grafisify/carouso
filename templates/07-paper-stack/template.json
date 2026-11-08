@@ -1,8 +1,8 @@
 {
   "number": 7,
-  "id": "07-poster-stack",
-  "name": "Poster Stack",
-  "vibe": "Hero object on top, big headline stack below, URL and arrow button at the foot",
+  "id": "07-paper-stack",
+  "name": "Paper Stack",
+  "vibe": "Left-aligned headline over a stack of paper sheets, graph-paper body slides, segmented progress bar",
   "fonts": [
     "Plus Jakarta Sans"
   ],
@@ -55,10 +55,10 @@
       "mode": "light"
     }
   ],
-  "preview": "assets/templates/07-poster-stack.jpg",
+  "preview": "assets/templates/07-paper-stack.jpg",
   "skins": [
-    "default (purple)",
-    "skin-pink",
-    "skin-news"
+    "default (teal)",
+    "skin-sand",
+    "skin-slate"
   ]
 }

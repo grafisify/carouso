@@ -1,8 +1,8 @@
 {
   "number": 8,
-  "id": "08-bubble-sticker",
-  "name": "Bubble Sticker",
-  "vibe": "Headline in a speech bubble, thick outlines, orange ground and sticker decor",
+  "id": "08-tape-label",
+  "name": "Tape Label",
+  "vibe": "Yellow and black, headline on a taped paper label, die-cut stickers, hazard-tape footer band",
   "fonts": [
     "Plus Jakarta Sans"
   ],
@@ -16,7 +16,7 @@
   "sequence": [
     {
       "slide": 1,
-      "pattern": "cover-bubble",
+      "pattern": "cover-label",
       "mode": "light"
     },
     {
@@ -55,5 +55,5 @@
       "mode": "dark"
     }
   ],
-  "preview": "assets/templates/08-bubble-sticker.jpg"
+  "preview": "assets/templates/08-tape-label.jpg"
 }

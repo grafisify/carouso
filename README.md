@@ -62,19 +62,19 @@ Fresh and natural. Sage and leaf green, soft rounded type. Good for health, natu
 
 <img src="assets/templates/06-fresh-garden.jpg" width="860" alt="Template 06 · Fresh Garden: eight sample slides">
 
-### 07 · Poster Stack
-Hero object on top, a big centered headline stack below, URL and arrow button at the foot. Glass pill for the handle. Comes in three skins: the default purple, `skin-pink` (flat pink poster) and `skin-news` (uppercase headlines, black and lime). Good for tutorials, tools, education.
+### 07 · Paper Stack
+Teal and peach. A big left-aligned headline over a stack of paper sheets, graph-paper body slides, highlighter underlines on the key words and a segmented progress bar. Comes in three palettes: the default teal, `skin-sand` (warm sand and espresso) and `skin-slate` (cool slate and sky). Good for tutorials, tools, education.
 
-<img src="assets/templates/07-poster-stack.jpg" width="860" alt="Template 07 · Poster Stack: eight sample slides">
+<img src="assets/templates/07-paper-stack.jpg" width="860" alt="Template 07 · Paper Stack: eight sample slides">
 
-<img src="assets/templates/07-poster-stack-skins.jpg" width="640" alt="Template 07 skins: default purple, pink, news">
+<img src="assets/templates/07-paper-stack-skins.jpg" width="640" alt="Template 07 palettes: default teal, sand, slate">
 
-*Default, `skin-pink`, `skin-news` covers. Put the skin class on `<body>`.*
+*Default, `skin-sand`, `skin-slate`. Put the skin class on `<body>`.*
 
-### 08 · Bubble Sticker
-Headline inside a speech bubble, thick outlines, orange diagonal ground and sticker decor. Good for tips, creative and food brands.
+### 08 · Tape Label
+Yellow and black. Huge left-aligned type with one word on a tilted paper label, taped label headlines, die-cut stickers and a hazard-tape footer band. Good for tips, creative and playful topics.
 
-<img src="assets/templates/08-bubble-sticker.jpg" width="860" alt="Template 08 · Bubble Sticker: eight sample slides">
+<img src="assets/templates/08-tape-label.jpg" width="860" alt="Template 08 · Tape Label: eight sample slides">
 
 ### 09 · Clean Object
 White space, heavy grotesk headlines with a serif italic accent, a yellow pill, glossy objects and a numbered gallery that peeks off the edges. Good for design, business, creator content.
@@ -91,7 +91,7 @@ Dark violet, a centered hook headline, a gradient CTA pill and glowing objects. 
 
 <img src="assets/templates/11-neon-hook.jpg" width="860" alt="Template 11 · Neon Hook: eight sample slides">
 
-**About the hero objects.** Templates 07 to 11 draw their default art (glossy cubes, balls, rings, stickers, a tote bag) as SVG, so the previews need no photos. To use your own transparent PNG or photo, put an `<img>` inside the `.object` element and it replaces the default. Generative AI imagery is still not allowed.
+**About the hero objects.** Templates 07 to 11 draw their default art (paper sheets, glossy cubes, balls and rings, die-cut stickers) as SVG, so the previews need no photos. To use your own transparent PNG or photo, put an `<img>` inside the `.object` element and it replaces the default. Generative AI imagery is still not allowed.
 
 Need a different slide count (5 to 10), your own photos, or another pattern for one slide? Say so in the brief. Templates stay locked, so the look never drifts. The previews above use sample copy and no photos. See [Adding photos](#adding-photos).
 

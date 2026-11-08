@@ -1,0 +1,128 @@
+/* Template 08: Tape Label. Yellow and black, headline on a taped paper label, die-cut stickers, hazard-tape footer band.
+   Tokens, type and decor only. Structure lives in design-system/system.css.
+   Default object art is drawn from ./decor/ (SVG, relative to this file). */
+:root{
+  --bg:#ffe45c;
+  --bg2:#f7d63c;
+  --panel:#fffdf0;
+  --text:#121212;
+  --muted:#2e2a10;
+  --soft:#3d3708;
+  --accent:#b3001b;
+  --line:rgba(18,18,18,0.3);
+  --line2:rgba(18,18,18,0.16);
+  --font-display:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans",-apple-system,"Inter",sans-serif;
+  --radius:8px;
+  --ink:#121212;
+  --out:#121212;
+  --hot:#e5322d;
+  --on-hot:#ffffff;
+  --kb:#121212;
+  --kf:#ffe45c;
+  --label:#fffdf0;
+  --label-ink:#121212;
+  --label-accent:#b3001b;
+  --band:#121212;
+  --band-ink:#ffe45c;
+  --shd:#121212;
+  --tape:rgba(255,255,255,.62);
+  --cta-bg:#121212;
+  --cta-fg:#ffe45c;
+}
+.slide.mode-dark{
+  --bg:#121212;
+  --bg2:#1b1b1b;
+  --panel:#242424;
+  --text:#fff4c2;
+  --muted:#e8dca4;
+  --soft:#c4b87c;
+  --accent:#ffe45c;
+  --line:rgba(255,244,194,0.3);
+  --line2:rgba(255,244,194,0.16);
+  --kb:#ffe45c;
+  --kf:#121212;
+  --label:#ffe45c;
+  --label-ink:#121212;
+  --label-accent:#b3001b;
+  --band:#ffe45c;
+  --band-ink:#121212;
+  --shd:rgba(255,255,255,.24);
+  --tape:rgba(255,255,255,.40);
+  --cta-bg:#ffe45c;
+  --cta-fg:#121212;
+}
+
+h1,h2,h3{font-weight:800}
+h1{letter-spacing:-4px}
+h2{font-size:76px;letter-spacing:-3px;line-height:1.02}
+.kicker{align-self:flex-start;background:var(--kb);color:var(--kf);padding:10px 22px 9px;border-radius:6px;letter-spacing:2.5px;transform:rotate(-2deg)}
+
+/* body slides: headline on a taped paper label, hazard-tape band at the foot */
+.slide:not(.p-label) .inner{inset:78px 82px 170px}
+.slide:not(.p-label) .content{padding:0 10px}
+.topbar{border-bottom:0;height:64px;font-size:22px}
+.topbar .b{background:var(--kb);color:var(--kf);padding:9px 18px;border-radius:6px;font-weight:800;letter-spacing:2px}
+.topbar span:last-child{display:inline-flex;align-items:center;justify-content:center;min-width:104px;height:48px;border-radius:999px;border:3px solid var(--text);color:var(--text);font-weight:800;letter-spacing:1px}
+.footer{left:0;right:0;bottom:0;height:112px;padding:0 82px;align-items:center;background:var(--band);color:var(--band-ink);font-size:24px;font-weight:800;letter-spacing:2.5px;z-index:4}
+.footer::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px;background:repeating-linear-gradient(135deg,var(--band) 0 14px,transparent 14px 28px)}
+.footer span+span{display:inline-flex;align-items:center;gap:14px}
+.footer span+span::before{content:"";width:16px;height:16px;background:currentColor;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.content>h2,.content>.quote{position:relative;margin-top:36px;background:var(--label);color:var(--label-ink);padding:36px 48px 42px;border-radius:6px;
+  transform:rotate(-1.6deg);box-shadow:10px 12px 0 var(--shd)}
+.content>h2{font-size:68px;letter-spacing:-2.5px;line-height:1.05}
+.content>h2 .accent,.content>.quote .accent{color:var(--label-accent)}
+.content>h2::before,.content>h2::after,.content>.quote::before,.content>.quote::after{content:"";position:absolute;top:-24px;width:132px;height:44px;
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 2px,transparent 2px 9px),var(--tape);box-shadow:0 2px 6px rgba(0,0,0,.12);z-index:1}
+.content>h2::before,.content>.quote::before{left:46px;transform:rotate(-5deg)}
+.content>h2::after,.content>.quote::after{right:46px;transform:rotate(4deg)}
+.p-statement .rule{display:none}
+.p-statement .kicker{margin-bottom:0}
+.p-quote .quote{margin-top:36px;font-weight:800;font-size:58px;letter-spacing:-2px;line-height:1.08}
+.p-quote .quote-mark{display:none}
+.p-quote .quote-source{color:var(--text)}
+.p-cards .card{background:var(--panel);border:4px solid var(--text);border-radius:6px;box-shadow:8px 10px 0 var(--shd)}
+.p-cards .card:nth-child(odd){transform:rotate(-1.2deg)}
+.p-cards .card:nth-child(even){transform:rotate(1.2deg)}
+.p-cards .card .index{color:var(--accent);font-weight:800}
+.p-mythfact .myth-grid{border:4px solid var(--text);border-radius:6px;box-shadow:8px 10px 0 var(--shd);background:var(--panel)}
+.p-mythfact .myth:first-child{border-right:4px solid var(--text)}
+.p-process .process-item{border-bottom:3px solid var(--text)}
+.p-process .process-item:first-child{border-top:3px solid var(--text)}
+.p-process .process-item{grid-template-columns:84px 1fr 200px}
+.p-process .process-no{display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:6px;background:var(--kb);color:var(--kf);font-weight:800}
+.p-process .process-tag{background:none;color:var(--text);border:3px solid var(--text);border-radius:6px;font-weight:800}
+.p-stats .stat-row{border-top:4px solid var(--text);border-bottom:4px solid var(--text)}
+.p-stats .stat{border-right:4px solid var(--text)}
+.p-stats .stat-number{font-weight:800;color:var(--accent)}
+.p-takeaway .takeaway-item{border-bottom:3px solid var(--text)}
+.p-takeaway .takeaway-dot{width:24px;height:24px;border-radius:4px;background:var(--text);transform:rotate(45deg) scale(.8)}
+.p-takeaway .closer-cta .accent{display:inline-block;padding:16px 32px;border-radius:6px;background:var(--kb);color:var(--kf);box-shadow:6px 7px 0 var(--shd)}
+.p-concept .concept-number{font-weight:800}
+.p-concept .concept-body{border-left:4px solid var(--text)}
+
+/* die-cut stickers on body slides, kept clear of the label and the band */
+.slide::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background-repeat:no-repeat}
+.p-statement::after{background-image:url("decor/sticker-burst.svg"),url("decor/sticker-heart.svg");background-size:230px auto,190px auto;background-position:780px 150px,-20px 1060px}
+.p-cards::after{background-image:url("decor/sticker-cursor.svg");background-size:200px auto;background-position:800px 140px}
+.p-process::after{background-image:url("decor/sticker-heart.svg");background-size:200px auto;background-position:800px 140px}
+.p-concept::after{background-image:url("decor/sticker-aster.svg"),url("decor/sticker-burst.svg");background-size:180px auto,210px auto;background-position:40px 1030px,790px 1000px}
+.p-stats::after{background-image:url("decor/sticker-aster.svg");background-size:200px auto;background-position:800px 140px}
+.p-quote::after{background-image:url("decor/sticker-burst.svg"),url("decor/sticker-cursor.svg");background-size:220px auto,180px auto;background-position:780px 140px,50px 1040px}
+.p-takeaway::after{background-image:url("decor/sticker-heart.svg");background-size:200px auto;background-position:800px 140px}
+.p-label::after{display:none}
+
+/* cover-label: big left-aligned type, highlighted word on a tilted label, sticker cluster */
+.p-label{background:var(--bg)}
+.p-label .label-head .tag{font-weight:700;letter-spacing:.5px}
+.p-label .label-head>span:first-child{align-self:flex-start;background:var(--kb);color:var(--kf);padding:9px 18px;border-radius:6px;font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:22px}
+.p-label .label{border:0;background:none;padding:0;margin-top:60px;border-radius:0}
+.p-label h1{font-size:146px;line-height:.95;letter-spacing:-6px;text-align:left}
+.p-label h1 .accent{display:inline-block;color:var(--label-accent);background:var(--label);padding:0 .14em .04em;border-radius:6px;transform:rotate(-2.2deg);box-shadow:8px 10px 0 var(--shd);margin-top:10px}
+.p-label .label .cta{position:absolute;right:-4px;bottom:-250px;width:190px;height:190px;border-radius:50%;padding:0;flex-direction:column;justify-content:center;
+  font-size:30px;letter-spacing:1px;transform:rotate(12deg);box-shadow:6px 8px 0 var(--shd);z-index:5}
+.p-label .label .cta::after{margin:8px 0 0}
+.p-label .object{left:70px;right:70px;top:auto;bottom:150px;height:690px;background-image:url("decor/cluster.svg");background-position:center bottom}
+.p-label .label-url{left:0;right:0;bottom:0;height:112px;display:flex;align-items:center;justify-content:center;background:var(--band);color:var(--band-ink);font-size:26px;z-index:4}
+.p-label .label-url::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px;background:repeating-linear-gradient(135deg,var(--band) 0 14px,transparent 14px 28px)}

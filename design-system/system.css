@@ -234,28 +234,19 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
 .p-hook .hook-foot{color:var(--text);position:absolute;left:82px;right:82px;bottom:44px;z-index:3;display:flex;justify-content:space-between;align-items:center;
   font-size:22px;font-weight:800;letter-spacing:2px}
 
-/* ---------- 15 cover-bubble ----------
-   Headline inside a speech bubble, object on a diagonal ground, sticker decor. */
-.p-bubble .inner{inset:0;padding:78px 82px 0}
-.p-bubble .bubble-head{color:var(--text);display:flex;justify-content:space-between;align-items:flex-start;height:96px;flex:none;
+/* ---------- 15 cover-label ----------
+   Brand tag row, headline on a label with a CTA badge, object below, URL line at the foot. */
+.p-label .inner{inset:0;padding:78px 82px 0}
+.p-label .label-head{color:var(--text);display:flex;justify-content:space-between;align-items:flex-start;height:96px;flex:none;
   font-size:22px;font-weight:800;line-height:1.25}
-.p-bubble .bubble-head .tag{text-align:right}
-.p-bubble .bubble{position:relative;flex:none;margin-top:40px;padding:62px 56px 80px;text-align:center;border:7px solid var(--out,var(--ink));
-  background:var(--panel);border-radius:60px}
-.p-bubble .bubble::before{content:"";position:absolute;right:40px;top:-62px;width:96px;height:62px;background:var(--out,var(--ink));
-  clip-path:polygon(0 100%,100% 0,100% 100%)}
-.p-bubble .bubble::after{content:"";position:absolute;right:50px;top:-47px;width:80px;height:50px;background:var(--panel);
-  clip-path:polygon(0 100%,100% 0,100% 100%)}
-.p-bubble h1{font-size:88px;line-height:1.02;letter-spacing:-3px;margin-top:0}
-.p-bubble .bubble .cta{position:absolute;right:30px;bottom:-34px}
-.p-bubble .object{position:absolute;left:150px;right:150px;top:640px;height:560px}
-.p-bubble .ground{position:absolute;left:-40px;right:-40px;bottom:0;height:430px;z-index:1;background:var(--ink);
-  clip-path:polygon(0 24%,50% 0,100% 20%,100% 100%,0 100%)}
-.p-bubble .ground::after{content:"";position:absolute;inset:14px 0 0 0;background:var(--hot);
-  clip-path:polygon(0 24%,50% 0,100% 20%,100% 100%,0 100%)}
-.p-bubble .stk{position:absolute;z-index:2;background-repeat:no-repeat;background-size:contain}
-.p-bubble .bubble-url{position:absolute;left:0;right:0;bottom:44px;z-index:3;text-align:center;font-size:26px;font-weight:800;letter-spacing:2px;
-  text-transform:uppercase;color:var(--on-hot)}
+.p-label .label-head .tag{text-align:right}
+.p-label .label{position:relative;flex:none;margin-top:40px;padding:56px 56px 70px;border:6px solid var(--out,var(--ink));
+  background:var(--panel);border-radius:var(--radius)}
+.p-label h1{font-size:88px;line-height:1.02;letter-spacing:-3px;margin-top:0}
+.p-label .label .cta{position:absolute;right:30px;bottom:-34px}
+.p-label .object{position:absolute;left:150px;right:150px;top:640px;height:560px}
+.p-label .label-url{position:absolute;left:0;right:0;bottom:44px;z-index:3;text-align:center;font-size:26px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--text)}
 
 /* ---------- 16 cover-object ----------
    Left-aligned headline, highlight pill row, object standing on a ground. */

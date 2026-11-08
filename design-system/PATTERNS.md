@@ -123,8 +123,8 @@ Hero object on top, centered headline stack, URL and arrow button at the foot, h
 ### cover-hook
 Headline and one-line promise up top, gradient CTA pill, object below, slide number and arrow button at the foot. Use when the cover is a question or a pain point.
 
-### cover-bubble
-Headline inside a speech bubble, CTA pill on its corner, object on a diagonal ground with two sticker slots. Use for friendly tips and creative topics.
+### cover-label
+Brand tag row, headline on a label with a CTA badge, object below, URL line at the foot. Use for friendly tips and creative topics.
 
 ### cover-object
 Left-aligned headline, highlight pill row, object standing on a ground. Use when one object carries the cover.
