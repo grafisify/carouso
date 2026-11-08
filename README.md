@@ -7,10 +7,6 @@
 Turn a topic into a designed, ready-to-post carousel for Instagram, TikTok, or Facebook.
 Pick a ready-made template or lock your own design system. Real images only. No AI slop.
 
-<img src="assets/preview-all.jpg" width="860" alt="Carouso demo carousel: six slides, six different layout patterns, one brand identity">
-
-*Six slides, six different patterns, one brand. Tokens stay locked. Composition stays free.*
-
 </div>
 
 ---
@@ -141,6 +137,10 @@ Any body slide can take a photo. Give the agent the file (or a URL) and say whic
 | Full-bleed top (`photo-top`) | One photo edge to edge on top with rounded bottom corners. The topbar sits on it, the copy starts below. | Hero-style slides. Pick a photo with a calm top edge |
 | Photo slide (`image-hero`, `cover-split`) | The photo is the slide. | Strong covers and showpiece images |
 
+<img src="assets/photo-layouts.jpg" width="860" alt="Photo layouts: one framed photo, two photos, full-bleed top photo, and a 3:1 band photo, each in a different template">
+
+*Left to right: `photo` in Warm Elegant, `photos` in Fresh Garden, `photo-top` in Dark Premium, and `photo band` in Bold Contrast. Sample photos are from the Kodak Lossless True Color Image Suite, released by Kodak for unrestricted use.*
+
 Every frame takes an optional caption on a scrim and a crop point (`--focus`). Details and markup are in `design-system/PATTERNS.md`.
 
 ## Design standards
@@ -181,7 +181,7 @@ carouso/
 │   └── PATTERNS.md           ← catalog: what each pattern is for
 ├── fonts/                    ← bundled variable fonts (SIL OFL) + fonts.css
 ├── assets/
-│   ├── preview-all.jpg       ← six demo slides in one strip
+│   ├── photo-layouts.jpg     ← the four photo layouts in four templates
 │   └── templates/            ← the six template previews
 ├── scripts/
 │   └── render_carousel.py    ← Playwright render with quality gates
