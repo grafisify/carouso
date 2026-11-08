@@ -16,7 +16,7 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 | | |
 |---|---|
 | **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 19-pattern library, so every carousel is consistent without looking copy-pasted. |
-| **Ready to use** | Eleven numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
+| **Ready to use** | Fourteen numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
@@ -91,6 +91,23 @@ Dark violet, a centered hook headline, a gradient CTA pill and glowing objects. 
 
 <img src="assets/templates/11-neon-hook.jpg" width="860" alt="Template 11 · Neon Hook: eight sample slides">
 
+### 12 · News Wire
+Full-bleed news photo under a dark scrim, a red angled tag, a big headline stack and a meta line. Body slides read like a wire desk: heavy masthead rule on top, ticker band at the foot. Good for breaking news, local news, announcements.
+
+<img src="assets/templates/12-news-wire.jpg" width="860" alt="Template 12 · News Wire: eight sample slides">
+
+### 13 · News Card
+The photo melts into paper and a white rounded story card sits on top with a category chip, headline, short summary and a swipe pill. Body slides are soft cards. Good for sports, lifestyle, explainers.
+
+<img src="assets/templates/13-news-card.jpg" width="860" alt="Template 13 · News Card: eight sample slides">
+
+### 14 · News Split
+A tall photo that fades into a dark panel, condensed uppercase headline and an orange footer bar. Body slides use solid top and bottom bars and include a claim vs fact-check slide. Good for weather, incidents, fact checks, short bulletins.
+
+<img src="assets/templates/14-news-split.jpg" width="860" alt="Template 14 · News Split: eight sample slides">
+
+**About the news covers.** Templates 12 to 14 need a cover photo: swap the `src` in the `news-photo` figure (and set `--focus` on it to choose the crop) and add a photo to the slide that carries one. The sample photos are from the Kodak Lossless True Color Image Suite, released by Kodak for unrestricted use; replace them with your own before publishing.
+
 **About the hero objects.** Templates 07 to 11 draw their default art (paper sheets, glossy cubes, balls and rings, die-cut stickers) as SVG, so the previews need no photos. To use your own transparent PNG or photo, put an `<img>` inside the `.object` element and it replaces the default. Generative AI imagery is still not allowed.
 
 Need a different slide count (5 to 10), your own photos, or another pattern for one slide? Say so in the brief. Templates stay locked, so the look never drifts. The previews above use sample copy and no photos. See [Adding photos](#adding-photos).
@@ -142,7 +159,7 @@ Font choices stay at the feel level. The agent maps them to real fonts internall
 
 ## The pattern library
 
-Nineteen structural patterns in `design-system/`, all token-driven. Each slide can also flip to the system's dark mode with one class (`mode-dark` on the `<section>`), so a carousel can alternate light and dark slides without any redesign.
+Twenty structural patterns in `design-system/`, all token-driven. Each slide can also flip to the system's dark mode with one class (`mode-dark` on the `<section>`), so a carousel can alternate light and dark slides without any redesign.
 
 | Pattern | Use for |
 |---|---|
@@ -202,18 +219,18 @@ Want your own brand instead? Ask for a custom design system and answer the 7 que
 carouso/
 ├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
 ├── templates/
-│   └── NN-name/              ← eleven templates, each with:
-│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 to 11 also draw their object art from decor/)
+│   └── NN-name/              ← fourteen templates, each with:
+│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 to 11 also draw their object art from decor/; 12 to 14 ship sample photos in images/)
 │       ├── template.json     ←   name, fonts, size, slide sequence
 │       └── sample.html       ←   the finished 8-slide sample to copy from
 ├── design-system/
-│   ├── system.css            ← structure + all 19 pattern styles (shared by every template)
-│   ├── patterns.html         ← the first 12 patterns as full slides (07 to 11 demo the newer seven)
+│   ├── system.css            ← structure + all 20 pattern styles (shared by every template)
+│   ├── patterns.html         ← the first 12 patterns as full slides (07 to 14 demo the newer eight)
 │   └── PATTERNS.md           ← catalog: what each pattern is for
 ├── fonts/                    ← bundled fonts (SIL OFL) + fonts.css
 ├── assets/
 │   ├── photo-layouts.jpg     ← the four photo layouts in four templates
-│   └── templates/            ← the eleven template previews
+│   └── templates/            ← the fourteen template previews
 ├── scripts/
 │   └── render_carousel.py    ← Playwright render with quality gates
 └── examples/

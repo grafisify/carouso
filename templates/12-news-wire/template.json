@@ -1,0 +1,59 @@
+{
+  "number": 12,
+  "id": "12-news-wire",
+  "name": "News Wire",
+  "vibe": "Full-bleed news photo with a dark scrim, red angled tag and headline stack; wire-desk body slides with a ticker footer",
+  "fonts": [
+    "Plus Jakarta Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-news",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "concept-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "stat-band",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/12-news-wire.jpg"
+}

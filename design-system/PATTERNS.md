@@ -1,6 +1,6 @@
 # Pattern catalog
 
-Nineteen structural patterns. The first twelve are full slides in `patterns.html`; the newer seven (below) are demonstrated by templates 07 to 11
+Twenty structural patterns. The first twelve are full slides in `patterns.html`; the newer eight (below) are demonstrated by templates 07 to 14
 (`data-pattern` marks the name). Copy the `<section>` block into the working
 carousel file. Never edit the structure per carousel. Only the copy, images,
 and token values change.
@@ -113,7 +113,7 @@ Rules:
 tokens. The shipped file's block matches its dark theme; light systems
 override it with their own dark palette.
 
-## Newer patterns (used by templates 07 to 11)
+## Newer patterns (used by templates 07 to 14)
 
 These read extra tokens (`--hl`, `--hl-ink`, `--cta-bg`, `--btn-bg`, `--ink`, `--out`, `--hot`) and an `.object` slot that the template fills with default art. Each template's `sample.html` shows the markup.
 
@@ -137,3 +137,6 @@ Numbered headline over a gallery of cards that run off the right and bottom edge
 
 ### note
 Editorial note: sticky number tab, two-column meta, indented paragraphs and a marker highlight. Use for long-form tips in a personal voice.
+
+### cover-news
+Full-bleed news photo with a scrim, brand row, then tag, headline, dek and meta stacked at the foot. The photo is required (`figure.news-photo`, crop set with `--focus`). Templates 12 to 14 restyle the same markup three ways. Use for news, announcements and photo-led stories.

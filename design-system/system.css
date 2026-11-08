@@ -296,6 +296,28 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
   -webkit-box-decoration-break:clone;box-decoration-break:clone}
 .p-note .object{position:absolute;z-index:3}
 
+/* ---------- 20 cover-news ----------
+   Full-bleed news photo with a scrim, brand row, then tag, headline, dek and meta stacked at the foot.
+   Markup: <figure class="news-photo" style="--focus:50% 30%"><img src="images/x.jpg" alt=""></figure> then .inner > .news-head + .news-stack.
+   The photo is required; templates 12 to 14 restyle this one structure. */
+.p-news{background:#0b0b0b;color:#fff}
+.p-news .news-photo{position:absolute;inset:0;margin:0;z-index:0;overflow:hidden}
+.p-news .news-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--focus,50% 50%);display:block}
+.p-news .news-photo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.42) 0,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 40%,rgba(0,0,0,.78) 74%,rgba(0,0,0,.94) 100%)}
+.p-news .inner{inset:0;padding:78px 82px 84px;justify-content:space-between;z-index:2}
+.p-news .news-head{display:flex;justify-content:space-between;align-items:center;flex:none;font-size:22px;font-weight:800;
+  letter-spacing:2.5px;text-transform:uppercase;color:#fff}
+.p-news .news-stack{flex:none}
+.p-news .news-tagrow{display:flex;align-items:center;gap:24px;margin-bottom:28px}
+.p-news .news-tag{display:inline-block;padding:10px 24px;font-size:24px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;
+  background:var(--tag-bg,var(--accent));color:var(--tag-fg,#fff)}
+.p-news h1{font-size:92px;line-height:1.02;letter-spacing:-3px;color:#fff;text-align:left}
+.p-news h1 .accent{color:var(--news-accent,#fff)}
+.p-news .dek{margin:26px 0 0;font-size:32px;line-height:1.4;color:rgba(255,255,255,.9);max-width:840px}
+.p-news .news-meta{display:flex;justify-content:space-between;align-items:center;margin-top:40px;font-size:22px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.82)}
+
 /* ---------- subtle background variants ----------
    Assign ONE per slide so backgrounds differ without
    fighting the content. All token-driven. */
