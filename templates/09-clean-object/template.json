@@ -1,0 +1,60 @@
+{
+  "number": 9,
+  "id": "09-clean-object",
+  "name": "Clean Object",
+  "vibe": "White space, heavy grotesk with a serif italic accent, yellow pill, glossy objects",
+  "fonts": [
+    "Albert Sans",
+    "Instrument Serif"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-object",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "concept-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "pointer",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "showcase",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "stat-band",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/09-clean-object.jpg"
+}

@@ -1,0 +1,144 @@
+/* Template 07: Paper Stack. Left-aligned headline over a stack of paper sheets, graph-paper body slides, segmented progress bar.
+   Tokens, type and decor only. Structure lives in design-system/system.css.
+   Default object art is drawn from ./decor/ (SVG, relative to this file). */
+:root{
+  --bg:#eaf3f0;
+  --bg2:#dcebe6;
+  --panel:#ffffff;
+  --text:#062f2e;
+  --muted:#2d5352;
+  --soft:#41676a;
+  --accent:#0b6b63;
+  --line:rgba(6,47,46,0.3);
+  --line2:rgba(6,47,46,0.16);
+  --font-display:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans",-apple-system,"Inter",sans-serif;
+  --radius:12px;
+  --grid:rgba(6,47,46,.07);
+  --pill-bg:transparent;
+  --pill-fg:#2d5352;
+}
+.slide.mode-dark{
+  --bg:#062f2e;
+  --bg2:#0a3b39;
+  --panel:#0e4543;
+  --text:#f1faf7;
+  --muted:#cde5df;
+  --soft:#a5cac3;
+  --accent:#ffb59a;
+  --line:rgba(241,250,247,0.3);
+  --line2:rgba(241,250,247,0.16);
+  --grid:rgba(241,250,247,.06);
+  --pill-fg:#cde5df;
+}
+
+/* optional skins: put class skin-sand or skin-slate on <body> */
+.skin-sand .slide{
+  --bg:#f5eee2;
+  --bg2:#eadfca;
+  --panel:#fffaf0;
+  --text:#2b1d14;
+  --muted:#5a4332;
+  --soft:#735a47;
+  --accent:#a1400f;
+  --line:rgba(43,29,20,0.3);
+  --line2:rgba(43,29,20,0.16);
+  --grid:rgba(43,29,20,.07);
+  --pill-fg:#5a4332;
+}
+.skin-sand .slide.mode-dark{
+  --bg:#2b1d14;
+  --bg2:#35251a;
+  --panel:#3e2c20;
+  --text:#fbf3e6;
+  --muted:#e6d6c0;
+  --soft:#c9b498;
+  --accent:#f2c078;
+  --line:rgba(251,243,230,0.3);
+  --line2:rgba(251,243,230,0.16);
+  --grid:rgba(251,243,230,.06);
+  --pill-fg:#e6d6c0;
+}
+.skin-slate .slide{
+  --bg:#e9eef4;
+  --bg2:#dce4ed;
+  --panel:#ffffff;
+  --text:#14202e;
+  --muted:#3d5068;
+  --soft:#52667f;
+  --accent:#1d5fa6;
+  --line:rgba(20,32,46,0.3);
+  --line2:rgba(20,32,46,0.16);
+  --grid:rgba(20,32,46,.07);
+  --pill-fg:#3d5068;
+}
+.skin-slate .slide.mode-dark{
+  --bg:#15202d;
+  --bg2:#1b2938;
+  --panel:#213245;
+  --text:#f0f5fa;
+  --muted:#cbd8e6;
+  --soft:#a2b6cb;
+  --accent:#8cc7ff;
+  --line:rgba(240,245,250,0.3);
+  --line2:rgba(240,245,250,0.16);
+  --grid:rgba(240,245,250,.06);
+  --pill-fg:#cbd8e6;
+}
+
+h1,h2,h3{font-weight:800}
+h1{letter-spacing:-3.5px}
+h2{font-size:76px;letter-spacing:-3px;line-height:1.02}
+.kicker{letter-spacing:3px}
+.kicker::before{content:"";display:inline-block;width:38px;height:6px;border-radius:3px;background:var(--accent);margin-right:16px;vertical-align:.18em}
+h1 .accent,h2 .accent{background:linear-gradient(transparent 64%,color-mix(in srgb,var(--accent) 26%,transparent) 64% 94%,transparent 94%);
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .06em}
+
+/* graph-paper body slides */
+.slide:not(.p-poster){background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:54px 54px;background-position:-1px -1px;background-color:var(--bg)}
+.topbar{border-bottom:0;height:72px;font-size:22px;letter-spacing:2.5px}
+.topbar .b{display:inline-flex;align-items:center;gap:14px;font-weight:800}
+.topbar .b::before{content:"";width:20px;height:20px;border-radius:5px;background:var(--accent);transform:rotate(45deg)}
+.seg{display:inline-flex;gap:6px;align-items:center}
+.seg i{display:block;width:22px;height:8px;border-radius:4px;background:var(--line)}
+.seg i.on{background:var(--accent)}
+.footer{bottom:46px;align-items:center;font-size:22px;font-weight:800;letter-spacing:2.5px;color:var(--muted)}
+.footer .save{display:inline-flex;align-items:center;gap:14px;color:var(--text)}
+.footer .save::before{content:"";width:18px;height:26px;background:var(--accent);clip-path:polygon(0 0,100% 0,100% 100%,50% 76%,0 100%)}
+.p-cards .card,.p-mythfact .myth-grid{border:0;border-radius:10px;background:var(--panel);box-shadow:0 0 0 1.5px var(--line2),0 24px 48px rgba(0,0,0,.14)}
+.p-process .process-tag{background:none;color:var(--accent);border:2px solid var(--accent);border-radius:8px;font-weight:800}
+.p-process .process-no{color:var(--accent);font-weight:800}
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--accent);font-weight:800;font-size:380px}
+.p-takeaway .takeaway-dot{background:var(--accent);border-radius:4px;transform:rotate(45deg) scale(.8)}
+.p-takeaway .closer-cta .accent{display:inline-block;padding:16px 32px;border-radius:10px;background:var(--accent);color:var(--bg)}
+
+/* cover-poster: left-aligned headline, paper stack bleeding off the bottom-right corner */
+.slide.p-poster{background:var(--bg)}
+.slide.p-poster::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:repeating-radial-gradient(circle at 100% 100%,transparent 0 78px,rgba(255,255,255,.055) 78px 80px)}
+.p-poster .poster-head{height:72px}
+.p-poster .poster-head>span:first-child{display:inline-flex;align-items:center;gap:14px;font-size:22px}
+.p-poster .poster-head>span:first-child::before{content:"";width:20px;height:20px;border-radius:5px;background:var(--accent);transform:rotate(45deg)}
+.p-poster .handle-pill{border:0;padding:0;font-size:22px;color:var(--soft)}
+.p-poster .object{position:absolute;right:0;bottom:0;width:960px;height:960px;margin:0;z-index:1;background-image:url("decor/stack.svg");background-position:right bottom}
+.p-poster .poster-stack{position:static;text-align:left;margin-top:64px}
+.p-poster h1,.p-poster .sub{position:relative;z-index:3}
+.p-poster h1{font-size:122px;line-height:.97;letter-spacing:-4.5px;color:var(--text);text-shadow:none;max-width:900px}
+.p-poster .sub{margin:34px 0 0;max-width:470px;font-size:32px;color:var(--muted)}
+.p-poster .poster-foot{position:absolute;left:82px;bottom:76px;z-index:3;margin:0;font-size:24px;color:var(--text);letter-spacing:2.5px}
+.p-poster .poster-foot::before{content:"";display:inline-block;width:56px;height:6px;border-radius:3px;background:var(--accent);margin-right:18px;vertical-align:.2em}
+.p-poster .arrow-btn{display:none}
+
+/* showcase tiles: palette swatches */
+.p-showcase .peek{background-color:var(--panel);border:0;border-radius:10px;box-shadow:0 0 0 1.5px var(--line2),0 24px 48px rgba(0,0,0,.12);
+  background-size:52% auto;background-position:center 60%}
+.p-showcase .peek.a{background-image:url("decor/sw-a.svg")}
+.p-showcase .peek.b{background-image:url("decor/sw-b.svg")}
+.p-showcase .peek.c{background-image:url("decor/sw-c.svg")}
+.p-showcase .peek.d{background-image:url("decor/sw-d.svg")}
+.p-showcase .peek.e{background-image:url("decor/sw-e.svg")}
+.p-showcase .peek.f{background-image:url("decor/sw-f.svg")}
+.p-showcase .peek .lab{color:var(--text)}
+.p-showcase .peek .who{background:var(--text);color:var(--bg);border-radius:8px}

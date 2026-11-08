@@ -1,0 +1,64 @@
+{
+  "number": 7,
+  "id": "07-paper-stack",
+  "name": "Paper Stack",
+  "vibe": "Left-aligned headline over a stack of paper sheets, graph-paper body slides, segmented progress bar",
+  "fonts": [
+    "Plus Jakarta Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-poster",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "concept-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "showcase",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/07-paper-stack.jpg",
+  "skins": [
+    "default (teal)",
+    "skin-sand",
+    "skin-slate"
+  ]
+}

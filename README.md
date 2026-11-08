@@ -15,8 +15,8 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 
 | | |
 |---|---|
-| **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 12-pattern library, so every carousel is consistent without looking copy-pasted. |
-| **Ready to use** | Six numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
+| **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 19-pattern library, so every carousel is consistent without looking copy-pasted. |
+| **Ready to use** | Eleven numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
@@ -61,6 +61,37 @@ Dark and premium. Near-black and antique gold, editorial quotes. Good for financ
 Fresh and natural. Sage and leaf green, soft rounded type. Good for health, nature, how-tos.
 
 <img src="assets/templates/06-fresh-garden.jpg" width="860" alt="Template 06 · Fresh Garden: eight sample slides">
+
+### 07 · Paper Stack
+Teal and peach. A big left-aligned headline over a stack of paper sheets, graph-paper body slides, highlighter underlines on the key words and a segmented progress bar. Comes in three palettes: the default teal, `skin-sand` (warm sand and espresso) and `skin-slate` (cool slate and sky). Good for tutorials, tools, education.
+
+<img src="assets/templates/07-paper-stack.jpg" width="860" alt="Template 07 · Paper Stack: eight sample slides">
+
+<img src="assets/templates/07-paper-stack-skins.jpg" width="640" alt="Template 07 palettes: default teal, sand, slate">
+
+*Default, `skin-sand`, `skin-slate`. Put the skin class on `<body>`.*
+
+### 08 · Tape Label
+Butter and charcoal. Huge left-aligned type with one word on a tilted paper label, taped label headlines, die-cut stickers and a hazard-tape footer band. Good for tips, creative and playful topics.
+
+<img src="assets/templates/08-tape-label.jpg" width="860" alt="Template 08 · Tape Label: eight sample slides">
+
+### 09 · Clean Object
+White space, heavy grotesk headlines with a serif italic accent, a yellow pill, glossy objects and a numbered gallery that peeks off the edges. Good for design, business, creator content.
+
+<img src="assets/templates/09-clean-object.jpg" width="860" alt="Template 09 · Clean Object: eight sample slides">
+
+### 10 · Sticky Mono
+Flat orange or paper slides, monospace notes, a sticky number tab and marker highlights. Good for stories, career notes, long-form tips.
+
+<img src="assets/templates/10-sticky-mono.jpg" width="860" alt="Template 10 · Sticky Mono: eight sample slides">
+
+### 11 · Neon Hook
+Dark violet, a centered hook headline, a gradient CTA pill and glowing objects. Good for hooks, tech, short punchy explainers.
+
+<img src="assets/templates/11-neon-hook.jpg" width="860" alt="Template 11 · Neon Hook: eight sample slides">
+
+**About the hero objects.** Templates 07 to 11 draw their default art (paper sheets, glossy cubes, balls and rings, die-cut stickers) as SVG, so the previews need no photos. To use your own transparent PNG or photo, put an `<img>` inside the `.object` element and it replaces the default. Generative AI imagery is still not allowed.
 
 Need a different slide count (5 to 10), your own photos, or another pattern for one slide? Say so in the brief. Templates stay locked, so the look never drifts. The previews above use sample copy and no photos. See [Adding photos](#adding-photos).
 
@@ -111,7 +142,7 @@ Font choices stay at the feel level. The agent maps them to real fonts internall
 
 ## The pattern library
 
-Twelve structural patterns in `design-system/`, all token-driven. Each slide can also flip to the system's dark mode with one class (`mode-dark` on the `<section>`), so a carousel can alternate light and dark slides without any redesign.
+Nineteen structural patterns in `design-system/`, all token-driven. Each slide can also flip to the system's dark mode with one class (`mode-dark` on the `<section>`), so a carousel can alternate light and dark slides without any redesign.
 
 | Pattern | Use for |
 |---|---|
@@ -171,18 +202,18 @@ Want your own brand instead? Ask for a custom design system and answer the 7 que
 carouso/
 ├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
 ├── templates/
-│   └── NN-name/              ← six templates, each with:
-│       ├── tokens.css        ←   colors, fonts, light and dark modes
+│   └── NN-name/              ← eleven templates, each with:
+│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 to 11 also draw their object art from decor/)
 │       ├── template.json     ←   name, fonts, size, slide sequence
 │       └── sample.html       ←   the finished 8-slide sample to copy from
 ├── design-system/
-│   ├── system.css            ← structure + all 12 pattern styles (shared by every template)
-│   ├── patterns.html         ← the 12 patterns as full slides
+│   ├── system.css            ← structure + all 19 pattern styles (shared by every template)
+│   ├── patterns.html         ← the first 12 patterns as full slides (07 to 11 demo the newer seven)
 │   └── PATTERNS.md           ← catalog: what each pattern is for
-├── fonts/                    ← bundled variable fonts (SIL OFL) + fonts.css
+├── fonts/                    ← bundled fonts (SIL OFL) + fonts.css
 ├── assets/
 │   ├── photo-layouts.jpg     ← the four photo layouts in four templates
-│   └── templates/            ← the six template previews
+│   └── templates/            ← the eleven template previews
 ├── scripts/
 │   └── render_carousel.py    ← Playwright render with quality gates
 └── examples/

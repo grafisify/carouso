@@ -1,0 +1,59 @@
+{
+  "number": 10,
+  "id": "10-sticky-mono",
+  "name": "Sticky Mono",
+  "vibe": "Flat orange, monospace notes, sticky tab and marker highlight",
+  "fonts": [
+    "JetBrains Mono"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "note",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "note",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/10-sticky-mono.jpg"
+}

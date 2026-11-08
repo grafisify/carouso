@@ -11,7 +11,7 @@ Produce carousel posts in two phases. Phase 1 locks a design system with the use
 Lock the tokens. Free the composition. That is what keeps every carousel on-brand without looking templated.
 
 ## Using a template (default path)
-Six ready-made templates ship in `templates/`. Each is a locked look (colors, fonts, light and dark tokens) plus a slide skeleton, so no onboarding is needed. The preview gallery is in `README.md`.
+Eleven ready-made templates ship in `templates/`. Each is a locked look (colors, fonts, light and dark tokens) plus a slide skeleton, so no onboarding is needed. The preview gallery is in `README.md`.
 
 Triggers: "template 3", "template no 3", "pakai template 3", "use template 2 for ...", or a template name ("morning cup"). Match the number or name against `templates/NN-slug/template.json`.
 
@@ -31,9 +31,9 @@ python3 scripts/render_carousel.py --html carousels/<slug>/index.html --out caro
 Fix the HTML until every gate passes. Never waive a gate.
 8. **Final visual check** as in Phase 2 step 7, then deliver `slide_01.jpg` to `slide_NN.jpg`. Templates need no `last-used.json`, because modes come from the template.
 
-Fonts are bundled in `fonts/`, so nothing needs installing besides Playwright.
+Fonts are bundled in `fonts/`, so nothing needs installing besides Playwright. Templates 07 to 11 draw their hero art (`.object` elements and decor) from `templates/NN-slug/decor/` through `tokens.css`, so keep the slide markup as in `sample.html`. To use the person's own transparent PNG or photo as the hero, put `<img src="images/x.png" alt="">` inside the `.object` element; the image replaces the default art. Template 07 has optional skins: add `skin-sand` or `skin-slate` to `<body>` when the person asks for a warm sand or a cool slate palette (listed under `skins` in its `template.json`). The newer patterns (`cover-poster`, `cover-hook`, `cover-label`, `cover-object`, `pointer`, `showcase`, `note`) are described in `design-system/PATTERNS.md`; swap them only for patterns of the same kind (cover for cover, body for body).
 
-A person who wants their own look instead of the six templates uses the custom path below.
+A person who wants their own look instead of the eleven templates uses the custom path below.
 
 ## Custom design system (optional path)
 Use this path only when the person asks for their own look, or sends a reference screenshot or HTML, instead of picking a template. When no template was chosen and no locked design system exists yet, offer the templates first, and run the onboarding below only if they want a custom one. When this path runs, do not start designing. Open the onboarding dialog first. Ask one question at a time, in this order, each with the listed choices. Accept a custom answer at any point. Seven questions, then design. If the user sends a screenshot or HTML reference instead of answering, skip the dialog and go to Phase 1, option B.

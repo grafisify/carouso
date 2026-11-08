@@ -191,6 +191,111 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
 .photo-top .topbar .b{color:#fff}
 .photo-top .content{justify-content:flex-start;padding-top:calc(var(--bleed-h,600px) - 138px + 64px)}
 
+/* ---------- shared pieces: object slot, arrow button, CTA pill ----------
+   .object holds a hero image. Templates draw a default illustration through
+   background-image (tokens.css). Put <img src="images/x.png" alt=""> inside to
+   use your own transparent PNG or photo instead; the img wins over the default. */
+.object{position:relative;flex:none;background-repeat:no-repeat;background-position:center;background-size:contain}
+.object img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+.object:has(img){background-image:none !important}
+.arrow-btn,.arr::after{--arrow:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 5.5 19.5 12 13 18.5'/%3E%3C/svg%3E")}
+.arrow-btn{display:inline-flex;align-items:center;justify-content:center;width:80px;height:80px;border-radius:22px;
+  background:var(--btn-bg,var(--text));color:var(--btn-fg,var(--bg))}
+.arrow-btn::before{content:"";width:38px;height:38px;background:currentColor;-webkit-mask:var(--arrow) center/contain no-repeat;mask:var(--arrow) center/contain no-repeat}
+.arr::after{content:"";display:inline-block;width:1.1em;height:1.1em;margin-left:.45em;vertical-align:-.15em;background:currentColor;
+  -webkit-mask:var(--arrow) center/contain no-repeat;mask:var(--arrow) center/contain no-repeat}
+.cta{display:inline-flex;align-items:center;align-self:flex-start;padding:20px 38px;border-radius:999px;font-size:30px;font-weight:800;line-height:1;
+  background:var(--cta-bg,var(--accent));color:var(--cta-fg,var(--bg));white-space:nowrap}
+.handle-pill{display:inline-flex;align-items:center;padding:12px 26px;border-radius:999px;background:var(--pill-bg,var(--panel));
+  color:var(--pill-fg,var(--text));font-size:20px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--line)}
+
+/* ---------- 13 cover-poster ----------
+   Hero object on top, big headline stack below, URL and arrow button at the foot. */
+.p-poster .inner{inset:0;padding:78px 82px 64px}
+.p-poster .poster-head{color:var(--text);display:flex;justify-content:space-between;align-items:center;height:72px;flex:none;
+  font-size:20px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.p-poster .object{flex:1;min-height:0;margin:16px -30px 8px}
+.p-poster .poster-stack{flex:none;text-align:center}
+.p-poster h1{font-size:96px;line-height:1;letter-spacing:-3px;margin-top:0}
+.p-poster .sub{max-width:none;margin:22px auto 0;font-size:30px;line-height:1.35;color:var(--text)}
+.p-poster .poster-foot{color:var(--text);margin-top:44px;display:flex;justify-content:space-between;align-items:center;
+  font-size:24px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+
+/* ---------- 14 cover-hook ----------
+   Headline up top, CTA pill, object below. Number bottom-left, arrow button bottom-right. */
+.p-hook .inner{inset:0;padding:78px 82px 0}
+.p-hook .hook-head{color:var(--text);display:flex;justify-content:space-between;align-items:center;height:60px;flex:none;
+  font-size:20px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.p-hook .hook-body{flex:none;margin-top:96px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.p-hook h1{font-size:92px;line-height:1.02;letter-spacing:-3px;margin-top:0}
+.p-hook .sub{margin:30px auto 0;font-size:32px;line-height:1.4;max-width:800px;color:var(--text)}
+.p-hook .cta{margin-top:44px;align-self:center}
+.p-hook .object{flex:1;min-height:0;margin:20px -82px 0}
+.p-hook .hook-foot{color:var(--text);position:absolute;left:82px;right:82px;bottom:44px;z-index:3;display:flex;justify-content:space-between;align-items:center;
+  font-size:22px;font-weight:800;letter-spacing:2px}
+
+/* ---------- 15 cover-label ----------
+   Brand tag row, headline on a label with a CTA badge, object below, URL line at the foot. */
+.p-label .inner{inset:0;padding:78px 82px 0}
+.p-label .label-head{color:var(--text);display:flex;justify-content:space-between;align-items:flex-start;height:96px;flex:none;
+  font-size:22px;font-weight:800;line-height:1.25}
+.p-label .label-head .tag{text-align:right}
+.p-label .label{position:relative;flex:none;margin-top:40px;padding:56px 56px 70px;border:6px solid var(--out,var(--ink));
+  background:var(--panel);border-radius:var(--radius)}
+.p-label h1{font-size:88px;line-height:1.02;letter-spacing:-3px;margin-top:0}
+.p-label .label .cta{position:absolute;right:30px;bottom:-34px}
+.p-label .object{position:absolute;left:150px;right:150px;top:640px;height:560px}
+.p-label .label-url{position:absolute;left:0;right:0;bottom:44px;z-index:3;text-align:center;font-size:26px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--text)}
+
+/* ---------- 16 cover-object ----------
+   Left-aligned headline, highlight pill row, object standing on a ground. */
+.p-objcover .inner{inset:0;padding:78px 82px 0}
+.p-objcover .oc-head{color:var(--text);display:flex;justify-content:space-between;align-items:center;height:60px;flex:none;font-size:24px;font-weight:700}
+.p-objcover h1{font-size:98px;line-height:1.02;letter-spacing:-4px;margin-top:70px;padding-right:20px}
+.p-objcover .pill-row{margin-top:30px;display:flex;justify-content:space-between;align-items:center;padding:20px 34px;border-radius:999px;
+  background:var(--hl);color:var(--hl-ink);font-size:38px;font-weight:800;letter-spacing:-1px;margin-inline:-14px}
+.p-objcover .object{position:absolute;left:230px;right:230px;top:560px;height:600px;z-index:3}
+.p-objcover .city{position:absolute;left:0;right:0;bottom:0;height:560px;z-index:1}
+.p-objcover .city::before{content:"";position:absolute;left:0;right:0;bottom:0;height:300px;background:var(--ground)}
+.p-objcover .city::after{content:"";position:absolute;left:0;right:0;bottom:290px;height:420px;background:var(--city) center bottom/100% auto no-repeat}
+.p-objcover .oc-foot{position:absolute;left:82px;right:82px;bottom:34px;z-index:4;display:flex;justify-content:space-between;align-items:flex-end;
+  font-size:20px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--on-ground)}
+
+/* ---------- 17 pointer ----------
+   Headline and short copy on the left, object bleeding off the right edge, CTA pill at the bottom. */
+.p-pointer .content{justify-content:flex-start;padding-top:60px}
+.p-pointer h2{font-size:76px;letter-spacing:-3px;line-height:1.04;max-width:640px}
+.p-pointer p{max-width:520px;margin-top:40px;color:var(--text);font-size:32px}
+.p-pointer p strong{font-weight:800}
+.p-pointer .object{position:absolute;right:-90px;top:430px;width:640px;height:620px;z-index:1}
+.p-pointer .cta{position:absolute;left:82px;right:82px;bottom:170px;z-index:3;justify-content:center;align-self:auto;font-size:34px;padding:26px 40px}
+
+/* ---------- 18 showcase ----------
+   Numbered headline, then a gallery whose cards run off the right and bottom edges. */
+.p-showcase .content{flex:none;justify-content:flex-start;padding:50px 0 16px}
+.p-showcase h2{font-size:72px;letter-spacing:-2.5px;line-height:1.05;margin-top:0}
+.p-showcase h2 .n{margin-right:22px;font-weight:600}
+.p-showcase .peek-wrap{position:absolute;left:82px;top:600px;display:grid;grid-template-columns:420px 420px 420px;grid-auto-rows:500px;gap:28px;z-index:2}
+.p-showcase .peek{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--panel);border:1px solid var(--line2);
+  background-repeat:no-repeat;background-position:center 62%;background-size:60% auto;padding:30px}
+.p-showcase .peek .lab{font-size:24px;font-weight:800;line-height:1.2;max-width:70%}
+.p-showcase .peek .who{position:absolute;left:24px;bottom:24px;display:inline-flex;padding:10px 20px;border-radius:999px;
+  background:var(--bg);color:var(--text);font-size:20px;font-weight:700}
+
+/* ---------- 19 note ----------
+   Editorial note: sticky tab, two-column meta, indented paragraphs, highlighted line. */
+.p-note .note-meta{color:var(--text);display:flex;justify-content:space-between;gap:30px;height:70px;flex:none;font-size:20px;line-height:1.3}
+.p-note .note-meta b{font-weight:800}
+.p-note .note-tab{position:absolute;left:0;top:250px;z-index:3;padding:22px 40px 22px 30px;font-size:46px;font-weight:800;
+  background:var(--hl);color:var(--hl-ink);transform:rotate(-3deg);transform-origin:left center;box-shadow:0 12px 20px rgba(0,0,0,.22)}
+.p-note .content{justify-content:flex-start;padding-top:120px}
+.p-note h2{font-size:56px;letter-spacing:-1.5px;line-height:1.12;margin-top:0}
+.p-note p{max-width:none;font-size:30px;line-height:1.5;margin-top:34px;color:var(--text);text-indent:56px}
+.p-note mark{background:color-mix(in srgb,var(--hl) 80%,transparent);color:var(--hl-ink);padding:2px 10px;font-weight:800;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone}
+.p-note .object{position:absolute;z-index:3}
+
 /* ---------- subtle background variants ----------
    Assign ONE per slide so backgrounds differ without
    fighting the content. All token-driven. */
