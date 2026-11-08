@@ -1,6 +1,6 @@
 # Pattern catalog
 
-Twelve structural patterns. Each is one full slide in `patterns.html`
+Nineteen structural patterns. The first twelve are full slides in `patterns.html`; the newer seven (below) are demonstrated by templates 07 to 11
 (`data-pattern` marks the name). Copy the `<section>` block into the working
 carousel file. Never edit the structure per carousel. Only the copy, images,
 and token values change.
@@ -112,3 +112,28 @@ Rules:
 `system.css` must define `.slide.mode-dark` with the brand's dark
 tokens. The shipped file's block matches its dark theme; light systems
 override it with their own dark palette.
+
+## Newer patterns (used by templates 07 to 11)
+
+These read extra tokens (`--hl`, `--hl-ink`, `--cta-bg`, `--btn-bg`, `--ink`, `--out`, `--hot`) and an `.object` slot that the template fills with default art. Each template's `sample.html` shows the markup.
+
+### cover-poster
+Hero object on top, centered headline stack, URL and arrow button at the foot, handle in a pill. Use when the topic has a tool, product or object to show.
+
+### cover-hook
+Headline and one-line promise up top, gradient CTA pill, object below, slide number and arrow button at the foot. Use when the cover is a question or a pain point.
+
+### cover-bubble
+Headline inside a speech bubble, CTA pill on its corner, object on a diagonal ground with two sticker slots. Use for friendly tips and creative topics.
+
+### cover-object
+Left-aligned headline, highlight pill row, object standing on a ground. Use when one object carries the cover.
+
+### pointer
+Headline and short copy on the left, object bleeding off the right edge, full-width CTA pill. Use for a story beat that ends in a "but try this" turn.
+
+### showcase
+Numbered headline over a gallery of cards that run off the right and bottom edges. Use to show examples or references (cards can hold your own screenshots).
+
+### note
+Editorial note: sticky number tab, two-column meta, indented paragraphs and a marker highlight. Use for long-form tips in a personal voice.

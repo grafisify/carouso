@@ -1,0 +1,65 @@
+/* Template 11: Neon Hook. Dark violet, centered hook headline, gradient CTA pill, glowing objects.
+   Tokens, type and decor only. Structure lives in design-system/system.css.
+   Default object art is drawn from ./decor/ (SVG, relative to this file). */
+:root{
+  --bg:#f6f1ff;
+  --bg2:#ebe2fb;
+  --panel:#ffffff;
+  --text:#160a2e;
+  --muted:#4b3d70;
+  --soft:#675890;
+  --accent:#6d28d9;
+  --line:rgba(22,10,46,0.3);
+  --line2:rgba(22,10,46,0.16);
+  --font-display:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans",-apple-system,"Inter",sans-serif;
+  --radius:28px;
+  --cta-bg:linear-gradient(90deg,#6d28d9,#a21caf);
+  --cta-fg:#ffffff;
+  --btn-bg:#160a2e;
+  --btn-fg:#ffffff;
+  --pill-bg:rgba(22,10,46,.06);
+  --pill-fg:#160a2e;
+}
+.slide.mode-dark{
+  --bg:#0b0618;
+  --bg2:#120a26;
+  --panel:#1a1033;
+  --text:#ffffff;
+  --muted:#dacff2;
+  --soft:#b3a5d6;
+  --accent:#c084fc;
+  --line:rgba(255,255,255,0.3);
+  --line2:rgba(255,255,255,0.16);
+  --cta-bg:linear-gradient(90deg,#7c3aed,#c026d3);
+  --cta-fg:#ffffff;
+  --btn-bg:#ffffff;
+  --btn-fg:#0b0618;
+  --pill-bg:rgba(255,255,255,.10);
+  --pill-fg:#ffffff;
+}
+
+.slide{background:radial-gradient(circle at 90% 0,rgba(168,85,247,.20),transparent 42%),var(--bg)}
+.slide.mode-dark{background:radial-gradient(circle at 80% 6%,rgba(168,85,247,.34),transparent 46%),radial-gradient(circle at 10% 96%,rgba(124,58,237,.22),transparent 40%),var(--bg)}
+h1,h2,h3{font-weight:800}
+h1{letter-spacing:-3px}
+h2{font-size:76px;letter-spacing:-3px;line-height:1.03}
+.kicker{letter-spacing:3px}
+.topbar{border-bottom:0;height:72px}
+.footer{bottom:40px;align-items:center;font-size:24px;font-weight:800;letter-spacing:2px;color:var(--text)}
+.footer .arrow-btn{width:64px;height:64px;border-radius:18px}
+.footer .arrow-btn::before{width:30px;height:30px}
+.p-cards .card,.p-mythfact .myth-grid{border:1px solid rgba(168,85,247,.45);border-radius:28px;box-shadow:0 0 44px rgba(168,85,247,.16)}
+.mode-dark .card,.mode-dark .myth-grid{background:rgba(255,255,255,.04)}
+.p-process .process-tag{background:var(--cta-bg);color:#fff;border:0;font-weight:800}
+.p-process .process-no{color:var(--accent)}
+.p-bignumber .giant{-webkit-text-stroke:0;font-weight:800;font-size:380px;color:var(--accent);text-shadow:0 0 60px rgba(168,85,247,.55)}
+.p-takeaway .takeaway-dot{background:var(--accent);box-shadow:0 0 14px var(--accent)}
+.p-takeaway .closer-cta .accent{display:inline-block;padding:16px 34px;border-radius:999px;background:var(--cta-bg);color:#fff}
+.p-stats .stat-number{font-weight:800}
+.p-hook .object{background-image:url("decor/neon.svg");background-size:100% auto;background-position:center bottom;margin-bottom:0}
+.p-hook .hook-foot{color:var(--text)}
+.p-hook h1{font-size:104px}
+.p-hook .hook-body{margin-top:120px}
+.p-hook h1 .accent{color:var(--accent)}

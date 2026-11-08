@@ -1,0 +1,59 @@
+{
+  "number": 11,
+  "id": "11-neon-hook",
+  "name": "Neon Hook",
+  "vibe": "Dark violet, centered hook headline, gradient CTA pill, glowing objects",
+  "fonts": [
+    "Plus Jakarta Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-hook",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "stat-band",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "concept-number",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "myth-fact",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/11-neon-hook.jpg"
+}

@@ -1,0 +1,87 @@
+/* Template 08: Bubble Sticker. Headline in a speech bubble, thick outlines, orange ground and sticker decor.
+   Tokens, type and decor only. Structure lives in design-system/system.css.
+   Default object art is drawn from ./decor/ (SVG, relative to this file). */
+:root{
+  --bg:#ece6cc;
+  --bg2:#e2dabb;
+  --panel:#f6f2de;
+  --text:#0d3b25;
+  --muted:#33573f;
+  --soft:#3f6050;
+  --accent:#9f2f04;
+  --line:rgba(13,59,37,0.3);
+  --line2:rgba(13,59,37,0.16);
+  --font-display:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans",-apple-system,"Inter",sans-serif;
+  --radius:34px;
+  --ink:#0d3b25;
+  --out:#0d3b25;
+  --hot:#ff6620;
+  --on-hot:#0a2d1c;
+  --cta-bg:#ff6620;
+  --cta-fg:#0a2d1c;
+  --btn-bg:#ff6620;
+  --btn-fg:#0a2d1c;
+}
+.slide.mode-dark{
+  --bg:#0d4a2e;
+  --bg2:#0a3b25;
+  --panel:#0f5233;
+  --text:#f6f2de;
+  --muted:#d5e3d3;
+  --soft:#b4cdb9;
+  --accent:#ffb085;
+  --line:rgba(246,242,222,0.3);
+  --line2:rgba(246,242,222,0.16);
+  --ink:#062a19;
+  --out:#f6f2de;
+  --hot:#ff6620;
+  --on-hot:#0a2d1c;
+}
+
+h1,h2,h3{font-weight:800}
+h1{letter-spacing:-3px}
+h2{font-size:78px;letter-spacing:-3px;line-height:1.02}
+.kicker{align-self:flex-start;background:var(--hot);color:var(--on-hot);padding:9px 22px 8px;border-radius:999px;border:3px solid var(--out);letter-spacing:2px}
+.topbar{border-bottom:5px solid var(--out)}
+.topbar .b{font-weight:800}
+.footer{font-weight:800}
+.p-cards .card{border:5px solid var(--out);box-shadow:10px 10px 0 var(--ink);border-radius:34px;background:var(--panel)}
+.p-cards .card .index{color:var(--accent)}
+.p-mythfact .myth-grid{border:5px solid var(--out);box-shadow:10px 10px 0 var(--ink);border-radius:34px}
+.p-mythfact .myth:first-child{border-right:5px solid var(--out)}
+.p-process .process-item{border-bottom:4px solid var(--out)}
+.p-process .process-item:first-child{border-top:4px solid var(--out)}
+.p-process .process-tag{background:var(--hot);color:var(--on-hot);border:3px solid var(--out);font-weight:800}
+.p-process .process-no{display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%;background:var(--hot);color:var(--on-hot);border:3px solid var(--out);font-weight:800}
+.p-process .process-item{grid-template-columns:80px 1fr 200px}
+.p-stats .stat-row{border-top:4px solid var(--out);border-bottom:4px solid var(--out)}
+.p-stats .stat{border-right:4px solid var(--out)}
+.p-stats .stat-number{font-weight:800}
+.p-takeaway .takeaway-item{border-bottom:4px solid var(--out)}
+.p-takeaway .takeaway-dot{width:26px;height:26px;border:3px solid var(--out);background:var(--hot)}
+.p-takeaway .closer-cta .accent{display:inline-block;padding:14px 30px;border-radius:999px;background:var(--hot);color:var(--on-hot);border:3px solid var(--out);box-shadow:5px 5px 0 var(--ink)}
+.p-quote .quote{font-weight:800;font-size:64px;letter-spacing:-2px}
+.p-quote .quote-mark{color:var(--accent);font-weight:800}
+.p-concept .concept-number{font-weight:800}
+.p-concept .concept-body{border-left:4px solid var(--out)}
+.p-statement .rule{height:8px;width:90px;border-radius:4px;background:var(--hot)}
+
+/* decor on body slides */
+.slide::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-repeat:no-repeat}
+.p-statement::after{background-image:url("decor/sticker-talk.svg"),url("decor/ball.svg");background-size:230px auto,170px auto;background-position:780px 180px,-30px 1170px}
+.p-cards::after{background-image:url("decor/sticker-cup.svg");background-size:170px auto;background-position:830px 190px}
+.p-process::after{background-image:url("decor/ball.svg");background-size:170px auto;background-position:850px 190px}
+.p-concept::after{background-image:url("decor/sticker-cup.svg"),url("decor/sticker-talk.svg");background-size:160px auto,200px auto;background-position:60px 1130px,800px 1100px}
+.p-stats::after{background-image:url("decor/sticker-talk.svg");background-size:210px auto;background-position:790px 185px}
+.p-quote::after{background-image:url("decor/sticker-cup.svg"),url("decor/ball.svg");background-size:170px auto,150px auto;background-position:820px 190px,70px 1150px}
+.p-takeaway::after{background-image:url("decor/sticker-talk.svg");background-size:210px auto;background-position:790px 185px}
+.p-bubble::after{display:none}
+
+/* cover-bubble */
+.p-bubble{background:var(--bg)}
+.p-bubble .object{background-image:url("decor/tote.svg")}
+.p-bubble .stk-a{left:60px;top:810px;width:230px;height:250px;background-image:url("decor/sticker-talk.svg");transform:rotate(-8deg)}
+.p-bubble .stk-b{right:56px;top:790px;width:180px;height:240px;background-image:url("decor/sticker-cup.svg");transform:rotate(7deg)}
+.p-bubble .bubble-head .tag{font-weight:700}
