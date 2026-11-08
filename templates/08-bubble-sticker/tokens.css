@@ -44,9 +44,22 @@ h1,h2,h3{font-weight:800}
 h1{letter-spacing:-3px}
 h2{font-size:78px;letter-spacing:-3px;line-height:1.02}
 .kicker{align-self:flex-start;background:var(--hot);color:var(--on-hot);padding:9px 22px 8px;border-radius:999px;border:3px solid var(--out);letter-spacing:2px}
-.topbar{border-bottom:5px solid var(--out)}
-.topbar .b{font-weight:800}
-.footer{font-weight:800}
+/* body slides: headline lives in an outlined bubble, footer sits on an orange ground band */
+.slide:not(.p-bubble) .inner{inset:78px 82px 150px}
+.topbar{border-bottom:0;height:64px}
+.topbar .b{display:inline-block;padding:8px 20px;border-radius:999px;background:var(--hot);color:var(--on-hot);border:3px solid var(--out);font-weight:800;letter-spacing:1.5px}
+.topbar span:last-child{font-weight:800;color:var(--text)}
+.footer{font-weight:800;color:var(--on-hot);bottom:34px}
+.footer::before{content:"";position:absolute;left:-82px;right:-82px;bottom:-34px;height:134px;background:var(--hot);border-top:6px solid var(--out);z-index:-1}
+.content>h2,.content>.quote{position:relative;margin-top:34px;background:var(--panel);border:6px solid var(--out);border-radius:46px;
+  padding:34px 44px 38px;box-shadow:10px 10px 0 var(--ink)}
+.content>h2{font-size:68px;letter-spacing:-2.5px;line-height:1.05}
+.content>h2::after{content:"";position:absolute;left:60px;bottom:-34px;width:48px;height:34px;background:var(--out);clip-path:polygon(0 0,100% 0,0 100%)}
+.content>h2::before{content:"";position:absolute;left:66px;bottom:-24px;width:34px;height:26px;background:var(--panel);clip-path:polygon(0 0,100% 0,0 100%);z-index:1}
+.p-statement .rule{display:none}
+.p-statement .kicker{margin-bottom:0}
+.p-quote .quote{margin-top:34px;font-size:56px}
+.p-quote .quote-mark{display:none}
 .p-cards .card{border:5px solid var(--out);box-shadow:10px 10px 0 var(--ink);border-radius:34px;background:var(--panel)}
 .p-cards .card .index{color:var(--accent)}
 .p-mythfact .myth-grid{border:5px solid var(--out);box-shadow:10px 10px 0 var(--ink);border-radius:34px}
@@ -70,12 +83,12 @@ h2{font-size:78px;letter-spacing:-3px;line-height:1.02}
 
 /* decor on body slides */
 .slide::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-repeat:no-repeat}
-.p-statement::after{background-image:url("decor/sticker-talk.svg"),url("decor/ball.svg");background-size:230px auto,170px auto;background-position:780px 180px,-30px 1170px}
+.p-statement::after{background-image:url("decor/sticker-talk.svg"),url("decor/ball.svg");background-size:230px auto,170px auto;background-position:780px 200px,-30px 1090px}
 .p-cards::after{background-image:url("decor/sticker-cup.svg");background-size:170px auto;background-position:830px 190px}
 .p-process::after{background-image:url("decor/ball.svg");background-size:170px auto;background-position:850px 190px}
-.p-concept::after{background-image:url("decor/sticker-cup.svg"),url("decor/sticker-talk.svg");background-size:160px auto,200px auto;background-position:60px 1130px,800px 1100px}
+.p-concept::after{background-image:url("decor/sticker-cup.svg"),url("decor/sticker-talk.svg");background-size:150px auto,190px auto;background-position:50px 1060px,820px 1030px}
 .p-stats::after{background-image:url("decor/sticker-talk.svg");background-size:210px auto;background-position:790px 185px}
-.p-quote::after{background-image:url("decor/sticker-cup.svg"),url("decor/ball.svg");background-size:170px auto,150px auto;background-position:820px 190px,70px 1150px}
+.p-quote::after{background-image:url("decor/sticker-cup.svg"),url("decor/ball.svg");background-size:170px auto,150px auto;background-position:820px 200px,70px 1100px}
 .p-takeaway::after{background-image:url("decor/sticker-talk.svg");background-size:210px auto;background-position:790px 185px}
 .p-bubble::after{display:none}
 
