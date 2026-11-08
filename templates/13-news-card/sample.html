@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- Template 13: News Card. Copy to carousels/<name>/index.html,
+     point the tokens.css link at ../../templates/13-news-card/tokens.css, then replace the copy.
+     The cover photo is required: keep <figure class="news-photo"> and swap the img src for your own photo (set --focus on the figure to choose the crop).
+     Body photos use <figure class="photo">. Replace the sample photos in images/ before publishing. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carouso template 13 News Card</title>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../../design-system/system.css">
+<link rel="stylesheet" href="tokens.css">
+</head>
+<body>
+
+<section class="slide p-news" data-pattern="cover-news">
+  <figure class="news-photo" style="--focus:50% 40%"><img src="images/regatta.jpg" alt=""></figure>
+  <div class="inner">
+    <div class="news-head"><span class="b">Your Brand</span><span>Nov 08, 2026</span></div>
+    <div class="news-stack">
+      <div class="news-tagrow"><span class="news-tag">Sports</span></div>
+      <h1>Regatta Season Opens With <span class="accent">Record</span> Entries</h1>
+      <p class="dek">More than 180 crews are signed up for the spring series, the biggest field in a decade.</p>
+      <span class="cta arr">Swipe for more</span>
+      <div class="news-meta"><span>5 min read</span><span>yourbrand.com</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide p-statement mode-dark" data-pattern="kicker-statement">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>5 min read</span></div>
+    <div class="content">
+      <div class="kicker">The headline</div>
+      <div class="rule"></div>
+      <h2>Sailing is <span class="accent">booming</span><br>on the bay.</h2>
+      <p>Clubs report waiting lists for the first time in years.</p>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span class="arr">Swipe</span></div>
+</section>
+
+<section class="slide p-cards" data-pattern="two-cards">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>5 min read</span></div>
+    <div class="content">
+      <div class="kicker">Two classes</div>
+      <h2>Who is <span class="accent">racing.</span></h2>
+      <figure class="photo band" style="--focus:50% 55%"><img src="images/boat.jpg" alt=""></figure>
+      <div class="two-column">
+        <div class="card"><div class="index">Class A</div><h3>Racing fleet</h3><p>Fast boats, full crews, strict rules.</p></div>
+        <div class="card"><div class="index">Class B</div><h3>Cruising fleet</h3><p>Relaxed starts and family crews.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span class="arr">Swipe</span></div>
+</section>
+
+<section class="slide p-process mode-dark" data-pattern="process-steps">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>5 min read</span></div>
+    <div class="content">
+      <div class="kicker">Race week</div>
+      <h2>Three days,<br><span class="accent">one trophy.</span></h2>
+      <div class="process">
+        <div class="process-item"><div class="process-no">01</div><div><h3>Practice day</h3><p>Free to watch from the pier.</p></div><div class="process-tag">Mon</div></div>
+        <div class="process-item"><div class="process-no">02</div><div><h3>Opening race</h3><p>First start at noon.</p></div><div class="process-tag">Thu</div></div>
+        <div class="process-item"><div class="process-no">03</div><div><h3>Finals</h3><p>The top ten crews compete.</p></div><div class="process-tag">Sun</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span class="arr">Swipe</span></div>
+</section>
+
+<section class="slide p-concept" data-pattern="concept-number">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>5 min read</span></div>
+    <div class="content">
+      <div class="kicker">Why now</div>
+      <h2>Easier to<br><span class="accent">join in.</span></h2>
+      <div class="concept">
+        <div class="concept-number">01</div>
+        <div class="concept-body">
+          <h3>Cheaper to sail</h3>
+          <p>Club fees dropped 20 percent this year, and loaner boats are available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span class="arr">Swipe</span></div>
+</section>
+
+<section class="slide p-quote mode-dark" data-pattern="quote">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>5 min read</span></div>
+    <div class="content">
+      <div class="kicker">From the dock</div>
+      <div class="quote-mark">&ldquo;</div>
+      <div class="quote">Seventy boats on one start line. You can feel it in your chest.</div>
+      <div class="quote-source">Race committee chair</div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span class="arr">Swipe</span></div>
+</section>
+
+<section class="slide p-stats" data-pattern="stat-band">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>5 min read</span></div>
+    <div class="content">
+      <div class="kicker">The field</div>
+      <h2>The series<br>in <span class="accent">3 figures.</span></h2>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-number"><span class="accent">180</span></div><div class="stat-label">crews entered</div></div>
+        <div class="stat"><div class="stat-number"><span class="accent">9</span></div><div class="stat-label">race days</div></div>
+        <div class="stat"><div class="stat-number"><span class="accent">20%</span></div><div class="stat-label">lower fees</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span class="arr">Swipe</span></div>
+</section>
+
+<section class="slide p-takeaway mode-dark" data-pattern="takeaway">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>5 min read</span></div>
+    <div class="content">
+      <div class="kicker">Takeaway</div>
+      <h2>Watch it <span class="accent">live.</span></h2>
+      <div class="takeaway">
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Best spot</h3><p>The east pier, from ten in the morning.</p></div></div>
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Bring</h3><p>Sun cover and binoculars.</p></div></div>
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Follow</h3><p>Results post after each race.</p></div></div>
+      </div>
+      <div class="closer-cta"><div class="accent">Follow for results</div></div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span class="arr">Swipe</span></div>
+</section>
+
+</body>
+</html>

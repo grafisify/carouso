@@ -1,0 +1,64 @@
+/* Template 13: News Card. Full-bleed photo fading into paper, a white rounded story card with a chip and swipe pill; soft card body slides.
+   Tokens, type and decor only. Structure lives in design-system/system.css.
+   Default object art is drawn from ./decor/ (SVG, relative to this file). */
+:root{
+  --bg:#f6f2ea;
+  --bg2:#ece6d9;
+  --panel:#ffffff;
+  --text:#17140f;
+  --muted:#433d33;
+  --soft:#5a5347;
+  --accent:#b4123f;
+  --line:rgba(23,20,15,0.3);
+  --line2:rgba(23,20,15,0.16);
+  --font-display:"Albert Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Albert Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Albert Sans",-apple-system,"Inter",sans-serif;
+  --radius:28px;
+  --tag-bg:#fde3ea;
+  --tag-fg:#8a0f30;
+  --cta-bg:#17140f;
+  --cta-fg:#ffffff;
+}
+.slide.mode-dark{
+  --bg:#17140f;
+  --bg2:#1f1b15;
+  --panel:#28231c;
+  --text:#f6f2ea;
+  --muted:#ddd5c6;
+  --soft:#b8ae9b;
+  --accent:#ff93ab;
+  --line:rgba(246,242,234,0.3);
+  --line2:rgba(246,242,234,0.16);
+  --cta-bg:#f6f2ea;
+  --cta-fg:#17140f;
+}
+
+h1,h2,h3{font-weight:800}
+h2{font-size:74px;letter-spacing:-2.8px;line-height:1.04}
+.kicker{display:inline-block;align-self:flex-start;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);padding:10px 22px;border-radius:999px;letter-spacing:2.5px}
+.topbar{border-bottom:0}
+.topbar span:last-child{padding:8px 20px;border-radius:999px;background:var(--panel);color:var(--text);box-shadow:0 0 0 1.5px var(--line2)}
+.footer{font-weight:700}
+.footer span:last-child{background:var(--text);color:var(--bg);padding:12px 28px;border-radius:999px;letter-spacing:2px}
+.p-cards .card{border:0;background:var(--panel);box-shadow:0 0 0 1.5px var(--line2),0 20px 44px rgba(0,0,0,.10)}
+.p-cards .card .index{color:var(--accent)}
+.p-process .process-no{color:var(--accent);font-weight:800}
+.p-concept .concept-number{color:var(--accent);font-weight:800}
+.p-stats .stat-number{font-weight:800}
+.photo{border-radius:28px}
+
+/* cover-news: photo melts into paper, story card with a chip straddling its top edge */
+.p-news{background:var(--bg)}
+.p-news .news-photo::after{background:linear-gradient(180deg,rgba(0,0,0,.34) 0,rgba(0,0,0,0) 22%,rgba(246,242,234,0) 50%,color-mix(in srgb,var(--bg) 88%,transparent) 82%,var(--bg) 100%)}
+.p-news .inner{padding:78px 82px 140px}
+.p-news .news-head .b{display:inline-flex;align-items:center;gap:14px;letter-spacing:2px}
+.p-news .news-head .b::before{content:"";width:26px;height:26px;border-radius:50%;border:6px solid #fff;box-sizing:border-box}
+.p-news .news-stack{position:static;background:#fff;color:var(--text);border-radius:44px;padding:42px 56px 52px;box-shadow:0 26px 60px rgba(40,25,10,.24)}
+.p-news .news-tagrow{margin:-84px 0 26px}
+.p-news .news-tag{border-radius:999px;font-size:22px;padding:12px 26px;border:6px solid #fff}
+.p-news h1{color:var(--text);font-size:68px;line-height:1.06;letter-spacing:-2.4px}
+.p-news h1 .accent{color:var(--accent)}
+.p-news .dek{color:var(--muted);font-size:30px;margin-top:22px;max-width:none}
+.p-news .cta{margin-top:34px}
+.p-news .news-meta{position:absolute;left:82px;right:82px;bottom:52px;margin:0;color:var(--soft)}
