@@ -72,7 +72,7 @@ Teal and peach. A big left-aligned headline over a stack of paper sheets, graph-
 *Default, `skin-sand`, `skin-slate`. Put the skin class on `<body>`.*
 
 ### 08 · Tape Label
-Yellow and black. Huge left-aligned type with one word on a tilted paper label, taped label headlines, die-cut stickers and a hazard-tape footer band. Good for tips, creative and playful topics.
+Butter and charcoal. Huge left-aligned type with one word on a tilted paper label, taped label headlines, die-cut stickers and a hazard-tape footer band. Good for tips, creative and playful topics.
 
 <img src="assets/templates/08-tape-label.jpg" width="860" alt="Template 08 · Tape Label: eight sample slides">
 

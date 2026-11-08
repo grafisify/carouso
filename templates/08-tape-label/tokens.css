@@ -2,56 +2,56 @@
    Tokens, type and decor only. Structure lives in design-system/system.css.
    Default object art is drawn from ./decor/ (SVG, relative to this file). */
 :root{
-  --bg:#ffe45c;
-  --bg2:#f7d63c;
-  --panel:#fffdf0;
-  --text:#121212;
-  --muted:#2e2a10;
-  --soft:#3d3708;
-  --accent:#b3001b;
-  --line:rgba(18,18,18,0.3);
-  --line2:rgba(18,18,18,0.16);
+  --bg:#f1e7c3;
+  --bg2:#e8dcb0;
+  --panel:#fbf6e4;
+  --text:#1a1a17;
+  --muted:#3a3722;
+  --soft:#4a4527;
+  --accent:#a31d1d;
+  --line:rgba(26,26,23,0.3);
+  --line2:rgba(26,26,23,0.16);
   --font-display:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
   --font-body:"Plus Jakarta Sans",-apple-system,"Inter","Helvetica Neue",Arial,sans-serif;
   --font-serif:"Plus Jakarta Sans",-apple-system,"Inter",sans-serif;
   --radius:8px;
-  --ink:#121212;
-  --out:#121212;
-  --hot:#e5322d;
+  --ink:#1a1a17;
+  --out:#1a1a17;
+  --hot:#d6453a;
   --on-hot:#ffffff;
-  --kb:#121212;
-  --kf:#ffe45c;
-  --label:#fffdf0;
-  --label-ink:#121212;
-  --label-accent:#b3001b;
-  --band:#121212;
-  --band-ink:#ffe45c;
-  --shd:#121212;
+  --kb:#1a1a17;
+  --kf:#e8d58a;
+  --label:#fbf6e4;
+  --label-ink:#1a1a17;
+  --label-accent:#a31d1d;
+  --band:#1a1a17;
+  --band-ink:#e8d58a;
+  --shd:#1a1a17;
   --tape:rgba(255,255,255,.62);
-  --cta-bg:#121212;
-  --cta-fg:#ffe45c;
+  --cta-bg:#1a1a17;
+  --cta-fg:#e8d58a;
 }
 .slide.mode-dark{
-  --bg:#121212;
-  --bg2:#1b1b1b;
-  --panel:#242424;
-  --text:#fff4c2;
-  --muted:#e8dca4;
-  --soft:#c4b87c;
-  --accent:#ffe45c;
-  --line:rgba(255,244,194,0.3);
-  --line2:rgba(255,244,194,0.16);
-  --kb:#ffe45c;
-  --kf:#121212;
-  --label:#ffe45c;
-  --label-ink:#121212;
-  --label-accent:#b3001b;
-  --band:#ffe45c;
-  --band-ink:#121212;
+  --bg:#1b1a17;
+  --bg2:#23221e;
+  --panel:#2b2a25;
+  --text:#f4ecce;
+  --muted:#ddd3ae;
+  --soft:#b9af8a;
+  --accent:#e8d58a;
+  --line:rgba(244,236,206,0.3);
+  --line2:rgba(244,236,206,0.16);
+  --kb:#e8d58a;
+  --kf:#1a1a17;
+  --label:#e8d58a;
+  --label-ink:#1a1a17;
+  --label-accent:#a31d1d;
+  --band:#e8d58a;
+  --band-ink:#1a1a17;
   --shd:rgba(255,255,255,.24);
   --tape:rgba(255,255,255,.40);
-  --cta-bg:#ffe45c;
-  --cta-fg:#121212;
+  --cta-bg:#e8d58a;
+  --cta-fg:#1a1a17;
 }
 
 h1,h2,h3{font-weight:800}
