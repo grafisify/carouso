@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- Template 32: Music Player. Copy to carousels/<name>/index.html,
+     point the tokens.css link at ../../templates/32-music-player/tokens.css, then replace the copy.
+     The footer is the scrubber: set --p to the slide number and --t to the total on .bar, and mirror them in the two time labels. The album art is CSS; swap .art for an <img> to use a real cover. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carouso template 32 Music Player</title>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../../design-system/system.css">
+<link rel="stylesheet" href="tokens.css">
+</head>
+<body>
+
+<section class="slide p-cover-bt mode-dark" data-pattern="cover-big-type">
+  <div class="inner content">
+    <div class="topbar"><span class="b">Your Brand</span><span>Now playing</span></div>
+    <div class="art" role="img" aria-label="album cover"></div>
+    <div class="meta">
+      <h1>Deep work,<br><span class="accent">side A.</span></h1>
+      <p class="desc">A playlist method for two focused hours.</p>
+    </div>
+    <div class="ctrl" role="img" aria-label="previous, pause, next"></div>
+  </div>
+  <div class="footer"><span>0:01</span><span class="bar" style="--p:1;--t:8"></span><span>0:08</span></div>
+</section>
+
+<section class="slide p-statement" data-pattern="kicker-statement">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>02 / 08</span></div>
+    <div class="content">
+      <div class="kicker">Track 01</div>
+      <div class="rule"></div>
+      <h2>Silence is not <span class="accent">the only option.</span></h2>
+      <p>The right sound hides the office, the street and your own phone.</p>
+    </div>
+  </div>
+  <div class="footer"><span>0:02</span><span class="bar" style="--p:02;--t:08"></span><span>0:08</span></div>
+</section>
+
+<section class="slide p-process mode-dark" data-pattern="process-steps">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>03 / 08</span></div>
+    <div class="content">
+      <div class="kicker">Tracklist</div>
+      <h2>Build it in<br><span class="accent">three parts.</span></h2>
+      <div class="process">
+        <div class="process-item"><div class="process-no">1</div><div><h3>Warm up</h3><p>Familiar songs, low volume</p></div><div class="process-tag">0:15</div></div>
+        <div class="process-item"><div class="process-no">2</div><div><h3>Main block</h3><p>No lyrics, steady tempo</p></div><div class="process-tag">1:30</div></div>
+        <div class="process-item"><div class="process-no">3</div><div><h3>Cool down</h3><p>Anything you love</p></div><div class="process-tag">0:15</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>0:03</span><span class="bar" style="--p:03;--t:08"></span><span>0:08</span></div>
+</section>
+
+<section class="slide p-bignumber" data-pattern="big-number">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>04 / 08</span></div>
+    <div class="content">
+      <div class="kicker">Tempo</div>
+      <div class="giant">60</div>
+      <h2>beats <span class="accent">per minute.</span></h2>
+      <p>Slow, even rhythm keeps you working without pulling your attention.</p>
+    </div>
+  </div>
+  <div class="footer"><span>0:04</span><span class="bar" style="--p:04;--t:08"></span><span>0:08</span></div>
+</section>
+
+<section class="slide p-cards mode-dark" data-pattern="two-cards">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>05 / 08</span></div>
+    <div class="content">
+      <div class="kicker">Pick one</div>
+      <h2>Two sounds<br><span class="accent">that work.</span></h2>
+      <div class="two-column">
+        <div class="card"><div class="index">No lyrics</div><h3>Instrumental</h3><p>Film scores, lo-fi, piano.</p></div>
+        <div class="card"><div class="index">No melody</div><h3>Ambient</h3><p>Rain, cafe noise, brown noise.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>0:05</span><span class="bar" style="--p:05;--t:08"></span><span>0:08</span></div>
+</section>
+
+<section class="slide p-quote" data-pattern="quote">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>06 / 08</span></div>
+    <div class="content">
+      <div class="kicker">Rule one</div>
+      <div class="quote-mark">&ldquo;</div>
+      <div class="quote">Press play.<br>Start typing.<br><span class="accent">Do not skip.</span></div>
+      <div class="quote-source">The whole method</div>
+    </div>
+  </div>
+  <div class="footer"><span>0:06</span><span class="bar" style="--p:06;--t:08"></span><span>0:08</span></div>
+</section>
+
+<section class="slide p-stats mode-dark" data-pattern="stat-band">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>07 / 08</span></div>
+    <div class="content">
+      <div class="kicker">One session</div>
+      <h2>What two<br><span class="accent">hours buy.</span></h2>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-number"><span class="accent">120</span></div><div class="stat-label">minutes of focus</div></div>
+        <div class="stat"><div class="stat-number"><span class="accent">1</span></div><div class="stat-label">playlist, on repeat</div></div>
+        <div class="stat"><div class="stat-number"><span class="accent">0</span></div><div class="stat-label">decisions about music</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>0:07</span><span class="bar" style="--p:07;--t:08"></span><span>0:08</span></div>
+</section>
+
+<section class="slide p-takeaway" data-pattern="takeaway">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>08 / 08</span></div>
+    <div class="content">
+      <div class="kicker">Up next</div>
+      <h2>Your <span class="accent">queue.</span></h2>
+      <div class="takeaway">
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Make one playlist</h3><p>Two hours, three parts.</p></div></div>
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Drop the lyrics</h3><p>Words compete with words.</p></div></div>
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Reuse it daily</h3><p>The first song becomes the cue.</p></div></div>
+      </div>
+      <div class="closer-cta"><div class="accent">Save and press play</div></div>
+    </div>
+  </div>
+  <div class="footer"><span>0:08</span><span class="bar" style="--p:08;--t:08"></span><span>0:08</span></div>
+</section>
+
+</body>
+</html>

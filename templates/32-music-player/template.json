@@ -1,0 +1,59 @@
+{
+  "number": 32,
+  "id": "32-music-player",
+  "name": "Music Player",
+  "vibe": "Now-playing screen: gradient album cover, track title and artist, scrubber that advances per slide, transport controls, tracklist rows, lyric quotes",
+  "fonts": [
+    "Albert Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "stat-band",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/32-music-player.jpg"
+}
