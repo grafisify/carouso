@@ -1,0 +1,60 @@
+{
+  "number": 23,
+  "id": "23-pixel-quest",
+  "name": "Pixel Quest",
+  "vibe": "8-bit game screen: arcade headlines, HUD with hearts and level counter, pixel-bordered dialog boxes, XP tags, ground strip footer",
+  "fonts": [
+    "Press Start 2P",
+    "Space Mono"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-hook",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "stat-band",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/23-pixel-quest.jpg"
+}
