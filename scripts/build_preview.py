@@ -15,6 +15,7 @@ import argparse
 import asyncio
 import math
 import sys
+import tempfile
 from pathlib import Path
 
 from playwright.async_api import async_playwright
@@ -49,9 +50,9 @@ async def main() -> int:
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    tmp = out.with_suffix(".preview.html")
-    tmp.write_text(html)
-    try:
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td) / "preview.html"
+        tmp.write_text(html)
         async with async_playwright() as p:
             browser = await p.chromium.launch()
             page = await browser.new_page(viewport={"width": w, "height": h})
@@ -59,8 +60,6 @@ async def main() -> int:
             await page.screenshot(path=str(out), type="jpeg", quality=args.quality,
                                   clip={"x": 0, "y": 0, "width": w, "height": h})
             await browser.close()
-    finally:
-        tmp.unlink(missing_ok=True)
     print(f"OK: {len(files)} slides -> {out} ({w}x{h})", flush=True)
     return 0
 
