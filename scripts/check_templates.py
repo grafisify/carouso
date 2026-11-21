@@ -33,8 +33,19 @@ PATTERN_CLASS = {
     "pointer": "p-pointer", "showcase": "p-showcase", "note": "p-note",
     "cover-news": "p-news",
 }
-SECTION = re.compile(r'<section\s+class="([^"]*\bslide\b[^"]*)"([^>]*)>')
-DATA_PATTERN = re.compile(r'data-pattern="([^"]+)"')
+SECTION_TAG = re.compile(r'<section\b[^>]*>')
+CLASS_ATTR = re.compile(r'\sclass="([^"]*)"')
+DATA_PATTERN = re.compile(r'\sdata-pattern="([^"]+)"')
+
+
+def slide_sections(html: str) -> list:
+    out = []
+    for tag in SECTION_TAG.findall(html):
+        m = CLASS_ATTR.search(tag)
+        classes = m.group(1).split() if m else []
+        if "slide" in classes:
+            out.append((classes, tag))
+    return out
 
 
 def check(tdir: Path, fonts_declared: set) -> list:
@@ -58,14 +69,13 @@ def check(tdir: Path, fonts_declared: set) -> list:
         errs.append(f"preview {t['preview']} not found")
 
     html = (tdir / "sample.html").read_text()
-    sections = SECTION.findall(html)
+    sections = slide_sections(html)
     seq = t["sequence"]
     if len(sections) != len(seq):
         errs.append(f"sample.html has {len(sections)} slides, sequence has {len(seq)}")
-    for s, (cls, rest) in zip(seq, sections):
-        classes = cls.split()
+    for s, (classes, tag) in zip(seq, sections):
         n, pat, mode = s["slide"], s["pattern"], s["mode"]
-        dp = DATA_PATTERN.search(rest)
+        dp = DATA_PATTERN.search(tag)
         if not dp or dp.group(1) != pat:
             errs.append(f"slide {n}: data-pattern {dp.group(1) if dp else None!r}, expected {pat!r}")
         want = PATTERN_CLASS.get(pat)
@@ -73,6 +83,9 @@ def check(tdir: Path, fonts_declared: set) -> list:
             errs.append(f"slide {n}: unknown pattern {pat!r}")
         elif want not in classes:
             errs.append(f"slide {n}: class {want!r} missing for {pat!r}")
+        extra = [c for c in classes if c in PATTERN_CLASS.values() and c != want]
+        if extra:
+            errs.append(f"slide {n}: extra pattern classes {extra}")
         if mode not in ("light", "dark"):
             errs.append(f"slide {n}: unknown mode {mode!r}")
         elif (mode == "dark") != ("mode-dark" in classes):
