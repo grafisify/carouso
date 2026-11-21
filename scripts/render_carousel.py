@@ -57,6 +57,8 @@ async def main() -> int:
         await page.goto(html.as_uri(), wait_until="load")
         await page.evaluate(
             """async()=>{
+                // lazy images below the viewport never start loading, so decode() would hang
+                document.querySelectorAll('img[loading="lazy"]').forEach(i=>i.loading='eager');
                 await document.fonts.ready;
                 await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
             }""")
