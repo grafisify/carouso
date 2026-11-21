@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- Template 35: Spreadsheet. Copy to carousels/<name>/index.html,
+     point the tokens.css link at ../../templates/35-spreadsheet/tokens.css, then replace the copy.
+     Kickers read as formulas or cell references. The .cols strip under the topbar is the column header row; the cover chart bars take style="--v:NN%". -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carouso template 35 Spreadsheet</title>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<link rel="stylesheet" href="../../design-system/system.css">
+<link rel="stylesheet" href="tokens.css">
+</head>
+<body>
+
+<section class="slide p-cover-bt" data-pattern="cover-big-type">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>01 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+    <div class="chart" role="img" aria-label="bar chart"><i style="--v:34%"></i><i style="--v:46%"></i><i style="--v:41%"></i><i style="--v:63%"></i><i style="--v:100%"></i></div>
+    <div class="kicker">=BUDGET(you)</div>
+    <h1>A budget in<br><span class="accent">four rows.</span></h1>
+    <p class="desc">No app, no categories. One sheet you will actually open.</p>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Swipe</span></div>
+</section>
+
+<section class="slide p-statement mode-dark" data-pattern="kicker-statement">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>02 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+      <div class="kicker">A2</div>
+      <div class="rule"></div>
+      <h2>Forty categories is <span class="accent">why you quit.</span></h2>
+      <p>A budget only works if updating it takes under a minute.</p>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Save this</span></div>
+</section>
+
+<section class="slide p-process" data-pattern="process-steps">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>03 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+      <div class="kicker">A1:C4</div>
+      <h2>Four rows.<br><span class="accent">That is all.</span></h2>
+      <div class="process">
+        <div class="process-item"><div class="process-no">1</div><div><h3>Income</h3><p>What lands each month.</p></div><div class="process-tag">100%</div></div>
+        <div class="process-item"><div class="process-no">2</div><div><h3>Fixed costs</h3><p>Rent, bills, debt.</p></div><div class="process-tag">50%</div></div>
+        <div class="process-item"><div class="process-no">3</div><div><h3>Everything else</h3><p>Food, fun, the rest.</p></div><div class="process-tag">30%</div></div>
+        <div class="process-item"><div class="process-no">4</div><div><h3>Pay yourself</h3><p>Savings, moved on payday.</p></div><div class="process-tag">20%</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Save this</span></div>
+</section>
+
+<section class="slide p-bignumber mode-dark" data-pattern="big-number">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>04 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+      <div class="kicker">=B1*0.2</div>
+      <div class="giant">20%</div>
+      <h2>saved <span class="accent">first.</span></h2>
+      <p>Move it the day you are paid, before anything else leaves.</p>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Save this</span></div>
+</section>
+
+<section class="slide p-mythfact" data-pattern="myth-fact">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>05 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+      <div class="kicker">=IF(tracked)</div>
+      <h2>Track rows,<br><span class="accent">not receipts.</span></h2>
+      <div class="myth-grid">
+        <div class="myth"><div class="myth-label">FALSE</div><h3>Every coffee</h3><p>Accurate for two weeks, then abandoned.</p></div>
+        <div class="myth"><div class="myth-label">TRUE</div><h3>Three totals</h3><p>Rough, but still alive in December.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Save this</span></div>
+</section>
+
+<section class="slide p-stats mode-dark" data-pattern="stat-band">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>06 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+      <div class="kicker">=SUM(B2:B4)</div>
+      <h2>On an income<br><span class="accent">of 3,000.</span></h2>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-number"><span class="accent">1,500</span></div><div class="stat-label">Fixed</div></div>
+        <div class="stat"><div class="stat-number"><span class="accent">900</span></div><div class="stat-label">Else</div></div>
+        <div class="stat"><div class="stat-number"><span class="accent">600</span></div><div class="stat-label">Saved</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Save this</span></div>
+</section>
+
+<section class="slide p-quote" data-pattern="quote">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>07 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+      <div class="kicker">Comment</div>
+      <div class="quote-mark">&ldquo;</div>
+      <div class="quote">A rough budget you keep beats a perfect one <span class="accent">you drop.</span></div>
+      <div class="quote-source">Note on cell A1</div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Save this</span></div>
+</section>
+
+<section class="slide p-takeaway mode-dark" data-pattern="takeaway">
+  <div class="inner">
+    <div class="topbar"><span class="b">Your Brand</span><span>08 / 08</span></div>
+    <div class="cols"><span></span><span class="on">A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="content">
+      <div class="kicker">Checklist</div>
+      <h2>Build it <span class="accent">tonight.</span></h2>
+      <div class="takeaway">
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Open a blank sheet</h3><p>Four rows, three columns.</p></div></div>
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Fill in last month</h3><p>Totals from your bank app.</p></div></div>
+        <div class="takeaway-item"><div class="takeaway-dot"></div><div><h3>Automate row four</h3><p>Standing order on payday.</p></div></div>
+      </div>
+      <div class="closer-cta"><div class="accent">Save a copy</div></div>
+    </div>
+  </div>
+  <div class="footer"><span>@yourhandle</span><span>Save this</span></div>
+</section>
+
+</body>
+</html>
