@@ -16,7 +16,7 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 | | |
 |---|---|
 | **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 20-pattern library, so every carousel is consistent without looking copy-pasted. |
-| **Ready to use** | Fourteen numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
+| **Ready to use** | Twenty-four numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
@@ -106,9 +106,61 @@ A tall photo that fades into a dark panel, condensed uppercase headline and an o
 
 <img src="assets/templates/14-news-split.jpg" width="860" alt="Template 14 · News Split: eight sample slides">
 
+### 15 · Riso Print
+Two-ink risograph print: blue and fluorescent pink on warm paper, overprinted circles, halftone dots and slightly misregistered big type. Good for creative work, events, communities, zines.
+
+<img src="assets/templates/15-riso-print.jpg" width="860" alt="Template 15 · Riso Print: eight sample slides">
+
+### 16 · Blueprint
+A technical drawing: blueprint blue and drafting paper, a grid, monospace titles, dimension lines, callout circles and a title block at the foot. Good for tech, how-it-works posts, processes.
+
+<img src="assets/templates/16-blueprint.jpg" width="860" alt="Template 16 · Blueprint: eight sample slides">
+
+### 17 · Bento Grid
+Dashboard tiles on a quiet canvas: every block is a rounded tile, one lime highlight tile per slide, big figures. Good for data, product features, comparisons.
+
+<img src="assets/templates/17-bento-grid.jpg" width="860" alt="Template 17 · Bento Grid: eight sample slides">
+
+### 18 · Chat Thread
+Every slide is a message thread: chat header, timestamp chips, incoming and outgoing bubbles, typing dots and a composer bar. Good for hooks, scripts, Q&A, myth vs fact.
+
+<img src="assets/templates/18-chat-thread.jpg" width="860" alt="Template 18 · Chat Thread: eight sample slides">
+
+### 19 · Receipt
+A thermal receipt on a desk: torn zigzag paper, dashed rules, line items with prices, a total, a barcode and one red stamp. Good for pricing, costs, checklists, money topics.
+
+<img src="assets/templates/19-receipt.jpg" width="860" alt="Template 19 · Receipt: eight sample slides">
+
+### 20 · Comic Pop
+A comic-book page: yellow and blue with halftone dots, inked panels with hard shadows, caption boxes, a speech bubble and a starburst. Good for casual education, myth busting, younger audiences.
+
+<img src="assets/templates/20-comic-pop.jpg" width="860" alt="Template 20 · Comic Pop: eight sample slides">
+
+### 21 · Bauhaus
+Primary red, yellow and blue on paper and black: circles, quarter circles and triangles, heavy uppercase grotesk, a color strip and a solid footer band. Good for design, branding, principles.
+
+<img src="assets/templates/21-bauhaus.jpg" width="860" alt="Template 21 · Bauhaus: eight sample slides">
+
+### 22 · Retro OS
+An early desktop computer: windows on a dithered desktop, striped title bars, pixel headlines, dialog boxes and beveled buttons. Good for digital tips, productivity, tech nostalgia.
+
+<img src="assets/templates/22-retro-os.jpg" width="860" alt="Template 22 · Retro OS: eight sample slides">
+
+### 23 · Pixel Quest
+An 8-bit game screen: arcade headlines, a HUD with hearts and a level counter, pixel-bordered dialog boxes, XP tags and a ground strip. Good for gamified steps, challenges, habits.
+
+<img src="assets/templates/23-pixel-quest.jpg" width="860" alt="Template 23 · Pixel Quest: eight sample slides">
+
+### 24 · Notebook Doodle
+A spiral notebook page: ruled lines, a red margin, handwritten headlines, highlighter strokes, hand-drawn circles and taped sticky notes, with a black-paper alternate. Good for study tips, personal notes, personal brands.
+
+<img src="assets/templates/24-notebook-doodle.jpg" width="860" alt="Template 24 · Notebook Doodle: eight sample slides">
+
 **About the news covers.** Templates 12 to 14 need a cover photo: swap the `src` in the `news-photo` figure (and set `--focus` on it to choose the crop) and add a photo to the slide that carries one. The sample photos are from the Kodak Lossless True Color Image Suite, released by Kodak for unrestricted use; replace them with your own before publishing.
 
 **About the hero objects.** Templates 07 to 11 draw their default art (paper sheets, glossy cubes, balls and rings, die-cut stickers) as SVG, so the previews need no photos. To use your own transparent PNG or photo, put an `<img>` inside the `.object` element and it replaces the default. Generative AI imagery is still not allowed.
+
+**About templates 15 to 24.** Each one is a themed skin over the same patterns: the paper strip, windows, bubbles, tiles and doodles are drawn by its `tokens.css`, so they need no photos. Keep the slide markup as in `sample.html` and replace the copy.
 
 Need a different slide count (5 to 10), your own photos, or another pattern for one slide? Say so in the brief. Templates stay locked, so the look never drifts. The previews above use sample copy and no photos. See [Adding photos](#adding-photos).
 
@@ -224,8 +276,8 @@ Want your own brand instead? Ask for a custom design system and answer the 7 que
 carouso/
 ├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
 ├── templates/
-│   └── NN-name/              ← fourteen templates, each with:
-│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 to 11 also draw their object art from decor/; 12 to 14 ship sample photos in images/)
+│   └── NN-name/              ← twenty-four templates, each with:
+│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 to 11 and 15 to 24 also draw art from decor/; 12 to 14 ship sample photos in images/)
 │       ├── template.json     ←   name, fonts, size, slide sequence
 │       └── sample.html       ←   the finished 8-slide sample to copy from
 ├── design-system/
@@ -235,7 +287,7 @@ carouso/
 ├── fonts/                    ← bundled fonts (SIL OFL) + fonts.css
 ├── assets/
 │   ├── photo-layouts.jpg     ← the four photo layouts in four templates
-│   └── templates/            ← the fourteen template previews
+│   └── templates/            ← the twenty-four template previews
 ├── scripts/
 │   ├── render_carousel.py    ← Playwright render with quality gates
 │   ├── check_templates.py    ← consistency check for every template (runs in CI)
