@@ -1,0 +1,60 @@
+{
+  "number": 16,
+  "id": "16-blueprint",
+  "name": "Blueprint",
+  "vibe": "Technical drawing: blueprint blue and drafting paper, grid, monospace titles, dimension lines, callout circles, title block footer",
+  "fonts": [
+    "IBM Plex Mono",
+    "Inter"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-poster",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "concept-number",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "stat-band",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/16-blueprint.jpg"
+}

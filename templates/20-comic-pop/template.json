@@ -1,0 +1,60 @@
+{
+  "number": 20,
+  "id": "20-comic-pop",
+  "name": "Comic Pop",
+  "vibe": "Comic-book page: yellow and blue with halftone dots, inked panels with hard shadows, caption boxes, speech bubble, starburst",
+  "fonts": [
+    "Bangers",
+    "Inter"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/20-comic-pop.jpg"
+}

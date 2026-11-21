@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- light bulb -->
+  <g stroke="#1e2a4a" stroke-width="9">
+    <path d="M470 250c-52-34-70-98-44-148 28-54 96-76 152-48 58 28 80 98 50 152-10 18-24 32-40 44l-4 46-106 6z"/>
+    <path d="M482 330l98-8M490 364l84-8M508 398c16 14 36 12 50-4"/>
+    <path d="M500 238c-6-38 4-66 28-84 22 20 34 46 30 82" stroke-width="7"/>
+  </g>
+  <!-- rays -->
+  <g stroke="#c0322b" stroke-width="9">
+    <path d="M354 122l-52-22M372 52l-34-44M452 8l-6-2M650 40l36-40M700 128l54-18M708 214l48 20"/>
+  </g>
+  <!-- star -->
+  <path d="M150 300l22 54 58 6-44 38 14 58-50-32-50 32 14-58-44-38 58-6z" stroke="#c0322b" stroke-width="9" fill="#ffe45c"/>
+  <!-- curly arrow -->
+  <path d="M60 60c60-50 150-40 170 20 16 50-40 80-70 50-28-30 10-80 70-70 50 8 80 50 84 104" stroke="#1e2a4a" stroke-width="8"/>
+  <path d="M286 126l30 42 20-48" stroke="#1e2a4a" stroke-width="8"/>
+</svg>

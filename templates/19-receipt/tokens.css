@@ -1,0 +1,130 @@
+/* Template 19: Receipt. A thermal-paper receipt on a desk: torn zigzag edges, dashed rules,
+   line items with prices, a total, a barcode and one red stamp.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#fbf9f3;             /* paper */
+  --bg2:#f1eee5;
+  --panel:#f1eee5;
+  --text:#1b1b1a;
+  --muted:#4a4944;
+  --soft:#4a4944;
+  --accent:#b3261a;         /* stamp red */
+  --line:rgba(27,27,26,0.6);
+  --line2:rgba(27,27,26,0.3);
+  --desk:#d8d0bf;
+  --font-display:"Space Mono","SF Mono",Menlo,Consolas,monospace;
+  --font-body:"Space Mono","SF Mono",Menlo,Consolas,monospace;
+  --font-serif:"Space Mono","SF Mono",Menlo,Consolas,monospace;
+  --radius:0px;
+}
+.slide.mode-dark{
+  --bg:#222220;
+  --bg2:#2b2b28;
+  --panel:#2b2b28;
+  --text:#f4f0e4;
+  --muted:#cfcabb;
+  --soft:#cfcabb;
+  --accent:#ff8a73;
+  --line:rgba(244,240,228,0.6);
+  --line2:rgba(244,240,228,0.3);
+  --desk:#0f0f0e;
+}
+
+/* the desk is the slide, the paper is a strip with torn ends */
+.slide{background:var(--desk)}
+.slide::before{opacity:.05}
+.slide::after{content:"";position:absolute;left:70px;right:70px;top:44px;bottom:44px;z-index:1;background:var(--bg);
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.22));
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/36px 51% repeat-x,
+    conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/36px 51% repeat-x;
+  mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/36px 51% repeat-x,
+    conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/36px 51% repeat-x}
+.inner{inset:104px 130px 250px}
+.topbar{height:60px;border-bottom:3px dashed var(--line);font-size:21px;font-weight:700;letter-spacing:1px;color:var(--text)}
+/* footer: barcode with the handle underneath */
+.footer{left:130px;right:130px;bottom:92px;height:128px;align-items:flex-end;font-size:20px;font-weight:700;letter-spacing:1px;color:var(--text);
+  background:repeating-linear-gradient(90deg,var(--text) 0 4px,transparent 4px 8px,var(--text) 8px 10px,transparent 10px 16px,var(--text) 16px 22px,transparent 22px 26px,
+    var(--text) 26px 28px,transparent 28px 36px,var(--text) 36px 40px,transparent 40px 44px) left top/100% 78px no-repeat}
+
+/* type */
+h1,h2,h3{font-weight:700;text-transform:uppercase}
+h2{font-size:64px;line-height:1.06;letter-spacing:-2.5px}
+h3{font-size:31px;letter-spacing:-.5px;line-height:1.2}
+p{font-size:27px;line-height:1.45;letter-spacing:-.4px}
+.kicker{font-size:21px;font-weight:700;letter-spacing:1px;color:var(--muted)}
+.kicker::before{content:"*** "}
+.kicker::after{content:" ***"}
+.content>h2{padding-bottom:30px;border-bottom:3px dashed var(--line)}
+
+/* cover */
+.p-cover-bt{background:var(--desk)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:104px 130px 250px;padding:0;justify-content:flex-start;align-items:stretch;text-align:center}
+.p-cover-bt .shop{font-size:34px;font-weight:700;letter-spacing:6px;text-transform:uppercase;padding-bottom:24px;border-bottom:3px dashed var(--line)}
+.p-cover-bt .kicker{margin:26px 0 0}
+.p-cover-bt h1{font-size:104px;line-height:.98;letter-spacing:-5px;margin-top:86px;text-align:left}
+.p-cover-bt .desc{width:auto;margin:40px 0 0;text-align:left;font-size:30px;color:var(--text)}
+.p-cover-bt .meta{margin-top:auto;padding-top:28px;border-top:3px dashed var(--line);justify-content:space-between;font-size:26px;font-weight:700;letter-spacing:0;color:var(--text)}
+.p-cover-bt .meta span:first-child{color:var(--text)}
+.p-cover-bt .stamp{position:absolute;right:24px;bottom:130px;padding:14px 26px 12px;border:6px solid var(--accent);color:var(--accent);font-size:54px;font-weight:700;
+  letter-spacing:4px;transform:rotate(-12deg);opacity:.88}
+
+/* process: line items with prices */
+.p-process .process{margin-top:6px}
+.p-process .process-item{grid-template-columns:54px 1fr auto;gap:18px;padding:26px 0;border-bottom:2px dashed var(--line2);align-items:start}
+.p-process .process-item:first-child{border-top:0}
+.p-process .process-item:last-child{border-bottom:3px dashed var(--line)}
+.p-process .process-no{font-size:26px;color:var(--muted);letter-spacing:0;padding-top:4px}
+.p-process .process-item h3{font-size:34px}
+.p-process .process-item p{font-size:25px}
+.p-process .process-tag{border:0;padding:0;font-size:34px;font-weight:700;letter-spacing:-1px;color:var(--text);text-transform:none}
+
+/* big-number: the total */
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--text);font-size:210px;font-weight:700;letter-spacing:-14px;line-height:1;margin:46px 0 0 -8px}
+.p-bignumber h2{margin-top:14px;padding-bottom:30px;border-bottom:3px dashed var(--line)}
+.p-bignumber p{font-size:29px}
+
+/* stat-band: three totals */
+.p-stats .stat-row{margin-top:0;border:0;grid-template-columns:1fr}
+.p-stats .stat{border:0 !important;border-bottom:2px dashed var(--line2) !important;padding:26px 0 !important;display:flex;flex-direction:row-reverse;justify-content:space-between;align-items:baseline;gap:30px}
+.p-stats .stat:last-child{border-bottom:3px dashed var(--line) !important}
+.p-stats .stat-number{font-size:92px;font-weight:700;letter-spacing:-5px;line-height:1}
+.p-stats .stat-number .accent{color:var(--text)}
+.p-stats .stat-label{margin:0;font-size:27px;max-width:400px;color:var(--text)}
+
+/* myth-fact: voided line and the corrected one */
+.p-mythfact .myth-grid{margin-top:0;border:0;grid-template-columns:1fr}
+.p-mythfact .myth{min-height:0;padding:34px 0;border:0 !important;background:transparent !important;border-bottom:3px dashed var(--line) !important}
+.p-mythfact .myth-label{font-size:21px;letter-spacing:1px;color:var(--muted)}
+.p-mythfact .myth:last-child .myth-label{display:inline-block;border:3px solid var(--accent);padding:5px 14px;transform:rotate(-3deg)}
+.p-mythfact .myth h3{margin-top:22px;font-size:42px;letter-spacing:-1.5px;max-width:none}
+.p-mythfact .myth:first-child h3{text-decoration:line-through;text-decoration-thickness:4px;color:var(--muted)}
+.p-mythfact .myth p{margin-top:14px;font-size:27px;color:var(--text)}
+
+/* concept */
+.p-concept .concept{margin-top:40px;grid-template-columns:150px 1fr;gap:30px}
+.p-concept .concept-number{font-size:130px;font-weight:700;letter-spacing:-8px;line-height:.9;color:var(--text)}
+.p-concept .concept-body{border-left:3px dashed var(--line);padding-left:32px}
+.p-concept .concept-body h3{font-size:36px;margin-bottom:14px}
+.p-concept .concept-body p{margin-top:0;color:var(--text)}
+
+/* quote */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{margin-top:44px;font-weight:700;font-size:74px;line-height:1.06;letter-spacing:-3.5px;text-transform:uppercase}
+.p-quote .quote-source{margin-top:44px;padding-top:28px;border-top:3px dashed var(--line);font-size:22px;font-weight:700;letter-spacing:1px;color:var(--text)}
+
+/* takeaway */
+.p-takeaway .takeaway{margin-top:6px}
+.p-takeaway .takeaway-item{border-bottom:2px dashed var(--line2);padding:24px 0;gap:22px}
+.p-takeaway .takeaway-dot{width:auto;height:auto;margin:0;background:none;border-radius:0}
+.p-takeaway .takeaway-dot::before{content:"[x]";font-size:31px;font-weight:700;color:var(--text);line-height:1.2}
+.p-takeaway .takeaway-item h3{font-size:33px}
+.p-takeaway .takeaway-item p{font-size:25px}
+.p-takeaway .closer-cta{margin-top:34px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-block;border:5px solid var(--accent);padding:12px 22px 10px;font-size:26px;letter-spacing:2px;transform:rotate(-3deg)}
+
+/* receipts print from the top */
+.content{justify-content:flex-start;padding-top:56px}
+.p-quote .quote{font-size:92px;letter-spacing:-4.5px}
+.p-stats .stat-number{font-size:112px}
+.p-process .process-item p,.p-takeaway .takeaway-item p{font-size:27px}

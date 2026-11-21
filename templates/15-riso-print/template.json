@@ -1,0 +1,59 @@
+{
+  "number": 15,
+  "id": "15-riso-print",
+  "name": "Riso Print",
+  "vibe": "Two-ink risograph: blue and fluorescent pink on warm paper, overprinted circles, halftone dots, misregistered big type",
+  "fonts": [
+    "Space Grotesk"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "stat-band",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/15-riso-print.jpg"
+}

@@ -1,0 +1,59 @@
+{
+  "number": 18,
+  "id": "18-chat-thread",
+  "name": "Chat Thread",
+  "vibe": "Message thread: chat header, timestamp chips, incoming and outgoing bubbles, typing dots, a reaction, composer bar footer",
+  "fonts": [
+    "Nunito"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "myth-fact",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "concept-number",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/18-chat-thread.jpg"
+}

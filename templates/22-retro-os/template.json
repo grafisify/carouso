@@ -1,0 +1,60 @@
+{
+  "number": 22,
+  "id": "22-retro-os",
+  "name": "Retro OS",
+  "vibe": "Early desktop computer: windows on a dithered desktop, striped title bars, pixel headlines, dialog boxes, beveled buttons, menu bar footer",
+  "fonts": [
+    "Pixelify Sans",
+    "Inter"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/22-retro-os.jpg"
+}
