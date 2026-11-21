@@ -1,0 +1,116 @@
+/* Template 29: Notes App. A note in a notes app: back link and folder name on top, a date line, serif note titles,
+   numbered lists, a two-column table, pinned cards, a block quote and round checkboxes.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#fffdf7;
+  --bg2:#f6f2e6;
+  --panel:#fbf4d9;
+  --text:#1c1b18;
+  --muted:#55524a;
+  --soft:#55524a;
+  --accent:#8f5b00;         /* amber ink for links and labels */
+  --mark:#f5c000;           /* app yellow, shapes only */
+  --mark-ink:#1c1b18;
+  --line:rgba(28,27,24,.18);
+  --line2:rgba(28,27,24,.1);
+  --font-display:"Instrument Serif",Georgia,serif;
+  --font-body:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Instrument Serif",Georgia,serif;
+  --radius:26px;
+}
+.slide.mode-dark{
+  --bg:#1c1c1e;
+  --bg2:#2a2a2d;
+  --panel:#2a2a2d;
+  --text:#f5f4ef;
+  --muted:#c4c2b9;
+  --soft:#c4c2b9;
+  --accent:#ffd60a;
+  --mark:#ffd60a;
+  --line:rgba(245,244,239,.2);
+  --line2:rgba(245,244,239,.11);
+}
+.slide::before{display:none}
+.inner{inset:64px 76px 150px}
+.topbar{height:64px;border:0;font-size:28px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.topbar .b{display:flex;align-items:center;gap:16px;color:var(--accent)}
+.topbar .b::before{content:"";width:20px;height:20px;border:solid var(--accent);border-width:0 0 5px 5px;transform:rotate(45deg);margin-left:6px}
+/* toolbar */
+.footer{left:0;right:0;bottom:0;height:104px;padding:0 76px;align-items:center;border-top:1px solid var(--line);background:var(--bg2);
+  font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted);z-index:3}
+.footer span:last-child{color:var(--accent)}
+
+/* type */
+h1,h2{font-weight:400;letter-spacing:-2px}
+h2{font-size:124px;line-height:.92;letter-spacing:-3px}
+h1 .accent,h2 .accent{color:inherit;font-style:italic;text-decoration:underline;text-decoration-color:var(--mark);text-decoration-thickness:8px;text-underline-offset:10px}
+h3{font-family:var(--font-body);font-size:36px;font-weight:700;line-height:1.16;letter-spacing:-.8px}
+p{font-size:30px;line-height:1.45}
+.kicker{font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+
+/* cover */
+.p-cover-bt{background:var(--bg)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:64px 76px 150px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .doc{flex:1;display:flex;flex-direction:column;justify-content:center}
+.p-cover-bt .kicker{margin:0}
+.p-cover-bt h1{font-size:210px;line-height:.84;letter-spacing:-6px;margin-top:30px}
+.p-cover-bt .desc{width:auto;max-width:none;margin:50px 0 0;font-size:36px}
+.p-cover-bt .todo{list-style:none;margin:50px 0 0;border-top:1px solid var(--line)}
+.p-cover-bt .todo li{display:flex;align-items:center;gap:28px;padding:26px 0;border-bottom:1px solid var(--line);font-size:36px;font-weight:500}
+.p-cover-bt .todo li::before{content:"";flex:none;width:48px;height:48px;border-radius:50%;border:4px solid var(--muted)}
+
+/* concept */
+.p-concept .concept{margin-top:64px;grid-template-columns:130px 1fr;gap:20px}
+.p-concept .concept-number{font-size:190px;font-weight:400;line-height:.8;color:var(--text)}
+.p-concept .concept-number::after{content:".";color:var(--mark)}
+.p-concept .concept-body{border-left:0;padding-left:20px}
+.p-concept .concept-body h3{font-size:42px;margin-bottom:16px}
+.p-concept .concept-body p{margin-top:0;font-size:32px}
+
+/* process: numbered list */
+.p-process .process{margin-top:56px}
+.p-process .process-item{grid-template-columns:76px 1fr auto;gap:10px;padding:30px 0;align-items:start}
+.p-process .process-no{font-family:var(--font-display);font-size:76px;font-weight:400;letter-spacing:0;line-height:.8;color:var(--text)}
+.p-process .process-no::after{content:".";color:var(--mark)}
+.p-process .process-item h3{font-size:40px}
+.p-process .process-item p{font-size:29px;margin-top:8px}
+.p-process .process-tag{border:0;border-radius:10px;background:var(--panel);padding:10px 18px;font-size:22px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--accent)}
+
+/* two-cards: pinned notes */
+.p-cards .two-column{margin-top:56px;gap:22px}
+.p-cards .card{min-height:500px;padding:34px 34px 40px;border:0}
+.p-cards .card .index{display:flex;align-items:center;gap:14px;font-size:22px;font-weight:700;letter-spacing:0;text-transform:none}
+.p-cards .card .index::before{content:"";width:20px;height:20px;border-radius:50%;background:var(--mark)}
+.p-cards .card h3{font-family:var(--font-display);font-size:66px;font-weight:400;letter-spacing:-1.5px;line-height:.96}
+.p-cards .card p{font-size:28px}
+
+/* big-number */
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--text);font-size:560px;font-weight:400;letter-spacing:-20px;line-height:.78;margin-top:40px}
+.p-bignumber .giant::after{content:".";color:var(--mark)}
+.p-bignumber h2{margin-top:30px;font-size:104px}
+.p-bignumber p{font-size:32px;max-width:760px}
+
+/* myth-fact: a two-column table */
+.p-mythfact .myth-grid{margin-top:56px;border:1px solid var(--line);border-radius:var(--radius)}
+.p-mythfact .myth{min-height:0;padding:0 34px 40px;background:transparent !important}
+.p-mythfact .myth-label{margin:0 -34px;padding:20px 34px;background:var(--panel);border-bottom:1px solid var(--line);font-size:22px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+.p-mythfact .myth:last-child .myth-label{color:var(--accent)}
+.p-mythfact .myth h3{margin-top:40px;font-family:var(--font-display);font-size:92px;font-weight:400;letter-spacing:-2px;line-height:.9;max-width:none}
+.p-mythfact .myth:first-child h3{color:var(--muted)}
+.p-mythfact .myth p{margin-top:22px;font-size:29px}
+
+/* quote */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{margin-top:56px;padding-left:44px;border-left:10px solid var(--mark);font-style:italic;font-size:118px;line-height:.94;letter-spacing:-2.5px;max-width:none}
+.p-quote .quote-source{margin:44px 0 0 54px;font-size:24px;font-weight:600;letter-spacing:0;text-transform:none}
+
+/* takeaway: checklist */
+.p-takeaway .takeaway{margin-top:50px;border-top:1px solid var(--line)}
+.p-takeaway .takeaway-item{padding:28px 0;gap:28px;align-items:center}
+.p-takeaway .takeaway-dot{position:relative;width:56px;height:56px;margin:0;background:var(--mark)}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:20px;top:10px;width:13px;height:25px;border:solid var(--mark-ink);border-width:0 6px 6px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:40px}
+.p-takeaway .takeaway-item p{font-size:29px;margin-top:6px}
+.p-takeaway .closer-cta{margin-top:44px;text-align:left}
+.p-takeaway .closer-cta .accent{font-size:30px;font-weight:700;letter-spacing:0;text-transform:none;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px}
