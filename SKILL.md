@@ -52,7 +52,7 @@ After the seventh answer, summarize the locked choices in one short message, the
 
 Two ways in. Pick one.
 
-Never edit the shared `design-system/system.css`: every template builds on it. Start each custom system by copying `design-system/system.css` and `design-system/patterns.html` into `design-systems/<name>/`, and edit only that copy.
+Never edit the shared `design-system/system.css`: every template builds on it. Start each custom system by copying `design-system/system.css` and `design-system/patterns.html` into `design-systems/<name>/`, and edit only that copy. In the copied `patterns.html`, change the fonts link to `../../fonts/fonts.css` (the copy sits one level deeper).
 
 **A. Generate from the onboarding answers.** Set the `:root` tokens (and the `.slide.mode-dark` block) in `design-systems/<name>/system.css` to the brand (colors, fonts, radius). Render three sample patterns in those tokens (one cover, one body, one closer) and show them to the user. Iterate until approved.
 
