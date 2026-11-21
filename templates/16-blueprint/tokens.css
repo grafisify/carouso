@@ -1,0 +1,137 @@
+/* Template 16: Blueprint. Technical drawing: blueprint blue with a white grid, drafting-paper alternate,
+   monospace titles, dimension lines, callout circles and a title block at the foot.
+   Tokens, type and decor only. Structure lives in design-system/system.css.
+   The cover drawing comes from ./decor/wireframe.svg. */
+:root{
+  --bg:#eef2f7;
+  --bg2:#e2e9f2;
+  --panel:#f7f9fc;
+  --text:#123f8f;
+  --muted:#33558f;
+  --soft:#33558f;
+  --accent:#b93a1e;
+  --line:rgba(18,63,143,0.55);
+  --line2:rgba(18,63,143,0.3);
+  --grid:rgba(18,63,143,.10);
+  --grid2:rgba(18,63,143,.20);
+  --font-display:"IBM Plex Mono","SF Mono",Menlo,Consolas,monospace;
+  --font-body:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-serif:"IBM Plex Mono","SF Mono",Menlo,Consolas,monospace;
+  --radius:0px;
+}
+.slide.mode-dark{
+  --bg:#123f8f;
+  --bg2:#0f3679;
+  --panel:#164698;
+  --text:#ffffff;
+  --muted:#d7e3fb;
+  --soft:#d7e3fb;
+  --accent:#ffd166;
+  --line:rgba(255,255,255,0.6);
+  --line2:rgba(255,255,255,0.32);
+  --grid:rgba(255,255,255,.07);
+  --grid2:rgba(255,255,255,.15);
+}
+
+/* drawing sheet: grid, border frame, title block */
+.slide{background-color:var(--bg);background-image:
+  linear-gradient(var(--grid2) 2px,transparent 2px),linear-gradient(90deg,var(--grid2) 2px,transparent 2px),
+  linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:180px 180px,180px 180px,36px 36px,36px 36px;background-position:-1px -1px}
+.slide::before{display:none}
+.slide::after{content:"";position:absolute;inset:34px;border:2px solid var(--line);pointer-events:none;z-index:1}
+.inner{inset:70px 82px 150px}
+.footer{left:34px;right:34px;bottom:34px;height:78px;padding:0;border-top:2px solid var(--line);align-items:stretch;
+  font-family:var(--font-display);font-weight:500;font-size:20px;letter-spacing:1.5px;color:var(--text);z-index:2}
+.footer span{display:flex;align-items:center;padding:0 48px}
+.footer span+span{border-left:2px solid var(--line);min-width:300px;justify-content:center}
+
+/* type */
+h1,h2,h3,.kicker,.topbar{font-family:var(--font-display)}
+h1,h2{font-weight:700;text-transform:uppercase}
+h2{font-size:70px;line-height:1.04;letter-spacing:-2.5px}
+h3{font-size:34px;font-weight:700;letter-spacing:-.5px;line-height:1.15}
+p{font-size:30px;line-height:1.45}
+.kicker{font-size:21px;font-weight:500;letter-spacing:2.5px;color:var(--text)}
+.kicker::before{content:"";display:inline-block;width:20px;height:20px;border:2px solid var(--accent);border-radius:50%;margin-right:16px;vertical-align:-3px;
+  background:radial-gradient(circle,var(--accent) 0 3px,transparent 4px)}
+.topbar{height:64px;border-bottom:2px solid var(--line);font-size:20px;font-weight:500;letter-spacing:2px;color:var(--text)}
+
+/* dimension line under every body headline */
+.content>h2::after{content:"";display:block;width:360px;height:22px;margin-top:30px;
+  background:linear-gradient(var(--accent),var(--accent)) left center/2px 22px no-repeat,
+    linear-gradient(var(--accent),var(--accent)) right center/2px 22px no-repeat,
+    linear-gradient(var(--accent),var(--accent)) center/100% 2px no-repeat}
+
+/* cover */
+.p-poster .inner{padding:70px 82px 150px}
+.p-poster .poster-head{height:64px;border-bottom:2px solid var(--line);font-family:var(--font-display);font-weight:500;font-size:20px}
+.p-poster .object{margin:40px -10px 20px;background-image:url("decor/wireframe.svg")}
+.p-poster .poster-stack{text-align:left}
+.p-poster h1{font-size:82px;line-height:1.02;letter-spacing:-3.5px}
+.p-poster .sub{margin:28px 0 0;max-width:820px;font-size:31px;color:var(--muted)}
+.p-poster .poster-foot{display:none}
+
+/* concept: callout circle with crosshair */
+.p-concept .concept{grid-template-columns:190px 1fr;gap:40px;margin-top:64px;align-items:start}
+.p-concept .concept-number{width:190px;height:190px;border:2px solid var(--text);border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:96px;font-weight:700;color:var(--accent);line-height:1;
+  background:linear-gradient(var(--line2),var(--line2)) center/100% 1px no-repeat,linear-gradient(var(--line2),var(--line2)) center/1px 100% no-repeat}
+.p-concept .concept-body{border-left:2px dashed var(--line);padding-left:40px}
+.p-concept .concept-body h3{font-size:40px;margin-bottom:18px}
+
+/* process: numbered callouts on a dashed spine */
+.p-process .process{margin-top:54px;position:relative}
+.p-process .process::before{content:"";position:absolute;left:36px;top:40px;bottom:40px;border-left:2px dashed var(--line)}
+.p-process .process-item{grid-template-columns:74px 1fr 210px;gap:30px;border:0 !important;padding:26px 0}
+.p-process .process-no{position:relative;width:74px;height:74px;border:2px solid var(--text);border-radius:50%;background:var(--bg);color:var(--text);
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:26px;font-weight:700;letter-spacing:0}
+.p-process .process-item h3{font-size:36px}
+.p-process .process-item p{font-size:27px}
+.p-process .process-tag{border:0;border-bottom:2px solid var(--accent);border-radius:0;padding:6px 0;color:var(--text);
+  font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:.5px;text-transform:none}
+
+/* stats: measured values */
+.p-stats .stat-row{border-top:2px solid var(--line);border-bottom:2px solid var(--line);margin-top:60px}
+.p-stats .stat{border-right:2px dashed var(--line);padding:34px 20px 34px 0}
+.p-stats .stat:not(:first-child){padding-left:26px}
+.p-stats .stat-number{font-size:120px;font-weight:700;letter-spacing:-5px;line-height:1}
+.p-stats .stat-label{font-size:25px;margin-top:14px}
+
+/* myth-fact: rejected sheet is hatched, approved sheet is solid */
+.p-mythfact .myth-grid{border:2px solid var(--line);margin-top:60px}
+.p-mythfact .myth{padding:38px;min-height:480px}
+.p-mythfact .myth:first-child{border-right:2px solid var(--line);background:repeating-linear-gradient(135deg,var(--line2) 0 2px,transparent 2px 18px)}
+.p-mythfact .myth:last-child{background:var(--panel)}
+.p-mythfact .myth-label{display:inline-block;font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:2.5px;color:var(--text);
+  border:2px solid var(--text);padding:7px 14px;background:var(--bg)}
+.p-mythfact .myth:last-child .myth-label{color:var(--accent);border-color:var(--accent);transform:rotate(-4deg)}
+.p-mythfact .myth h3{font-size:38px;margin-top:70px;text-transform:uppercase}
+.p-mythfact .myth:first-child h3{text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--accent)}
+.p-mythfact .myth p{font-size:27px;color:var(--text)}
+
+/* big number: outlined figure with a height dimension */
+.p-bignumber .giant{position:relative;align-self:flex-start;font-size:360px;font-weight:700;letter-spacing:-16px;line-height:.95;margin-top:30px;padding-right:70px;
+  -webkit-text-stroke:3px var(--text);color:transparent}
+.p-bignumber .giant::after{content:"";position:absolute;right:0;top:40px;bottom:40px;width:24px;
+  background:linear-gradient(var(--accent),var(--accent)) center top/24px 2px no-repeat,
+    linear-gradient(var(--accent),var(--accent)) center bottom/24px 2px no-repeat,
+    linear-gradient(var(--accent),var(--accent)) center/2px 100% no-repeat}
+.p-bignumber h2{margin-top:20px}
+
+/* cards: detail views */
+.p-cards .two-column{margin-top:60px;gap:28px}
+.p-cards .card{background:transparent;border:2px dashed var(--line);padding:34px;min-height:440px}
+.p-cards .card .index{font-family:var(--font-display);font-size:20px;font-weight:700;letter-spacing:2px;color:var(--accent)}
+.p-cards .card h3{align-self:flex-start;margin-top:auto;padding:16px 22px;border:2px solid var(--text);font-size:30px;text-transform:uppercase}
+.p-cards .card:first-child h3{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.p-cards .card p{font-size:27px;margin-top:26px}
+
+/* takeaway: checklist boxes */
+.p-takeaway .takeaway{margin-top:50px;border-top:2px solid var(--line)}
+.p-takeaway .takeaway-item{border-bottom:2px solid var(--line);padding:26px 0;gap:28px;align-items:center}
+.p-takeaway .takeaway-dot{width:44px;height:44px;margin-top:0;border-radius:0;background:transparent;border:2px solid var(--text);position:relative}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:12px;top:3px;width:14px;height:26px;border:solid var(--accent);border-width:0 4px 4px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:34px;text-transform:uppercase}
+.p-takeaway .closer-cta{text-align:left;margin-top:44px}
+.p-takeaway .closer-cta .accent{display:inline-block;border:2px solid var(--accent);padding:16px 24px;font-family:var(--font-display);font-size:21px;font-weight:700;letter-spacing:2.5px;transform:rotate(-2deg)}
