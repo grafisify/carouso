@@ -5,6 +5,34 @@ Twenty structural patterns. The first twelve are full slides in `patterns.html`;
 carousel file. Never edit the structure per carousel. Only the copy, images,
 and token values change.
 
+Each pattern has a short CSS class on the `<section>`, next to `slide`. Templates and
+`patterns.html` mark the name with `data-pattern`. `template.json` uses the name.
+
+| Pattern name | Section class |
+|---|---|
+| cover-big-type | `p-cover-bt` |
+| cover-split | `p-cover-split` |
+| kicker-statement | `p-statement` |
+| stat-band | `p-stats` |
+| concept-number | `p-concept` |
+| quote | `p-quote` |
+| two-cards | `p-cards` |
+| image-hero | `p-imghero` |
+| process-steps | `p-process` |
+| myth-fact | `p-mythfact` |
+| big-number | `p-bignumber` |
+| takeaway | `p-takeaway` |
+| cover-poster | `p-poster` |
+| cover-hook | `p-hook` |
+| cover-label | `p-label` |
+| cover-object | `p-objcover` |
+| pointer | `p-pointer` |
+| showcase | `p-showcase` |
+| note | `p-note` |
+| cover-news | `p-news` |
+
+Example: `<section class="slide p-cards mode-dark" data-pattern="two-cards">`.
+
 Patterns are structural, not topical. The sample psychology copy is placeholder.
 Reuse any pattern for any niche.
 

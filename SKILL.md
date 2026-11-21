@@ -21,7 +21,7 @@ Files per template: `tokens.css` (the skin), `template.json` (name, fonts, size,
 2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle (the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change.
 3. **Plan from the sequence.** Start from the template `sequence`. Keep the cover first, the takeaway last, and the mode of each slide as listed. For a different slide count, drop or repeat middle slides in sequence order, keeping modes alternating and no two adjacent slides on the same pattern. Swap a middle pattern when the content fits another one better (numbers to `stat-band` or `big-number`, steps to `process-steps`, one line to `quote`), keeping that slide's mode. Use `cover-split` only when a verified cover image is supplied. A placed image goes on the slide as a `.photo` slot (see below), or on an `image-hero` slide when the photo is the point. Write the plan as a list (slide number, pattern, mode, one-line content) before building.
 4. **Write the copy** under the copy standards below. Replace every sample line. Nothing from the sample topic may remain.
-5. **Build the HTML.** Create `carousels/<slug>/index.html` by copying the chosen template's `sample.html`. Change only the `tokens.css` link to `../../templates/NN-slug/tokens.css`. The `fonts.css` and `system.css` links already resolve from that depth. Keep or remove `<section>` blocks per the plan, copy pattern blocks from `design-system/patterns.html` for added slides, apply the `mode-dark` class per the plan, fill in brand, handle, and the `NN / TT` counters.
+5. **Build the HTML.** Create `carousels/<slug>/index.html` by copying the chosen template's `sample.html`. Change only the `tokens.css` link to `../../templates/NN-slug/tokens.css`. The `fonts.css` and `system.css` links already resolve from that depth. Keep or remove `<section>` blocks per the plan, copy pattern blocks from `design-system/patterns.html` (or another template's `sample.html` for the newer patterns; the name-to-class table is in `design-system/PATTERNS.md`) for added slides, apply the `mode-dark` class per the plan, fill in brand, handle, and the `NN / TT` counters.
 6. **Images** pass the hard gate in Phase 2 step 4 below. Put local copies in `carousels/<slug>/images/` and log provenance in `carousels/<slug>/provenance.log`.
 7. **Render** with the template's size and fonts from `template.json`:
 ```
@@ -52,11 +52,13 @@ After the seventh answer, summarize the locked choices in one short message, the
 
 Two ways in. Pick one.
 
-**A. Generate from the onboarding answers.** Set the `:root` tokens in `design-system/system.css` to the brand (colors, fonts, radius). Render three sample patterns in those tokens (one cover, one body, one closer) and show them to the user. Iterate until approved.
+Never edit the shared `design-system/system.css`: every template builds on it. Start each custom system by copying `design-system/system.css` and `design-system/patterns.html` into `design-systems/<name>/`, and edit only that copy.
 
-**B. Adapt from a reference.** The user sends a screenshot or an HTML file of a carousel they like. Study it: color roles, type scale, spacing rhythm, recurring elements. Encode what you learn as `:root` tokens, then render the sample patterns. Iterate until approved.
+**A. Generate from the onboarding answers.** Set the `:root` tokens (and the `.slide.mode-dark` block) in `design-systems/<name>/system.css` to the brand (colors, fonts, radius). Render three sample patterns in those tokens (one cover, one body, one closer) and show them to the user. Iterate until approved.
 
-**Approval gate.** The system enters production only after the user approves the rendered samples. Save it under its system name (for example `design-systems/morningcup-playful/`, containing `system.css`, `patterns.html`, and `last-used.json`). To build another system later, run the onboarding dialog again from question 1.
+**B. Adapt from a reference.** The user sends a screenshot or an HTML file of a carousel they like. Study it: color roles, type scale, spacing rhythm, recurring elements. Encode what you learn as `:root` tokens in `design-systems/<name>/system.css`, then render the sample patterns. Iterate until approved.
+
+**Approval gate.** The system enters production only after the user approves the rendered samples. It lives under its system name (for example `design-systems/morningcup-playful/`, containing `system.css`, `patterns.html`, and `last-used.json`). To build another system later, run the onboarding dialog again from question 1.
 
 ## Phase 2: compose a carousel
 

@@ -15,7 +15,7 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 
 | | |
 |---|---|
-| **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 19-pattern library, so every carousel is consistent without looking copy-pasted. |
+| **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 20-pattern library, so every carousel is consistent without looking copy-pasted. |
 | **Ready to use** | Fourteen numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
@@ -173,6 +173,11 @@ Twenty structural patterns in `design-system/`, all token-driven. Each slide can
 | process-steps | Sequences and how-tos |
 | myth-fact | Correcting a misconception |
 | takeaway | Closers, recaps, CTAs |
+| cover-poster, cover-hook, cover-label, cover-object | Object-led covers (templates 07 to 11) |
+| cover-news | Photo-led news covers (templates 12 to 14) |
+| pointer | A story beat that ends in a turn |
+| showcase | A gallery of examples or screenshots |
+| note | Long-form tips in a personal voice |
 
 ## Adding photos
 
@@ -232,7 +237,8 @@ carouso/
 │   ├── photo-layouts.jpg     ← the four photo layouts in four templates
 │   └── templates/            ← the fourteen template previews
 ├── scripts/
-│   └── render_carousel.py    ← Playwright render with quality gates
+│   ├── render_carousel.py    ← Playwright render with quality gates
+│   └── check_templates.py    ← consistency check for every template (runs in CI)
 └── examples/
     └── brief-example.md      ← a complete brief and how the skill handles it
 ```
