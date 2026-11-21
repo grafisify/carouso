@@ -1,0 +1,60 @@
+{
+  "number": 25,
+  "id": "25-code-editor",
+  "name": "Code Editor",
+  "vibe": "Code editor window: tab bar with window dots, monospace headlines in syntax colors, comment kickers, diff view, code-block cards, terminal line, status bar footer",
+  "fonts": [
+    "JetBrains Mono",
+    "Inter"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "dark"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "light"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "dark"
+    },
+    {
+      "slide": 4,
+      "pattern": "myth-fact",
+      "mode": "light"
+    },
+    {
+      "slide": 5,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 6,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "light"
+    }
+  ],
+  "preview": "assets/templates/25-code-editor.jpg"
+}
