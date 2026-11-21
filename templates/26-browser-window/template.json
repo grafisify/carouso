@@ -1,0 +1,59 @@
+{
+  "number": 26,
+  "id": "26-browser-window",
+  "name": "Browser Window",
+  "vibe": "Web page in a browser: window dots, address bar with the brand URL, article cards with thumbnails, metric tiles, testimonial, button with a pointer cursor",
+  "fonts": [
+    "Albert Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "stat-band",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/26-browser-window.jpg"
+}
