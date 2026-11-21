@@ -1,0 +1,59 @@
+{
+  "number": 33,
+  "id": "33-app-store",
+  "name": "App Store",
+  "vibe": "App store listing: rounded gradient app icon, name and tagline, pill Get button, ratings strip with stars, screenshot cards, version notes, starred review",
+  "fonts": [
+    "Inter"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "stat-band",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "quote",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/33-app-store.jpg"
+}
