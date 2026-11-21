@@ -8,6 +8,9 @@ Quality gates (exit 1 on failure):
   3. every slide bounding box must equal --width x --height
   4. every font in --check-fonts must be loaded (reject silent fallback)
   5. no visible text may be smaller than --min-font px (default 20, readable on a phone)
+  6. every <img> on a slide must load (no broken or missing files)
+  7. no text may be cut off by the slide edge (except inside .peek or [data-bleed],
+     which bleed off the edge on purpose)
 
 Example:
   python3 scripts/render_carousel.py --html topic.html --out out/ \
@@ -49,13 +52,27 @@ async def main() -> int:
         page = await browser.new_page(
             viewport={"width": args.width, "height": args.height}
         )
-        # file:// so relative local image paths always resolve
-        await page.goto(html.as_uri())
-        await page.wait_for_timeout(2500)  # let local fonts/images load
-        try:
-            await page.evaluate("document.fonts.ready.then(()=>1)")
-        except Exception:
-            pass
+        # file:// so relative local image paths always resolve. "load" waits for
+        # stylesheets, images and CSS backgrounds; then wait for fonts and decoding.
+        await page.goto(html.as_uri(), wait_until="load")
+        await page.evaluate(
+            """async()=>{
+                await document.fonts.ready;
+                await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));
+            }""")
+
+        # Image gate: a wrong path or unreadable file renders as an empty frame.
+        broken = await page.evaluate(
+            """()=>[...document.querySelectorAll('.slide img')]
+                .filter(i=>!i.complete||i.naturalWidth===0)
+                .map(i=>{const s=i.closest('.slide');
+                  return `slide ${[...document.querySelectorAll('.slide')].indexOf(s)+1} ${i.getAttribute('src')}`;})""")
+        if broken:
+            print("GATE FAILED (image): not loaded:", flush=True)
+            for line in broken[:12]:
+                print("  " + line, flush=True)
+            await browser.close()
+            return 1
 
         # Font gate: a webfont (e.g. Google Fonts) that fails to load drops
         # headlines to a fallback. Reject before rendering.
@@ -121,7 +138,7 @@ async def main() -> int:
             await browser.close()
             return 1
 
-        bad_overflow, bad_size = [], []
+        bad_overflow, bad_size, bad_edge = [], [], []
         for i in range(n):
             await page.evaluate(
                 f"""document.querySelectorAll('.slide').forEach((c,idx)=>{{
@@ -131,7 +148,7 @@ async def main() -> int:
 
             # Size gate via bounding box (no PIL dependency)
             box = await el.bounding_box()
-            if not box or int(box["width"]) != args.width or int(box["height"]) != args.height:
+            if not box or round(box["width"]) != args.width or round(box["height"]) != args.height:
                 bad_size.append(i + 1)
 
             await el.screenshot(
@@ -153,6 +170,31 @@ async def main() -> int:
             )
             if ovf["scrollH"] > ovf["clientH"] + 2 or ovf["scrollW"] > ovf["clientW"] + 2:
                 bad_overflow.append(i + 1)
+
+            # Edge gate: text past the slide edge is cut off in the JPG.
+            cut = await page.evaluate(
+                f"""(()=>{{
+                    const s = document.querySelectorAll('.slide')[{i}];
+                    const b = s.getBoundingClientRect(), out = [];
+                    const w = document.createTreeWalker(s, NodeFilter.SHOW_TEXT);
+                    while (w.nextNode()) {{
+                      const n = w.currentNode, el = n.parentElement;
+                      if (!n.textContent.trim() || el.closest('.peek,[data-bleed]')) continue;
+                      const cs = getComputedStyle(el);
+                      if (cs.display==='none' || cs.visibility==='hidden') continue;
+                      const r = document.createRange(); r.selectNodeContents(n);
+                      for (const q of r.getClientRects()) {{
+                        if (q.width && (q.left < b.left-1 || q.top < b.top-1 ||
+                            q.right > b.right+1 || q.bottom > b.bottom+1)) {{
+                          out.push(n.textContent.trim().slice(0,24)); break;
+                        }}
+                      }}
+                    }}
+                    return out;
+                }})()"""
+            )
+            if cut:
+                bad_edge.append(f"{i + 1} {cut[:3]}")
             print(f"slide {i+1:02d}: box={box['width']:.0f}x{box['height']:.0f} overflow={ovf}", flush=True)
 
         await browser.close()
@@ -163,6 +205,9 @@ async def main() -> int:
         failed = True
     if bad_overflow:
         print(f"GATE FAILED (overflow): slides {bad_overflow} (content clipped or colliding)", flush=True)
+        failed = True
+    if bad_edge:
+        print(f"GATE FAILED (edge): text cut off by the slide edge: {bad_edge}", flush=True)
         failed = True
     if failed:
         return 1

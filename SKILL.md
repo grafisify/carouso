@@ -100,7 +100,7 @@ python3 scripts/render_carousel.py --html <file.html> --out <dir-output> \
     --check-fonts "Plus Jakarta Sans"
 ```
 (Adjust width, height, slides, and fonts to the brief and the system tokens.)
-The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, or when a checked font failed to load. Fix the HTML and re-render until it passes. Never waive the gate manually.
+The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, when a checked font failed to load, when an `<img>` failed to load, or when text is cut off by the slide edge (elements inside `.peek` or `[data-bleed]` may bleed on purpose). Fix the HTML and re-render until it passes. Never waive the gate manually.
 
 ### 7. Final visual check and record
 Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern, full pattern sequence, and the mode of each slide (for example `{"cover": "cover-big-type", "sequence": ["cover-big-type", "two-cards", "takeaway"], "modes": ["light", "dark", "light"]}`).
@@ -137,7 +137,7 @@ Apply this reasoning at every step. It is what keeps the output from reading as 
 - Contrast: body, muted, footer, and accent text hold at least 4.5:1 against their background and panel (WCAG AA). Templates already comply, so a custom system must check its own tokens in both modes.
 - Color: 60 percent base, 30 percent secondary, 10 percent accent.
 - Consistency: topbar, footer, kicker, cards, radius, and shadows never change style across slides. Patterns vary. Tokens do not.
-- Safe zones: 64px from each edge. Nothing important outside them.
+- Safe zones: content stays inside the `.inner` box (78px top and bottom, 82px left and right). Only the topbar and footer chrome sit closer, at 34px from the edge. No text may be cut by the slide edge.
 - Anti-collision: fixed zones with vertical flex flow. Elements that touch are a failed design.
 
 ## Output contract
