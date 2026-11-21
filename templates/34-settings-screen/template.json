@@ -1,0 +1,59 @@
+{
+  "number": 34,
+  "id": "34-settings-screen",
+  "name": "Settings Screen",
+  "vibe": "Phone settings page: grouped rounded rows, pill toggles switched on or off, a value slider, quick-setting tiles, search field on the cover",
+  "fonts": [
+    "Nunito"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "big-number",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/34-settings-screen.jpg"
+}
