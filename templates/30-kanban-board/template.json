@@ -1,0 +1,59 @@
+{
+  "number": 30,
+  "id": "30-kanban-board",
+  "name": "Kanban Board",
+  "vibe": "Task board: columns with headers, task cards with colored label bars, avatars, a WIP limit figure, checked cards in the Done column",
+  "fonts": [
+    "Space Grotesk"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "myth-fact",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "two-cards",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/30-kanban-board.jpg"
+}
