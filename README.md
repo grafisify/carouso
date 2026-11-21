@@ -16,7 +16,7 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 | | |
 |---|---|
 | **Locked tokens, free layouts** | Brand tokens (colors, fonts, spacing) stay locked. Slides are composed per topic from a 20-pattern library, so every carousel is consistent without looking copy-pasted. |
-| **Ready to use** | Twenty-four numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
+| **Ready to use** | Thirty-six numbered templates. Say `template 3, topic: ...` and get finished JPGs. No setup, no onboarding, fonts included. |
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
@@ -156,11 +156,71 @@ A spiral notebook page: ruled lines, a red margin, handwritten headlines, highli
 
 <img src="assets/templates/24-notebook-doodle.jpg" width="860" alt="Template 24 · Notebook Doodle: eight sample slides">
 
+### 25 · Code Editor
+An editor window: file tab, line numbers, syntax-coloured headlines, a red and green diff, a terminal prompt and a status bar. Good for coding tips, dev tools, tech tutorials.
+
+<img src="assets/templates/25-code-editor.jpg" width="860" alt="Template 25 · Code Editor: eight sample slides">
+
+### 26 · Browser Window
+Every slide is a web page inside a browser frame: address bar, hero section, call-to-action button with a cursor, metric cards. Good for web, SEO and digital product tips.
+
+<img src="assets/templates/26-browser-window.jpg" width="860" alt="Template 26 · Browser Window: eight sample slides">
+
+### 27 · Search Results
+The headline is typed into a search field; answers arrive as autocomplete suggestions, ranked results and a featured answer. Good for question hooks and FAQs.
+
+<img src="assets/templates/27-search-results.jpg" width="860" alt="Template 27 · Search Results: eight sample slides">
+
+### 28 · Lock Screen
+A phone lock screen: oversized clock, stacked notification cards with app icons, widgets and a home indicator over a gradient wallpaper. Good for hooks, reminders, habits.
+
+<img src="assets/templates/28-lock-screen.jpg" width="860" alt="Template 28 · Lock Screen: eight sample slides">
+
+### 29 · Notes App
+A clean notes app: serif note titles, yellow highlight, numbered lists, pinned note cards and a checklist. Good for short tips, lists, journaling.
+
+<img src="assets/templates/29-notes-app.jpg" width="860" alt="Template 29 · Notes App: eight sample slides">
+
+### 30 · Kanban Board
+A task board: To do, Doing and Done columns, cards with coloured labels, a WIP limit and a done checklist. Good for process, productivity, project management.
+
+<img src="assets/templates/30-kanban-board.jpg" width="860" alt="Template 30 · Kanban Board: eight sample slides">
+
+### 31 · Calendar
+A calendar app: date tiles with a red weekday band, a day agenda with timed, colour-coded events and week strips. Good for plans, routines, countdowns.
+
+<img src="assets/templates/31-calendar.jpg" width="860" alt="Template 31 · Calendar: eight sample slides">
+
+### 32 · Music Player
+A now-playing screen: gradient album cover, transport controls, tracklist rows, lyric-style quotes and a scrubber that advances with every slide. Good for lifestyle, playlists, recommendations.
+
+<img src="assets/templates/32-music-player.jpg" width="860" alt="Template 32 · Music Player: eight sample slides">
+
+### 33 · App Store
+A store listing: app icon, Get button, ratings strip with stars, screenshot cards, version notes and a starred review. Good for reviews, tool recommendations, launches.
+
+<img src="assets/templates/33-app-store.jpg" width="860" alt="Template 33 · App Store: eight sample slides">
+
+### 34 · Settings Screen
+A phone settings page: grouped rows with toggles switched on or off, a slider and quick-setting tiles. Good for do versus don't, habits to turn on or off.
+
+<img src="assets/templates/34-settings-screen.jpg" width="860" alt="Template 34 · Settings Screen: eight sample slides">
+
+### 35 · Spreadsheet
+A sheet: cell grid, lettered columns, formula bar, a selected cell with its fill handle, table rows and red and green conditional fills. Good for money, data, comparisons.
+
+<img src="assets/templates/35-spreadsheet.jpg" width="860" alt="Template 35 · Spreadsheet: eight sample slides">
+
+### 36 · Glass Widgets
+Home-screen widgets in frosted glass over a soft mesh gradient, with progress rings and a mini bar chart. Good for light data, lifestyle, premium brands.
+
+<img src="assets/templates/36-glass-widgets.jpg" width="860" alt="Template 36 · Glass Widgets: eight sample slides">
+
 **About the news covers.** Templates 12 to 14 need a cover photo: swap the `src` in the `news-photo` figure (and set `--focus` on it to choose the crop) and add a photo to the slide that carries one. The sample photos are from the Kodak Lossless True Color Image Suite, released by Kodak for unrestricted use; replace them with your own before publishing.
 
 **About the hero objects.** Templates 07 to 11 draw their default art (paper sheets, glossy cubes, balls and rings, die-cut stickers) as SVG, so the previews need no photos. To use your own transparent PNG or photo, put an `<img>` inside the `.object` element and it replaces the default. Generative AI imagery is still not allowed.
 
-**About templates 15 to 24.** Each one is a themed skin over the same patterns: the paper strip, windows, bubbles, tiles and doodles are drawn by its `tokens.css`, so they need no photos. Keep the slide markup as in `sample.html` and replace the copy.
+**About templates 15 to 36.** Each one is a themed skin over the same patterns: the paper strip, windows, bubbles, tiles, doodles and app chrome are drawn by its `tokens.css`, so they need no photos. Keep the slide markup as in `sample.html` and replace the copy. Templates 25 to 36 imitate app screens; where a value drives the decor (a toggle, a slider, a progress ring, the music scrubber) it is set in the markup, as noted in the comment at the top of each `sample.html`.
 
 Need a different slide count (5 to 10), your own photos, or another pattern for one slide? Say so in the brief. Templates stay locked, so the look never drifts. The previews above use sample copy and no photos. See [Adding photos](#adding-photos).
 
@@ -276,8 +336,8 @@ Want your own brand instead? Ask for a custom design system and answer the 7 que
 carouso/
 ├── SKILL.md                  ← the whole skill: workflow, design thinking, gates
 ├── templates/
-│   └── NN-name/              ← twenty-four templates, each with:
-│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 to 11 and 15 to 24 also draw art from decor/; 12 to 14 ship sample photos in images/)
+│   └── NN-name/              ← thirty-six templates, each with:
+│       ├── tokens.css        ←   colors, fonts, light and dark modes (07 to 11 and some of 15 to 36 also draw art from decor/; 12 to 14 ship sample photos in images/)
 │       ├── template.json     ←   name, fonts, size, slide sequence
 │       └── sample.html       ←   the finished 8-slide sample to copy from
 ├── design-system/
@@ -287,7 +347,7 @@ carouso/
 ├── fonts/                    ← bundled fonts (SIL OFL) + fonts.css
 ├── assets/
 │   ├── photo-layouts.jpg     ← the four photo layouts in four templates
-│   └── templates/            ← the twenty-four template previews
+│   └── templates/            ← the thirty-six template previews
 ├── scripts/
 │   ├── render_carousel.py    ← Playwright render with quality gates
 │   ├── check_templates.py    ← consistency check for every template (runs in CI)
