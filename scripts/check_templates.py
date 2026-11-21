@@ -40,6 +40,7 @@ DATA_PATTERN = re.compile(r'\sdata-pattern="([^"]+)"')
 
 def slide_sections(html: str) -> list:
     out = []
+    html = re.sub(r"<!--.*?-->", "", html, flags=re.S)
     for tag in SECTION_TAG.findall(html):
         m = CLASS_ATTR.search(tag)
         classes = m.group(1).split() if m else []
