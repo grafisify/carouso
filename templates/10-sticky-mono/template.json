@@ -26,12 +26,12 @@
     },
     {
       "slide": 3,
-      "pattern": "note",
+      "pattern": "process-steps",
       "mode": "dark"
     },
     {
       "slide": 4,
-      "pattern": "process-steps",
+      "pattern": "note",
       "mode": "light"
     },
     {

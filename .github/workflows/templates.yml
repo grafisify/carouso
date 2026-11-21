@@ -1,0 +1,32 @@
+name: templates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check-and-render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check template consistency
+        run: python3 scripts/check_templates.py
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Render every template through the quality gates
+        run: |
+          set -e
+          python3 scripts/check_templates.py --render-cmd > render.sh
+          bash -e render.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rendered-slides
+          path: out/
+          if-no-files-found: ignore

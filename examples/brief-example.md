@@ -20,7 +20,7 @@ No onboarding, no font install. The rest of this file shows the custom path.
 
 The user answers the 7 onboarding questions: playful and friendly, warm earth colors, rounded type feel, "Morning Cup / @morningcup", coffee topics, English, named "morningcup-playful".
 
-The agent sets the `:root` tokens in `design-system/system.css` to the brand, renders three sample patterns (cover-big-type, stat-band, takeaway), and shows them. The user asks for a warmer background. The agent adjusts the tokens, re-renders, and the user approves. The system is saved to `design-systems/morningcup-playful/`. Phase 1 is done.
+The agent copies `design-system/system.css` and `patterns.html` into `design-systems/morningcup-playful/`, sets the `:root` tokens in that copy to the brand, renders three sample patterns (cover-big-type, stat-band, takeaway), and shows them. The user asks for a warmer background. The agent adjusts the tokens, re-renders, and the user approves. Phase 1 is done.
 
 ## Phase 2: compose a carousel
 
