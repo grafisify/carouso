@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Template 22: Retro OS. Copy to carousels/<name>/index.html,
      point the tokens.css link at ../../templates/22-retro-os/tokens.css, then replace the copy.
-     Windows, dialogs and buttons are drawn by tokens.css. Keep the slide markup as it is here. -->
+     Windows, dialogs and buttons are drawn by tokens.css. Keep the slide markup as it is here; button labels are the data-btn attributes. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -64,8 +64,8 @@
       <div class="kicker">Error</div>
       <h2>It is not<br><span class="accent">the storage.</span></h2>
       <div class="myth-grid">
-        <div class="myth"><div class="myth-label">Myth</div><h3>Buy a bigger drive</h3><p>More space only makes a bigger pile.</p></div>
-        <div class="myth"><div class="myth-label">Fact</div><h3>Make fewer piles</h3><p>Three folders beat thirty you never open.</p></div>
+        <div class="myth" data-btn="Cancel"><div class="myth-label">Myth</div><h3>Buy a bigger drive</h3><p>More space only makes a bigger pile.</p></div>
+        <div class="myth" data-btn="OK"><div class="myth-label">Fact</div><h3>Make fewer piles</h3><p>Three folders beat thirty you never open.</p></div>
       </div>
     </div>
   </div>
@@ -92,8 +92,8 @@
       <div class="kicker">Two habits</div>
       <h2>Keep it <span class="accent">clean.</span></h2>
       <div class="two-column">
-        <div class="card"><div class="index">Daily.txt</div><h3>Empty the Inbox</h3><p>Two minutes before you shut the lid.</p></div>
-        <div class="card"><div class="index">Weekly.txt</div><h3>Empty the trash</h3><p>Friday afternoon, every week.</p></div>
+        <div class="card" data-btn="Open"><div class="index">Daily.txt</div><h3>Empty the Inbox</h3><p>Two minutes before you shut the lid.</p></div>
+        <div class="card" data-btn="Open"><div class="index">Weekly.txt</div><h3>Empty the trash</h3><p>Friday afternoon, every week.</p></div>
       </div>
     </div>
   </div>
