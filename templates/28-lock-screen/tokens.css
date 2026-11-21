@@ -1,0 +1,136 @@
+/* Template 28: Lock Screen. A phone lock screen: soft gradient wallpaper, a thin oversized clock, stacked notification cards
+   with app icons and timestamps, round widgets, a slide-to-save pill and a home indicator.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#f6e9e4;
+  --bg2:#e9defa;
+  --panel:rgba(255,255,255,.72);  /* notification card */
+  --text:#1a1730;
+  --muted:#454061;
+  --soft:#454061;
+  --accent:#5b3fd6;
+  --line:rgba(26,23,48,.14);
+  --line2:rgba(26,23,48,.08);
+  --wall:linear-gradient(165deg,#ffd9c7 0%,#f3d3ec 45%,#cfd6ff 100%);
+  --icon:linear-gradient(140deg,#7a5cff,#ff7ab8);
+  --icon-ink:#ffffff;
+  --font-display:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-body:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --radius:40px;
+}
+.slide.mode-dark{
+  --bg:#17132e;
+  --bg2:#2a1b4a;
+  --panel:rgba(255,255,255,.13);
+  --text:#ffffff;
+  --muted:#d9d4f2;
+  --soft:#d9d4f2;
+  --accent:#c7b8ff;
+  --line:rgba(255,255,255,.2);
+  --line2:rgba(255,255,255,.12);
+  --wall:linear-gradient(165deg,#0f1238 0%,#3a1d5c 55%,#7a2f5f 100%);
+  --icon:linear-gradient(140deg,#9d86ff,#ff8fc4);
+  --icon-ink:#17132e;
+}
+.slide{background:var(--wall)}
+.slide::before{display:none}
+/* home indicator */
+.slide::after{content:"";position:absolute;left:50%;bottom:22px;width:300px;height:10px;margin-left:-150px;border-radius:999px;background:var(--text);opacity:.85;z-index:3}
+.inner{inset:56px 60px 130px}
+.topbar{height:56px;border:0;font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--text)}
+.footer{left:60px;right:60px;bottom:58px;font-size:21px;font-weight:700;letter-spacing:1px;text-transform:none;color:var(--muted)}
+
+/* type */
+h1,h2,h3{font-weight:700}
+h2{font-size:84px;line-height:.98;letter-spacing:-4px}
+h3{font-size:36px;line-height:1.14;letter-spacing:-1px}
+p{font-size:29px;line-height:1.4;font-weight:500}
+.kicker{font-size:22px;font-weight:700;letter-spacing:2.5px;color:var(--muted)}
+
+/* notification card, shared */
+.note,.p-statement p,.p-process .process-item,.p-cards .card,.p-mythfact .myth,.p-quote .quote,.p-takeaway .takeaway-item{
+  background:var(--panel);border:0;border-radius:var(--radius);box-shadow:inset 0 0 0 1px var(--line2),0 10px 30px rgba(20,10,60,.08)}
+.app-icon,.p-process .process-no,.p-cards .card .index::before,.p-mythfact .myth-label::before,.p-quote .quote-source::before,.p-takeaway .takeaway-dot{
+  flex:none;width:72px;height:72px;border-radius:20px;background:var(--icon)}
+
+/* cover */
+.p-cover-bt{background:var(--wall)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:56px 60px 130px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .date{margin-top:70px;text-align:center;font-size:36px;font-weight:600;letter-spacing:-.4px;color:var(--text)}
+.p-cover-bt .clock{text-align:center;font-size:330px;font-weight:300;line-height:.92;letter-spacing:-16px;color:var(--text)}
+.p-cover-bt .note{position:relative;margin:auto 0 40px;padding:40px 44px 48px}
+.p-cover-bt .note::before,.p-cover-bt .note::after{content:"";position:absolute;left:34px;right:34px;height:40px;border-radius:0 0 34px 34px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line2)}
+.p-cover-bt .note::before{bottom:-18px;opacity:.75}
+.p-cover-bt .note::after{left:70px;right:70px;bottom:-34px;opacity:.5;z-index:-1}
+.p-cover-bt .app{display:flex;align-items:center;gap:20px;font-size:24px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.p-cover-bt .app::before{content:"";width:56px;height:56px;border-radius:16px;background:var(--icon)}
+.p-cover-bt .app span{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:600}
+.p-cover-bt h1{font-size:96px;line-height:.96;letter-spacing:-4.5px;margin-top:30px}
+.p-cover-bt .desc{width:auto;max-width:none;margin:26px 0 0;font-size:32px;color:var(--muted)}
+
+/* big-number: the clock treatment */
+.p-bignumber .content{align-items:center;text-align:center}
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--text);font-size:460px;font-weight:300;letter-spacing:-26px;line-height:.9;margin-top:30px}
+.p-bignumber h2{margin-top:0}
+.p-bignumber p{max-width:720px;font-size:31px}
+
+/* process: a stack of notifications */
+.p-process .process{margin-top:50px;display:flex;flex-direction:column;gap:18px}
+.p-process .process-item{grid-template-columns:72px 1fr auto;gap:26px;padding:30px 34px;align-items:start}
+.p-process .process-no{display:flex;align-items:center;justify-content:center;font-size:30px;letter-spacing:0;color:var(--icon-ink)}
+.p-process .process-item h3{font-size:38px}
+.p-process .process-item p{font-size:28px;margin-top:8px}
+.p-process .process-tag{border:0;padding:6px 0 0;font-size:22px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+
+/* myth-fact: one silenced, one delivered */
+.p-mythfact .myth-grid{margin-top:50px;grid-template-columns:1fr;border:0;border-radius:0;overflow:visible;gap:18px}
+.p-mythfact .myth{min-height:0;padding:34px 38px 40px;border:0 !important;background:var(--panel) !important}
+.p-mythfact .myth:first-child{opacity:.8}
+.p-mythfact .myth:last-child{box-shadow:inset 0 0 0 4px var(--accent)}
+.p-mythfact .myth-label{display:flex;align-items:center;gap:20px;font-size:22px;letter-spacing:1.5px;color:var(--muted) !important}
+.p-mythfact .myth-label::before{content:"";width:56px;height:56px;border-radius:16px}
+.p-mythfact .myth:first-child .myth-label::before{background:var(--muted)}
+.p-mythfact .myth h3{margin-top:22px;font-size:50px;letter-spacing:-2px;max-width:none}
+.p-mythfact .myth p{margin-top:12px;font-size:30px;color:var(--muted)}
+
+/* stat-band: round widgets */
+.p-stats .stat-row{margin-top:56px;border:0;gap:20px}
+.p-stats .stat{border:0 !important;padding:0 !important;text-align:center}
+.p-stats .stat-number{width:100%;aspect-ratio:1;border-radius:50%;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line2),inset 0 0 0 14px var(--line2);display:flex;align-items:center;justify-content:center;
+  font-size:80px;font-weight:600;letter-spacing:-4px}
+.p-stats .stat-number .accent{color:var(--text)}
+.p-stats .stat-label{margin-top:22px;font-size:27px;font-weight:600;color:var(--text)}
+
+/* two-cards */
+.p-cards .two-column{margin-top:50px;gap:18px}
+.p-cards .card{min-height:520px;padding:34px 34px 40px}
+.p-cards .card .index{display:flex;align-items:center;gap:20px;font-size:22px;letter-spacing:1.5px;color:var(--muted)}
+.p-cards .card .index::before{content:"";width:56px;height:56px;border-radius:16px}
+.p-cards .card h3{font-size:50px;letter-spacing:-2px;line-height:1.02}
+.p-cards .card p{font-size:28px;color:var(--muted)}
+
+/* quote: one large notification */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{order:2;margin-top:0;padding:28px 44px 56px;border-radius:0 0 var(--radius) var(--radius);box-shadow:none;font-weight:700;font-size:92px;line-height:.98;letter-spacing:-4.5px;max-width:none}
+.p-quote .quote-source{order:1;margin-top:44px;padding:36px 44px 0;border-radius:var(--radius) var(--radius) 0 0;background:var(--panel);display:flex;align-items:center;gap:20px;
+  font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.p-quote .quote-source::before{content:"";width:56px;height:56px;border-radius:16px}
+
+/* statement */
+.p-statement .rule{display:none}
+.p-statement h2{font-size:112px;letter-spacing:-5.5px;line-height:.94}
+.p-statement p{margin-top:50px;padding:36px 40px;max-width:none;font-size:33px;color:var(--text)}
+
+/* takeaway */
+.p-takeaway .takeaway{margin-top:50px;display:flex;flex-direction:column;gap:18px}
+.p-takeaway .takeaway-item{padding:28px 34px;gap:26px;align-items:center}
+.p-takeaway .takeaway-dot{position:relative;margin:0}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:27px;top:14px;width:14px;height:28px;border:solid var(--icon-ink);border-width:0 6px 6px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:40px}
+.p-takeaway .takeaway-item p{font-size:28px;margin-top:6px;color:var(--muted)}
+.p-takeaway .closer-cta{margin-top:40px;text-align:left}
+.p-takeaway .closer-cta .accent{display:flex;align-items:center;justify-content:center;position:relative;height:108px;border-radius:999px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line2);
+  color:var(--text);font-size:30px;font-weight:600;letter-spacing:0;text-transform:none}
+.p-takeaway .closer-cta .accent::before{content:"";position:absolute;left:10px;top:10px;width:88px;height:88px;border-radius:50%;background:var(--icon)}
