@@ -1,0 +1,119 @@
+/* Template 27: Search Results. Every headline is a query typed into a search field; the body is the results page:
+   suggestion dropdown, ranked results with link titles, a featured answer box, quick-answer figure and an expandable question list.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#ffffff;
+  --bg2:#f3f5f9;
+  --panel:#f6f8fc;
+  --text:#191c22;
+  --muted:#4b5160;
+  --soft:#4b5160;
+  --accent:#1a55c9;         /* link */
+  --line:rgba(25,28,34,.16);
+  --line2:rgba(25,28,34,.09);
+  --url:#1c6b35;
+  --field:#ffffff;
+  --glass:%234b5160;
+  --font-display:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --radius:28px;
+}
+.slide.mode-dark{
+  --bg:#111318;
+  --bg2:#1a1d25;
+  --panel:#1a1d25;
+  --text:#eceef3;
+  --muted:#b7bccb;
+  --soft:#b7bccb;
+  --accent:#8fb6ff;
+  --line:rgba(236,238,243,.18);
+  --line2:rgba(236,238,243,.1);
+  --url:#86d7a0;
+  --field:#1f232d;
+}
+.slide::before{display:none}
+.inner{inset:64px 72px 120px}
+.topbar{height:72px;border:0;font-size:22px;letter-spacing:0;text-transform:none;font-weight:700;color:var(--muted)}
+.topbar .b{font-size:36px;font-weight:800;letter-spacing:-1.2px}
+.topbar span:last-child{padding:10px 22px;border-radius:999px;background:var(--panel);box-shadow:inset 0 0 0 1px var(--line)}
+.footer{left:72px;right:72px;bottom:40px;font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+.content{justify-content:center}
+
+/* type */
+h3{font-size:38px;font-weight:700;line-height:1.15;letter-spacing:-1px;color:var(--accent)}
+p{font-size:29px;line-height:1.42}
+.kicker{font-size:21px;font-weight:800;letter-spacing:2px;color:var(--muted)}
+
+/* the search field: body headlines and the cover title are queries */
+.content>h2,.p-cover-bt h1{position:relative;margin-top:22px;padding:34px 48px 36px 120px;border-radius:52px;background:var(--field);box-shadow:inset 0 0 0 3px var(--line),0 14px 34px rgba(20,30,70,.10);
+  font-size:64px;font-weight:700;line-height:1.1;letter-spacing:-2.4px;text-align:left}
+.content>h2::before,.p-cover-bt h1::before{content:"";position:absolute;left:44px;top:38px;width:52px;height:52px;
+  background:currentColor;opacity:.6;-webkit-mask:var(--mag) center/contain no-repeat;mask:var(--mag) center/contain no-repeat;
+  --mag:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='M15.5 15.5 21 21'/%3E%3C/svg%3E")}
+.content>h2::after,.p-cover-bt h1::after{content:"";display:inline-block;width:5px;height:.95em;margin-left:10px;vertical-align:-.12em;background:var(--accent)}
+
+/* cover */
+.p-cover-bt{background:var(--bg)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:64px 72px 120px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .serp{flex:1;display:flex;flex-direction:column;justify-content:center}
+.p-cover-bt .kicker{margin:0}
+.p-cover-bt h1{font-size:76px;letter-spacing:-3px;padding:44px 48px 46px 130px;border-radius:52px 52px 0 0;margin-top:26px}
+.p-cover-bt h1::before{top:50px;left:48px;width:60px;height:60px}
+.p-cover-bt .suggest{list-style:none;margin:-3px 0 0;padding:14px 0 22px;background:var(--field);border-radius:0 0 52px 52px;box-shadow:inset 0 0 0 3px var(--line),0 14px 34px rgba(20,30,70,.10)}
+.p-cover-bt .suggest li{padding:24px 48px 24px 130px;font-size:40px;line-height:1.2;letter-spacing:-1px;color:var(--muted)}
+.p-cover-bt .suggest li b{color:var(--text);font-weight:800}
+.p-cover-bt .suggest li:first-child{background:var(--panel)}
+.p-cover-bt .desc{width:auto;max-width:none;margin:56px 0 0;font-size:34px;line-height:1.35}
+
+/* statement: the top answer */
+.p-statement .rule{display:none}
+.p-statement p{margin-top:64px;max-width:none;font-size:84px;font-weight:700;line-height:1.08;letter-spacing:-2.6px;color:var(--text)}
+
+/* process: ranked results */
+.p-process .process{margin-top:44px}
+.p-process .process-item{grid-template-columns:1fr;gap:0;padding:42px 0;border:0;border-bottom:1px solid var(--line)}
+.p-process .process-item:first-child{border-top:0}
+.p-process .process-no{display:none}
+.p-process .process-item h3{font-size:52px;letter-spacing:-1.4px;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:7px}
+.p-process .process-item p{font-size:34px;margin-top:16px}
+.p-process .process-tag{grid-row:1;justify-self:start;border:0;padding:0;margin-bottom:10px;font-size:26px;font-weight:700;letter-spacing:.3px;text-transform:none;color:var(--url)}
+
+/* big-number: quick answer */
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--accent);font-size:520px;font-weight:800;letter-spacing:-20px;line-height:.9;margin:44px 0 0 -8px}
+.p-bignumber p{margin-top:20px;max-width:none;font-size:50px;font-weight:700;letter-spacing:-1.6px;line-height:1.14;color:var(--text)}
+
+/* two-cards: two results side by side */
+.p-cards .two-column{margin-top:48px;gap:22px}
+.p-cards .card{min-height:640px;padding:40px 36px;border:0;box-shadow:inset 0 0 0 1px var(--line)}
+.p-cards .card:last-child{box-shadow:inset 0 0 0 4px var(--accent)}
+.p-cards .card .index{font-size:21px;font-weight:700;letter-spacing:.3px;text-transform:none;color:var(--url)}
+.p-cards .card h3{font-size:54px;letter-spacing:-1.6px;line-height:1.05}
+.p-cards .card p{font-size:31px}
+
+/* myth-fact: did you mean */
+.p-mythfact .myth-grid{margin-top:48px;grid-template-columns:1fr;border:0;border-radius:0;overflow:visible;gap:22px}
+.p-mythfact .myth{min-height:0;padding:48px 46px 54px;border:0 !important;border-radius:var(--radius);background:var(--panel) !important;box-shadow:inset 0 0 0 1px var(--line)}
+.p-mythfact .myth:last-child{box-shadow:inset 0 0 0 4px var(--accent)}
+.p-mythfact .myth-label{font-size:21px;letter-spacing:2px;color:var(--muted)}
+.p-mythfact .myth:last-child .myth-label{color:var(--url)}
+.p-mythfact .myth h3{margin-top:18px;font-size:62px;letter-spacing:-1.8px;max-width:none}
+.p-mythfact .myth:first-child h3{color:var(--muted);text-decoration:line-through;text-decoration-thickness:4px}
+.p-mythfact .myth p{margin-top:18px;font-size:34px;color:var(--text)}
+
+/* quote: featured answer */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{margin-top:48px;padding:56px 50px 60px;border-radius:var(--radius);background:var(--panel);box-shadow:inset 0 0 0 1px var(--line);
+  font-weight:700;font-size:96px;line-height:1.02;letter-spacing:-4px;max-width:none}
+.p-quote .quote-source{margin-top:34px;font-size:26px;font-weight:700;letter-spacing:.3px;text-transform:none;color:var(--url)}
+
+/* takeaway: people also ask */
+.p-takeaway .takeaway{margin-top:44px;border-radius:var(--radius);box-shadow:inset 0 0 0 1px var(--line);padding:4px 40px}
+.p-takeaway .takeaway-item{flex-direction:row-reverse;justify-content:space-between;align-items:center;padding:40px 0;gap:30px}
+.p-takeaway .takeaway-item:last-child{border-bottom:0}
+.p-takeaway .takeaway-dot{width:26px;height:26px;margin:0 6px 12px 0;border-radius:0;background:transparent;border:solid var(--muted);border-width:0 5px 5px 0;transform:rotate(45deg)}
+.p-takeaway .takeaway-item h3{font-size:46px;color:var(--text)}
+.p-takeaway .takeaway-item p{font-size:32px;margin-top:8px}
+.p-takeaway .closer-cta{margin-top:44px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-flex;align-items:center;height:88px;padding:0 42px;border-radius:999px;background:var(--accent);color:var(--bg);font-size:28px;font-weight:800;letter-spacing:-.2px;text-transform:none}
