@@ -93,16 +93,14 @@ p{font-size:29px;line-height:1.45;letter-spacing:-.5px}
 .p-process .process-item p{font-size:28px;margin-top:10px}
 .p-process .process-tag{border:0;border-radius:0;padding:0;font-family:var(--font-display);font-size:20px;letter-spacing:0;text-transform:none;color:var(--hp)}
 
-/* stat-band: character stats with bars */
+/* stat-band: character stats with bars. Set the fill on each .stat: style="--v:50%" */
 .p-stats .stat-row{margin-top:56px;border:0;grid-template-columns:1fr;gap:30px;padding:0 6px}
 .p-stats .stat{border:0 !important;padding:28px 30px !important;display:grid;grid-template-columns:230px 1fr;align-items:center;column-gap:26px;row-gap:16px}
 .p-stats .stat-number{font-family:var(--font-display);font-size:72px;font-weight:400;letter-spacing:-4px;line-height:1}
 .p-stats .stat-number .accent{color:var(--text)}
 .p-stats .stat-label{margin:0;font-size:30px;font-weight:700;color:var(--text)}
-.p-stats .stat::after{content:"";grid-column:1/3;height:30px;background:repeating-linear-gradient(90deg,var(--hp) 0 34px,transparent 34px 42px) 0 0/50% 100% no-repeat,
+.p-stats .stat::after{content:"";grid-column:1/3;height:30px;background:repeating-linear-gradient(90deg,var(--hp) 0 34px,transparent 34px 42px) 0 0/var(--v,50%) 100% no-repeat,
   repeating-linear-gradient(90deg,var(--line2) 0 34px,transparent 34px 42px)}
-.p-stats .stat:nth-child(2)::after{background-size:30% 100%,auto}
-.p-stats .stat:nth-child(3)::after{background-size:20% 100%,auto}
 
 /* myth-fact */
 .p-mythfact .myth-grid{margin-top:56px;border:0;border-radius:0;overflow:visible;gap:36px;padding:0 6px}

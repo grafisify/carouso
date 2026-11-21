@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Template 23: Pixel Quest. Copy to carousels/<name>/index.html,
      point the tokens.css link at ../../templates/23-pixel-quest/tokens.css, then replace the copy.
-     The cover scene comes from decor/quest.svg through tokens.css. To use your own image, put <img src="images/x.png" alt=""> inside the .object element. Arcade type is wide: keep headlines under about 14 characters a line. -->
+     The cover scene comes from decor/quest.svg through tokens.css. To use your own image, put <img src="images/x.png" alt=""> inside the .object element. Arcade type is wide: keep headlines under about 14 characters a line. On the stats slide, set each bar's fill with style="--v:NN%" on its .stat. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -62,9 +62,9 @@
       <div class="kicker">Stats</div>
       <h2>Your<br><span class="accent">build</span></h2>
       <div class="stat-row">
-        <div class="stat"><div class="stat-number"><span class="accent">50%</span></div><div class="stat-label">Needs</div></div>
-        <div class="stat"><div class="stat-number"><span class="accent">30%</span></div><div class="stat-label">Wants</div></div>
-        <div class="stat"><div class="stat-number"><span class="accent">20%</span></div><div class="stat-label">Savings</div></div>
+        <div class="stat" style="--v:50%"><div class="stat-number"><span class="accent">50%</span></div><div class="stat-label">Needs</div></div>
+        <div class="stat" style="--v:30%"><div class="stat-number"><span class="accent">30%</span></div><div class="stat-label">Wants</div></div>
+        <div class="stat" style="--v:20%"><div class="stat-number"><span class="accent">20%</span></div><div class="stat-label">Savings</div></div>
       </div>
     </div>
   </div>
