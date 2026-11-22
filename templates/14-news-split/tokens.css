@@ -56,8 +56,9 @@ h3{font-size:46px;line-height:1}
 
 /* cover-news: tall photo that fades into the dark panel, condensed uppercase headline, orange band */
 .p-news{background:var(--bg)}
-.p-news .news-photo{bottom:auto;height:980px}
-.p-news .news-photo::after{background:linear-gradient(180deg,rgba(28,20,16,.82) 0,rgba(28,20,16,.55) 10%,rgba(28,20,16,0) 26%,rgba(28,20,16,0) 50%,rgba(28,20,16,.9) 86%,#1c1410 100%)}
+.p-news .news-photo{bottom:auto;height:calc(980px + var(--safe-shift,0px))}
+.p-news .news-photo::after{background:linear-gradient(180deg,rgba(28,20,16,.82) 0,rgba(28,20,16,.82) var(--safe-shift,0px),rgba(28,20,16,.55) calc(98px + var(--safe-shift,0px)),rgba(28,20,16,0) calc(254.8px + var(--safe-shift,0px)),
+  rgba(28,20,16,0) calc(490px + var(--safe-shift,0px)),rgba(28,20,16,.9) calc(842.8px + var(--safe-shift,0px)),#1c1410 100%)}
 .p-news .inner{padding:max(60px,var(--safe-top,0px)) 82px calc(136px + var(--safe-bottom,0px)) 82px}
 .p-news .news-head .b{display:inline-flex;align-items:center;gap:14px;padding:8px 20px;border:3px solid #fff;border-radius:999px}
 .p-news .news-head .b::before{content:"";width:14px;height:14px;border-radius:50%;background:#ff4a44}
