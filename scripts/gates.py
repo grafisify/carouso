@@ -27,16 +27,27 @@ DECOR = '[data-decor],[aria-hidden="true"]'
 # Cards that run off the slide on purpose: their text may be cut, so it skips the
 # legibility gates too, but it is still copy and must stay out of the story zones.
 BLEED = '.peek,[data-bleed]'
-# Hides everything the copy paints (fill, outline, shadow, underline, gradient
-# fill, SVG text) and leaves decoration alone, for the safe gate.
-_COPY = ':not(' + ','.join(f'{d},{d} *' for d in DECOR.split(',')) + ')'
-HIDE_COPY = (
-    ','.join(f'{_COPY}{e}' for e in ('', '::before', '::after', '::marker')) +
-    "{-webkit-text-fill-color:transparent!important;text-shadow:none!important;"
-    "-webkit-text-stroke-color:transparent!important;text-decoration-color:transparent!important}"
-    f"[data-gate-clip]{_COPY}{{background-image:none!important;background-color:transparent!important}}"
-    f"text{_COPY},tspan{_COPY},textPath{_COPY}{{fill:transparent!important;stroke:transparent!important}}"
-)
+
+
+def _hide_all_text(scopes):
+    """CSS that hides whatever the text in these scopes paints: fill, outline, shadow,
+    underline, and the gradient fills and SVG text that measure() tags."""
+    def each(tail):
+        return ','.join(f'{scope}{tail}' for scope in scopes)
+    return (
+        each('') + ',' + each('::before') + ',' + each('::after') + ',' + each('::marker') +
+        "{-webkit-text-fill-color:transparent!important;text-shadow:none!important;"
+        "-webkit-text-stroke-color:transparent!important;text-decoration-color:transparent!important}"
+        + each('[data-gate-clip]') + "{background-image:none!important;background-color:transparent!important}"
+        + each('[data-gate-svg]') + "{fill:transparent!important;stroke:transparent!important}"
+    )
+
+
+# The safe gate compares a story zone with the decoration's text hidden against the
+# same zone with all text hidden, so what differs is copy. Hiding the copy alone
+# would take the decoration inside it along: the text fill is inherited.
+HIDE_DECOR = _hide_all_text([f'{d}{sub}' for d in DECOR.split(',') for sub in ('', ' *')])
+HIDE_ALL = _hide_all_text(['*'])
 
 COLLECT = """
 ([i, decor, bleed]) => {
@@ -198,8 +209,8 @@ async ([shown, hidden, lines]) => {
 """
 
 
-# Which copy leaves a mark in a strip of the slide: the strip as rendered against
-# the strip with the copy hidden. Read off the pixels, so rotation, outlines,
+# Which copy leaves a mark in a strip of the slide: the strip with the copy showing
+# against the strip with it hidden. Read off the pixels, so rotation, outlines,
 # shadows, text-transform and generated content need no modelling.
 ZONE = """
 async ([shown, hidden, top, boxes]) => {
@@ -264,13 +275,17 @@ async def measure(page, lab, i, keep_clear=None):
         strips = [(y, y2) for y, y2 in strips if y2 > y]
         clips = [{"x": box["x"], "y": box["y"] + y, "width": box["width"], "height": y2 - y} for y, y2 in strips]
         await page.evaluate(
-            """i => { for (const e of document.querySelectorAll('.slide')[i].querySelectorAll('*'))
-                 if (getComputedStyle(e).backgroundClip.includes('text')) e.setAttribute('data-gate-clip', ''); }""", i)
+            """i => { for (const e of document.querySelectorAll('.slide')[i].querySelectorAll('*')) {
+                 if (getComputedStyle(e).backgroundClip.includes('text')) e.setAttribute('data-gate-clip', '');
+                 if (e instanceof SVGTextContentElement) e.setAttribute('data-gate-svg', ''); } }""", i)
+        style = await page.add_style_tag(content=HIDE_DECOR)
         shown = [await page.screenshot(type="png", clip=c) for c in clips]
-        style = await page.add_style_tag(content=HIDE_COPY)
+        await style.evaluate("s => s.remove()")
+        style = await page.add_style_tag(content=HIDE_ALL)
         hidden = [await page.screenshot(type="png", clip=c) for c in clips]
         await style.evaluate("s => s.remove()")
-        await page.evaluate("document.querySelectorAll('[data-gate-clip]').forEach(e => e.removeAttribute('data-gate-clip'))")
+        await page.evaluate("""() => { for (const e of document.querySelectorAll('[data-gate-clip],[data-gate-svg]')) {
+                                  e.removeAttribute('data-gate-clip'); e.removeAttribute('data-gate-svg'); } }""")
         info["unsafe"] = []
         for (y, _), a, b in zip(strips, shown, hidden):
             info["unsafe"] += await lab.evaluate(
