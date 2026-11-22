@@ -31,6 +31,9 @@ CASES = [
     ("slide packed with words", "density", BODY, "<p>" + "Notes pile up when nobody reads them. " * 12 + "</p>"),
     ("light text on a dark slide written with color-mix()", None, '<div class="kicker">The gap</div>',
      '<div class="kicker" style="color:color-mix(in srgb, var(--text) 92%, var(--bg))">The gap</div>'),
+    ("unpainted words do not count", None, BODY,
+     BODY + '<div style="display:none"><p>' + "Hidden draft copy. " * 40 + '</p></div>'
+          + '<p style="color:transparent;position:absolute">' + "Clear ink. " * 40 + '</p>'),
     ("decoration opts out", None, BODY,
      BODY + '<div data-decor style="position:absolute;right:90px;top:260px;font-size:60px;color:#e4e4e4">draft</div>'),
 ]

@@ -49,17 +49,19 @@ COLLECT = """
     const n = w.currentNode, el = n.parentElement, text = n.textContent.trim();
     if (!text) continue;
     const cs = getComputedStyle(el);
-    if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+    // Only text that is painted counts: a display:none ancestor leaves no box,
+    // and transparent or zero-opacity text leaves no ink.
+    if (cs.visibility === 'hidden' || !el.checkVisibility()) continue;
+    let opacity = 1, block = el;
+    for (let a = el; a && a !== s.parentElement; a = a.parentElement) opacity *= parseFloat(getComputedStyle(a).opacity);
+    const fill = rgba(cs.webkitTextFillColor || cs.color);
+    if (fill[3] * opacity < 0.05) continue;   // clipped-gradient or invisible text
     words += text.split(/\\s+/).filter(t => /[\\p{L}\\p{N}]/u.test(t)).length;
     // decoration opts out, and so do marks with no letter or digit (quote marks, arrows)
     if (el.closest(exempt) || !/[\\p{L}\\p{N}]/u.test(text)) continue;
-    let opacity = 1, block = el;
-    for (let a = el; a && a !== s.parentElement; a = a.parentElement) opacity *= parseFloat(getComputedStyle(a).opacity);
     while (block !== s && getComputedStyle(block).display.startsWith('inline')) block = block.parentElement;
     let blockId = blocks.indexOf(block);
     if (blockId < 0) blockId = blocks.push(block) - 1;
-    const fill = rgba(cs.webkitTextFillColor || cs.color);
-    if (fill[3] * opacity < 0.05) continue;   // clipped-gradient or invisible text
     // Where the glyphs really are inside the line box: a 300px numeral has a
     // tall box but its ink stops well short of the label under it.
     pen.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
