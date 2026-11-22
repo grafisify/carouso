@@ -24,6 +24,8 @@ CASES = [
     ("hyphenated word that wraps", None, HEADLINE, "Notes before-and-after-before-and-after-before-and-after"),
     ("word wider than its line", "word", HEADLINE, "Pertanggungjawabannyalah"),
     ("faint body text", "contrast", BODY, '<p style="color:#b9b9b9">Here is how to write the ones you will.</p>'),
+    ("translucent sheet over the slide", "contrast", BODY,
+     BODY + '<div style="position:absolute;inset:0;background:rgba(255,255,255,.8)"></div>'),
     ("shape over the headline", "hidden", BODY,
      BODY + '<div style="position:absolute;left:0;right:0;top:500px;height:500px;background:#777"></div>'),
     ("body pulled onto the headline", "overlap", BODY,

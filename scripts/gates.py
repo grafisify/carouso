@@ -127,6 +127,27 @@ async ([shown, hidden, lines]) => {
       ratios.push((Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05));
     }
     ratios.sort((p, q) => p - q);
+    // The same contrast read off the glyphs as painted. Anything translucent
+    // laid over the text fades them, and the declared colour cannot show that.
+    const span = Math.max(48, 2 * h), seen = [], fade = [];
+    for (let cx = 0; cx < w; cx += span) {
+      const ink = [];
+      for (let px = cx; px < Math.min(w, cx + span); px++) for (let py = 0; py < h; py++) {
+        const k = (py * w + px) * 4;
+        const d = Math.abs(a[k] - b[k]) + Math.abs(a[k + 1] - b[k + 1]) + Math.abs(a[k + 2] - b[k + 2]);
+        if (d > 24) ink.push([d, k]);
+      }
+      if (ink.length < 40) continue;
+      // the strongest pixels are stroke centres; the rest is anti-aliased edge
+      ink.sort((p, q) => q[0] - p[0]);
+      const core = ink.slice(0, Math.max(8, Math.floor(ink.length * 0.05)));
+      const fg = [0, 0, 0], bg = [0, 0, 0];
+      for (const [, k] of core) for (let j = 0; j < 3; j++) { fg[j] += a[k + j] / core.length; bg[j] += b[k + j] / core.length; }
+      const want = l.color.map((v, j) => v * l.alpha + bg[j] * (1 - l.alpha));
+      const ratio = (p, q) => { const L1 = lum(p), L2 = lum(q); return (Math.max(L1, L2) + 0.05) / (Math.min(L1, L2) + 0.05); };
+      seen.push(ratio(fg, bg)); fade.push(ratio(fg, bg) / ratio(want, bg));
+    }
+    seen.sort((p, q) => p - q); fade.sort((p, q) => p - q);
     // longest horizontal stretch where the text left no mark on the slide
     let gap = 0, run = 0;
     for (let px = 0; px < w; px++) {
@@ -138,7 +159,11 @@ async ([shown, hidden, lines]) => {
       run = ink ? 0 : run + 1;
       if (run > gap) gap = run;
     }
-    return {contrast: ratios[Math.floor(ratios.length * 0.1)], gap};
+    let contrast = ratios[Math.floor(ratios.length * 0.1)];
+    // Anti-aliasing alone costs thin 20px type up to 15% (measured on the 36 samples),
+    // so the painted value only takes over when the glyphs are clearly fainter than declared.
+    if (seen.length && fade[Math.floor(fade.length / 2)] < 0.8) contrast = Math.min(contrast, seen[Math.floor(seen.length * 0.1)]);
+    return {contrast, gap};
   });
 }
 """
