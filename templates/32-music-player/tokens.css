@@ -49,15 +49,15 @@ p{font-size:29px;line-height:1.42}
 /* cover: now playing */
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
 .p-cover-bt .inner{inset:64px 76px 150px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
-.p-cover-bt .art{flex:none;position:relative;width:640px;height:640px;margin:34px auto 0;border-radius:36px;overflow:hidden;
+.p-cover-bt .art{flex:none;position:relative;width:430px;height:430px;margin:34px auto 0;border-radius:36px;overflow:hidden;
   background:linear-gradient(145deg,var(--art1) 0%,var(--art2) 52%,var(--art3) 100%);box-shadow:0 40px 80px rgba(0,0,0,.45)}
-.p-cover-bt .art::before{content:"";position:absolute;left:50%;top:50%;width:760px;height:760px;margin:-230px 0 0 -230px;border-radius:50%;
+.p-cover-bt .art::before{content:"";position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-160px 0 0 -160px;border-radius:50%;
   background:repeating-radial-gradient(circle,rgba(255,255,255,.0) 0 26px,rgba(255,255,255,.2) 26px 30px)}
-.p-cover-bt .art::after{content:"";position:absolute;left:64px;top:64px;width:150px;height:150px;border-radius:50%;background:#fff3d6}
-.p-cover-bt .meta{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:16px}
+.p-cover-bt .art::after{content:"";position:absolute;left:44px;top:44px;width:104px;height:104px;border-radius:50%;background:#fff3d6}
+.p-cover-bt .meta{flex:none;display:block;text-align:center;padding-top:76px}
 .p-cover-bt h1{text-transform:none;font-size:104px;line-height:.96;letter-spacing:-3px;margin:0}
-.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:none;margin:22px 0 0;font-size:33px;color:var(--muted)}
-.p-cover-bt .ctrl{flex:none;height:120px;margin-bottom:6px;
+.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:none;margin:26px 0 0;font-size:33px;color:var(--muted)}
+.p-cover-bt .ctrl{flex:none;height:120px;margin:auto 0;
   background:
    radial-gradient(circle,var(--text) 0 59px,transparent 60px) center/120px 120px no-repeat,
    linear-gradient(var(--bg),var(--bg)) calc(50% - 9px) 50%/12px 40px no-repeat,

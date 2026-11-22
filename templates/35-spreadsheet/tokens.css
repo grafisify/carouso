@@ -70,12 +70,25 @@ p{font-size:29px;line-height:1.42}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
 .p-cover-bt .inner{inset:0 72px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
 .p-cover-bt .content{align-items:stretch;justify-content:flex-start}
-.p-cover-bt .chart{flex:none;display:flex;align-items:flex-end;gap:22px;height:330px;margin-top:66px;padding:0 20px;border-bottom:4px solid var(--text)}
+.p-cover-bt .chart{flex:none;display:flex;align-items:flex-end;gap:22px;height:236px;margin-top:56px;padding:0 20px;border-bottom:4px solid var(--text)}
 .p-cover-bt .chart i{flex:1;height:var(--v);background:var(--line)}
 .p-cover-bt .chart i:last-child{background:var(--accent)}
-.p-cover-bt .kicker{margin:auto 0 26px}
-.p-cover-bt h1{text-transform:none;font-size:104px;line-height:.96;letter-spacing:-4.4px;margin:0 20px 0 0;padding:34px 36px 40px}
-.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:800px;margin:40px 0 0;padding-bottom:30px;font-size:33px;color:var(--muted)}
+.p-cover-bt .kicker{margin:84px 0 26px}
+.p-cover-bt h1{text-transform:none;font-size:104px;line-height:.96;letter-spacing:-4.4px;margin:0 20px 0 0;padding:44px 36px 50px;text-align:center}
+.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:800px;margin:40px auto 0;font-size:33px;color:var(--muted);text-align:center}
+/* filled cells under the title */
+.p-cover-bt .content::after{content:"";flex:1;min-height:0;margin-top:50px;background:linear-gradient(var(--line),var(--line)) 24px 32px/150px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 276px 32px/96px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 528px 32px/120px 14px no-repeat,
+  linear-gradient(var(--accent),var(--accent)) 780px 32px/170px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 24px 110px/110px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 276px 110px/150px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 528px 110px/84px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 780px 110px/130px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 24px 188px/170px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 276px 188px/120px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 528px 188px/140px 14px no-repeat,
+  linear-gradient(var(--line),var(--line)) 780px 188px/96px 14px no-repeat}
 
 /* statement */
 .p-statement .rule{display:none}
