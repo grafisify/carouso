@@ -1,0 +1,116 @@
+/* Template 33: App Store. A store listing: rounded app icon, name and tagline, pill Get button, the ratings strip,
+   screenshot cards, version notes and a starred review card.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#ffffff;
+  --bg2:#f2f2f7;
+  --panel:#f2f2f7;
+  --text:#0b0b0f;
+  --muted:#55555e;
+  --soft:#55555e;
+  --accent:#0a63d1;
+  --on-accent:#ffffff;
+  --line:rgba(11,11,15,.14);
+  --icon1:#2ad0a5; --icon2:#0a63d1; --icon3:#5b2bd6;
+  --star:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f59e0b' d='M12 1.8l3.1 6.6 7.1.9-5.2 5 1.3 7.1L12 17.9l-6.3 3.5L7 14.3l-5.2-5 7.1-.9z'/%3E%3C/svg%3E");
+  --font-display:"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Inter","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Inter","Helvetica Neue",Arial,sans-serif;
+  --radius:32px;
+}
+.slide.mode-dark{
+  --bg:#000000;
+  --bg2:#1c1c1e;
+  --panel:#1c1c1e;
+  --text:#ffffff;
+  --muted:#b4b4bd;
+  --soft:#b4b4bd;
+  --accent:#5aa9ff;
+  --on-accent:#00172f;
+  --line:rgba(255,255,255,.18);
+}
+.slide::before{display:none}
+.inner{inset:64px 76px 116px}
+.topbar{height:60px;border:0;font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.topbar .b{position:relative;padding-left:34px;font-size:28px;font-weight:600;color:var(--accent)}
+.topbar .b::before{content:"";position:absolute;left:4px;top:50%;width:16px;height:16px;margin-top:-10px;border:solid var(--accent);border-width:0 0 4px 4px;transform:rotate(45deg)}
+.footer{left:76px;right:76px;bottom:40px;padding-top:22px;border-top:1px solid var(--line);font-size:21px;font-weight:600;letter-spacing:1px;color:var(--muted)}
+
+/* type */
+h1,h2{font-weight:800}
+h3{font-weight:700}
+h2{font-size:84px;line-height:1;letter-spacing:-3px}
+h3{font-size:38px;line-height:1.14;letter-spacing:-.8px}
+p{font-size:29px;line-height:1.42}
+.kicker{font-size:23px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+
+/* cover: the listing header */
+.p-cover-bt{background:var(--bg)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:64px 76px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .icon{flex:none;position:relative;width:360px;height:360px;margin-top:56px;border-radius:82px;overflow:hidden;
+  background:linear-gradient(150deg,var(--icon1) 0%,var(--icon2) 55%,var(--icon3) 100%);box-shadow:0 30px 60px rgba(10,99,209,.28)}
+.p-cover-bt .icon::before{content:"";position:absolute;left:78px;top:150px;width:54px;height:96px;border:solid #fff;border-width:0 30px 30px 0;transform:rotate(42deg);transform-origin:0 0;left:154px;top:56px;width:64px;height:114px;border-width:0 36px 36px 0}
+.p-cover-bt .kicker{margin:auto 0 0}
+.p-cover-bt h1{text-transform:none;font-size:118px;line-height:.94;letter-spacing:-5px;margin:18px 0 0}
+.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:760px;margin:30px 0 0;font-size:35px;color:var(--muted)}
+.p-cover-bt .get{flex:none;display:flex;align-items:center;gap:32px;margin:56px 0 24px;font-size:25px;line-height:1.3;color:var(--muted)}
+.p-cover-bt .get b{display:inline-flex;align-items:center;justify-content:center;height:96px;min-width:240px;padding:0 48px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:38px;font-weight:800}
+
+/* stat-band: the ratings strip */
+.p-stats .stat-row{margin-top:56px;border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);gap:0}
+.p-stats .stat{border:0 !important;border-left:1px solid var(--line) !important;padding:38px 10px 40px !important;text-align:center;display:flex;flex-direction:column}
+.p-stats .stat:first-child{border-left:0 !important}
+.p-stats .stat-number{order:2;margin-top:14px;font-size:92px;font-weight:800;letter-spacing:-4px;line-height:1}
+.p-stats .stat-number .accent{color:var(--text)}
+.p-stats .stat-label{order:1;margin:0;font-size:22px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;line-height:1.2}
+.p-stats .stat::after{order:3;content:"";height:30px;margin:16px auto 0;width:150px;background:var(--star) 0 0/30px 30px repeat-x}
+.p-stats .stat:nth-child(n+2)::after{width:64px;height:8px;margin-top:38px;border-radius:8px;background:var(--line)}
+
+/* two-cards: two screenshots */
+.p-cards .two-column{margin-top:52px;gap:24px}
+.p-cards .card{min-height:640px;padding:40px 36px 44px;border:0;border-radius:44px;background:linear-gradient(170deg,var(--icon1),var(--icon2));color:#fff}
+.p-cards .card:last-child{background:linear-gradient(170deg,var(--icon2),var(--icon3))}
+.p-cards .card .index{align-self:flex-start;padding:10px 20px;border-radius:999px;background:rgba(0,0,0,.36);color:#fff;font-size:22px;font-weight:700;letter-spacing:1px}
+.p-cards .card h3{font-size:54px;font-weight:800;letter-spacing:-2px;line-height:1.02;color:#fff}
+.p-cards .card p{font-size:28px;color:#fff}
+.p-cards .card:first-child{background:linear-gradient(170deg,#0b7a61,#0a55b5)}
+.p-cards .card:last-child{background:linear-gradient(170deg,#0a55b5,#5b2bd6)}
+
+/* statement: version notes */
+.p-statement .rule{display:none}
+.p-statement h2{font-size:100px;letter-spacing:-4px;line-height:.96}
+.p-statement p{margin-top:44px;padding-top:40px;border-top:1px solid var(--line);font-size:34px;max-width:none}
+
+/* quote: a review card */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{position:relative;padding:126px 46px 54px;border-radius:var(--radius);background:var(--panel);font-weight:700;font-size:64px;line-height:1.1;letter-spacing:-2px;max-width:none}
+.p-quote .quote::before{content:"";position:absolute;left:46px;top:50px;width:220px;height:44px;background:var(--star) 0 0/44px 44px repeat-x}
+.p-quote .quote-source{margin-top:34px;font-size:26px;font-weight:600;letter-spacing:0;text-transform:none}
+
+/* process: feature rows with an icon tile and a small pill */
+.p-process .process{margin-top:48px;border-top:1px solid var(--line)}
+.p-process .process-item{grid-template-columns:112px 1fr auto;gap:30px;padding:30px 0;border-bottom:1px solid var(--line);align-items:center}
+.p-process .process-item:first-child{border-top:0}
+.p-process .process-no{display:flex;align-items:center;justify-content:center;width:112px;height:112px;border-radius:26px;background:linear-gradient(150deg,var(--icon1),var(--icon2));color:#fff;font-size:48px;font-weight:800;letter-spacing:0;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+.p-process .process-item:nth-child(2) .process-no{background:linear-gradient(150deg,var(--icon2),var(--icon3))}
+.p-process .process-item:nth-child(3) .process-no{background:linear-gradient(150deg,#f59e0b,#e0457b)}
+.p-process .process-item h3{font-size:40px}
+.p-process .process-item p{font-size:27px;margin-top:6px}
+.p-process .process-tag{border:0;padding:16px 30px;border-radius:999px;background:var(--panel);color:var(--accent);font-size:25px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}
+
+/* big-number */
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--text);font-size:330px;font-weight:800;letter-spacing:-18px;line-height:.9}
+.p-bignumber .giant::after{content:"";display:block;width:330px;height:66px;margin-top:26px;background:var(--star) 0 0/66px 66px repeat-x}
+.p-bignumber h2{margin-top:44px}
+.p-bignumber p{margin-top:24px}
+
+/* takeaway */
+.p-takeaway .takeaway{margin-top:44px;border-top:1px solid var(--line)}
+.p-takeaway .takeaway-item{padding:28px 0;gap:28px;align-items:center}
+.p-takeaway .takeaway-dot{position:relative;width:56px;height:56px;margin:0;background:var(--accent)}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:21px;top:11px;width:12px;height:24px;border:solid var(--on-accent);border-width:0 5px 5px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:40px}
+.p-takeaway .takeaway-item p{font-size:27px;margin-top:4px}
+.p-takeaway .closer-cta{margin-top:44px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-flex;align-items:center;justify-content:center;height:96px;min-width:240px;padding:0 52px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:36px;font-weight:800;letter-spacing:0;text-transform:none}

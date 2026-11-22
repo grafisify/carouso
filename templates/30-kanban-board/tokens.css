@@ -1,0 +1,131 @@
+/* Template 30: Kanban Board. A task board: columns with headers and counters, task cards with colored label bars,
+   avatars, a WIP limit figure and checked cards in the Done column.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#f2efe8;             /* board */
+  --bg2:#e6e2d8;            /* column */
+  --panel:#ffffff;          /* card */
+  --text:#1b1d22;
+  --muted:#4d515c;
+  --soft:#4d515c;
+  --accent:#2457c5;
+  --line:rgba(27,29,34,.16);
+  --line2:rgba(27,29,34,.09);
+  --l1:#1f7f4c; --l2:#e3a008; --l3:#c23b28; --l4:#2b63c9; --l5:#7446e0;
+  --ok:#1d7a47; --no:#b93524;
+  --card-shadow:0 3px 0 rgba(27,29,34,.10);
+  --font-display:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Space Grotesk","Helvetica Neue",Arial,sans-serif;
+  --radius:20px;
+}
+.slide.mode-dark{
+  --bg:#14161b;
+  --bg2:#1d2027;
+  --panel:#282c36;
+  --text:#f1f2f5;
+  --muted:#b9bdc9;
+  --soft:#b9bdc9;
+  --accent:#8db4ff;
+  --line:rgba(241,242,245,.18);
+  --line2:rgba(241,242,245,.1);
+  --ok:#7fe0a8; --no:#ff9d8f;
+  --card-shadow:0 3px 0 rgba(0,0,0,.35);
+}
+.slide::before{display:none}
+.inner{inset:60px 64px 116px}
+.topbar{height:64px;border:0;font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+.topbar .b{display:flex;align-items:center;gap:18px;font-size:28px}
+.topbar .b::before{content:"";width:44px;height:44px;border-radius:12px;background:linear-gradient(90deg,var(--l4) 0 12px,transparent 12px 16px,var(--l2) 16px 28px,transparent 28px 32px,var(--l1) 32px) center/100% 100%;
+  -webkit-mask:linear-gradient(#000,#000) 0 0/12px 100% no-repeat,linear-gradient(#000,#000) 16px 0/12px 70% no-repeat,linear-gradient(#000,#000) 32px 0/12px 46% no-repeat;
+  mask:linear-gradient(#000,#000) 0 0/12px 100% no-repeat,linear-gradient(#000,#000) 16px 0/12px 70% no-repeat,linear-gradient(#000,#000) 32px 0/12px 46% no-repeat}
+.topbar span:last-child{padding:8px 20px;border-radius:999px;background:var(--bg2)}
+.footer{left:64px;right:64px;bottom:40px;font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+
+/* type */
+h1,h2,h3{font-weight:700}
+h2{font-size:88px;line-height:.96;letter-spacing:-4px}
+h3{font-size:38px;line-height:1.1;letter-spacing:-1.2px}
+p{font-size:29px;line-height:1.4}
+.kicker{align-self:flex-start;padding:8px 18px;border-radius:8px;background:var(--l4);color:#fff;font-size:21px;font-weight:700;letter-spacing:1.5px}
+.mode-dark .kicker{color:#0d1220;background:var(--accent)}
+
+/* task card, shared */
+.p-process .process-item,.p-cards .card,.p-mythfact .myth,.p-quote .quote,.p-takeaway .takeaway-item,.p-statement p,.p-cover-bt .col i{
+  background:var(--panel);border:0;border-radius:var(--radius);box-shadow:var(--card-shadow)}
+/* column, shared */
+.p-process .process,.p-takeaway .takeaway,.p-cover-bt .col{background:var(--bg2);border-radius:28px}
+
+/* cover: a small board, then the title */
+.p-cover-bt{background:var(--bg)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:60px 64px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .board{flex:none;margin-top:36px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.p-cover-bt .col{padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px}
+.p-cover-bt .col b{font-size:24px;font-weight:700;color:var(--muted);padding:0 6px 4px}
+.p-cover-bt .col i{display:block;height:96px;background-image:linear-gradient(var(--c,var(--l4)),var(--c,var(--l4))),linear-gradient(var(--line),var(--line)),linear-gradient(var(--line2),var(--line2));
+  background-size:64px 12px,70% 12px,46% 12px;background-position:20px 20px,20px 48px,20px 70px;background-repeat:no-repeat}
+.p-cover-bt .col i:nth-child(3){--c:var(--l2)}
+.p-cover-bt .col:nth-child(2) i{--c:var(--l3)}
+.p-cover-bt .col:nth-child(2) i:nth-child(3){--c:var(--l5)}
+.p-cover-bt .col:nth-child(3) i{--c:var(--l1)}
+.p-cover-bt .title{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:20px}
+.p-cover-bt .kicker{margin:0}
+.p-cover-bt h1{font-size:124px;line-height:.9;letter-spacing:-6.5px;margin-top:34px}
+.p-cover-bt .desc{width:auto;max-width:760px;margin:40px 0 0;font-size:33px}
+
+/* statement */
+.p-statement .rule{display:none}
+.p-statement h2{font-size:120px;letter-spacing:-6px;line-height:.92}
+.p-statement p{position:relative;margin-top:50px;padding:58px 36px 36px;max-width:none;font-size:32px;color:var(--text)}
+.p-statement p::before{content:"";position:absolute;left:36px;top:26px;width:72px;height:14px;border-radius:7px;background:var(--l3)}
+
+/* process: one column of cards */
+.p-process .process{margin-top:50px;padding:22px;display:flex;flex-direction:column;gap:18px}
+.p-process .process-item{grid-template-columns:1fr auto;column-gap:20px;row-gap:0;padding:30px 30px 32px;align-items:start}
+.p-process .process-no{grid-column:2;grid-row:1/3;align-self:end;width:64px;height:64px;border-radius:50%;background:var(--bg2);color:var(--text);display:flex;align-items:center;justify-content:center;
+  font-size:26px;letter-spacing:0}
+.p-process .process-item>div:nth-child(2){grid-column:1;grid-row:2}
+.p-process .process-item h3{font-size:42px}
+.p-process .process-item p{font-size:28px;margin-top:8px}
+.p-process .process-tag{grid-column:1;grid-row:1;justify-self:start;margin-bottom:16px;border:0;border-radius:7px;padding:6px 14px;background:var(--l1);color:#fff;font-size:20px;font-weight:700;letter-spacing:.5px;text-transform:none}
+.p-process .process-item:nth-child(1) .process-tag{background:var(--l4)}
+.p-process .process-item:nth-child(2) .process-tag{background:var(--l2);color:#1b1d22}
+
+/* big-number: the limit */
+.p-bignumber .giant{-webkit-text-stroke:0;align-self:flex-start;margin-top:40px;padding:0 70px 20px;border-radius:44px;background:var(--bg2);color:var(--text);
+  font-size:400px;font-weight:700;letter-spacing:-16px;line-height:1}
+.p-bignumber h2{margin-top:40px}
+
+/* myth-fact: blocked and unblocked */
+.p-mythfact .myth-grid{margin-top:50px;border:0;border-radius:0;overflow:visible;gap:20px;padding-bottom:4px}
+.p-mythfact .myth{min-height:500px;padding:30px 30px 36px;border:0 !important;background:var(--panel) !important;display:flex;flex-direction:column}
+.p-mythfact .myth-label{align-self:flex-start;padding:6px 14px;border-radius:7px;background:var(--l3);color:#fff !important;font-size:20px;letter-spacing:.5px;text-transform:none}
+.p-mythfact .myth:last-child .myth-label{background:var(--l1)}
+.p-mythfact .myth h3{margin-top:auto;font-size:48px;letter-spacing:-2px;line-height:1.02}
+.p-mythfact .myth p{font-size:28px;margin-top:16px}
+
+/* two-cards */
+.p-cards .two-column{margin-top:50px;gap:20px;padding-bottom:4px}
+.p-cards .card{min-height:500px;padding:30px 30px 36px}
+.p-cards .card .index{align-self:flex-start;padding:6px 14px;border-radius:7px;background:var(--l5);color:#fff;font-size:20px;letter-spacing:.5px;text-transform:none}
+.p-cards .card:last-child .index{background:var(--l2);color:#1b1d22}
+.p-cards .card h3{font-size:48px;letter-spacing:-2px;line-height:1.02}
+.p-cards .card p{font-size:28px}
+
+/* quote: one card with an avatar */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{position:relative;margin-top:50px;padding:76px 44px 50px;font-weight:700;font-size:98px;line-height:.96;letter-spacing:-5px;max-width:none}
+.p-quote .quote::before{content:"";position:absolute;left:44px;top:34px;width:84px;height:14px;border-radius:7px;background:var(--l5)}
+.p-quote .quote-source{display:flex;align-items:center;gap:20px;margin-top:34px;font-size:24px;font-weight:700;letter-spacing:.3px;text-transform:none;color:var(--text)}
+.p-quote .quote-source::before{content:"";width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--l4),var(--l5))}
+
+/* takeaway: the Done column */
+.p-takeaway .takeaway{margin-top:50px;padding:22px;display:flex;flex-direction:column;gap:18px}
+.p-takeaway .takeaway-item{padding:28px 30px;gap:26px;align-items:center}
+.p-takeaway .takeaway-dot{position:relative;width:52px;height:52px;margin:0;background:var(--l1)}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:19px;top:10px;width:12px;height:23px;border:solid #fff;border-width:0 5px 5px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:40px}
+.p-takeaway .takeaway-item p{font-size:28px;margin-top:6px}
+.p-takeaway .closer-cta{margin-top:40px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-flex;align-items:center;height:84px;padding:0 38px;border-radius:16px;background:var(--accent);color:var(--bg);font-size:27px;font-weight:700;letter-spacing:0;text-transform:none}

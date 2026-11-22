@@ -1,0 +1,59 @@
+{
+  "number": 27,
+  "id": "27-search-results",
+  "name": "Search Results",
+  "vibe": "Search page: every headline is a query in a search field, suggestion dropdown cover, ranked results with link titles, featured answer box, expandable question list",
+  "fonts": [
+    "Plus Jakarta Sans"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "two-cards",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "myth-fact",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/27-search-results.jpg"
+}

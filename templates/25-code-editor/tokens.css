@@ -1,0 +1,139 @@
+/* Template 25: Code Editor. A code editor window: tab bar with window dots, monospace headlines with syntax colors,
+   comment kickers, a diff view, code-block cards, a terminal line and a status bar at the foot.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#fafafa;
+  --bg2:#eeeff2;
+  --panel:#f1f2f5;
+  --text:#1c1f2b;
+  --muted:#474b5c;
+  --soft:#5c6370;
+  --accent:#287233;         /* string */
+  --line:rgba(28,31,43,.18);
+  --line2:rgba(28,31,43,.1);
+  --kw:#8839ef;             /* keyword */
+  --fn:#1554d1;             /* function */
+  --num:#b3470f;            /* number */
+  --cm:#5c6370;             /* comment */
+  --del-bg:#fde8e8; --del:#9b2c2c;
+  --add-bg:#e3f6e5; --add:#1f5f2a;
+  --bar:#1554d1; --bar-ink:#ffffff;
+  --font-display:"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+  --font-body:"Inter",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --font-serif:"JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+  --radius:14px;
+}
+.slide.mode-dark{
+  --bg:#0f111a;
+  --bg2:#090b10;
+  --panel:#1a1c25;
+  --text:#e6e9f5;
+  --muted:#b8bdd4;
+  --soft:#7f8ab0;
+  --accent:#c3e88d;
+  --line:rgba(230,233,245,.16);
+  --line2:rgba(230,233,245,.09);
+  --kw:#c792ea;
+  --fn:#82aaff;
+  --num:#f78c6c;
+  --cm:#7f8ab0;
+  --del-bg:#3a1d24; --del:#ffb4b4;
+  --add-bg:#17321f; --add:#b6f0bd;
+  --bar:#82aaff; --bar-ink:#0f111a;
+}
+.slide::before{display:none}
+
+/* window chrome: tab bar on top, status bar at the foot */
+.inner{inset:0 0 76px}
+.topbar{height:92px;padding:0 44px 0 170px;border:0;background:var(--bg2);position:relative;font-family:var(--font-display);font-size:22px;font-weight:500;
+  letter-spacing:0;text-transform:none;color:var(--soft);align-items:stretch}
+.topbar::before{content:"";position:absolute;left:44px;top:36px;width:20px;height:20px;border-radius:50%;background:#ff5f57;box-shadow:34px 0 0 #febc2e,68px 0 0 #28c840}
+.topbar span{display:flex;align-items:center}
+.topbar .b{padding:0 34px;background:var(--bg);border-top:4px solid var(--fn);color:var(--text)}
+.content{padding:0 82px}
+.footer{left:0;right:0;bottom:0;height:76px;padding:0 44px;align-items:center;background:var(--bar);color:var(--bar-ink);
+  font-family:var(--font-display);font-size:21px;font-weight:700;letter-spacing:0;text-transform:none;z-index:3}
+
+/* type */
+h1,h2,h3{font-weight:700;letter-spacing:-2px}
+h2{font-size:74px;line-height:1.08;letter-spacing:-3.5px}
+h3{font-size:34px;line-height:1.2;letter-spacing:-1px;color:var(--fn)}
+p{font-size:30px;line-height:1.45}
+.kicker{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--cm)}
+.kicker::before{content:"// "}
+
+/* cover */
+.p-cover-bt{background:var(--bg)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:0 0 76px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .file{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 82px}
+.p-cover-bt .kicker{margin:0}
+.p-cover-bt h1{font-size:118px;line-height:1;letter-spacing:-6px;margin-top:34px}
+.p-cover-bt .desc{width:auto;max-width:760px;margin:44px 0 0;font-size:34px}
+.p-cover-bt .term{flex:none;margin:0 44px 44px;padding:34px 40px;border-radius:var(--radius);background:var(--bg2);border:1px solid var(--line);
+  font-family:var(--font-display);font-size:30px;font-weight:500;color:var(--text)}
+.p-cover-bt .term::before{content:"$ ";color:var(--accent);font-weight:700}
+.p-cover-bt .term::after{content:"";display:inline-block;width:16px;height:34px;margin-left:12px;vertical-align:-6px;background:var(--text)}
+
+/* statement */
+.p-statement .rule{display:none}
+.p-statement h2{font-size:104px;line-height:1.02;letter-spacing:-5.5px}
+.p-statement p{font-size:34px;margin-top:44px;max-width:780px}
+
+/* process: numbered lines */
+.p-process .process{margin-top:56px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--line);padding:10px 0}
+.p-process .process-item{grid-template-columns:86px 1fr auto;gap:0;padding:26px 36px 26px 0;border:0}
+.p-process .process-item:first-child{border-top:0}
+.p-process .process-no{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:0;color:var(--cm);text-align:right;padding-right:28px;align-self:start;padding-top:6px}
+.p-process .process-item>div:nth-child(2){border-left:2px solid var(--line);padding-left:28px}
+.p-process .process-item h3{font-size:38px}
+.p-process .process-item h3::after{content:"()";color:var(--text)}
+.p-process .process-item p{font-size:28px;margin-top:8px}
+.p-process .process-tag{border:0;border-radius:8px;background:var(--bg);padding:10px 16px;font-family:var(--font-display);font-size:21px;letter-spacing:0;text-transform:none;color:var(--num)}
+
+/* myth-fact: a diff */
+.p-mythfact .myth-grid{margin-top:56px;grid-template-columns:1fr;border:1px solid var(--line);border-radius:var(--radius)}
+.p-mythfact .myth{min-height:0;padding:36px 40px 40px 96px;position:relative;border:0 !important}
+.p-mythfact .myth:first-child{background:var(--del-bg)}
+.p-mythfact .myth:last-child{background:var(--add-bg)}
+.p-mythfact .myth::before{position:absolute;left:38px;top:30px;font-family:var(--font-display);font-size:56px;font-weight:700;line-height:1}
+.p-mythfact .myth:first-child::before{content:"-";color:var(--del)}
+.p-mythfact .myth:last-child::before{content:"+";color:var(--add)}
+.p-mythfact .myth-label{font-family:var(--font-display);font-size:22px;letter-spacing:0;text-transform:none;font-weight:700}
+.p-mythfact .myth:first-child .myth-label{color:var(--del)}
+.p-mythfact .myth:last-child .myth-label{color:var(--add)}
+.p-mythfact .myth h3{margin-top:14px;font-size:44px;letter-spacing:-2px;max-width:none;color:var(--text)}
+.p-mythfact .myth p{margin-top:12px;font-size:29px;color:var(--text)}
+
+/* big-number */
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--num);font-size:420px;font-weight:700;letter-spacing:-28px;line-height:.9;margin:36px 0 0 -10px}
+.p-bignumber h2{margin-top:20px}
+
+/* two-cards: code blocks with a file tab */
+.p-cards .two-column{margin-top:56px;grid-template-columns:1fr;gap:26px}
+.p-cards .card{min-height:0;padding:0 36px 34px;border:1px solid var(--line);overflow:hidden}
+.p-cards .card .index{margin:0 -36px;padding:16px 36px;background:var(--bg2);border-bottom:1px solid var(--line);font-family:var(--font-display);font-size:22px;font-weight:500;
+  letter-spacing:0;text-transform:none;color:var(--soft)}
+.p-cards .card h3{margin-top:0;padding-top:30px;font-size:44px;letter-spacing:-2px}
+.p-cards .card h3::before{content:"$ ";color:var(--accent)}
+.p-cards .card p{font-size:29px;margin-top:12px}
+
+/* quote: a string literal */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{margin-top:44px;font-weight:700;font-size:86px;line-height:1.06;letter-spacing:-4.5px;color:var(--accent);max-width:none}
+.p-quote .quote::before{content:"\201C"}
+.p-quote .quote::after{content:"\201D"}
+.p-quote .quote-source{margin-top:44px;font-family:var(--font-display);font-size:26px;letter-spacing:0;text-transform:none;color:var(--cm)}
+.p-quote .quote-source::before{content:"// "}
+
+/* takeaway: passing checks */
+.p-takeaway .takeaway{margin-top:52px;border-radius:var(--radius);background:var(--panel);border:1px solid var(--line);padding:6px 36px}
+.p-takeaway .takeaway-item{border-bottom:1px solid var(--line);padding:26px 0;gap:26px;align-items:center}
+.p-takeaway .takeaway-item:last-child{border-bottom:0}
+.p-takeaway .takeaway-dot{position:relative;width:44px;height:44px;margin:0;border-radius:50%;background:var(--add-bg)}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:15px;top:7px;width:11px;height:21px;border:solid var(--add);border-width:0 5px 5px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:34px;color:var(--text)}
+.p-takeaway .takeaway-item p{font-size:28px;margin-top:6px}
+.p-takeaway .closer-cta{margin-top:40px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-block;background:var(--bar);color:var(--bar-ink);border-radius:10px;padding:20px 30px;font-family:var(--font-display);font-size:26px;font-weight:700;
+  letter-spacing:0;text-transform:none}

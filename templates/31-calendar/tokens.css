@@ -1,0 +1,137 @@
+/* Template 31: Calendar. A calendar app: date tiles with a red weekday band, a day agenda with timed event blocks,
+   color-coded events, week strips and a month grid on the cover.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#ffffff;
+  --bg2:#f3f4f7;
+  --panel:#f6f7fa;
+  --text:#1a1d29;
+  --muted:#4c5163;
+  --soft:#4c5163;
+  --accent:#c5221f;         /* calendar red */
+  --on-accent:#ffffff;
+  --line:rgba(26,29,41,.16);
+  --line2:rgba(26,29,41,.09);
+  --e1:#dce7ff; --e1i:#1b3f94;
+  --e2:#d8f1e2; --e2i:#17583a;
+  --e3:#eadffc; --e3i:#4a2c91;
+  --e4:#ffe5cc; --e4i:#8a4300;
+  --font-display:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --radius:24px;
+}
+.slide.mode-dark{
+  --bg:#14161d;
+  --bg2:#1d2029;
+  --panel:#1d2029;
+  --text:#f2f3f7;
+  --muted:#bdc1cf;
+  --soft:#bdc1cf;
+  --accent:#ff8f86;
+  --on-accent:#2a0b09;
+  --line:rgba(242,243,247,.18);
+  --line2:rgba(242,243,247,.1);
+  --e1:#1e2e57; --e1i:#c0d2ff;
+  --e2:#173a2a; --e2i:#a9ebc6;
+  --e3:#33255c; --e3i:#d9c8ff;
+  --e4:#4a2c10; --e4i:#ffd0a1;
+}
+.slide::before{display:none}
+.inner{inset:64px 72px 116px}
+.topbar{height:64px;border-bottom:1px solid var(--line);padding-bottom:18px;font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+.topbar .b{display:flex;align-items:center;gap:16px;font-size:28px;font-weight:800}
+.topbar .b::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--accent)}
+.footer{left:72px;right:72px;bottom:40px;font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+
+/* type */
+h1,h2,h3{font-weight:800}
+h2{font-size:84px;line-height:.98;letter-spacing:-2.2px}
+h3{font-size:38px;line-height:1.12;letter-spacing:-1px}
+p{font-size:29px;line-height:1.42}
+.kicker{font-size:23px;font-weight:800;letter-spacing:2.5px;color:var(--accent)}
+
+/* cover: date tile, month grid, title */
+.p-cover-bt{background:var(--bg)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:64px 72px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .top{flex:none;margin-top:50px;display:grid;grid-template-columns:320px 1fr;gap:40px;align-items:stretch}
+.p-cover-bt .tile{border-radius:44px;overflow:hidden;background:var(--panel);box-shadow:inset 0 0 0 2px var(--line),0 18px 40px rgba(20,24,50,.10);text-align:center}
+.p-cover-bt .tile .kicker{margin:0;padding:20px 0 18px;background:var(--accent);color:var(--on-accent);font-size:26px}
+.p-cover-bt .tile .day{font-size:210px;font-weight:800;letter-spacing:-10px;line-height:1.16;color:var(--text)}
+.p-cover-bt .grid{background:
+  radial-gradient(circle,var(--accent) 0 23px,transparent 24px) calc(100%/7*2) calc(100%/5*1)/calc(100%/7) calc(100%/5) no-repeat,
+  radial-gradient(circle,var(--line) 0 9px,transparent 10px) 0 0/calc(100%/7) calc(100%/5)}
+.p-cover-bt .title{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:20px}
+.p-cover-bt h1{font-size:112px;line-height:.94;letter-spacing:-3.4px;margin:0}
+.p-cover-bt .desc{width:auto;max-width:760px;margin:40px 0 0;font-size:34px}
+
+/* statement */
+.p-statement .rule{width:100%;height:1px;background:var(--line);margin:0;order:3;display:none}
+.p-statement h2{font-size:100px;letter-spacing:-2.8px;line-height:.96}
+.p-statement p{margin-top:48px;padding:34px 38px;border-radius:var(--radius);border-left:12px solid var(--e1i);background:var(--e1);color:var(--e1i);font-size:32px;font-weight:600;max-width:none}
+
+/* stat-band: three date tiles */
+.p-stats .stat-row{margin-top:56px;border:0;gap:20px}
+.p-stats .stat{border:0 !important;padding:0 0 34px !important;border-radius:32px;overflow:hidden;background:var(--panel);box-shadow:inset 0 0 0 2px var(--line);text-align:center}
+.p-stats .stat::before{content:"";display:block;height:34px;background:var(--accent)}
+.p-stats .stat-number{font-size:88px;font-weight:800;letter-spacing:-4px;line-height:1;margin-top:40px}
+.p-stats .stat-number .accent{color:var(--text)}
+.p-stats .stat-label{margin:22px 22px 0;font-size:27px;font-weight:600;line-height:1.25}
+
+/* process: a day agenda. The tag is the time, the block is the event */
+.p-process .process{margin-top:50px;border-top:1px solid var(--line)}
+.p-process .process-item{grid-template-columns:150px 1fr;gap:0;padding:18px 0;border-bottom:1px solid var(--line);align-items:stretch}
+.p-process .process-item:first-child{border-top:0}
+.p-process .process-no{display:none}
+.p-process .process-item>div:nth-child(2){grid-column:2;grid-row:1;padding:26px 32px 30px;border-radius:18px;border-left:12px solid var(--e1i);background:var(--e1)}
+.p-process .process-item:nth-child(2)>div:nth-child(2){border-color:var(--e2i);background:var(--e2)}
+.p-process .process-item:nth-child(3)>div:nth-child(2){border-color:var(--e3i);background:var(--e3)}
+.p-process .process-item h3{font-size:40px;color:var(--e1i)}
+.p-process .process-item p{font-size:28px;margin-top:8px;color:var(--e1i)}
+.p-process .process-item:nth-child(2) h3,.p-process .process-item:nth-child(2) p{color:var(--e2i)}
+.p-process .process-item:nth-child(3) h3,.p-process .process-item:nth-child(3) p{color:var(--e3i)}
+.p-process .process-tag{grid-column:1;grid-row:1;justify-self:start;align-self:start;border:0;padding:22px 0 0;font-size:28px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+
+/* myth-fact: a crowded week and a calm one */
+.p-mythfact .myth-grid{margin-top:56px;border:0;border-radius:0;overflow:visible;gap:20px}
+.p-mythfact .myth{min-height:520px;padding:34px 32px 38px;border:0 !important;border-radius:var(--radius);background:var(--panel) !important;box-shadow:inset 0 0 0 2px var(--line);display:flex;flex-direction:column}
+.p-mythfact .myth-label{font-size:22px;letter-spacing:2px;color:var(--muted)}
+.p-mythfact .myth:last-child .myth-label{color:var(--accent)}
+.p-mythfact .myth-label::after{content:"";display:block;height:44px;margin-top:22px;background:radial-gradient(circle,var(--muted) 0 15px,transparent 16px) 0 0/calc(100%/7) 100%}
+.p-mythfact .myth:last-child .myth-label::after{background:
+  radial-gradient(circle,var(--accent) 0 15px,transparent 16px) 0 0/calc(100%/7) 100% no-repeat,
+  radial-gradient(circle,var(--accent) 0 15px,transparent 16px) calc(100%/6*2) 0/calc(100%/7) 100% no-repeat,
+  radial-gradient(circle,var(--accent) 0 15px,transparent 16px) calc(100%/6*4) 0/calc(100%/7) 100% no-repeat,
+  radial-gradient(circle,var(--line) 0 15px,transparent 16px) 0 0/calc(100%/7) 100%}
+.p-mythfact .myth h3{margin-top:auto;font-size:48px;letter-spacing:-1.1px;line-height:1.04}
+.p-mythfact .myth p{font-size:28px;margin-top:16px}
+
+/* big-number: one date tile */
+.p-bignumber .giant{-webkit-text-stroke:0;align-self:flex-start;margin-top:40px;min-width:440px;padding:0 50px 10px;border-radius:44px;overflow:hidden;text-align:center;
+  background:linear-gradient(var(--accent),var(--accent)) top/100% 56px no-repeat,var(--panel);box-shadow:inset 0 0 0 2px var(--line);
+  color:var(--text);font-size:330px;font-weight:800;letter-spacing:-16px;line-height:1.28;padding-top:36px}
+.p-bignumber h2{margin-top:44px}
+
+/* two-cards: two events */
+.p-cards .two-column{margin-top:56px;gap:20px}
+.p-cards .card{min-height:520px;padding:34px 32px 38px;border:0;border-radius:18px;border-left:12px solid var(--e4i);background:var(--e4)}
+.p-cards .card:last-child{border-color:var(--e2i);background:var(--e2)}
+.p-cards .card .index{font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--e4i)}
+.p-cards .card h3{font-size:48px;letter-spacing:-1.1px;line-height:1.04;color:var(--e4i)}
+.p-cards .card p{font-size:28px;color:var(--e4i)}
+.p-cards .card:last-child .index,.p-cards .card:last-child h3,.p-cards .card:last-child p{color:var(--e2i)}
+
+/* quote */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{margin-top:50px;padding:50px 46px 56px;border-radius:18px;border-left:12px solid var(--e3i);background:var(--e3);color:var(--e3i);font-weight:800;font-size:92px;line-height:.98;letter-spacing:-2.6px;max-width:none}
+
+/* takeaway */
+.p-takeaway .takeaway{margin-top:48px;border-top:1px solid var(--line)}
+.p-takeaway .takeaway-item{padding:28px 0;gap:28px;align-items:center}
+.p-takeaway .takeaway-dot{position:relative;width:52px;height:52px;margin:0;background:var(--accent)}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:19px;top:10px;width:12px;height:23px;border:solid var(--on-accent);border-width:0 5px 5px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:40px}
+.p-takeaway .takeaway-item p{font-size:28px;margin-top:6px}
+.p-takeaway .closer-cta{margin-top:44px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-flex;align-items:center;height:88px;padding:0 40px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:28px;font-weight:800;letter-spacing:0;text-transform:none}

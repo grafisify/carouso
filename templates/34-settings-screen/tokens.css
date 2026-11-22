@@ -1,0 +1,122 @@
+/* Template 34: Settings Screen. A phone settings page: grouped rounded rows, pill toggles that are on or off,
+   a slider, quick-setting tiles and a search field on the cover.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#f3f5ea;
+  --bg2:#e4e9d3;
+  --panel:#e4e9d3;
+  --text:#191c12;
+  --muted:#4a5038;
+  --soft:#4a5038;
+  --accent:#3d5f10;
+  --on-accent:#ffffff;
+  --line:rgba(25,28,18,.2);
+  --off:#6c7259;
+  --font-display:"Nunito","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Nunito","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Nunito","Helvetica Neue",Arial,sans-serif;
+  --radius:40px;
+}
+.slide.mode-dark{
+  --bg:#12140d;
+  --bg2:#23271a;
+  --panel:#23271a;
+  --text:#eef1e2;
+  --muted:#bfc5ab;
+  --soft:#bfc5ab;
+  --accent:#b9db7c;
+  --on-accent:#1a2a03;
+  --line:rgba(238,241,226,.2);
+  --off:#9aa085;
+}
+.slide::before{display:none}
+.inner{inset:64px 72px 116px}
+.topbar{height:60px;border:0;font-size:25px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+.topbar .b{position:relative;padding-left:52px;font-size:29px;font-weight:800}
+.topbar .b::before{content:"";position:absolute;left:4px;top:50%;width:30px;height:4px;margin-top:-2px;border-radius:4px;background:var(--text)}
+.topbar .b::after{content:"";position:absolute;left:5px;top:50%;width:14px;height:14px;margin-top:-9px;border:solid var(--text);border-width:0 0 4px 4px;transform:rotate(45deg)}
+.footer{left:72px;right:72px;bottom:40px;font-size:22px;font-weight:800;letter-spacing:1.5px;color:var(--muted)}
+
+/* the toggle, drawn on any element with data-state */
+[data-state]{display:inline-flex;align-items:center;gap:22px}
+[data-state]::after{content:"";flex:none;width:112px;height:64px;border-radius:64px;box-sizing:border-box;
+  background:radial-gradient(circle at calc(100% - 32px) 50%,var(--on-accent) 0 23px,transparent 24px),var(--accent)}
+[data-state="off"]::after{border:4px solid var(--off);background:radial-gradient(circle at 28px 50%,var(--off) 0 16px,transparent 17px)}
+
+/* type */
+h1,h2,h3{font-weight:800}
+h2{font-size:88px;line-height:1;letter-spacing:-2.2px}
+h3{font-size:40px;line-height:1.14;letter-spacing:-.4px}
+p{font-size:30px;line-height:1.4}
+.kicker{font-size:24px;font-weight:800;letter-spacing:2px;color:var(--accent)}
+
+/* cover: the settings home */
+.p-cover-bt{background:var(--bg)}
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:64px 72px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .kicker{margin:70px 0 0}
+.p-cover-bt h1{text-transform:none;font-size:124px;line-height:.94;letter-spacing:-4px;margin:22px 0 0}
+.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:none;margin:44px 0 0;display:flex;align-items:center;gap:26px;height:104px;padding:0 44px;border-radius:999px;background:var(--panel);font-size:32px;font-weight:600;color:var(--muted)}
+.p-cover-bt .desc::before{content:"";flex:none;width:30px;height:30px;border:5px solid var(--muted);border-radius:50%;box-shadow:16px 16px 0 -12px var(--muted)}
+.p-cover-bt .group{flex:none;margin-top:auto;border-radius:var(--radius);background:var(--panel);overflow:hidden}
+.p-cover-bt .row{display:flex;align-items:center;justify-content:space-between;gap:30px;padding:40px 44px;font-size:38px;font-weight:800;border-top:4px solid var(--bg)}
+.p-cover-bt .row:first-child{border-top:0}
+.p-cover-bt .row [data-state]{font-size:26px;font-weight:700;color:var(--muted)}
+
+/* statement */
+.p-statement .rule{display:none}
+.p-statement h2{font-size:104px;letter-spacing:-3px;line-height:.96}
+.p-statement p{margin-top:48px;padding:38px 44px;border-radius:var(--radius);background:var(--panel);font-size:33px;max-width:none}
+
+/* process: a group of rows. The tag is the toggle */
+.p-process .process{margin-top:48px;border:0;border-radius:var(--radius);background:var(--panel);overflow:hidden}
+.p-process .process-item{grid-template-columns:1fr auto;gap:30px;padding:38px 44px;border:0;border-top:4px solid var(--bg);align-items:center}
+.p-process .process-item:first-child{border-top:0}
+.p-process .process-no{display:none}
+.p-process .process-item h3{font-size:40px}
+.p-process .process-item p{font-size:27px;margin-top:6px}
+.p-process .process-tag{border:0;padding:0;font-size:26px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+
+/* myth-fact: off and on */
+.p-mythfact .myth-grid{margin-top:52px;border:0;border-radius:0;overflow:visible;gap:20px}
+.p-mythfact .myth{min-height:540px;padding:40px 38px 44px;border:0 !important;border-radius:var(--radius);background:var(--panel) !important;display:flex;flex-direction:column}
+.p-mythfact .myth-label{align-self:flex-start;flex-direction:row-reverse;font-size:26px;font-weight:800;letter-spacing:1.5px;color:var(--muted)}
+.p-mythfact .myth-label[data-state="on"]{color:var(--accent)}
+.p-mythfact .myth h3{margin-top:auto;font-size:50px;letter-spacing:-1.2px;line-height:1.04}
+.p-mythfact .myth p{font-size:28px;margin-top:16px}
+
+/* big-number: a value with its slider. Set --v on .giant */
+.p-bignumber .giant{-webkit-text-stroke:0;color:var(--text);font-size:330px;font-weight:800;letter-spacing:-12px;line-height:.9;padding-bottom:110px;align-self:stretch;
+  background:
+   radial-gradient(circle at var(--v,50%) calc(100% - 36px),var(--accent) 0 35px,var(--bg) 36px 46px,transparent 47px),
+   linear-gradient(var(--accent),var(--accent)) 0 calc(100% - 22px)/var(--v,50%) 28px no-repeat,
+   linear-gradient(var(--panel),var(--panel)) 0 calc(100% - 22px)/100% 28px no-repeat}
+.p-bignumber h2{margin-top:48px}
+.p-bignumber p{margin-top:24px}
+
+/* two-cards: quick-setting tiles */
+.p-cards .two-column{margin-top:52px;gap:20px}
+.p-cards .card{min-height:520px;padding:40px 38px 44px;border:0;border-radius:var(--radius);background:var(--accent)}
+.p-cards .card .index{font-size:25px;font-weight:800;letter-spacing:1.5px;color:var(--on-accent)}
+.p-cards .card h3{font-size:50px;letter-spacing:-1.2px;line-height:1.04;color:var(--on-accent)}
+.p-cards .card p{font-size:28px;color:var(--on-accent)}
+.p-cards .card:last-child{background:var(--panel)}
+.p-cards .card:last-child .index{color:var(--muted)}
+.p-cards .card:last-child h3{color:var(--text)}
+.p-cards .card:last-child p{color:var(--muted)}
+
+/* quote */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{font-weight:800;font-size:98px;line-height:1;letter-spacing:-2.8px;max-width:none}
+.p-quote .quote-source{align-self:flex-start;margin-top:52px;padding:20px 36px;border-radius:999px;background:var(--panel);font-size:26px;font-weight:700;letter-spacing:0;text-transform:none}
+
+/* takeaway */
+.p-takeaway .takeaway{margin-top:44px;border:0;border-radius:var(--radius);background:var(--panel);overflow:hidden}
+.p-takeaway .takeaway-item{padding:34px 44px;gap:30px;align-items:center;border:0;border-top:4px solid var(--bg)}
+.p-takeaway .takeaway-item:first-child{border-top:0}
+.p-takeaway .takeaway-dot{position:relative;width:56px;height:56px;margin:0;border-radius:16px;background:var(--accent)}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:21px;top:10px;width:12px;height:25px;border:solid var(--on-accent);border-width:0 6px 6px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:40px}
+.p-takeaway .takeaway-item p{font-size:27px;margin-top:4px}
+.p-takeaway .closer-cta{margin-top:40px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-flex;align-items:center;height:96px;padding:0 52px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:31px;font-weight:800;letter-spacing:0;text-transform:none}

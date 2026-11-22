@@ -1,0 +1,60 @@
+{
+  "number": 35,
+  "id": "35-spreadsheet",
+  "name": "Spreadsheet",
+  "vibe": "Spreadsheet: cell grid, lettered column headers, formula bar, selected cell with fill handle, table rows with right-aligned figures, conditional-format fills, cell comment",
+  "fonts": [
+    "IBM Plex Mono",
+    "Inter"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1440
+  },
+  "brand_placeholder": "Your Brand",
+  "handle_placeholder": "@yourhandle",
+  "modes_alternate": true,
+  "sequence": [
+    {
+      "slide": 1,
+      "pattern": "cover-big-type",
+      "mode": "light"
+    },
+    {
+      "slide": 2,
+      "pattern": "kicker-statement",
+      "mode": "dark"
+    },
+    {
+      "slide": 3,
+      "pattern": "process-steps",
+      "mode": "light"
+    },
+    {
+      "slide": 4,
+      "pattern": "big-number",
+      "mode": "dark"
+    },
+    {
+      "slide": 5,
+      "pattern": "myth-fact",
+      "mode": "light"
+    },
+    {
+      "slide": 6,
+      "pattern": "stat-band",
+      "mode": "dark"
+    },
+    {
+      "slide": 7,
+      "pattern": "quote",
+      "mode": "light"
+    },
+    {
+      "slide": 8,
+      "pattern": "takeaway",
+      "mode": "dark"
+    }
+  ],
+  "preview": "assets/templates/35-spreadsheet.jpg"
+}

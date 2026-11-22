@@ -1,0 +1,130 @@
+/* Template 36: Glass Widgets. Home-screen widgets in frosted glass over a soft mesh gradient: blurred translucent
+   cards with a light rim, progress rings, a mini bar widget, pill buttons.
+   Tokens, type and decor only. Structure lives in design-system/system.css. */
+:root{
+  --bg:#f3ecfb;
+  --bg2:#ffffff;
+  --panel:rgba(255,255,255,.52);
+  --text:#1a1430;
+  --muted:#423a5c;
+  --soft:#423a5c;
+  --accent:#5b21b6;
+  --on-accent:#ffffff;
+  --line:rgba(26,20,48,.16);
+  --rim:rgba(255,255,255,.9);
+  --track:rgba(26,20,48,.14);
+  --b1:#ffd3bd; --b2:#f8c4de; --b3:#c6daff;
+  --font-display:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --font-serif:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --radius:48px;
+}
+.slide.mode-dark{
+  --bg:#150f2e;
+  --bg2:#221a44;
+  --panel:rgba(255,255,255,.11);
+  --text:#ffffff;
+  --muted:#e2dcf2;
+  --soft:#e2dcf2;
+  --accent:#fde68a;
+  --on-accent:#2b1d00;
+  --line:rgba(255,255,255,.22);
+  --rim:rgba(255,255,255,.34);
+  --track:rgba(255,255,255,.2);
+  --b1:#8a1546; --b2:#4c1d95; --b3:#125468;
+}
+/* the wallpaper */
+.slide{background:
+  radial-gradient(60% 46% at 88% 8%,var(--b1) 0%,transparent 70%),
+  radial-gradient(70% 50% at 0% 46%,var(--b2) 0%,transparent 72%),
+  radial-gradient(74% 50% at 96% 96%,var(--b3) 0%,transparent 72%),
+  var(--bg)}
+.slide:nth-of-type(even){background:
+  radial-gradient(60% 46% at 6% 4%,var(--b3) 0%,transparent 70%),
+  radial-gradient(70% 50% at 100% 50%,var(--b1) 0%,transparent 72%),
+  radial-gradient(74% 50% at 10% 100%,var(--b2) 0%,transparent 72%),
+  var(--bg)}
+.slide::before{display:none}
+.inner{inset:64px 72px 116px}
+.topbar{height:60px;border:0;font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+.topbar .b{font-size:28px;font-weight:800}
+.footer{left:72px;right:72px;bottom:40px;font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+
+/* the glass */
+.widget,.p-statement p,.p-stats .stat,.p-process .process-item,.p-bignumber .giant,.p-cards .card,.p-quote .quote,.p-takeaway .takeaway{
+  background:var(--panel);border:2px solid var(--rim) !important;border-radius:var(--radius);
+  -webkit-backdrop-filter:blur(30px) saturate(1.4);backdrop-filter:blur(30px) saturate(1.4);
+  box-shadow:0 24px 60px rgba(20,10,60,.14)}
+
+/* type */
+h1,h2,h3{font-weight:800}
+h2{font-size:86px;line-height:1;letter-spacing:-2.4px}
+h3{font-size:38px;line-height:1.14;letter-spacing:-.8px}
+p{font-size:29px;line-height:1.42}
+.kicker{font-size:23px;font-weight:800;letter-spacing:2.5px;color:var(--accent)}
+
+/* cover: two widgets and the title */
+.p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
+.p-cover-bt .inner{inset:64px 72px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .widgets{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+.p-cover-bt .widget{height:400px;padding:36px 38px;display:flex;flex-direction:column;font-size:26px;font-weight:700;color:var(--muted)}
+.p-cover-bt .widget b{margin-top:auto;font-size:84px;font-weight:800;letter-spacing:-3px;line-height:1;color:var(--text)}
+.p-cover-bt .widget .dial{width:170px;height:170px;margin-top:22px;border-radius:50%;
+  background:radial-gradient(circle,transparent 0 58px,#000 59px) ,conic-gradient(var(--accent) var(--v),var(--track) 0);
+  background:conic-gradient(var(--accent) var(--v),var(--track) 0);
+  -webkit-mask:radial-gradient(circle,transparent 0 57px,#000 58px);mask:radial-gradient(circle,transparent 0 57px,#000 58px)}
+.p-cover-bt .widget .bars{display:flex;align-items:flex-end;gap:12px;height:170px;margin-top:22px}
+.p-cover-bt .widget .bars i{flex:1;height:var(--v);border-radius:10px;background:var(--track)}
+.p-cover-bt .widget .bars i:last-child{background:var(--accent)}
+.p-cover-bt .title{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:16px}
+.p-cover-bt h1{text-transform:none;font-size:112px;line-height:.95;letter-spacing:-3.6px;margin:22px 0 0}
+.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:780px;margin:36px 0 0;font-size:34px;color:var(--muted)}
+
+/* statement */
+.p-statement .rule{display:none}
+.p-statement h2{font-size:102px;letter-spacing:-3px;line-height:.96}
+.p-statement p{margin-top:48px;padding:40px 44px;font-size:33px;max-width:none;color:var(--text)}
+
+/* stat-band: three ring widgets. Set --v on each .stat */
+.p-stats .stat-row{margin-top:52px;border:0;gap:18px}
+.p-stats .stat{padding:34px 26px 36px !important;display:flex;flex-direction:column;align-items:flex-start}
+.p-stats .stat::before{content:"";width:104px;height:104px;margin-bottom:34px;border-radius:50%;background:conic-gradient(var(--accent) var(--v,50%),var(--track) 0);
+  -webkit-mask:radial-gradient(circle,transparent 0 33px,#000 34px);mask:radial-gradient(circle,transparent 0 33px,#000 34px)}
+.p-stats .stat-number{font-size:80px;font-weight:800;letter-spacing:-3px;line-height:1}
+.p-stats .stat-number .accent{color:var(--text)}
+.p-stats .stat-label{margin-top:14px;font-size:26px;line-height:1.28;font-weight:600}
+
+/* process: stacked glass rows */
+.p-process .process{margin-top:44px;border:0;display:flex;flex-direction:column;gap:16px}
+.p-process .process-item{grid-template-columns:84px 1fr auto;gap:28px;padding:30px 34px;align-items:center;border-radius:40px}
+.p-process .process-no{display:flex;align-items:center;justify-content:center;width:84px;height:84px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:36px;font-weight:800;letter-spacing:0}
+.p-process .process-item h3{font-size:38px}
+.p-process .process-item p{font-size:27px;margin-top:4px}
+.p-process .process-tag{border:0;padding:0;font-size:26px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
+
+/* big-number: one large widget */
+.p-bignumber .giant{-webkit-text-stroke:0;align-self:flex-start;margin-top:36px;padding:30px 60px 40px;color:var(--text);font-size:290px;font-weight:800;letter-spacing:-12px;line-height:1}
+.p-bignumber h2{margin-top:52px}
+.p-bignumber p{margin-top:24px}
+
+/* two-cards */
+.p-cards .two-column{margin-top:52px;gap:20px}
+.p-cards .card{min-height:540px;padding:38px 36px 42px}
+.p-cards .card .index{align-self:flex-start;padding:12px 24px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:23px;font-weight:800;letter-spacing:1px}
+.p-cards .card h3{font-size:50px;letter-spacing:-1.6px;line-height:1.04}
+.p-cards .card p{font-size:28px;color:var(--text)}
+
+/* quote */
+.p-quote .quote-mark{display:none}
+.p-quote .quote{padding:56px 50px 62px;font-weight:800;font-size:80px;line-height:1.04;letter-spacing:-2.4px;max-width:none}
+.p-quote .quote-source{margin-top:40px;font-size:26px;font-weight:700;letter-spacing:0;text-transform:none}
+
+/* takeaway */
+.p-takeaway .takeaway{margin-top:44px;padding:8px 40px;overflow:hidden}
+.p-takeaway .takeaway-item{padding:30px 0;gap:28px;align-items:center;border-color:var(--line)}
+.p-takeaway .takeaway-dot{position:relative;width:56px;height:56px;margin:0;background:var(--accent)}
+.p-takeaway .takeaway-dot::after{content:"";position:absolute;left:21px;top:11px;width:12px;height:24px;border:solid var(--on-accent);border-width:0 5px 5px 0;transform:rotate(42deg)}
+.p-takeaway .takeaway-item h3{font-size:38px}
+.p-takeaway .takeaway-item p{font-size:27px;margin-top:4px;color:var(--text)}
+.p-takeaway .closer-cta{margin-top:40px;text-align:left}
+.p-takeaway .closer-cta .accent{display:inline-flex;align-items:center;height:94px;padding:0 50px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:30px;font-weight:800;letter-spacing:0;text-transform:none}
