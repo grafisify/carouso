@@ -38,11 +38,11 @@
   --e4:#4a2c10; --e4i:#ffd0a1;
 }
 .slide::before{display:none}
-.inner{inset:64px 72px 116px}
+.inner{inset:max(64px,var(--safe-top,0px)) 72px max(116px,calc(76px + var(--safe-bottom,0px))) 72px}
 .topbar{height:64px;border-bottom:1px solid var(--line);padding-bottom:18px;font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
 .topbar .b{display:flex;align-items:center;gap:16px;font-size:28px;font-weight:800}
 .topbar .b::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--accent)}
-.footer{left:72px;right:72px;bottom:40px;font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+.footer{left:72px;right:72px;bottom:max(40px,var(--safe-bottom,0px));font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
 
 /* type */
 h1,h2,h3{font-weight:800}
@@ -54,7 +54,7 @@ p{font-size:29px;line-height:1.42}
 /* cover: date tile, title, then one week of dots */
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:64px 72px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .inner{inset:max(64px,var(--safe-top,0px)) 72px max(116px,calc(76px + var(--safe-bottom,0px))) 72px;padding:0 0 0 0;align-items:stretch;justify-content:flex-start;text-align:left}
 .p-cover-bt .top{flex:none;margin-top:44px;display:flex;justify-content:center}
 .p-cover-bt .tile{width:270px;border-radius:40px;overflow:hidden;background:var(--panel);box-shadow:inset 0 0 0 2px var(--line),0 18px 40px rgba(20,24,50,.10);text-align:center}
 .p-cover-bt .tile .kicker{margin:0;padding:18px 0 16px;background:var(--accent);color:var(--on-accent);font-size:24px}

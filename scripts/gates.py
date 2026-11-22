@@ -199,10 +199,15 @@ def is_large(line):
     return line["size"] >= 66 or (line["size"] >= 52 and line["weight"] >= 700)
 
 
-def judge(info, min_contrast=4.5, max_words=80):
-    """Turn the measurements of one slide into gate failures. Empty lists mean pass."""
-    bad = {"contrast": [], "hidden": [], "overlap": [], "density": []}
+def judge(info, min_contrast=4.5, max_words=80, keep_clear=None):
+    """Turn the measurements of one slide into gate failures. Empty lists mean pass.
+
+    keep_clear is (top, bottom): the first and last slide rows text may occupy.
+    """
+    bad = {"contrast": [], "hidden": [], "overlap": [], "density": [], "safe": []}
     for line in info["lines"]:
+        if keep_clear and (line["top"] < keep_clear[0] - 1 or line["bottom"] > keep_clear[1] + 1):
+            bad["safe"].append(f"'{line['text']}'")
         need = min(min_contrast, 3.0) if is_large(line) else min_contrast
         if min_contrast and round(line["contrast"], 2) < need:
             bad["contrast"].append(f"'{line['text']}' {line['contrast']:.2f}:1 (needs {need}:1)")

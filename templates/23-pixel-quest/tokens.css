@@ -43,10 +43,10 @@
   linear-gradient(var(--line),var(--line)) 64% 9%/6px 6px no-repeat,linear-gradient(var(--line),var(--line)) 30% 34%/6px 6px no-repeat,
   linear-gradient(var(--line),var(--line)) 92% 52%/6px 6px no-repeat,linear-gradient(var(--line),var(--line)) 6% 62%/6px 6px no-repeat}
 .slide:not(.mode-dark)::before{opacity:.0}
-.slide::after{content:"";position:absolute;left:0;right:0;bottom:0;height:112px;z-index:1;
+.slide::after{content:"";position:absolute;left:0;right:0;bottom:0;height:calc(112px + var(--safe-bottom,0px));z-index:1;
   background:linear-gradient(var(--ground) 0 24px,var(--ground2) 24px 36px,#0d0b22 36px)}
-.inner{inset:64px 72px 170px}
-.footer{left:72px;right:72px;bottom:24px;font-family:var(--font-display);font-size:20px;letter-spacing:0;color:#ffffff;z-index:3}
+.inner{inset:max(64px,var(--safe-top,0px)) 72px max(170px,calc(146px + var(--safe-bottom,0px))) 72px}
+.footer{left:72px;right:72px;bottom:max(24px,var(--safe-bottom,0px));font-family:var(--font-display);font-size:20px;letter-spacing:0;color:#ffffff;z-index:3}
 
 /* HUD */
 .topbar{height:64px;border:0;font-family:var(--font-display);font-size:20px;font-weight:400;letter-spacing:0;color:var(--text)}
@@ -65,7 +65,7 @@ p{font-size:29px;line-height:1.45;letter-spacing:-.5px}
   background:var(--panel);border:0;box-shadow:0 calc(var(--px)*-1) 0 var(--line),0 var(--px) 0 var(--line),calc(var(--px)*-1) 0 0 var(--line),var(--px) 0 0 var(--line)}
 
 /* cover */
-.p-hook .inner{padding:64px 72px 112px}
+.p-hook .inner{padding:max(64px,var(--safe-top,0px)) 72px max(112px,calc(88px + var(--safe-bottom,0px))) 72px}
 .p-hook .hook-head{font-family:var(--font-display);font-size:20px;font-weight:400;letter-spacing:0}
 .p-hook .handle-pill{border:0;border-radius:0;background:var(--text);color:var(--bg);font-family:var(--font-display);font-size:20px;font-weight:400;letter-spacing:0;padding:14px 16px 12px}
 .p-hook .hook-body{margin-top:200px;position:relative;z-index:2}
@@ -78,7 +78,7 @@ p{font-size:29px;line-height:1.45;letter-spacing:-.5px}
 .p-hook .object{margin:30px -72px 0;background-image:url("decor/quest.svg");background-position:center bottom;background-size:100% auto}
 /* the built-in scene tucks up behind the text; a custom image stays below it */
 .p-hook .object:not(:has(img)){margin-top:-150px}
-.p-hook .hook-foot{left:72px;right:72px;bottom:16px;font-family:var(--font-display);font-size:20px;letter-spacing:0;color:#fff}
+.p-hook .hook-foot{left:72px;right:72px;bottom:max(16px,var(--safe-bottom,0px));font-family:var(--font-display);font-size:20px;letter-spacing:0;color:#fff}
 .p-hook .arrow-btn{width:58px;height:58px;border-radius:0;background:var(--coin);color:#171433}
 .p-hook .arrow-btn::before{width:30px;height:30px}
 

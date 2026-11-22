@@ -39,10 +39,10 @@
     conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/36px 51% repeat-x;
   mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/36px 51% repeat-x,
     conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/36px 51% repeat-x}
-.inner{inset:104px 130px 250px}
+.inner{inset:max(104px,var(--safe-top,0px)) 130px max(250px,calc(158px + var(--safe-bottom,0px))) 130px}
 .topbar{height:60px;border-bottom:3px dashed var(--line);font-size:21px;font-weight:700;letter-spacing:1px;color:var(--text)}
 /* footer: barcode with the handle underneath */
-.footer{left:130px;right:130px;bottom:92px;height:128px;align-items:flex-end;font-size:20px;font-weight:700;letter-spacing:1px;color:var(--text);
+.footer{left:130px;right:130px;bottom:max(92px,var(--safe-bottom,0px));height:128px;align-items:flex-end;font-size:20px;font-weight:700;letter-spacing:1px;color:var(--text);
   background:repeating-linear-gradient(90deg,var(--text) 0 4px,transparent 4px 8px,var(--text) 8px 10px,transparent 10px 16px,var(--text) 16px 22px,transparent 22px 26px,
     var(--text) 26px 28px,transparent 28px 36px,var(--text) 36px 40px,transparent 40px 44px) left top/100% 78px no-repeat}
 
@@ -59,7 +59,7 @@ p{font-size:27px;line-height:1.45;letter-spacing:-.4px}
 /* cover */
 .p-cover-bt{background:var(--desk)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:104px 130px 250px;padding:0;justify-content:flex-start;align-items:stretch;text-align:center}
+.p-cover-bt .inner{inset:max(104px,var(--safe-top,0px)) 130px max(250px,calc(158px + var(--safe-bottom,0px))) 130px;padding:0 0 0 0;justify-content:flex-start;align-items:stretch;text-align:center}
 .p-cover-bt .shop{font-size:34px;font-weight:700;letter-spacing:6px;text-transform:uppercase;padding-bottom:24px;border-bottom:3px dashed var(--line)}
 .p-cover-bt .kicker{margin:26px 0 0}
 .p-cover-bt h1{font-size:104px;line-height:.98;letter-spacing:-5px;margin-top:auto}

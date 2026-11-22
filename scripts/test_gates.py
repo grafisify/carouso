@@ -18,7 +18,7 @@ SAMPLE = ROOT / "templates" / "02-clean-minimal" / "sample.html"
 HEADLINE = 'Most notes are <span class="accent">never read again.</span>'
 BODY = "<p>Here is how to write the ones you will.</p>"
 
-# name, expected gate (None = must pass), old, new
+# name, expected gate (None = must pass), old, new, then any extra renderer arguments
 CASES = [
     ("untouched sample", None, "", ""),
     ("hyphenated word that wraps", None, HEADLINE, "Notes before-and-after-before-and-after-before-and-after"),
@@ -44,6 +44,12 @@ CASES = [
      + "Notes pile up when nobody reads them. " * 12 + "</p>"),
     ("decoration opts out", None, BODY,
      BODY + '<div data-decor style="position:absolute;right:90px;top:260px;font-size:60px;color:#e4e4e4">draft</div>'),
+    ("sample reflowed to 4:5", None, "", "", "--format", "feed"),
+    ("sample reflowed to 9:16", None, "", "", "--format", "story"),
+    ("text under the app interface of a 9:16 slide", "safe", BODY,
+     BODY + '<p style="position:absolute;left:0;top:-60px">Posted this morning</p>', "--format", "story"),
+    ("the same text is fine at 3:4", None, BODY,
+     BODY + '<p style="position:absolute;left:0;top:-60px">Posted this morning</p>'),
 ]
 
 
@@ -54,7 +60,7 @@ def main() -> int:
     slides = len(re.findall(r'<section class="slide', base))
     failed = 0
     with tempfile.TemporaryDirectory() as tmp:
-        for name, gate, old, new in CASES:
+        for name, gate, old, new, *extra in CASES:
             if old and old not in base:
                 print(f"FAIL {name}: the sample no longer holds the text this case edits")
                 failed += 1
@@ -63,7 +69,7 @@ def main() -> int:
             page.write_text(base.replace(old, new, 1) if old else base, encoding="utf-8")
             run = subprocess.run(
                 [sys.executable, str(ROOT / "scripts" / "render_carousel.py"), "--html", str(page),
-                 "--out", str(Path(tmp) / "out"), "--slides", str(slides), "--check-fonts", "Plus Jakarta Sans"],
+                 "--out", str(Path(tmp) / "out"), "--slides", str(slides), "--check-fonts", "Plus Jakarta Sans", *extra],
                 capture_output=True, text=True)
             fired = re.findall(r"GATE FAILED \((.+?)\)", run.stdout)
             ok = (not fired and run.returncode == 0) if gate is None else gate in fired

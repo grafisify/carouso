@@ -20,7 +20,8 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
-| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, text under 20px, a missing font, a broken image, text cut off by the slide edge, a word too wide for its line, text under 4.5:1 contrast, text covered by an image or by other text, or more than 80 words on a slide. Defects never ship silently. |
+| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, text under 20px, a missing font, a broken image, text cut off by the slide edge, a word too wide for its line, text under 4.5:1 contrast, text covered by an image or by other text, more than 80 words on a slide, or text under the app interface of a 9:16 slide. Defects never ship silently. |
+| **Three sizes** | The same carousel renders at 1080x1440 (3:4), 1080x1350 (4:5 feed) and 1080x1920 (9:16 Stories and TikTok). Slides reflow to each size; the 9:16 render keeps text out of the top and bottom 250px. |
 
 ## Pick a template
 
@@ -30,7 +31,7 @@ Every template is a finished 8-slide look: colors, fonts, light and dark slides,
 template 3, topic: 5 habits that waste your week
 ```
 
-The agent asks once for anything missing (brand name and handle, optional images), writes the copy, and renders print-clean JPGs at 1080x1440. The sample copy in the previews is placeholder.
+The agent asks once for anything missing (brand name and handle, optional images), writes the copy, and renders print-clean JPGs at 1080x1440. Ask for 4:5 or for Stories/TikTok to get 1080x1350 or 1080x1920 from the same carousel. The sample copy in the previews is placeholder.
 
 ### 01 · Morning Cup
 Playful and friendly. Warm earth tones, rounded type. Good for food, lifestyle, small brands.
@@ -329,6 +330,20 @@ Every slide is held to the same bar:
 4. Get back `slide_01.jpg` to `slide_08.jpg` in `carousels/<name>/`.
 
 Want your own brand instead? Ask for a custom design system and answer the 7 questions.
+
+### Output sizes
+
+| Format | Size | For |
+|---|---|---|
+| `portrait` (default) | 1080x1440 | Instagram and Facebook carousels |
+| `feed` | 1080x1350 | 4:5 feed posts, LinkedIn |
+| `story` | 1080x1920 | TikTok photo mode, Stories, Reels covers |
+
+```
+python3 scripts/render_carousel.py --html carousels/<name>/index.html --out carousels/<name>/story --format story --slides 8
+```
+
+The slides reflow to the new height instead of being scaled. At 9:16 the topbar, footer and every line of text stay out of the top and bottom 250px, where the app draws its own buttons and captions.
 
 ## Package contents
 

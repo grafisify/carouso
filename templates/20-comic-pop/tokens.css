@@ -55,16 +55,18 @@ p{font-size:30px;line-height:1.4;font-weight:600}
 /* cover */
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{align-items:center;text-align:center;justify-content:center;padding:180px 82px 0}
+.p-cover-bt .inner{align-items:center;text-align:center;justify-content:center;padding:max(180px,var(--safe-top,0px)) 82px 0 82px}
 .p-cover-bt .kicker{align-self:center;margin-bottom:36px}
 .p-cover-bt h1{font-size:196px;line-height:.86;letter-spacing:3px;margin:0}
 .p-cover-bt .desc{width:auto;max-width:640px;margin:44px auto 0;font-size:34px;font-weight:700;color:var(--text)}
-.p-cover-bt .burst{position:absolute;right:36px;top:76px;width:420px;height:420px;display:flex;align-items:center;justify-content:center;transform:rotate(10deg);
+.p-cover-bt .burst{position:absolute;right:36px;top:calc(76px + var(--safe-shift,0px));width:420px;height:420px;display:flex;align-items:center;justify-content:center;transform:rotate(10deg);
   filter:drop-shadow(10px 10px 0 var(--ink))}
 .p-cover-bt .burst::before{content:"";position:absolute;inset:0;background:var(--ink);clip-path:var(--burst)}
 .p-cover-bt .burst::after{content:"";position:absolute;inset:14px;background:var(--pop);clip-path:var(--burst)}
 .p-cover-bt .burst span{position:relative;z-index:1;font-family:var(--font-display);font-size:126px;letter-spacing:3px;color:#fff;
   -webkit-text-stroke:4px var(--ink);paint-order:stroke fill;text-shadow:6px 6px 0 var(--ink)}
+/* 4:5: the headline sits 45px higher, so the burst backs off */
+:root.fmt-feed .p-cover-bt .burst{top:36px;transform:rotate(10deg) scale(.88);transform-origin:right top}
 
 /* inked panel, shared */
 .p-cards .card,.p-mythfact .myth,.p-quote .quote,.p-concept .concept-body{background:#fff;color:var(--ink);border:5px solid var(--ink);box-shadow:12px 12px 0 var(--ink)}
