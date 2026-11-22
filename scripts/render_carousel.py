@@ -13,6 +13,12 @@ Quality gates (exit 1 on failure):
      which bleed off the edge on purpose)
   8. no word may be wider than the line it sits on (a long word in a big
      headline spills out of its column instead of wrapping)
+  9. every line of text must reach --min-contrast against what is painted behind
+     it (default 4.5:1, or 3:1 for large display type), measured on the pixels
+ 10. no text may be covered by an image or shape, and no two text elements may
+     sit on each other
+ 11. no slide may hold more than --max-words visible words (default 80)
+Decoration opts out of 9 and 10 with data-decor or aria-hidden="true".
 
 Example:
   python3 scripts/render_carousel.py --html topic.html --out out/ \
@@ -26,6 +32,8 @@ from pathlib import Path
 
 from playwright.async_api import async_playwright
 
+import gates
+
 
 async def main() -> int:
     ap = argparse.ArgumentParser()
@@ -37,6 +45,11 @@ async def main() -> int:
     ap.add_argument("--quality", type=int, default=88)
     ap.add_argument("--min-font", type=int, default=20,
                     help="smallest allowed text size in px at 1080 wide. 0 disables.")
+    ap.add_argument("--min-contrast", type=float, default=4.5,
+                    help="lowest allowed text contrast ratio. Large display type "
+                         "needs 3.0 at most. 0 disables.")
+    ap.add_argument("--max-words", type=int, default=80,
+                    help="most visible words allowed on one slide. 0 disables.")
     ap.add_argument("--check-fonts", default="",
                     help="comma-separated font families that must be loaded, "
                          'e.g. "Baloo 2,Quicksand". Missing = exit 1.')
@@ -143,6 +156,8 @@ async def main() -> int:
             return 1
 
         bad_overflow, bad_size, bad_edge, bad_word = [], [], [], []
+        bad_look = {"contrast": [], "hidden": [], "overlap": [], "density": []}
+        lab = await browser.new_page()  # blank page whose canvas compares the captures
         for i in range(n):
             await page.evaluate(
                 f"""document.querySelectorAll('.slide').forEach((c,idx)=>{{
@@ -229,6 +244,12 @@ async def main() -> int:
             )
             if wide:
                 bad_word.append(f"{i + 1} {wide[:3]}")
+
+            # Legibility gates: contrast, covered or colliding text, density.
+            verdict = gates.judge(await gates.measure(page, lab, i), args.min_contrast, args.max_words)
+            for gate, found in verdict.items():
+                if found:
+                    bad_look[gate].append(f"{i + 1} {found[:3]}")
             print(f"slide {i+1:02d}: box={box['width']:.0f}x{box['height']:.0f} overflow={ovf}", flush=True)
 
         await browser.close()
@@ -247,6 +268,16 @@ async def main() -> int:
         print(f"GATE FAILED (word): word wider than its line: {bad_word} "
               f"(use a shorter word or break it across lines)", flush=True)
         failed = True
+    advice = {
+        "contrast": ("text too faint against its background", "darken or lighten the text, or put a scrim under it"),
+        "hidden": ("text covered by an image or shape", "shorten the copy or move the element"),
+        "overlap": ("text sitting on other text", "shorten the copy or give the elements room"),
+        "density": ("too many words on one slide", "cut the copy or split the slide"),
+    }
+    for gate, (what, fix) in advice.items():
+        if bad_look[gate]:
+            print(f"GATE FAILED ({gate}): {what}: {bad_look[gate]} ({fix})", flush=True)
+            failed = True
     if failed:
         return 1
 

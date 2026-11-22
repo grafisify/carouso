@@ -24,8 +24,12 @@ jobs:
           set -e
           python3 scripts/check_templates.py --render-cmd > render.sh
           bash -e render.sh
+      - name: Render the pattern library that custom systems start from
+        run: python3 scripts/render_carousel.py --html design-system/patterns.html --out out/_patterns --slides 12 --check-fonts "Plus Jakarta Sans"
       - name: Check the headline budgets in template.json
         run: python3 scripts/copy_budget.py
+      - name: Check that each gate rejects a broken slide
+        run: python3 scripts/test_gates.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:

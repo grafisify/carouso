@@ -92,9 +92,9 @@ p{font-size:29px;line-height:1.42}
 .p-process .process{margin-top:48px;border-top:1px solid var(--line)}
 .p-process .process-item{grid-template-columns:112px 1fr auto;gap:30px;padding:30px 0;border-bottom:1px solid var(--line);align-items:center}
 .p-process .process-item:first-child{border-top:0}
-.p-process .process-no{display:flex;align-items:center;justify-content:center;width:112px;height:112px;border-radius:26px;background:linear-gradient(150deg,var(--icon1),var(--icon2));color:#fff;font-size:48px;font-weight:800;letter-spacing:0;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+.p-process .process-no{display:flex;align-items:center;justify-content:center;width:112px;height:112px;border-radius:26px;background:linear-gradient(150deg,#0b7a61,#0a55b5);color:#fff;font-size:48px;font-weight:800;letter-spacing:0;text-shadow:0 2px 8px rgba(0,0,0,.35)}
 .p-process .process-item:nth-child(2) .process-no{background:linear-gradient(150deg,var(--icon2),var(--icon3))}
-.p-process .process-item:nth-child(3) .process-no{background:linear-gradient(150deg,#f59e0b,#e0457b)}
+.p-process .process-item:nth-child(3) .process-no{background:linear-gradient(150deg,#b45309,#be185d)}
 .p-process .process-item h3{font-size:40px}
 .p-process .process-item p{font-size:27px;margin-top:6px}
 .p-process .process-tag{border:0;padding:16px 30px;border-radius:999px;background:var(--panel);color:var(--accent);font-size:25px;font-weight:800;letter-spacing:.5px;text-transform:uppercase}

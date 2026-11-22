@@ -31,7 +31,7 @@
   --line:rgba(246,239,224,0.38);
   --line2:rgba(246,239,224,0.2);
   --ink1:#f6efe0;
-  --ink2:#ff5c86;
+  --ink2:#ff6f95;
   --off:rgba(13,22,92,.9);
   --blend:normal;
 }
@@ -71,7 +71,7 @@ p{font-size:31px;line-height:1.4;color:var(--muted)}
 .p-cover-bt .ring::before{inset:auto;left:730px;top:-844px;width:210px;height:210px;border:0;border-radius:0;background:var(--ink1)}
 
 /* body compositions */
-.p-statement::after{width:560px;height:560px;border-radius:50%;right:-180px;bottom:-170px;background:var(--ink2)}
+.p-statement::after{width:560px;height:560px;border-radius:50%;right:-350px;bottom:80px;background:var(--ink2)}
 .p-statement .rule{display:none}
 .p-statement h2{font-size:112px;letter-spacing:-5.5px;line-height:.9}
 .p-statement p{font-size:34px;max-width:640px;margin-top:40px}

@@ -100,7 +100,19 @@ python3 scripts/render_carousel.py --html <file.html> --out <dir-output> \
     --check-fonts "Plus Jakarta Sans"
 ```
 (Adjust width, height, slides, and fonts to the brief and the system tokens.)
-The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, when a checked font failed to load, when an `<img>` failed to load, when text is cut off by the slide edge (elements inside `.peek` or `[data-bleed]` may bleed on purpose), or when a word is wider than the line it sits on. For that last one, pick a shorter word; do not shrink the type. Fix the HTML and re-render until it passes. Never waive the gate manually.
+The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, when a checked font failed to load, when an `<img>` failed to load, when text is cut off by the slide edge (elements inside `.peek` or `[data-bleed]` may bleed on purpose), or when a word is wider than the line it sits on. For that last one, pick a shorter word; do not shrink the type.
+
+Three more gates judge the rendered pixels, so they also catch what a photo or a decoration does to the text:
+
+| Gate | Fails when | Fix |
+|---|---|---|
+| `contrast` | A line of text is under 4.5:1 against what is painted behind it. Display type of 66px or more (52px or more when bold) needs 3:1. | Change the text color, strengthen the scrim, or move the photo focus with `--focus`. On a custom system, fix the token, not the slide. |
+| `hidden` / `overlap` | An image or shape covers text, or two text elements sit on each other. Long copy pushing a headline under the cover art is the usual cause. | Shorten the copy to the `headline` budget. Do not shrink the type or nudge elements with inline offsets. |
+| `density` | A slide holds more than 80 visible words, counting the topbar and footer. | Cut the copy or split the slide in two. |
+
+Text that is decoration on purpose (a watermark numeral, a ghost word behind the headline) opts out of `contrast`, `hidden` and `overlap` with `data-decor` on the element. Never put `data-decor` on copy the reader is meant to read.
+
+Fix the HTML and re-render until it passes. Never waive the gate manually, and never raise `--max-words` or lower `--min-contrast` to get a render through.
 
 ### 7. Final visual check and record
 Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern, full pattern sequence, and the mode of each slide (for example `{"cover": "cover-big-type", "sequence": ["cover-big-type", "two-cards", "takeaway"], "modes": ["light", "dark", "light"]}`).
@@ -173,7 +185,7 @@ A rewrite, for calibration:
 - Alignment: one consistent inner margin everywhere. Left-aligned by default; covers center deliberately.
 - Typography: two font families maximum. Every font must load; the render gate rejects silent fallback.
 - Type size: designed for a phone, where a 1080px slide shows at about a third of its size. Body copy 28 to 32px, secondary text (labels, captions, stat labels, footers, tags) 20px or more, never smaller. The render gate rejects any text under 20px (`--min-font`).
-- Contrast: body, muted, footer, and accent text hold at least 4.5:1 against their background and panel (WCAG AA). Templates already comply, so a custom system must check its own tokens in both modes.
+- Contrast: body, muted, footer, and accent text hold at least 4.5:1 against their background and panel (WCAG AA). The render gate measures it on the pixels, so a custom system finds out on its first render of `patterns.html` whether its tokens hold in both modes.
 - Color: 60 percent base, 30 percent secondary, 10 percent accent.
 - Consistency: topbar, footer, kicker, cards, radius, and shadows never change style across slides. Patterns vary. Tokens do not.
 - Safe zones: content stays inside the `.inner` box (78px top and bottom, 82px left and right). Only the topbar and footer chrome sit closer, at 34px from the edge. No text may be cut by the slide edge.
