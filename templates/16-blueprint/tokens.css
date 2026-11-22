@@ -66,10 +66,13 @@ p{font-size:30px;line-height:1.45}
 /* cover */
 .p-poster .inner{padding:70px 82px 150px}
 .p-poster .poster-head{height:64px;border-bottom:2px solid var(--line);font-family:var(--font-display);font-weight:500;font-size:20px}
-.p-poster .object{margin:40px -10px 20px;background-image:url("decor/wireframe.svg")}
-.p-poster .poster-stack{text-align:left}
-.p-poster h1{font-size:82px;line-height:1.02;letter-spacing:-3.5px}
-.p-poster .sub{margin:28px 0 0;max-width:820px;font-size:31px;color:var(--muted)}
+.p-poster .object{flex:none;height:376px;margin:36px -40px 0;background-image:url("decor/wireframe.svg");background-size:100% auto;background-position:center top}
+.p-poster .poster-stack{flex:1;display:flex;flex-direction:column;text-align:center}
+.p-poster h1{font-size:82px;line-height:1.02;letter-spacing:-3.5px;margin-top:auto}
+.p-poster .sub{margin:28px auto 0;max-width:640px;font-size:31px;color:var(--muted)}
+/* exploded view: the lower half of the drawing sits under the title */
+.p-poster .poster-stack::after{content:"";flex:none;height:242px;margin:auto -40px 0;background:url("decor/wireframe.svg") center bottom/100% auto no-repeat}
+.p-poster .inner:has(.object img) .poster-stack::after{visibility:hidden}
 .p-poster .poster-foot{display:none}
 
 /* concept: callout circle with crosshair */

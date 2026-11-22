@@ -63,16 +63,17 @@ p{font-size:30px;line-height:1.42;font-weight:500}
 .p-cover-bt{background:var(--desk)}
 .p-cover-bt .cover-line{display:none}
 .p-cover-bt .inner{inset:56px 56px 176px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
-.p-cover-bt .win{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:48px 52px 60px}
-.p-cover-bt .kicker{margin:0}
+.p-cover-bt .win{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:150px 52px 60px}
+.p-cover-bt .kicker{margin:0;align-self:center}
 .p-cover-bt h1{font-size:164px;line-height:.9;letter-spacing:-3px;margin-top:36px}
-.p-cover-bt .desc{width:auto;max-width:760px;margin:40px 0 0;font-size:34px;color:var(--muted)}
-.p-cover-bt .meta{margin-top:52px;gap:26px;font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:1px;text-transform:none;color:var(--text)}
+.p-cover-bt .desc{width:auto;max-width:700px;margin:40px auto 0;font-size:34px;color:var(--muted)}
+.p-cover-bt .meta{margin-top:52px;gap:26px;justify-content:center;font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:1px;text-transform:none;color:var(--text)}
 .p-cover-bt .meta span{display:inline-flex;align-items:center;height:76px;padding:0 36px;border:4px solid var(--line);box-shadow:6px 6px 0 var(--line);color:var(--text)}
 .p-cover-bt .meta span:first-child{background:var(--text);color:var(--bg);outline:4px solid var(--line);outline-offset:6px}
-.p-cover-bt .ring{left:262px;right:auto;top:auto;bottom:172px;width:76px;height:94px;border:0;border-radius:0;z-index:5;
+.p-cover-bt .ring{display:none}
+.p-cover-bt .meta span:first-child{position:relative}
+.p-cover-bt .meta span:first-child::after{content:"";position:absolute;right:-34px;bottom:-66px;width:76px;height:94px;z-index:5;
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 26' shape-rendering='crispEdges'%3E%3Cpath d='M2 2v19l5-4 4 8 4-2-4-8h7z' fill='%23fff' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat}
-.p-cover-bt .ring::before{display:none}
 
 /* statement: prompt with a block cursor */
 .p-statement .rule{display:none}
