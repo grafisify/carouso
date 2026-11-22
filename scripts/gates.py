@@ -49,17 +49,28 @@ COLLECT = """
     const n = w.currentNode, el = n.parentElement, text = n.textContent.trim();
     if (!text) continue;
     const cs = getComputedStyle(el);
-    // Only text that is painted counts: a display:none ancestor leaves no box,
-    // and transparent or zero-opacity text leaves no ink.
-    if (cs.visibility === 'hidden' || !el.checkVisibility()) continue;
-    let opacity = 1, block = el;
-    for (let a = el; a && a !== s.parentElement; a = a.parentElement) opacity *= parseFloat(getComputedStyle(a).opacity);
+    const r = document.createRange();
+    r.selectNodeContents(n);
+    const rects = [...r.getClientRects()];
+    // Only painted text counts. No rect means no box (a display:none ancestor);
+    // checkVisibility() would also drop display:contents, whose text does render.
+    if (cs.visibility === 'hidden' || !rects.length) continue;
+    let opacity = 1, block = el, clipped = false;
+    for (let a = el; a && a !== s.parentElement; a = a.parentElement) {
+      const as = getComputedStyle(a);
+      opacity *= parseFloat(as.opacity);
+      clipped = clipped || as.backgroundClip.includes('text');
+    }
     const fill = rgba(cs.webkitTextFillColor || cs.color);
-    if (fill[3] * opacity < 0.05) continue;   // clipped-gradient or invisible text
+    // a transparent fill still shows when it is outlined, shadowed or lets a clipped background through
+    const inked = fill[3] >= 0.05 || clipped || cs.textShadow !== 'none'
+      || (parseFloat(cs.webkitTextStrokeWidth) > 0 && rgba(cs.webkitTextStrokeColor)[3] >= 0.05);
+    if (opacity < 0.05 || !inked) continue;
     words += text.split(/\\s+/).filter(t => /[\\p{L}\\p{N}]/u.test(t)).length;
     // decoration opts out, and so do marks with no letter or digit (quote marks, arrows)
     if (el.closest(exempt) || !/[\\p{L}\\p{N}]/u.test(text)) continue;
-    while (block !== s && getComputedStyle(block).display.startsWith('inline')) block = block.parentElement;
+    if (fill[3] * opacity < 0.05) continue;   // outlined or gradient text has no one colour to measure
+    while (block !== s && /^(inline|contents)/.test(getComputedStyle(block).display)) block = block.parentElement;
     let blockId = blocks.indexOf(block);
     if (blockId < 0) blockId = blocks.push(block) - 1;
     // Where the glyphs really are inside the line box: a 300px numeral has a
@@ -68,9 +79,7 @@ COLLECT = """
     const shown = cs.textTransform === 'uppercase' ? text.toUpperCase() : text;
     const m = pen.measureText(shown);
     const box = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
-    const r = document.createRange();
-    r.selectNodeContents(n);
-    for (const q of r.getClientRects()) {
+    for (const q of rects) {
       if (q.width < 6 || q.height < 6) continue;
       const x = Math.max(0, q.left - b.left), y = Math.max(0, q.top - b.top);
       const x2 = Math.min(b.width, q.right - b.left), y2 = Math.min(b.height, q.bottom - b.top);

@@ -36,6 +36,11 @@ CASES = [
     ("unpainted words do not count", None, BODY,
      BODY + '<div style="display:none"><p>' + "Hidden draft copy. " * 40 + '</p></div>'
           + '<p style="color:transparent;position:absolute">' + "Clear ink. " * 40 + '</p>'),
+    ("faint text inside display:contents", "contrast", BODY,
+     '<p style="display:contents;color:#b9b9b9">Here is how to write the ones you will.</p>'),
+    ("outlined words still count", "density", BODY,
+     '<p style="-webkit-text-fill-color:transparent;-webkit-text-stroke:1px #111">'
+     + "Notes pile up when nobody reads them. " * 12 + "</p>"),
     ("decoration opts out", None, BODY,
      BODY + '<div data-decor style="position:absolute;right:90px;top:260px;font-size:60px;color:#e4e4e4">draft</div>'),
 ]
