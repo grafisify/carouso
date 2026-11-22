@@ -36,7 +36,8 @@ body{background:#050505;font-family:var(--font-body);color:var(--text);
 .topbar .b{color:var(--text)}
 .content{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
 .kicker{color:var(--accent);font-size:22px;font-weight:800;letter-spacing:3px;text-transform:uppercase}
-h1,h2,h3{font-family:var(--font-display);font-weight:650;color:var(--text)}
+/* balance wrapped headings so a long headline never leaves one word alone on the last line */
+h1,h2,h3{font-family:var(--font-display);font-weight:650;color:var(--text);text-wrap:balance}
 h1{font-size:100px;line-height:.94;letter-spacing:-5px;margin-top:26px}
 h2{font-size:70px;line-height:1;letter-spacing:-3px;margin-top:26px}
 h3{font-size:40px;line-height:1.12;letter-spacing:-1px}
@@ -96,7 +97,7 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
 
 /* ---------- 06 quote ---------- */
 .p-quote .quote-mark{color:var(--accent);font-family:var(--font-serif);font-size:110px;line-height:.5;margin-top:56px}
-.p-quote .quote{margin-top:35px;color:var(--text);font-family:var(--font-serif);font-size:60px;line-height:1.17;letter-spacing:-1.5px;max-width:860px}
+.p-quote .quote{text-wrap:balance;margin-top:35px;color:var(--text);font-family:var(--font-serif);font-size:60px;line-height:1.17;letter-spacing:-1.5px;max-width:860px}
 .p-quote .quote-source{margin-top:35px;color:var(--muted);font-size:22px;letter-spacing:2px;text-transform:uppercase}
 
 /* ---------- 07 two-cards ---------- */
