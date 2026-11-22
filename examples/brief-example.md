@@ -14,6 +14,26 @@ python3 scripts/render_carousel.py --html carousels/turkish-coffee/index.html \
 
 No onboarding, no font install.
 
+## With a brand kit
+
+> "template 13, topik: tiga kesalahan seduh kopi di rumah, pakai brand kit Kopi Pagi"
+
+The agent reads `examples/brand-kit/brand.json` for the language and form of address (`id`, `kamu`), writes the copy, and leaves `Your Brand` and `@yourhandle` in the HTML. The render puts the brand on:
+
+```
+python3 scripts/render_carousel.py --html carousels/seduh-kopi/index.html \
+    --out carousels/seduh-kopi/ --slides 8 --check-fonts "Plus Jakarta Sans" \
+    --brand examples/brand-kit/brand.json
+```
+
+```
+brand: Kopi Pagi @kopipagi: 8 names, 1 addresses, 7 handles
+  logo on slides [1, 2, 3, 4, 5, 6, 7, 8]
+  accent on light slides: #b53a06 (from #c2410c, moved so text in it reads there)
+```
+
+The same HTML renders for another brand by passing another kit.
+
 ## Fast path in Indonesian
 
 > "pakai template 21, topik: foto produk pakai HP untuk jualan online"

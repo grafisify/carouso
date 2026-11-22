@@ -135,3 +135,6 @@ p{font-size:29px;line-height:1.42}
 .p-takeaway .takeaway-item p{font-size:28px;margin-top:6px}
 .p-takeaway .closer-cta{margin-top:44px;text-align:left}
 .p-takeaway .closer-cta .accent{display:inline-flex;align-items:center;height:88px;padding:0 40px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:28px;font-weight:800;letter-spacing:0;text-transform:none}
+/* A brand kit logo (render --brand) takes the place of the stand-in mark beside the name. */
+.topbar .b:has(.brand-logo)::before{display:none}
+.topbar .b .brand-logo{margin-right:0}
