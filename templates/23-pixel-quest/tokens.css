@@ -75,7 +75,9 @@ p{font-size:29px;line-height:1.45;letter-spacing:-.5px}
 .p-hook .cta{margin-top:50px;border-radius:0;background:var(--coin);color:#171433;font-family:var(--font-display);font-size:28px;font-weight:400;padding:26px 30px 22px;
   box-shadow:0 -6px 0 #fff,0 6px 0 #fff,-6px 0 0 #fff,6px 0 0 #fff}
 .p-hook .cta.arr::after{display:none}
-.p-hook .object{margin:-150px -72px 0;background-image:url("decor/quest.svg");background-position:center bottom;background-size:100% auto}
+.p-hook .object{margin:30px -72px 0;background-image:url("decor/quest.svg");background-position:center bottom;background-size:100% auto}
+/* the built-in scene tucks up behind the text; a custom image stays below it */
+.p-hook .object:not(:has(img)){margin-top:-150px}
 .p-hook .hook-foot{left:72px;right:72px;bottom:16px;font-family:var(--font-display);font-size:20px;letter-spacing:0;color:#fff}
 .p-hook .arrow-btn{width:58px;height:58px;border-radius:0;background:var(--coin);color:#171433}
 .p-hook .arrow-btn::before{width:30px;height:30px}
