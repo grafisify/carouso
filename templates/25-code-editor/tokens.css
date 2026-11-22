@@ -66,11 +66,11 @@ p{font-size:30px;line-height:1.45}
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
 .p-cover-bt .inner{inset:0 0 76px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
-.p-cover-bt .file{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 82px}
+.p-cover-bt .file{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:90px 82px 0}
 .p-cover-bt .kicker{margin:0}
 .p-cover-bt h1{font-size:118px;line-height:1;letter-spacing:-6px;margin-top:34px}
-.p-cover-bt .desc{width:auto;max-width:760px;margin:44px 0 0;font-size:34px}
-.p-cover-bt .term{flex:none;margin:0 44px 44px;padding:34px 40px;border-radius:var(--radius);background:var(--bg2);border:1px solid var(--line);
+.p-cover-bt .desc{width:auto;max-width:700px;margin:44px auto 0;font-size:34px}
+.p-cover-bt .term{flex:none;text-align:left;margin:0 44px 44px;padding:34px 40px;border-radius:var(--radius);background:var(--bg2);border:1px solid var(--line);
   font-family:var(--font-display);font-size:30px;font-weight:500;color:var(--text)}
 .p-cover-bt .term::before{content:"$ ";color:var(--accent);font-weight:700}
 .p-cover-bt .term::after{content:"";display:inline-block;width:16px;height:34px;margin-left:12px;vertical-align:-6px;background:var(--text)}
