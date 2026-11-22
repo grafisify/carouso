@@ -12,8 +12,9 @@ For each templates/NN-slug/ it verifies:
   - (warning only) no two adjacent slides share a pattern
 
 Exit 1 on any problem. Pass --render-cmd to print the matching render commands
-(one per line) for CI, and --format feed or --format story with it for the
-commands of the other two output sizes.
+(one per line) for CI, --format feed or --format story with it for the
+commands of the other two output sizes, and --brand brand.json with it to
+render every template with a brand kit.
 """
 import argparse
 import json
@@ -113,6 +114,8 @@ def main() -> int:
                     help="print one render command per template instead of a report")
     ap.add_argument("--format", choices=["portrait", "feed", "story"], default="portrait",
                     help="with --render-cmd: print the commands for this output format")
+    ap.add_argument("--brand", default=None,
+                    help="with --render-cmd: render every template with this brand.json, into out/brand/")
     args = ap.parse_args()
 
     fonts_declared = set(re.findall(r'font-family:\s*"([^"]+)"',
@@ -121,7 +124,9 @@ def main() -> int:
     if args.render_cmd:
         for d in tdirs:
             t = json.loads((d / "template.json").read_text())
-            if args.format == "portrait":
+            if args.brand:
+                size = f'--out out/brand/{d.name} --format {args.format} --brand {args.brand}'
+            elif args.format == "portrait":
                 size = f'--out out/{d.name} --width {t["size"]["width"]} --height {t["size"]["height"]}'
             else:
                 size = f'--out out/{args.format}/{d.name} --format {args.format}'

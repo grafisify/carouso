@@ -32,6 +32,7 @@ from pathlib import Path
 
 from playwright.async_api import async_playwright
 
+import brand
 import gates
 
 
@@ -62,7 +63,17 @@ async def main() -> int:
     ap.add_argument("--check-fonts", default="",
                     help="comma-separated font families that must be loaded, "
                          'e.g. "Baloo 2,Quicksand". Missing = exit 1.')
+    ap.add_argument("--brand", default=None,
+                    help="brand.json to put on the slides: name, handle, logo and accent colour "
+                         "(see scripts/brand.py). The HTML keeps its placeholders.")
     args = ap.parse_args()
+    kit = None
+    if args.brand:
+        try:
+            kit = brand.load(args.brand)
+        except brand.KitError as e:
+            print(f"GATE FAILED (brand): {e}", flush=True)
+            return 1
     if args.format:
         args.width, args.height = FORMATS[args.format]
 
@@ -89,6 +100,15 @@ async def main() -> int:
                 """f => { document.documentElement.classList.add('fmt-' + f);
                           return f === 'portrait' || !!getComputedStyle(document.documentElement).getPropertyValue('--slide-h').trim(); }""",
                 args.format)
+        if kit:
+            # before the fonts and images settle, so the logo and the new copy are waited for too
+            try:
+                for line in await brand.apply(page, kit, html):
+                    print(line, flush=True)
+            except brand.KitError as e:
+                print(f"GATE FAILED (brand): {e}", flush=True)
+                await browser.close()
+                return 1
         await page.evaluate(
             """async()=>{
                 // lazy images below the viewport never start loading, so decode() would hang
@@ -178,6 +198,14 @@ async def main() -> int:
         bad_look = {"contrast": [], "hidden": [], "overlap": [], "density": [], "safe": []}
         keep_clear = (STORY_CLEAR, args.height - STORY_CLEAR) if args.format == "story" else None
         lab = await browser.new_page()  # blank page whose canvas compares the captures
+        if kit:
+            try:
+                for line in await brand.settle(page, lab, kit, n, args.min_contrast or 4.5):
+                    print(line, flush=True)
+            except brand.KitError as e:
+                print(f"GATE FAILED (brand): {e}", flush=True)
+                await browser.close()
+                return 1
         for i in range(n):
             await page.evaluate(
                 f"""document.querySelectorAll('.slide').forEach((c,idx)=>{{

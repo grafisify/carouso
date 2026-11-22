@@ -62,3 +62,5 @@ h2{font-size:74px;letter-spacing:-2.8px;line-height:1.04}
 .p-news .dek{color:var(--muted);font-size:30px;margin-top:22px;max-width:none}
 .p-news .cta{margin-top:34px}
 .p-news .news-meta{position:absolute;left:82px;right:82px;bottom:max(52px,var(--safe-bottom,0px));margin:0;color:var(--soft)}
+/* A brand kit logo (render --brand) takes the place of the stand-in mark beside the name. */
+.p-news .news-head .b:has(.brand-logo)::before{display:none}

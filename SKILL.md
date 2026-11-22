@@ -18,10 +18,10 @@ Triggers: "template 3", "template no 3", "pakai template 3", "use template 2 for
 Files per template: `tokens.css` (the skin), `template.json` (name, fonts, size, slide sequence with patterns, modes and a `headline` budget per slide), `sample.html` (the finished sample carousel to copy from).
 
 1. **Resolve the template.** Read `templates/NN-slug/template.json`. If the person gave no number and no custom system exists, list every template (number, name, vibe) from the `template.json` files and ask which one. An unknown number gets the same list.
-2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle (the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), output format when the person names a platform or a ratio (see Output formats; default `portrait`), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change. Set `<html lang>` to the carousel language. For Indonesian, use the fixed-string table under "Indonesian copy".
+2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle, or a brand kit if they have one (see Brand kit; the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), output format when the person names a platform or a ratio (see Output formats; default `portrait`), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change. Set `<html lang>` to the carousel language. For Indonesian, use the fixed-string table under "Indonesian copy".
 3. **Plan from the sequence.** Start from the template `sequence`. Keep the cover first, the takeaway last, and the mode of each slide as listed. For a different slide count, drop or repeat middle slides in sequence order, keeping modes alternating and no two adjacent slides on the same pattern. Swap a middle pattern when the content fits another one better (numbers to `stat-band` or `big-number`, steps to `process-steps`, one line to `quote`), keeping that slide's mode. Use `cover-split` only when a verified cover image is supplied. A placed image goes on the slide as a `.photo` slot (see below), or on an `image-hero` slide when the photo is the point. Write the plan as a list (slide number, pattern, mode, one-line content) before building.
 4. **Write the copy** under the copy standards below. Replace every sample line. Nothing from the sample topic may remain. Write each headline to the slide's `headline` budget in `template.json`: `lines` is how many lines the layout was drawn for, `chars_per_line` is how many characters fit on one line and so the longest word that fits. A slide with `"lines": 2, "chars_per_line": 9` takes "Cari cahaya", never "Pencahayaan". Display templates are tight (21 Bauhaus and 23 Pixel Quest hold 8 to 11 characters a line), so choose the words to fit before building. Keep the sample's `<br>` rhythm and its one `.accent` span.
-5. **Build the HTML.** Create `carousels/<slug>/index.html` by copying the chosen template's `sample.html`. Change only the `tokens.css` link to `../../templates/NN-slug/tokens.css`. The `fonts.css` and `system.css` links already resolve from that depth. Keep or remove `<section>` blocks per the plan, copy pattern blocks from `design-system/patterns.html` (or another template's `sample.html` for the newer patterns; the name-to-class table is in `design-system/PATTERNS.md`) for added slides, apply the `mode-dark` class per the plan, fill in brand, handle, and the `NN / TT` counters.
+5. **Build the HTML.** Create `carousels/<slug>/index.html` by copying the chosen template's `sample.html`. Change only the `tokens.css` link to `../../templates/NN-slug/tokens.css`. The `fonts.css` and `system.css` links already resolve from that depth. Keep or remove `<section>` blocks per the plan, copy pattern blocks from `design-system/patterns.html` (or another template's `sample.html` for the newer patterns; the name-to-class table is in `design-system/PATTERNS.md`) for added slides, apply the `mode-dark` class per the plan, fill in brand, handle, and the `NN / TT` counters. With a brand kit, leave the brand and handle placeholders as they are; the render fills them in.
 6. **Images** pass the hard gate in Phase 2 step 4 below. Put local copies in `carousels/<slug>/images/` and log provenance in `carousels/<slug>/provenance.log`.
 7. **Render** with the fonts from `template.json` and the format from the brief:
 ```
@@ -132,6 +132,45 @@ Pick the format from the platform in the brief. Ask only when the person names a
 - How it works: the renderer puts `fmt-feed` or `fmt-story` on `<html>`, and `system.css` turns that into `--slide-h`, `--safe-top`, `--safe-bottom` (the two zone heights, 0 outside `story`) and `--safe-shift` (how far the content under the topbar moves down). Every bundled template positions its chrome with these.
 - A custom system approved before formats existed holds an older copy of `system.css` with no format rules, so `feed` and `story` fail the size gate and the renderer says why. Copy `design-system/system.css` over `design-systems/<name>/system.css` again, put that system's `:root` and `.slide.mode-dark` token blocks back, render the sample patterns at `portrait` to confirm the look is unchanged, then render the new format. Tell the person before touching a locked system.
 - On a custom system, anything placed with a fixed `top` or `bottom` needs the same treatment or `safe` will catch it: `bottom:max(34px,var(--safe-bottom,0px))` for text near the bottom edge, `height:calc(96px + var(--safe-bottom,0px));padding-bottom:var(--safe-bottom,0px)` for a full-bleed band, `top:calc(560px + var(--safe-shift,0px))` for art that must stay with the content. A rule that only one format needs goes behind `:root.fmt-feed` or `:root.fmt-story`.
+
+### Brand kit
+A brand kit puts one brand on any template at render time. It is a `brand.json` with its logo files beside it, kept outside the carousel folder so every carousel of that brand uses the same one. `examples/brand-kit/` is a working kit.
+
+```json
+{
+  "name": "Kopi Pagi",
+  "handle": "@kopipagi",
+  "url": "kopipagi.id",
+  "logo": "logo.svg",
+  "logo_on_dark": "logo-on-dark.svg",
+  "accent": "#c2410c",
+  "language": "id",
+  "address": "kamu"
+}
+```
+
+| Key | Effect |
+|---|---|
+| `name`, `handle` | Required. Replace the template's brand and handle placeholders (`brand_placeholder` and `handle_placeholder` in `template.json`) on every slide. |
+| `url` | Shown where a template has an address (`yourbrand.com`), written as the kit writes it, without `https://`. Without it the handle stands there. |
+| `logo` | SVG, PNG, JPG or WebP. Drawn beside the name on each slide, or beside the handle where the name is not shown. |
+| `logo_on_dark` | The version for dark surfaces. Used wherever the text beside the logo is light. |
+| `logo_type` | `"mark"` (default) sits before the name. `"wordmark"` takes the place of the name. |
+| `logo_tint` | `true` draws a one-colour logo in the colour of the text beside it, so one file works on every surface. |
+| `accent`, `accent_on_dark` | Replace the template's accent colour, on light and on dark slides. `accent_on_dark` needs `accent`. |
+| `language`, `address` | Read at the brief: the carousel language, and for Indonesian the form of address (`kamu`, `Anda`, `kita`). They change nothing in the render. |
+
+Render with `--brand`:
+```
+python3 scripts/render_carousel.py --html carousels/<slug>/index.html --out carousels/<slug> --slides 8 --brand brands/kopi-pagi/brand.json
+```
+
+- Keep the placeholders in the HTML. Write `Your Brand` and `@yourhandle` (or the template's own placeholders) exactly as the sample has them, so the same HTML renders for another brand.
+- The accent keeps the brand's hue. On a slide where text in it would fall under 4.5:1 it is made darker or lighter until it reads, and the renderer prints the colour it used (`accent on light slides: #b53a06 (from #c2410c ...)`). Only the accent changes: backgrounds, type and artwork stay the template's. Pick the template whose mood fits the brand, then let the kit colour it.
+- The kit goes on before the gates run. A name too long for its line, or a handle that runs into artwork, fails `word`, `edge`, `overlap` or `contrast` like any other copy. Shorten what the kit says, or pick a template with more room for it.
+- `GATE FAILED (brand)` names what is wrong with the kit itself: a missing key or file, a logo the browser cannot draw, or a logo that cannot be seen on some slides because it is the colour of the surface. For the last one add `logo_on_dark` or set `logo_tint`.
+- A custom design system takes a kit too, as long as its HTML says `Your Brand` and `@yourhandle`.
+- When a person gives a logo, colour and handle in the brief and has no kit yet, write the kit for them, show the three check slides, and tell them where the file is so the next carousel reuses it.
 
 ### 7. Final visual check and record
 Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern, full pattern sequence, and the mode of each slide (for example `{"cover": "cover-big-type", "sequence": ["cover-big-type", "two-cards", "takeaway"], "modes": ["light", "dark", "light"]}`).

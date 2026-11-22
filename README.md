@@ -345,6 +345,27 @@ python3 scripts/render_carousel.py --html carousels/<name>/index.html --out caro
 
 The slides reflow to the new height instead of being scaled. At 9:16 the topbar, footer and every line of text stay out of the top and bottom 250px, where the app draws its own buttons and captions.
 
+### Brand kit
+
+Put your name, handle, logo and accent colour in one `brand.json` and render any template with it. The HTML keeps its placeholders, so the same carousel renders for another brand.
+
+```json
+{
+  "name": "Kopi Pagi",
+  "handle": "@kopipagi",
+  "url": "kopipagi.id",
+  "logo": "logo.svg",
+  "logo_on_dark": "logo-on-dark.svg",
+  "accent": "#c2410c"
+}
+```
+
+```
+python3 scripts/render_carousel.py --html carousels/<name>/index.html --out carousels/<name> --slides 8 --brand examples/brand-kit/brand.json
+```
+
+The accent keeps its hue and is darkened or lightened only where text in it would be too faint to read. A name too long for its line, or a logo that cannot be seen on a dark slide, fails the render. Every key is listed under "Brand kit" in `SKILL.md`; `examples/brand-kit/` is a working kit.
+
 ## Package contents
 
 ```
@@ -367,11 +388,14 @@ carouso/
 │   ├── render_carousel.py    ← Playwright render with quality gates
 │   ├── gates.py              ← the pixel gates: contrast, covered or colliding text, density
 │   ├── test_gates.py         ← breaks a sample on purpose to prove each gate fires (runs in CI)
+│   ├── brand.py              ← the brand kit: name, handle, logo and accent on any template
+│   ├── test_brand.py         ← renders good and bad brand kits to prove each one is handled (runs in CI)
 │   ├── check_templates.py    ← consistency check for every template (runs in CI)
 │   ├── copy_budget.py        ← measures how many characters each slide's headline holds
 │   └── build_preview.py      ← compose rendered slides into a README preview sheet
 └── examples/
-    └── brief-example.md      ← a complete brief and how the skill handles it
+    ├── brief-example.md      ← a complete brief and how the skill handles it
+    └── brand-kit/            ← a working brand kit: brand.json and two logo files
 ```
 
 Output goes to `carousels/<name>/` (git-ignored).

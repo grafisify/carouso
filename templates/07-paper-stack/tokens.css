@@ -127,11 +127,11 @@ h1 .accent,h2 .accent{background:linear-gradient(transparent 64%,color-mix(in sr
 .p-poster h1,.p-poster .sub{position:relative;z-index:3}
 .p-poster h1{font-size:122px;line-height:.97;letter-spacing:-4.5px;color:var(--text);text-shadow:none;max-width:900px}
 .p-poster .sub{margin:34px 0 0;max-width:470px;font-size:32px;color:var(--muted)}
-.p-poster .poster-foot{position:absolute;left:82px;bottom:max(76px,var(--safe-bottom,0px));z-index:3;margin:0;font-size:24px;color:var(--text);letter-spacing:2.5px}
+.p-poster .poster-foot{position:absolute;left:0;bottom:max(60px,calc(var(--safe-bottom,0px) - 16px));z-index:3;margin:0;padding:16px 30px 16px 82px;border-radius:0 999px 999px 0;background:var(--bg);font-size:24px;color:var(--text);letter-spacing:2.5px}
 .p-poster .poster-foot::before{content:"";display:inline-block;width:56px;height:6px;border-radius:3px;background:var(--accent);margin-right:18px;vertical-align:.2em}
 .p-poster .arrow-btn{display:none}
 /* 9:16: the foot would sit on the paper stack once lifted out of the bottom zone, so it follows the sub */
-:root.fmt-story .p-poster .poster-foot{position:relative;left:auto;bottom:auto;margin-top:44px;justify-content:flex-start}
+:root.fmt-story .p-poster .poster-foot{position:relative;left:auto;bottom:auto;margin-top:44px;padding:0;border-radius:0;background:none;justify-content:flex-start}
 
 /* showcase tiles: palette swatches */
 .p-showcase .peek{background-color:var(--panel);border:0;border-radius:10px;box-shadow:0 0 0 1.5px var(--line2),0 24px 48px rgba(0,0,0,.12);
@@ -144,3 +144,6 @@ h1 .accent,h2 .accent{background:linear-gradient(transparent 64%,color-mix(in sr
 .p-showcase .peek.f{background-image:url("decor/sw-f.svg")}
 .p-showcase .peek .lab{color:var(--text)}
 .p-showcase .peek .who{background:var(--text);color:var(--bg);border-radius:8px}
+/* A brand kit logo (render --brand) takes the place of the stand-in mark beside the name. */
+.topbar .b:has(.brand-logo)::before,.p-poster .poster-head>span:first-child:has(.brand-logo)::before{display:none}
+.topbar .b .brand-logo,.p-poster .poster-head .brand-logo{margin-right:0}

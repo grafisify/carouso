@@ -41,6 +41,13 @@ jobs:
         run: python3 scripts/copy_budget.py
       - name: Check that each gate rejects a broken slide
         run: python3 scripts/test_gates.py
+      - name: Check that brand kits are applied and bad ones rejected
+        run: python3 scripts/test_brand.py
+      - name: Render every template with the example brand kit
+        run: |
+          set -e
+          python3 scripts/check_templates.py --render-cmd --brand examples/brand-kit/brand.json > render-brand.sh
+          bash -e render-brand.sh
       - uses: actions/upload-artifact@v4
         if: always()
         with:
