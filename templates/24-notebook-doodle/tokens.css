@@ -47,7 +47,7 @@
   linear-gradient(transparent 53px,var(--rule) 53px 56px);
   background-size:96px 112px,100% 100%,100% 56px;background-position:0 20px,0 0,0 34px;background-repeat:repeat-y,no-repeat,repeat}
 .slide::before{opacity:.05}
-.inner{inset:70px 76px 120px 160px}
+.inner{inset:max(70px,var(--safe-top,0px)) 76px max(120px,calc(86px + var(--safe-bottom,0px))) 160px}
 .topbar{height:60px;border:0;font-family:var(--font-display);font-size:38px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
 .footer{left:160px;right:76px;font-size:20px;font-weight:800;letter-spacing:1.5px;color:var(--muted)}
 
@@ -65,7 +65,7 @@ h1 .accent,h2 .accent{color:inherit;padding:0 .12em;margin:0 -.06em;
 
 /* cover */
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:70px 76px 120px 160px;padding:230px 0 0;align-items:center;justify-content:center;text-align:center}
+.p-cover-bt .inner{inset:max(70px,var(--safe-top,0px)) 76px max(120px,calc(86px + var(--safe-bottom,0px))) 160px;padding:230px 0 0 0;align-items:center;justify-content:center;text-align:center}
 .p-cover-bt .kicker{margin:0;align-self:center}
 .p-cover-bt h1{font-size:196px;line-height:.8;letter-spacing:-3px;margin-top:30px}
 .p-cover-bt .desc{width:auto;max-width:600px;margin:56px auto 0;font-size:34px;color:var(--muted)}

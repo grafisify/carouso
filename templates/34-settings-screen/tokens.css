@@ -30,12 +30,12 @@
   --off:#9aa085;
 }
 .slide::before{display:none}
-.inner{inset:64px 72px 116px}
+.inner{inset:max(64px,var(--safe-top,0px)) 72px max(116px,calc(76px + var(--safe-bottom,0px))) 72px}
 .topbar{height:60px;border:0;font-size:25px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
 .topbar .b{position:relative;padding-left:52px;font-size:29px;font-weight:800}
 .topbar .b::before{content:"";position:absolute;left:4px;top:50%;width:30px;height:4px;margin-top:-2px;border-radius:4px;background:var(--text)}
 .topbar .b::after{content:"";position:absolute;left:5px;top:50%;width:14px;height:14px;margin-top:-9px;border:solid var(--text);border-width:0 0 4px 4px;transform:rotate(45deg)}
-.footer{left:72px;right:72px;bottom:40px;font-size:22px;font-weight:800;letter-spacing:1.5px;color:var(--muted)}
+.footer{left:72px;right:72px;bottom:max(40px,var(--safe-bottom,0px));font-size:22px;font-weight:800;letter-spacing:1.5px;color:var(--muted)}
 
 /* the toggle, drawn on any element with data-state */
 [data-state]{display:inline-flex;align-items:center;gap:22px}
@@ -53,7 +53,7 @@ p{font-size:30px;line-height:1.4}
 /* cover: the title between two groups of switches */
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:64px 72px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:center}
+.p-cover-bt .inner{inset:max(64px,var(--safe-top,0px)) 72px max(116px,calc(76px + var(--safe-bottom,0px))) 72px;padding:0 0 0 0;align-items:stretch;justify-content:flex-start;text-align:center}
 .p-cover-bt .kicker{margin:auto 0 0}
 .p-cover-bt h1{text-transform:none;font-size:124px;line-height:.94;letter-spacing:-4px;margin:22px 0 0}
 .p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:none;margin:44px 0 0;display:flex;align-items:center;gap:26px;height:104px;padding:0 44px;border-radius:999px;background:var(--panel);font-size:32px;font-weight:600;color:var(--muted)}

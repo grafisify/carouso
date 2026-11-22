@@ -35,12 +35,21 @@ from playwright.async_api import async_playwright
 import gates
 
 
+FORMATS = {"portrait": (1080, 1440), "feed": (1080, 1350), "story": (1080, 1920)}
+# Stories and TikTok draw their own interface over the top and bottom of a 9:16
+# image. Must match --safe-top and --safe-bottom in design-system/system.css.
+STORY_CLEAR = 250
+
+
 async def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--html", required=True, help="carousel HTML file")
     ap.add_argument("--out", required=True, help="JPG output directory")
     ap.add_argument("--width", type=int, default=1080)
     ap.add_argument("--height", type=int, default=1440)
+    ap.add_argument("--format", choices=sorted(FORMATS), default=None,
+                    help="portrait 1080x1440 (default), feed 1080x1350 or story 1080x1920. "
+                         "Sets --width and --height and reflows the slides to that size.")
     ap.add_argument("--slides", type=int, default=10)
     ap.add_argument("--quality", type=int, default=88)
     ap.add_argument("--min-font", type=int, default=20,
@@ -54,7 +63,10 @@ async def main() -> int:
                     help="comma-separated font families that must be loaded, "
                          'e.g. "Baloo 2,Quicksand". Missing = exit 1.')
     args = ap.parse_args()
+    if args.format:
+        args.width, args.height = FORMATS[args.format]
 
+    fmt_aware = True
     html = Path(args.html).resolve()
     out = Path(args.out)
     if not html.exists():
@@ -70,6 +82,13 @@ async def main() -> int:
         # file:// so relative local image paths always resolve. "load" waits for
         # stylesheets, images and CSS backgrounds; then wait for fonts and decoding.
         await page.goto(html.as_uri(), wait_until="load")
+        if args.format:
+            # system.css sizes the slide and its safe zones from this class
+            # and a stylesheet copied before formats existed has no such rule
+            fmt_aware = await page.evaluate(
+                """f => { document.documentElement.classList.add('fmt-' + f);
+                          return f === 'portrait' || !!getComputedStyle(document.documentElement).getPropertyValue('--slide-h').trim(); }""",
+                args.format)
         await page.evaluate(
             """async()=>{
                 // lazy images below the viewport never start loading, so decode() would hang
@@ -156,7 +175,8 @@ async def main() -> int:
             return 1
 
         bad_overflow, bad_size, bad_edge, bad_word = [], [], [], []
-        bad_look = {"contrast": [], "hidden": [], "overlap": [], "density": []}
+        bad_look = {"contrast": [], "hidden": [], "overlap": [], "density": [], "safe": []}
+        keep_clear = (STORY_CLEAR, args.height - STORY_CLEAR) if args.format == "story" else None
         lab = await browser.new_page()  # blank page whose canvas compares the captures
         for i in range(n):
             await page.evaluate(
@@ -246,7 +266,7 @@ async def main() -> int:
                 bad_word.append(f"{i + 1} {wide[:3]}")
 
             # Legibility gates: contrast, covered or colliding text, density.
-            verdict = gates.judge(await gates.measure(page, lab, i), args.min_contrast, args.max_words)
+            verdict = gates.judge(await gates.measure(page, lab, i, keep_clear), args.min_contrast, args.max_words)
             for gate, found in verdict.items():
                 if found:
                     bad_look[gate].append(f"{i + 1} {found[:3]}")
@@ -257,6 +277,10 @@ async def main() -> int:
     failed = False
     if bad_size:
         print(f"GATE FAILED (size): slides {bad_size} (expected {args.width}x{args.height})", flush=True)
+        if not fmt_aware:
+            print(f"  The stylesheet has no rules for --format {args.format}: it was copied from system.css before "
+                  "formats existed. Copy design-system/system.css over it again and put the locked tokens "
+                  "(:root and .slide.mode-dark) back, or render with --format portrait.", flush=True)
         failed = True
     if bad_overflow:
         print(f"GATE FAILED (overflow): slides {bad_overflow} (content clipped or colliding)", flush=True)
@@ -273,6 +297,8 @@ async def main() -> int:
         "hidden": ("text covered by an image or shape", "shorten the copy or move the element"),
         "overlap": ("text sitting on other text", "shorten the copy or give the elements room"),
         "density": ("too many words on one slide", "cut the copy or split the slide"),
+        "safe": (f"text in the top or bottom {STORY_CLEAR}px, where the app draws over a 9:16 image",
+                 "position it with var(--safe-top) and var(--safe-bottom), or mark it data-decor"),
     }
     for gate, (what, fix) in advice.items():
         if bad_look[gate]:

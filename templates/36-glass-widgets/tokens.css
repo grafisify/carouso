@@ -45,10 +45,10 @@
   radial-gradient(74% 50% at 10% 100%,var(--b2) 0%,transparent 72%),
   var(--bg)}
 .slide::before{display:none}
-.inner{inset:64px 72px 116px}
+.inner{inset:max(64px,var(--safe-top,0px)) 72px max(116px,calc(76px + var(--safe-bottom,0px))) 72px}
 .topbar{height:60px;border:0;font-size:24px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted)}
 .topbar .b{font-size:28px;font-weight:800}
-.footer{left:72px;right:72px;bottom:40px;font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
+.footer{left:72px;right:72px;bottom:max(40px,var(--safe-bottom,0px));font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--muted)}
 
 /* the glass */
 .widget,.p-statement p,.p-stats .stat,.p-process .process-item,.p-bignumber .giant,.p-cards .card,.p-quote .quote,.p-takeaway .takeaway{
@@ -65,7 +65,7 @@ p{font-size:29px;line-height:1.42}
 
 /* cover: the title between two wide widgets */
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:64px 72px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:center}
+.p-cover-bt .inner{inset:max(64px,var(--safe-top,0px)) 72px max(116px,calc(76px + var(--safe-bottom,0px))) 72px;padding:0 0 0 0;align-items:stretch;justify-content:flex-start;text-align:center}
 .p-cover-bt .widgets{display:contents}
 .p-cover-bt .widget:first-child{order:1;margin-top:44px}
 .p-cover-bt .title{order:2}

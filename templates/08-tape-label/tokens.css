@@ -60,12 +60,12 @@ h2{font-size:76px;letter-spacing:-3px;line-height:1.02}
 .kicker{align-self:flex-start;background:var(--kb);color:var(--kf);padding:10px 22px 9px;border-radius:6px;letter-spacing:2.5px;transform:rotate(-2deg)}
 
 /* body slides: headline on a taped paper label, hazard-tape band at the foot */
-.slide:not(.p-label) .inner{inset:78px 82px 170px}
+.slide:not(.p-label) .inner{inset:max(78px,var(--safe-top,0px)) 82px calc(170px + var(--safe-bottom,0px)) 82px}
 .slide:not(.p-label) .content{padding:0 10px}
 .topbar{border-bottom:0;height:64px;font-size:22px}
 .topbar .b{background:var(--kb);color:var(--kf);padding:9px 18px;border-radius:6px;font-weight:800;letter-spacing:2px}
 .topbar span:last-child{display:inline-flex;align-items:center;justify-content:center;min-width:104px;height:48px;border-radius:999px;border:3px solid var(--text);color:var(--text);font-weight:800;letter-spacing:1px}
-.footer{left:0;right:0;bottom:0;height:112px;padding:0 82px;align-items:center;background:var(--band);color:var(--band-ink);font-size:24px;font-weight:800;letter-spacing:2.5px;z-index:4}
+.footer{left:0;right:0;bottom:0;height:calc(112px + var(--safe-bottom,0px));padding:0 82px;align-items:center;background:var(--band);color:var(--band-ink);font-size:24px;font-weight:800;letter-spacing:2.5px;z-index:4;padding-bottom:var(--safe-bottom,0px)}
 .footer::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px;background:repeating-linear-gradient(135deg,var(--band) 0 14px,transparent 14px 28px)}
 .footer span+span{display:inline-flex;align-items:center;gap:14px}
 .footer span+span::before{content:"";width:16px;height:16px;background:currentColor;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
@@ -104,13 +104,13 @@ h2{font-size:76px;letter-spacing:-3px;line-height:1.02}
 
 /* die-cut stickers on body slides, kept clear of the label and the band */
 .slide::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background-repeat:no-repeat}
-.p-statement::after{background-image:url("decor/sticker-burst.svg"),url("decor/sticker-heart.svg");background-size:230px auto,190px auto;background-position:780px 150px,-20px 1060px}
-.p-cards::after{background-image:url("decor/sticker-cursor.svg");background-size:200px auto;background-position:800px 140px}
-.p-process::after{background-image:url("decor/sticker-heart.svg");background-size:200px auto;background-position:800px 140px}
-.p-concept::after{background-image:url("decor/sticker-aster.svg"),url("decor/sticker-burst.svg");background-size:180px auto,210px auto;background-position:40px 1030px,790px 1000px}
-.p-stats::after{background-image:url("decor/sticker-aster.svg");background-size:200px auto;background-position:800px 140px}
-.p-quote::after{background-image:url("decor/sticker-burst.svg"),url("decor/sticker-cursor.svg");background-size:220px auto,180px auto;background-position:780px 140px,50px 1040px}
-.p-takeaway::after{background-image:url("decor/sticker-heart.svg");background-size:200px auto;background-position:800px 140px}
+.p-statement::after{background-image:url("decor/sticker-burst.svg"),url("decor/sticker-heart.svg");background-size:230px auto,190px auto;background-position:780px calc(150px + var(--safe-shift,0px)),-20px calc(1060px + var(--safe-shift,0px))}
+.p-cards::after{background-image:url("decor/sticker-cursor.svg");background-size:200px auto;background-position:800px calc(140px + var(--safe-shift,0px))}
+.p-process::after{background-image:url("decor/sticker-heart.svg");background-size:200px auto;background-position:800px calc(140px + var(--safe-shift,0px))}
+.p-concept::after{background-image:url("decor/sticker-aster.svg"),url("decor/sticker-burst.svg");background-size:180px auto,210px auto;background-position:40px calc(1030px + var(--safe-shift,0px)),790px calc(1000px + var(--safe-shift,0px))}
+.p-stats::after{background-image:url("decor/sticker-aster.svg");background-size:200px auto;background-position:800px calc(140px + var(--safe-shift,0px))}
+.p-quote::after{background-image:url("decor/sticker-burst.svg"),url("decor/sticker-cursor.svg");background-size:220px auto,180px auto;background-position:780px calc(140px + var(--safe-shift,0px)),50px calc(1040px + var(--safe-shift,0px))}
+.p-takeaway::after{background-image:url("decor/sticker-heart.svg");background-size:200px auto;background-position:800px calc(140px + var(--safe-shift,0px))}
 .p-label::after{display:none}
 
 /* cover-label: big left-aligned type, highlighted word on a tilted label, sticker cluster */
@@ -123,6 +123,8 @@ h2{font-size:76px;letter-spacing:-3px;line-height:1.02}
 .p-label .label .cta{position:absolute;right:-4px;bottom:-250px;width:190px;height:190px;border-radius:50%;padding:0;flex-direction:column;justify-content:center;
   font-size:30px;letter-spacing:1px;transform:rotate(12deg);box-shadow:6px 8px 0 var(--shd);z-index:5}
 .p-label .label .cta::after{margin:8px 0 0}
-.p-label .object{left:70px;right:70px;top:auto;bottom:150px;height:690px;background-image:url("decor/cluster.svg");background-position:center bottom}
-.p-label .label-url{left:0;right:0;bottom:0;height:112px;display:flex;align-items:center;justify-content:center;background:var(--band);color:var(--band-ink);font-size:26px;z-index:4}
+.p-label .object{left:70px;right:70px;top:auto;bottom:calc(150px + var(--safe-bottom,0px));height:690px;background-image:url("decor/cluster.svg");background-position:center bottom}
+/* 4:5 is 90px shorter: the cluster shrinks instead of climbing into the headline */
+:root.fmt-feed .p-label .object{height:600px}
+.p-label .label-url{left:0;right:0;bottom:0;height:calc(112px + var(--safe-bottom,0px));padding-bottom:var(--safe-bottom,0px);display:flex;align-items:center;justify-content:center;background:var(--band);color:var(--band-ink);font-size:26px;z-index:4}
 .p-label .label-url::before{content:"";position:absolute;left:0;right:0;top:-16px;height:16px;background:repeating-linear-gradient(135deg,var(--band) 0 14px,transparent 14px 28px)}

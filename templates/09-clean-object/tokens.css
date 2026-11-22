@@ -61,13 +61,13 @@ h1 .accent,h2 .accent{font-family:"Instrument Serif",Georgia,"Times New Roman",s
 
 /* cover-object */
 .p-objcover{background:var(--bg)}
-.p-objcover .object{background-image:url("decor/hero.svg");left:150px;right:150px;top:590px;height:580px}
+.p-objcover .object{background-image:url("decor/hero.svg");left:150px;right:150px;top:calc(590px + var(--safe-shift,0px));height:580px}
 .p-objcover .city::after{background-image:url("decor/city.svg")}
 .p-objcover h1{font-size:104px}
 .p-objcover .oc-head .b{font-size:36px;font-weight:800;letter-spacing:-1px}
 .p-objcover .oc-foot{color:#fff}
 /* pointer */
-.p-pointer .object{background-image:url("decor/hero.svg");right:-150px;top:470px;width:540px;height:540px}
+.p-pointer .object{background-image:url("decor/hero.svg");right:-150px;top:calc(470px + var(--safe-shift,0px));width:540px;height:540px}
 .p-pointer p strong{color:var(--accent)}
 /* showcase tiles */
 .p-showcase .peek{border:0}

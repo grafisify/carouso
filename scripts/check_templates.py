@@ -12,7 +12,8 @@ For each templates/NN-slug/ it verifies:
   - (warning only) no two adjacent slides share a pattern
 
 Exit 1 on any problem. Pass --render-cmd to print the matching render commands
-(one per line) for CI.
+(one per line) for CI, and --format feed or --format story with it for the
+commands of the other two output sizes.
 """
 import argparse
 import json
@@ -110,6 +111,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--render-cmd", action="store_true",
                     help="print one render command per template instead of a report")
+    ap.add_argument("--format", choices=["portrait", "feed", "story"], default="portrait",
+                    help="with --render-cmd: print the commands for this output format")
     args = ap.parse_args()
 
     fonts_declared = set(re.findall(r'font-family:\s*"([^"]+)"',
@@ -118,8 +121,11 @@ def main() -> int:
     if args.render_cmd:
         for d in tdirs:
             t = json.loads((d / "template.json").read_text())
-            print(f'python3 scripts/render_carousel.py --html templates/{d.name}/sample.html '
-                  f'--out out/{d.name} --width {t["size"]["width"]} --height {t["size"]["height"]} '
+            if args.format == "portrait":
+                size = f'--out out/{d.name} --width {t["size"]["width"]} --height {t["size"]["height"]}'
+            else:
+                size = f'--out out/{args.format}/{d.name} --format {args.format}'
+            print(f'python3 scripts/render_carousel.py --html templates/{d.name}/sample.html {size} '
                   f'--slides {len(t["sequence"])} --check-fonts "{",".join(t["fonts"])}"')
         return 0
 

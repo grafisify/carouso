@@ -47,7 +47,7 @@ h1{letter-spacing:-3px}
 h2{font-size:76px;letter-spacing:-3px;line-height:1.03}
 .kicker{letter-spacing:3px}
 .topbar{border-bottom:0;height:72px}
-.footer{bottom:40px;align-items:center;font-size:24px;font-weight:800;letter-spacing:2px;color:var(--text)}
+.footer{bottom:max(40px,var(--safe-bottom,0px));align-items:center;font-size:24px;font-weight:800;letter-spacing:2px;color:var(--text)}
 .footer .arrow-btn{width:64px;height:64px;border-radius:18px}
 .footer .arrow-btn::before{width:30px;height:30px}
 .p-cards .card,.p-mythfact .myth-grid{border:1px solid rgba(168,85,247,.45);border-radius:28px;box-shadow:0 0 44px rgba(168,85,247,.16)}

@@ -37,12 +37,12 @@
 .slide::before{display:none}
 
 /* canvas: tiles fill the slide, 16px gutters */
-.inner{inset:40px 40px 140px}
+.inner{inset:max(40px,var(--safe-top,0px)) 40px max(140px,calc(100px + var(--safe-bottom,0px))) 40px}
 .topbar{height:84px;border:0;gap:var(--gap);font-size:21px;font-weight:700;letter-spacing:1.5px}
 .topbar span{display:flex;align-items:center;height:100%;padding:0 40px;border-radius:999px;background:var(--panel);color:var(--text)}
 .topbar .b{flex:1}
 .topbar span:last-child{background:var(--tile2);color:var(--tile2-ink)}
-.footer{left:40px;right:40px;bottom:40px;height:84px;gap:var(--gap);font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--text)}
+.footer{left:40px;right:40px;bottom:max(40px,var(--safe-bottom,0px));height:84px;gap:var(--gap);font-size:21px;font-weight:700;letter-spacing:1.5px;color:var(--text)}
 .footer span{display:flex;align-items:center;padding:0 40px;border-radius:999px;background:var(--panel)}
 .footer span:first-child{flex:1}
 .content{justify-content:flex-start;margin-top:var(--gap)}
@@ -61,7 +61,7 @@ p{font-size:29px;line-height:1.4;letter-spacing:-.2px}
 /* cover */
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:40px 40px 140px;padding:0;margin-top:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:290px 1fr 150px;gap:var(--gap);
+.p-cover-bt .inner{inset:max(40px,var(--safe-top,0px)) 40px max(140px,calc(100px + var(--safe-bottom,0px))) 40px;padding:0 0 0 0;margin-top:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:290px 1fr 150px;gap:var(--gap);
   align-items:stretch;text-align:center;justify-content:stretch}
 .p-cover-bt .tile{background:var(--panel);border-radius:var(--radius);padding:48px;margin:0}
 .p-cover-bt .t-head{grid-area:2/1/3/3;display:flex;flex-direction:column;align-items:center}

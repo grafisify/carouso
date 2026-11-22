@@ -55,9 +55,9 @@ p{font-size:28px;letter-spacing:-.5px;line-height:1.5}
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt h1{font-size:88px}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:url("decor/smiley.svg") 760px 1010px/300px auto no-repeat,url("decor/cube.svg") 40px 1070px/190px auto no-repeat}
+.p-cover-bt::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:url("decor/smiley.svg") right 20px bottom max(130px,calc(96px + var(--safe-bottom,0px)))/300px auto no-repeat,url("decor/cube.svg") left 40px bottom max(156px,calc(122px + var(--safe-bottom,0px)))/190px auto no-repeat}
 .p-note .note-tab{font-size:54px}
-.p-note .object.s1{right:-40px;top:780px;width:150px;height:158px;background-image:url("decor/halo.svg");transform:rotate(10deg)}
-.p-note .object.s2{right:30px;bottom:130px;width:280px;height:280px;background-image:url("decor/smiley.svg")}
+.p-note .object.s1{right:-40px;top:calc(780px + var(--safe-shift,0px));width:150px;height:158px;background-image:url("decor/halo.svg");transform:rotate(10deg)}
+.p-note .object.s2{right:30px;bottom:max(130px,calc(96px + var(--safe-bottom,0px)));width:280px;height:280px;background-image:url("decor/smiley.svg")}
 .p-note .content{max-width:900px}
 .p-note h2{padding-left:118px}

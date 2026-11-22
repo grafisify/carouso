@@ -50,8 +50,8 @@ h2{font-size:74px;letter-spacing:-2.8px;line-height:1.04}
 
 /* cover-news: photo melts into paper, story card with a chip straddling its top edge */
 .p-news{background:var(--bg)}
-.p-news .news-photo::after{background:linear-gradient(180deg,rgba(0,0,0,.34) 0,rgba(0,0,0,0) 22%,rgba(246,242,234,0) 50%,color-mix(in srgb,var(--bg) 88%,transparent) 82%,var(--bg) 100%)}
-.p-news .inner{padding:78px 82px 140px}
+.p-news .news-photo::after{background:linear-gradient(180deg,rgba(0,0,0,.34) 0,rgba(0,0,0,.34) var(--safe-top,0px),rgba(0,0,0,0) calc(22% + var(--safe-top,0px)),rgba(246,242,234,0) 50%,color-mix(in srgb,var(--bg) 88%,transparent) 82%,var(--bg) 100%)}
+.p-news .inner{padding:max(78px,var(--safe-top,0px)) 82px max(140px,calc(88px + var(--safe-bottom,0px))) 82px}
 .p-news .news-head .b{display:inline-flex;align-items:center;gap:14px;letter-spacing:2px}
 .p-news .news-head .b::before{content:"";width:26px;height:26px;border-radius:50%;border:6px solid #fff;box-sizing:border-box}
 .p-news .news-stack{position:static;background:#fff;color:var(--text);border-radius:44px;padding:42px 56px 52px;box-shadow:0 26px 60px rgba(40,25,10,.24)}
@@ -61,4 +61,4 @@ h2{font-size:74px;letter-spacing:-2.8px;line-height:1.04}
 .p-news h1 .accent{color:var(--accent)}
 .p-news .dek{color:var(--muted);font-size:30px;margin-top:22px;max-width:none}
 .p-news .cta{margin-top:34px}
-.p-news .news-meta{position:absolute;left:82px;right:82px;bottom:52px;margin:0;color:var(--soft)}
+.p-news .news-meta{position:absolute;left:82px;right:82px;bottom:max(52px,var(--safe-bottom,0px));margin:0;color:var(--soft)}

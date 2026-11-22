@@ -31,13 +31,13 @@
   --line2:rgba(245,244,239,.11);
 }
 .slide::before{display:none}
-.inner{inset:64px 76px 150px}
+.inner{inset:max(64px,var(--safe-top,0px)) 76px calc(150px + var(--safe-bottom,0px)) 76px}
 .topbar{height:64px;border:0;font-size:28px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
 .topbar .b{display:flex;align-items:center;gap:16px;color:var(--accent)}
 .topbar .b::before{content:"";width:20px;height:20px;border:solid var(--accent);border-width:0 0 5px 5px;transform:rotate(45deg);margin-left:6px}
 /* toolbar */
-.footer{left:0;right:0;bottom:0;height:104px;padding:0 76px;align-items:center;border-top:1px solid var(--line);background:var(--bg2);
-  font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted);z-index:3}
+.footer{left:0;right:0;bottom:0;height:calc(104px + var(--safe-bottom,0px));padding:0 76px;align-items:center;border-top:1px solid var(--line);background:var(--bg2);
+  font-size:24px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted);z-index:3;padding-bottom:var(--safe-bottom,0px)}
 .footer span:last-child{color:var(--accent)}
 
 /* type */
@@ -51,8 +51,10 @@ p{font-size:30px;line-height:1.45}
 /* cover */
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:64px 76px 150px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
+.p-cover-bt .inner{inset:max(64px,var(--safe-top,0px)) 76px calc(150px + var(--safe-bottom,0px)) 76px;padding:0 0 0 0;align-items:stretch;justify-content:flex-start;text-align:left}
 .p-cover-bt .doc{flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding-top:210px}
+/* 4:5 is 90px shorter: the pad that centers the headline gives that back */
+:root.fmt-feed .p-cover-bt .doc{padding-top:120px}
 .p-cover-bt .kicker{margin:0;align-self:center}
 .p-cover-bt h1{font-size:210px;line-height:.84;letter-spacing:-6px;margin-top:30px}
 .p-cover-bt .desc{width:auto;max-width:none;margin:50px 0 0;font-size:36px}

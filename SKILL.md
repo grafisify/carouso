@@ -18,15 +18,15 @@ Triggers: "template 3", "template no 3", "pakai template 3", "use template 2 for
 Files per template: `tokens.css` (the skin), `template.json` (name, fonts, size, slide sequence with patterns, modes and a `headline` budget per slide), `sample.html` (the finished sample carousel to copy from).
 
 1. **Resolve the template.** Read `templates/NN-slug/template.json`. If the person gave no number and no custom system exists, list every template (number, name, vibe) from the `template.json` files and ask which one. An unknown number gets the same list.
-2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle (the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change. Set `<html lang>` to the carousel language. For Indonesian, use the fixed-string table under "Indonesian copy".
+2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle (the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), output format when the person names a platform or a ratio (see Output formats; default `portrait`), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change. Set `<html lang>` to the carousel language. For Indonesian, use the fixed-string table under "Indonesian copy".
 3. **Plan from the sequence.** Start from the template `sequence`. Keep the cover first, the takeaway last, and the mode of each slide as listed. For a different slide count, drop or repeat middle slides in sequence order, keeping modes alternating and no two adjacent slides on the same pattern. Swap a middle pattern when the content fits another one better (numbers to `stat-band` or `big-number`, steps to `process-steps`, one line to `quote`), keeping that slide's mode. Use `cover-split` only when a verified cover image is supplied. A placed image goes on the slide as a `.photo` slot (see below), or on an `image-hero` slide when the photo is the point. Write the plan as a list (slide number, pattern, mode, one-line content) before building.
 4. **Write the copy** under the copy standards below. Replace every sample line. Nothing from the sample topic may remain. Write each headline to the slide's `headline` budget in `template.json`: `lines` is how many lines the layout was drawn for, `chars_per_line` is how many characters fit on one line and so the longest word that fits. A slide with `"lines": 2, "chars_per_line": 9` takes "Cari cahaya", never "Pencahayaan". Display templates are tight (21 Bauhaus and 23 Pixel Quest hold 8 to 11 characters a line), so choose the words to fit before building. Keep the sample's `<br>` rhythm and its one `.accent` span.
 5. **Build the HTML.** Create `carousels/<slug>/index.html` by copying the chosen template's `sample.html`. Change only the `tokens.css` link to `../../templates/NN-slug/tokens.css`. The `fonts.css` and `system.css` links already resolve from that depth. Keep or remove `<section>` blocks per the plan, copy pattern blocks from `design-system/patterns.html` (or another template's `sample.html` for the newer patterns; the name-to-class table is in `design-system/PATTERNS.md`) for added slides, apply the `mode-dark` class per the plan, fill in brand, handle, and the `NN / TT` counters.
 6. **Images** pass the hard gate in Phase 2 step 4 below. Put local copies in `carousels/<slug>/images/` and log provenance in `carousels/<slug>/provenance.log`.
-7. **Render** with the template's size and fonts from `template.json`:
+7. **Render** with the fonts from `template.json` and the format from the brief:
 ```
 python3 scripts/render_carousel.py --html carousels/<slug>/index.html --out carousels/<slug>/ \
-    --width 1080 --height 1440 --slides <N> --check-fonts "<fonts from template.json, comma separated>"
+    --format portrait --slides <N> --check-fonts "<fonts from template.json, comma separated>"
 ```
 Fix the HTML until every gate passes. Never waive a gate.
 8. **Final visual check** as in Phase 2 step 7, then deliver `slide_01.jpg` to `slide_NN.jpg`. Templates need no `last-used.json`, because modes come from the template.
@@ -66,7 +66,7 @@ Never edit the shared `design-system/system.css`: every template builds on it. S
 Get this clear before starting. Ask about anything missing. Do not guess.
 - Topic and angle, as one hook sentence.
 - Design system: which locked system to use. Default to the most recently approved one. Ask when several exist. (On the template path, the template is the design system.)
-- Slide count (default 6-10) and size (default 1080x1440, which is what `system.css` renders; a different height needs a matching `.slide` height override).
+- Slide count (default 6-10) and output format (default `portrait`, 1080x1440; see Output formats).
 - Images. For each image: the source (uploaded file path, direct URL, or article URL), the target slide, and the role (hero, split, or inline). Without an explicit placement map, use no images.
 
 ### 2. Plan the composition
@@ -96,10 +96,10 @@ Start from the locked `system.css` (copy the `<style>` content or link the file)
 Run `scripts/render_carousel.py`:
 ```
 python3 scripts/render_carousel.py --html <file.html> --out <dir-output> \
-    --width 1080 --height 1440 --slides 6 \
+    --format portrait --slides 6 \
     --check-fonts "Plus Jakarta Sans"
 ```
-(Adjust width, height, slides, and fonts to the brief and the system tokens.)
+(Adjust format, slides, and fonts to the brief and the system tokens.)
 The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, when a checked font failed to load, when an `<img>` failed to load, when text is cut off by the slide edge (elements inside `.peek` or `[data-bleed]` may bleed on purpose), or when a word is wider than the line it sits on. For that last one, pick a shorter word; do not shrink the type.
 
 Three more gates judge the rendered pixels, so they also catch what a photo or a decoration does to the text:
@@ -110,9 +110,28 @@ Three more gates judge the rendered pixels, so they also catch what a photo or a
 | `hidden` / `overlap` | An image or shape covers text, or two text elements sit on each other. Long copy pushing a headline under the cover art is the usual cause. | Shorten the copy to the `headline` budget. Do not shrink the type or nudge elements with inline offsets. |
 | `density` | A slide holds more than 80 visible words, counting the topbar and footer. | Cut the copy or split the slide in two. |
 
-Text that is decoration on purpose (a watermark numeral, a ghost word behind the headline) opts out of `contrast`, `hidden` and `overlap` with `data-decor` on the element. Never put `data-decor` on copy the reader is meant to read.
+A fourth pixel gate runs on `--format story` only: `safe` fails when a line of text sits in the top or bottom 250px of the slide (see Output formats). Text inside `.peek` and `[data-bleed]` cards counts here, even though the other gates let those cards run off the slide. It is read off the rendered pixels, so outlines, shadows and tilted labels count too.
+
+Text that is decoration on purpose (a watermark numeral, a ghost word behind the headline) opts out of `contrast`, `hidden`, `overlap` and `safe` with `data-decor` on the element. Never put `data-decor` on copy the reader is meant to read.
 
 Fix the HTML and re-render until it passes. Never waive the gate manually, and never raise `--max-words` or lower `--min-contrast` to get a render through.
+
+### Output formats
+One HTML file renders at three sizes. `--format` sets the size and reflows the slides to it. Nothing is scaled or letterboxed, and the HTML does not change.
+
+| `--format` | Size | Use for |
+|---|---|---|
+| `portrait` (default) | 1080x1440, 3:4 | Instagram and Facebook carousels. This is the size the samples and the `headline` budgets are drawn for. |
+| `feed` | 1080x1350, 4:5 | Instagram feed posts and LinkedIn, when the person asks for 4:5. |
+| `story` | 1080x1920, 9:16 | TikTok photo mode, Instagram and Facebook Stories, Reels covers. |
+
+Pick the format from the platform in the brief. Ask only when the person names a platform that takes more than one. To deliver two formats, render the same HTML twice into two output folders.
+
+- `feed` is 90px shorter. The width is the same, so the `chars_per_line` budget holds, but a slide that was full at `portrait` can overflow. Cut a line of copy; do not shrink the type.
+- `story` keeps every line of text out of the top 250px and the bottom 250px, where the app draws its own interface (account name, close button, caption, reply bar). The topbar and footer move inside that area, bands and backgrounds still bleed to the edge, and the content centers in the 1420px between. The `safe` gate fails the render when text lands in either zone.
+- How it works: the renderer puts `fmt-feed` or `fmt-story` on `<html>`, and `system.css` turns that into `--slide-h`, `--safe-top`, `--safe-bottom` (the two zone heights, 0 outside `story`) and `--safe-shift` (how far the content under the topbar moves down). Every bundled template positions its chrome with these.
+- A custom system approved before formats existed holds an older copy of `system.css` with no format rules, so `feed` and `story` fail the size gate and the renderer says why. Copy `design-system/system.css` over `design-systems/<name>/system.css` again, put that system's `:root` and `.slide.mode-dark` token blocks back, render the sample patterns at `portrait` to confirm the look is unchanged, then render the new format. Tell the person before touching a locked system.
+- On a custom system, anything placed with a fixed `top` or `bottom` needs the same treatment or `safe` will catch it: `bottom:max(34px,var(--safe-bottom,0px))` for text near the bottom edge, `height:calc(96px + var(--safe-bottom,0px));padding-bottom:var(--safe-bottom,0px)` for a full-bleed band, `top:calc(560px + var(--safe-shift,0px))` for art that must stay with the content. A rule that only one format needs goes behind `:root.fmt-feed` or `:root.fmt-story`.
 
 ### 7. Final visual check and record
 Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern, full pattern sequence, and the mode of each slide (for example `{"cover": "cover-big-type", "sequence": ["cover-big-type", "two-cards", "takeaway"], "modes": ["light", "dark", "light"]}`).
@@ -188,7 +207,7 @@ A rewrite, for calibration:
 - Contrast: body, muted, footer, and accent text hold at least 4.5:1 against their background and panel (WCAG AA). The render gate measures it on the pixels, so a custom system finds out on its first render of `patterns.html` whether its tokens hold in both modes.
 - Color: 60 percent base, 30 percent secondary, 10 percent accent.
 - Consistency: topbar, footer, kicker, cards, radius, and shadows never change style across slides. Patterns vary. Tokens do not.
-- Safe zones: content stays inside the `.inner` box (78px top and bottom, 82px left and right). Only the topbar and footer chrome sit closer, at 34px from the edge. No text may be cut by the slide edge.
+- Safe zones: content stays inside the `.inner` box (78px top and bottom, 82px left and right). Only the topbar and footer chrome sit closer, at 34px from the edge. No text may be cut by the slide edge. At `--format story` all text also stays out of the top and bottom 250px.
 - Anti-collision: fixed zones with vertical flex flow. Elements that touch are a failed design.
 
 ## Output contract
