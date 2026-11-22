@@ -207,14 +207,16 @@ async ({pairs, name, handle, logo, logoOnDark, wordmark, tint, accent, accentOnD
       const named = alone(name), host = named || alone(handle);
       if (!host) { report.bare.push(i + 1); return; }
       // Light text means a dark surface. A mid-tone label (a link blue) reads on
-      // both, so there the fill behind it decides.
+      // both, so there the fill behind it decides: the nearest one inside the slide,
+      // or the slide's mode where that is a gradient or a picture.
       const ink = rgba(getComputedStyle(host).color);
-      let behind = null;
-      for (let n = host; n && !behind; n = n.parentElement) {
-        const c = rgba(getComputedStyle(n).backgroundColor);
-        if (c && c[3] > 0.5) behind = c;
+      let behind = null, drawn = false;
+      for (let n = host; n && !behind && !drawn; n = n === s ? null : n.parentElement) {
+        const cs = getComputedStyle(n), c = rgba(cs.backgroundColor);
+        if (c && c[3] > 0.5) behind = c; else drawn = cs.backgroundImage !== 'none';
       }
-      const onDark = ink && (lum(ink) > 0.4 || (lum(ink) > 0.175 && behind && lum(behind) < lum(ink)));
+      const darkBehind = behind ? lum(behind) < lum(ink) : s.classList.contains('mode-dark');
+      const onDark = ink && (lum(ink) > 0.4 || (lum(ink) > 0.175 && darkBehind));
       const src = logoOnDark && onDark ? logoOnDark : logo;
       // a tag of its own, so no template rule for span or i lands on it
       const el = document.createElement(tint ? 'brand-logo' : 'img');
