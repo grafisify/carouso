@@ -66,6 +66,7 @@ async def main() -> int:
     if args.format:
         args.width, args.height = FORMATS[args.format]
 
+    fmt_aware = True
     html = Path(args.html).resolve()
     out = Path(args.out)
     if not html.exists():
@@ -83,7 +84,11 @@ async def main() -> int:
         await page.goto(html.as_uri(), wait_until="load")
         if args.format:
             # system.css sizes the slide and its safe zones from this class
-            await page.evaluate("f => document.documentElement.classList.add('fmt-' + f)", args.format)
+            # and a stylesheet copied before formats existed has no such rule
+            fmt_aware = await page.evaluate(
+                """f => { document.documentElement.classList.add('fmt-' + f);
+                          return f === 'portrait' || !!getComputedStyle(document.documentElement).getPropertyValue('--slide-h').trim(); }""",
+                args.format)
         await page.evaluate(
             """async()=>{
                 // lazy images below the viewport never start loading, so decode() would hang
@@ -272,6 +277,10 @@ async def main() -> int:
     failed = False
     if bad_size:
         print(f"GATE FAILED (size): slides {bad_size} (expected {args.width}x{args.height})", flush=True)
+        if not fmt_aware:
+            print(f"  The stylesheet has no rules for --format {args.format}: it was copied from system.css before "
+                  "formats existed. Copy design-system/system.css over it again and put the locked tokens "
+                  "(:root and .slide.mode-dark) back, or render with --format portrait.", flush=True)
         failed = True
     if bad_overflow:
         print(f"GATE FAILED (overflow): slides {bad_overflow} (content clipped or colliding)", flush=True)
