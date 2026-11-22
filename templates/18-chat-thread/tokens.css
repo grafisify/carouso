@@ -65,10 +65,10 @@ p{font-size:30px;line-height:1.4;font-weight:600}
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
 .p-cover-bt .inner{inset:48px 56px 160px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
-.p-cover-bt .thread{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:10px}
+.p-cover-bt .thread{flex:1;display:flex;flex-direction:column;justify-content:center;padding-bottom:30px}
 .p-cover-bt .kicker{margin:0}
 .p-cover-bt .desc{width:auto;font-size:42px;margin-top:34px}
-.p-cover-bt h1{font-size:128px;line-height:.96;letter-spacing:-5px;padding:48px 52px 54px;margin-top:26px}
+.p-cover-bt h1{align-self:stretch;max-width:none;text-align:center;font-size:128px;line-height:.96;letter-spacing:-5px;padding:56px 44px 62px;margin-top:26px}
 .p-cover-bt .typing{align-self:flex-start;margin-top:26px;display:flex;gap:14px;padding:34px 40px;background:var(--panel);border-radius:var(--radius) var(--radius) var(--radius) 12px}
 .p-cover-bt .typing i{width:22px;height:22px;border-radius:50%;background:var(--muted);opacity:.45}
 .p-cover-bt .typing i:nth-child(2){opacity:.7}

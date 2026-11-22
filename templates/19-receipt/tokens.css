@@ -62,8 +62,8 @@ p{font-size:27px;line-height:1.45;letter-spacing:-.4px}
 .p-cover-bt .inner{inset:104px 130px 250px;padding:0;justify-content:flex-start;align-items:stretch;text-align:center}
 .p-cover-bt .shop{font-size:34px;font-weight:700;letter-spacing:6px;text-transform:uppercase;padding-bottom:24px;border-bottom:3px dashed var(--line)}
 .p-cover-bt .kicker{margin:26px 0 0}
-.p-cover-bt h1{font-size:104px;line-height:.98;letter-spacing:-5px;margin-top:86px;text-align:left}
-.p-cover-bt .desc{width:auto;margin:40px 0 0;text-align:left;font-size:30px;color:var(--text)}
+.p-cover-bt h1{font-size:104px;line-height:.98;letter-spacing:-5px;margin-top:auto}
+.p-cover-bt .desc{width:auto;margin:40px 0 0;font-size:30px;color:var(--text)}
 .p-cover-bt .meta{margin-top:auto;padding-top:28px;border-top:3px dashed var(--line);justify-content:space-between;font-size:26px;font-weight:700;letter-spacing:0;color:var(--text)}
 .p-cover-bt .meta span:first-child{color:var(--text)}
 .p-cover-bt .stamp{position:absolute;right:24px;bottom:130px;padding:14px 26px 12px;border:6px solid var(--accent);color:var(--accent);font-size:54px;font-weight:700;

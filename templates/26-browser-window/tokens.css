@@ -64,12 +64,12 @@ p{font-size:30px;line-height:1.42}
 .p-cover-bt{background:var(--desk)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
 .p-cover-bt .inner{inset:44px 44px 124px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
-.p-cover-bt .page{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 60px 20px;
-  background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--accent) 16%,transparent),transparent 46%)}
-.p-cover-bt .kicker{margin:0}
+.p-cover-bt .page{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:60px 60px 0;
+  background:radial-gradient(circle at 50% 0,color-mix(in srgb,var(--accent) 16%,transparent),transparent 52%)}
+.p-cover-bt .kicker{margin:0;align-self:center}
 .p-cover-bt h1{font-size:128px;line-height:.92;letter-spacing:-6.5px;margin-top:36px}
-.p-cover-bt .desc{width:auto;max-width:720px;margin:44px 0 0;font-size:34px}
-.p-cover-bt .cta{align-self:flex-start;margin-top:56px}
+.p-cover-bt .desc{width:auto;max-width:740px;margin:44px auto 0;font-size:34px}
+.p-cover-bt .cta{align-self:center;margin-top:56px}
 
 /* stat-band: metric tiles */
 .p-stats .stat-row{margin-top:60px;border:0;gap:20px}

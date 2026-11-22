@@ -47,14 +47,14 @@ p{font-size:29px;line-height:1.42}
 /* cover: the listing header */
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
-.p-cover-bt .inner{inset:64px 76px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
-.p-cover-bt .icon{flex:none;position:relative;width:360px;height:360px;margin-top:56px;border-radius:82px;overflow:hidden;
+.p-cover-bt .inner{inset:64px 76px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:center}
+.p-cover-bt .icon{flex:none;position:relative;width:360px;height:360px;margin:100px auto -76px;transform:scale(.78);transform-origin:50% 0;border-radius:82px;overflow:hidden;
   background:linear-gradient(150deg,var(--icon1) 0%,var(--icon2) 55%,var(--icon3) 100%);box-shadow:0 30px 60px rgba(10,99,209,.28)}
 .p-cover-bt .icon::before{content:"";position:absolute;left:78px;top:150px;width:54px;height:96px;border:solid #fff;border-width:0 30px 30px 0;transform:rotate(42deg);transform-origin:0 0;left:154px;top:56px;width:64px;height:114px;border-width:0 36px 36px 0}
-.p-cover-bt .kicker{margin:auto 0 0}
+.p-cover-bt .kicker{margin:84px 0 0}
 .p-cover-bt h1{text-transform:none;font-size:118px;line-height:.94;letter-spacing:-5px;margin:18px 0 0}
-.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:760px;margin:30px 0 0;font-size:35px;color:var(--muted)}
-.p-cover-bt .get{flex:none;display:flex;align-items:center;gap:32px;margin:56px 0 24px;font-size:25px;line-height:1.3;color:var(--muted)}
+.p-cover-bt .desc{text-transform:none;letter-spacing:0;width:auto;max-width:760px;margin:30px auto 0;font-size:35px;color:var(--muted)}
+.p-cover-bt .get{flex:none;display:flex;flex-direction:column;align-items:center;gap:26px;margin:60px 0 0;font-size:25px;line-height:1.3;color:var(--muted)}
 .p-cover-bt .get b{display:inline-flex;align-items:center;justify-content:center;height:96px;min-width:240px;padding:0 48px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-size:38px;font-weight:800}
 
 /* stat-band: the ratings strip */
