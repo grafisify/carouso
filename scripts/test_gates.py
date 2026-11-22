@@ -48,6 +48,9 @@ CASES = [
     ("sample reflowed to 9:16", None, "", "", "--format", "story"),
     ("text under the app interface of a 9:16 slide", "safe", BODY,
      BODY + '<p style="position:absolute;left:0;top:-60px">Posted this morning</p>', "--format", "story"),
+    ("a card that bleeds off the slide still keeps its text out of the 9:16 zones", "safe", BODY,
+     BODY + '<div data-bleed style="position:absolute;left:82px;bottom:-40px;height:200px"><span>Layout</span></div>',
+     "--format", "story"),
     ("the same text is fine at 3:4", None, BODY,
      BODY + '<p style="position:absolute;left:0;top:-60px">Posted this morning</p>'),
 ]

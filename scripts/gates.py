@@ -10,9 +10,10 @@ are compared in a canvas on a blank page, so nothing beyond Playwright is needed
     "lines":   one entry per visible line of text, with the contrast against
                what is painted behind it and the longest stretch with no ink,
     "overlap": pairs of text lines from different elements that sit on each other,
+    "cut":     where the text of .peek and [data-bleed] cards sits, for the safe gate only,
   }
-  judge(info, min_contrast, max_words) -> {"contrast": [...], "hidden": [...],
-                                           "overlap": [...], "density": [...]}
+  judge(info, min_contrast, max_words, keep_clear) -> {"contrast": [...], "hidden": [...],
+                                           "overlap": [...], "density": [...], "safe": [...]}
 """
 import base64
 
@@ -22,10 +23,13 @@ HIDE_TEXT = (
     "text-decoration-color:transparent!important}"
 )
 # Text that is decoration on purpose opts out of the legibility gates.
-EXEMPT = '.peek,[data-bleed],[data-decor],[aria-hidden="true"]'
+DECOR = '[data-decor],[aria-hidden="true"]'
+# Cards that run off the slide on purpose: their text may be cut, so it skips the
+# legibility gates too, but it is still copy and must stay out of the story zones.
+BLEED = '.peek,[data-bleed]'
 
 COLLECT = """
-([i, exempt]) => {
+([i, decor, bleed]) => {
   const s = document.querySelectorAll('.slide')[i];
   const b = s.getBoundingClientRect();
   // Painting the colour and reading the pixel back handles every CSS notation:
@@ -41,7 +45,7 @@ COLLECT = """
     }
     return known[c];
   };
-  const blocks = [], lines = [];
+  const blocks = [], lines = [], cut = [];
   const pen = document.createElement('canvas').getContext('2d');
   let words = 0;
   const w = document.createTreeWalker(s, NodeFilter.SHOW_TEXT);
@@ -69,7 +73,15 @@ COLLECT = """
     if (opacity < 0.05 || !inked) continue;
     words += text.split(/\\s+/).filter(t => /[\\p{L}\\p{N}]/u.test(t)).length;
     // decoration opts out, and so do marks with no letter or digit (quote marks, arrows)
-    if (el.closest(exempt) || !/[\\p{L}\\p{N}]/u.test(text)) continue;
+    if (el.closest(decor) || !/[\\p{L}\\p{N}]/u.test(text)) continue;
+    if (el.closest(bleed)) {
+      for (const q of rects) {
+        const x = Math.max(0, q.left - b.left), x2 = Math.min(b.width, q.right - b.left);
+        const top = Math.max(0, q.top - b.top), bottom = Math.min(b.height, q.bottom - b.top);
+        if (x2 - x >= 6 && bottom - top >= 6) cut.push({text: text.slice(0, 28), top, bottom});
+      }
+      continue;
+    }
     if (fill[3] * opacity < 0.05) continue;   // outlined or gradient text has no one colour to measure
     while (block !== s && /^(inline|contents)/.test(getComputedStyle(block).display)) block = block.parentElement;
     let blockId = blocks.indexOf(block);
@@ -102,7 +114,7 @@ COLLECT = """
     const oh = Math.min(p.bottom, q.bottom) - Math.max(p.top, q.top);
     if (ow > 8 && oh > 0.3 * Math.min(p.bottom - p.top, q.bottom - q.top)) overlap.push([p.text, q.text]);
   }
-  return {words, lines, overlap};
+  return {words, lines, overlap, cut};
 }
 """
 
@@ -181,7 +193,7 @@ async ([shown, hidden, lines]) => {
 
 async def measure(page, lab, i):
     """Measure slide i. The slide must already be the only one displayed."""
-    info = await page.evaluate(COLLECT, [i, EXEMPT])
+    info = await page.evaluate(COLLECT, [i, DECOR, BLEED])
     el = page.locator(".slide").nth(i)
     # JPEG is ten times faster to capture than PNG and the thresholds below absorb its noise
     shown = await el.screenshot(type="jpeg", quality=92)
@@ -205,9 +217,10 @@ def judge(info, min_contrast=4.5, max_words=80, keep_clear=None):
     keep_clear is (top, bottom): the first and last slide rows text may occupy.
     """
     bad = {"contrast": [], "hidden": [], "overlap": [], "density": [], "safe": []}
-    for line in info["lines"]:
+    for line in info["lines"] + info.get("cut", []):
         if keep_clear and (line["top"] < keep_clear[0] - 1 or line["bottom"] > keep_clear[1] + 1):
             bad["safe"].append(f"'{line['text']}'")
+    for line in info["lines"]:
         need = min(min_contrast, 3.0) if is_large(line) else min_contrast
         if min_contrast and round(line["contrast"], 2) < need:
             bad["contrast"].append(f"'{line['text']}' {line['contrast']:.2f}:1 (needs {need}:1)")
