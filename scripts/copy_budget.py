@@ -46,7 +46,10 @@ MEASURE = """
     const charWidth = probe.getBoundingClientRect().width / ref.length;
     // two-character words wrap at every step, so the widest line is the usable width
     el.textContent = 'n '.repeat(400);
-    const width = el.getBoundingClientRect().width;
+    // content box only: padding and borders hold no text
+    const width = el.getBoundingClientRect().width
+      - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)
+      - parseFloat(cs.borderLeftWidth) - parseFloat(cs.borderRightWidth);
     el.innerHTML = saved;
     el.style.textWrap = savedWrap;
     return {chars_per_line: Math.floor(width / charWidth), lines};

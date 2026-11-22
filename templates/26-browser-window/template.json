@@ -73,7 +73,7 @@
       "pattern": "quote",
       "mode": "light",
       "headline": {
-        "chars_per_line": 21,
+        "chars_per_line": 18,
         "lines": 2
       }
     },

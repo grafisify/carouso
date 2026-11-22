@@ -19,7 +19,7 @@
       "pattern": "cover-big-type",
       "mode": "light",
       "headline": {
-        "chars_per_line": 26,
+        "chars_per_line": 21,
         "lines": 1
       }
     },
@@ -28,7 +28,7 @@
       "pattern": "kicker-statement",
       "mode": "dark",
       "headline": {
-        "chars_per_line": 29,
+        "chars_per_line": 23,
         "lines": 1
       }
     },
@@ -37,7 +37,7 @@
       "pattern": "process-steps",
       "mode": "light",
       "headline": {
-        "chars_per_line": 31,
+        "chars_per_line": 25,
         "lines": 2
       }
     },
@@ -46,7 +46,7 @@
       "pattern": "big-number",
       "mode": "dark",
       "headline": {
-        "chars_per_line": 31,
+        "chars_per_line": 25,
         "lines": 1
       }
     },
@@ -55,7 +55,7 @@
       "pattern": "two-cards",
       "mode": "light",
       "headline": {
-        "chars_per_line": 31,
+        "chars_per_line": 25,
         "lines": 1
       }
     },
@@ -64,7 +64,7 @@
       "pattern": "myth-fact",
       "mode": "dark",
       "headline": {
-        "chars_per_line": 31,
+        "chars_per_line": 25,
         "lines": 1
       }
     },
@@ -73,7 +73,7 @@
       "pattern": "quote",
       "mode": "light",
       "headline": {
-        "chars_per_line": 20,
+        "chars_per_line": 18,
         "lines": 4
       }
     },
@@ -82,7 +82,7 @@
       "pattern": "takeaway",
       "mode": "dark",
       "headline": {
-        "chars_per_line": 31,
+        "chars_per_line": 25,
         "lines": 1
       }
     }

@@ -64,7 +64,7 @@
       "pattern": "quote",
       "mode": "dark",
       "headline": {
-        "chars_per_line": 30,
+        "chars_per_line": 27,
         "lines": 2
       }
     },

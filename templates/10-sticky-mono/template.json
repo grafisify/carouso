@@ -28,7 +28,7 @@
       "pattern": "note",
       "mode": "light",
       "headline": {
-        "chars_per_line": 27,
+        "chars_per_line": 24,
         "lines": 1
       }
     },
@@ -46,7 +46,7 @@
       "pattern": "note",
       "mode": "light",
       "headline": {
-        "chars_per_line": 27,
+        "chars_per_line": 24,
         "lines": 1
       }
     },
