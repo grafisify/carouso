@@ -58,7 +58,8 @@ COLLECT = """
     let opacity = 1, block = el, clipped = false;
     for (let a = el; a && a !== s.parentElement; a = a.parentElement) {
       const as = getComputedStyle(a);
-      opacity *= parseFloat(as.opacity);
+      // content-visibility:hidden keeps the boxes but paints nothing inside
+      opacity *= as.contentVisibility === 'hidden' ? 0 : parseFloat(as.opacity);
       clipped = clipped || as.backgroundClip.includes('text');
     }
     const fill = rgba(cs.webkitTextFillColor || cs.color);

@@ -35,7 +35,8 @@ CASES = [
      '<div class="kicker" style="color:color-mix(in srgb, var(--text) 92%, var(--bg))">The gap</div>'),
     ("unpainted words do not count", None, BODY,
      BODY + '<div style="display:none"><p>' + "Hidden draft copy. " * 40 + '</p></div>'
-          + '<p style="color:transparent;position:absolute">' + "Clear ink. " * 40 + '</p>'),
+          + '<p style="color:transparent;position:absolute">' + "Clear ink. " * 40 + '</p>'
+          + '<div style="content-visibility:hidden;position:absolute;left:90px;top:90px;width:600px"><p>' + "Skipped by the browser. " * 30 + '</p></div>'),
     ("faint text inside display:contents", "contrast", BODY,
      '<p style="display:contents;color:#b9b9b9">Here is how to write the ones you will.</p>'),
     ("outlined words still count", "density", BODY,
