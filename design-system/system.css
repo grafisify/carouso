@@ -12,7 +12,7 @@
   --panel:#1d1f20;         /* card panel */
   --text:#f1eee7;          /* main text */
   --muted:#a5a39d;         /* secondary text */
-  --soft:#73736f;          /* faint text (footer, meta) */
+  --soft:#8e8c86;          /* faint text (footer, meta) */
   --accent:#c7a66a;        /* the one accent color */
   --line:rgba(241,238,231,.14);
   --line2:rgba(241,238,231,.08);
@@ -345,7 +345,7 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
    the block below matches this file's (already dark) theme. */
 .slide.mode-dark{
   --bg:#101112; --bg2:#171819; --panel:#1d1f20;
-  --text:#f1eee7; --muted:#a5a39d; --soft:#73736f;
+  --text:#f1eee7; --muted:#a5a39d; --soft:#8e8c86;
   --accent:#c7a66a;
   --line:rgba(241,238,231,.16); --line2:rgba(241,238,231,.09);
 }

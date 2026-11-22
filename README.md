@@ -20,7 +20,7 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
-| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, text under 20px, a missing font, a broken image, text cut off by the slide edge, or a word too wide for its line. Defects never ship silently. |
+| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, text under 20px, a missing font, a broken image, text cut off by the slide edge, a word too wide for its line, text under 4.5:1 contrast, text covered by an image or by other text, or more than 80 words on a slide. Defects never ship silently. |
 
 ## Pick a template
 
@@ -350,6 +350,8 @@ carouso/
 │   └── templates/            ← the thirty-six template previews
 ├── scripts/
 │   ├── render_carousel.py    ← Playwright render with quality gates
+│   ├── gates.py              ← the pixel gates: contrast, covered or colliding text, density
+│   ├── test_gates.py         ← breaks a sample on purpose to prove each gate fires (runs in CI)
 │   ├── check_templates.py    ← consistency check for every template (runs in CI)
 │   ├── copy_budget.py        ← measures how many characters each slide's headline holds
 │   └── build_preview.py      ← compose rendered slides into a README preview sheet
