@@ -29,6 +29,8 @@ CASES = [
     ("body pulled onto the headline", "overlap", BODY,
      '<p style="margin-top:-90px">Here is how to write the ones you will.</p>'),
     ("slide packed with words", "density", BODY, "<p>" + "Notes pile up when nobody reads them. " * 12 + "</p>"),
+    ("light text on a dark slide written with color-mix()", None, '<div class="kicker">The gap</div>',
+     '<div class="kicker" style="color:color-mix(in srgb, var(--text) 92%, var(--bg))">The gap</div>'),
     ("decoration opts out", None, BODY,
      BODY + '<div data-decor style="position:absolute;right:90px;top:260px;font-size:60px;color:#e4e4e4">draft</div>'),
 ]

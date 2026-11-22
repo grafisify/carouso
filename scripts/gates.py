@@ -28,7 +28,19 @@ COLLECT = """
 ([i, exempt]) => {
   const s = document.querySelectorAll('.slide')[i];
   const b = s.getBoundingClientRect();
-  const rgba = (c) => { const m = c.match(/[\\d.]+/g).map(Number); return [m[0], m[1], m[2], m.length > 3 ? m[3] : 1]; };
+  // Painting the colour and reading the pixel back handles every CSS notation:
+  // color-mix() computes to color(srgb 1 1 1), whose channels are not bytes.
+  const dot = document.createElement('canvas').getContext('2d', {willReadFrequently: true});
+  dot.canvas.width = dot.canvas.height = 1;
+  const known = {};
+  const rgba = (c) => {
+    if (!known[c]) {
+      dot.clearRect(0, 0, 1, 1); dot.fillStyle = c; dot.fillRect(0, 0, 1, 1);
+      const d = dot.getImageData(0, 0, 1, 1).data;
+      known[c] = [d[0], d[1], d[2], d[3] / 255];
+    }
+    return known[c];
+  };
   const blocks = [], lines = [];
   const pen = document.createElement('canvas').getContext('2d');
   let words = 0;
