@@ -10,9 +10,9 @@ are compared in a canvas on a blank page, so nothing beyond Playwright is needed
     "lines":   one entry per visible line of text, with the contrast against
                what is painted behind it and the longest stretch with no ink,
     "overlap": pairs of text lines from different elements that sit on each other,
-    "cut":     where the text of .peek and [data-bleed] cards sits, for the safe gate only,
+    "unsafe":  text painted outside keep_clear, when it is given,
   }
-  judge(info, min_contrast, max_words, keep_clear) -> {"contrast": [...], "hidden": [...],
+  judge(info, min_contrast, max_words) -> {"contrast": [...], "hidden": [...],
                                            "overlap": [...], "density": [...], "safe": [...]}
 """
 import base64
@@ -27,6 +27,16 @@ DECOR = '[data-decor],[aria-hidden="true"]'
 # Cards that run off the slide on purpose: their text may be cut, so it skips the
 # legibility gates too, but it is still copy and must stay out of the story zones.
 BLEED = '.peek,[data-bleed]'
+# Hides everything the copy paints (fill, outline, shadow, underline, gradient
+# fill, SVG text) and leaves decoration alone, for the safe gate.
+_COPY = ':not(' + ','.join(f'{d},{d} *' for d in DECOR.split(',')) + ')'
+HIDE_COPY = (
+    ','.join(f'{_COPY}{e}' for e in ('', '::before', '::after', '::marker')) +
+    "{-webkit-text-fill-color:transparent!important;text-shadow:none!important;"
+    "-webkit-text-stroke-color:transparent!important;text-decoration-color:transparent!important}"
+    f"[data-gate-clip]{_COPY}{{background-image:none!important;background-color:transparent!important}}"
+    f"text{_COPY},tspan{_COPY},textPath{_COPY}{{fill:transparent!important;stroke:transparent!important}}"
+)
 
 COLLECT = """
 ([i, decor, bleed]) => {
@@ -45,7 +55,7 @@ COLLECT = """
     }
     return known[c];
   };
-  const blocks = [], lines = [], cut = [];
+  const blocks = [], lines = [], boxes = [];
   const pen = document.createElement('canvas').getContext('2d');
   let words = 0;
   const w = document.createTreeWalker(s, NodeFilter.SHOW_TEXT);
@@ -72,26 +82,19 @@ COLLECT = """
       || (parseFloat(cs.webkitTextStrokeWidth) > 0 && rgba(cs.webkitTextStrokeColor)[3] >= 0.05);
     if (opacity < 0.05 || !inked) continue;
     words += text.split(/\\s+/).filter(t => /[\\p{L}\\p{N}]/u.test(t)).length;
-    // decoration opts out, and so do marks with no letter or digit (quote marks, arrows)
-    if (el.closest(decor) || !/[\\p{L}\\p{N}]/u.test(text)) continue;
+    if (el.closest(decor)) continue;
+    // every painted piece of copy, so the safe gate can name what it finds in a story zone
+    for (const q of rects) boxes.push({text: text.slice(0, 28), x: q.left - b.left, y: q.top - b.top,
+                                       x2: q.right - b.left, y2: q.bottom - b.top});
+    // marks with no letter or digit (quote marks, arrows) skip the legibility gates
+    if (!/[\\p{L}\\p{N}]/u.test(text)) continue;
     // Where the glyphs really are inside the line box: a 300px numeral has a
     // tall box but its ink stops well short of the label under it.
     pen.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
     const shown = cs.textTransform === 'uppercase' ? text.toUpperCase() : text;
     const m = pen.measureText(shown);
     const box = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
-    // scaled to the rect, which is taller than the line box on rotated text
-    const ink = (q) => { const k = q.height / box;
-      return [q.top - b.top + k * (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent),
-              q.top - b.top + k * (m.fontBoundingBoxAscent + m.actualBoundingBoxDescent)]; };
-    if (el.closest(bleed)) {
-      for (const q of rects) {
-        const x = Math.max(0, q.left - b.left), x2 = Math.min(b.width, q.right - b.left);
-        const [top, bottom] = ink(q).map(v => Math.min(b.height, Math.max(0, v)));
-        if (x2 - x >= 6 && bottom - top >= 2) cut.push({text: text.slice(0, 28), top, bottom});
-      }
-      continue;
-    }
+    if (el.closest(bleed)) continue;
     if (fill[3] * opacity < 0.05) continue;   // outlined or gradient text has no one colour to measure
     while (block !== s && /^(inline|contents)/.test(getComputedStyle(block).display)) block = block.parentElement;
     let blockId = blocks.indexOf(block);
@@ -101,7 +104,10 @@ COLLECT = """
       const x = Math.max(0, q.left - b.left), y = Math.max(0, q.top - b.top);
       const x2 = Math.min(b.width, q.right - b.left), y2 = Math.min(b.height, q.bottom - b.top);
       if (x2 - x < 6 || y2 - y < 6) continue;
-      const [top, bottom] = ink(q);
+      // scaled to the rect, which is taller than the line box on rotated text
+      const k = q.height / box;
+      const top = q.top - b.top + k * (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent);
+      const bottom = q.top - b.top + k * (m.fontBoundingBoxAscent + m.actualBoundingBoxDescent);
       lines.push({text: text.slice(0, 28), block: blockId, x, y, w: x2 - x, h: y2 - y, top, bottom,
                   color: [fill[0], fill[1], fill[2]], alpha: fill[3] * opacity,
                   size: parseFloat(cs.fontSize), weight: parseInt(cs.fontWeight) || 400});
@@ -115,7 +121,7 @@ COLLECT = """
     const oh = Math.min(p.bottom, q.bottom) - Math.max(p.top, q.top);
     if (ow > 8 && oh > 0.3 * Math.min(p.bottom - p.top, q.bottom - q.top)) overlap.push([p.text, q.text]);
   }
-  return {words, lines, overlap, cut};
+  return {words, lines, overlap, boxes};
 }
 """
 
@@ -192,8 +198,54 @@ async ([shown, hidden, lines]) => {
 """
 
 
-async def measure(page, lab, i):
-    """Measure slide i. The slide must already be the only one displayed."""
+# Which copy leaves a mark in a strip of the slide: the strip as rendered against
+# the strip with the copy hidden. Read off the pixels, so rotation, outlines,
+# shadows, text-transform and generated content need no modelling.
+ZONE = """
+async ([shown, hidden, top, boxes]) => {
+  const load = async (b64) => {
+    const img = new Image();
+    img.src = 'data:image/png;base64,' + b64;
+    await img.decode();
+    const c = document.createElement('canvas');
+    c.width = img.naturalWidth; c.height = img.naturalHeight;
+    const g = c.getContext('2d', {willReadFrequently: true});
+    g.drawImage(img, 0, 0);
+    return g.getImageData(0, 0, c.width, c.height);
+  };
+  const A = await load(shown), B = await load(hidden), w = A.width, h = A.height;
+  const ink = new Uint8Array(w * h);
+  let total = 0, first = -1;
+  for (let k = 0; k < w * h; k++) {
+    const d = Math.abs(A.data[4 * k] - B.data[4 * k]) + Math.abs(A.data[4 * k + 1] - B.data[4 * k + 1])
+            + Math.abs(A.data[4 * k + 2] - B.data[4 * k + 2]);
+    if (d > 48) { ink[k] = 1; total++; if (first < 0) first = Math.floor(k / w); }
+  }
+  const found = [];
+  // an outline or a shadow reaches a little past the box of its text: look there
+  // only when no box holds the ink, or the neighbours of the culprit get named too
+  for (const pad of [0, 12]) {
+    if (found.length || total < 4) break;
+    for (const q of boxes) {
+      const x = Math.max(0, Math.floor(q.x - pad)), x2 = Math.min(w, Math.ceil(q.x2 + pad));
+      const y = Math.max(0, Math.floor(q.y - pad - top)), y2 = Math.min(h, Math.ceil(q.y2 + pad - top));
+      let n = 0;
+      for (let py = y; py < y2; py++) for (let px = x; px < x2; px++) n += ink[py * w + px];
+      if (n >= 4 && !found.includes(q.text)) found.push(q.text);
+    }
+  }
+  // generated content has no text node to name
+  if (!found.length && total >= 4) found.push('text at y=' + (top + first));
+  return found;
+}
+"""
+
+
+async def measure(page, lab, i, keep_clear=None):
+    """Measure slide i. The slide must already be the only one displayed.
+
+    keep_clear is (top, bottom): the first and last slide rows copy may be painted on.
+    """
     info = await page.evaluate(COLLECT, [i, DECOR, BLEED])
     el = page.locator(".slide").nth(i)
     # JPEG is ten times faster to capture than PNG and the thresholds below absorb its noise
@@ -204,6 +256,23 @@ async def measure(page, lab, i):
     px = await lab.evaluate(ANALYZE, [base64.b64encode(shown).decode(), base64.b64encode(hidden).decode(), info["lines"]])
     for line, m in zip(info["lines"], px):
         line.update(m)
+    if keep_clear:
+        box = await el.bounding_box()
+        # one row of grace on each side, for anti-aliasing
+        strips = [(0, keep_clear[0] - 1), (keep_clear[1] + 1, box["height"])]
+        clips = [{"x": box["x"], "y": box["y"] + y, "width": box["width"], "height": y2 - y} for y, y2 in strips]
+        await page.evaluate(
+            """i => { for (const e of document.querySelectorAll('.slide')[i].querySelectorAll('*'))
+                 if (getComputedStyle(e).backgroundClip.includes('text')) e.setAttribute('data-gate-clip', ''); }""", i)
+        shown = [await page.screenshot(type="png", clip=c) for c in clips]
+        style = await page.add_style_tag(content=HIDE_COPY)
+        hidden = [await page.screenshot(type="png", clip=c) for c in clips]
+        await style.evaluate("s => s.remove()")
+        await page.evaluate("document.querySelectorAll('[data-gate-clip]').forEach(e => e.removeAttribute('data-gate-clip'))")
+        info["unsafe"] = []
+        for (y, _), a, b in zip(strips, shown, hidden):
+            info["unsafe"] += await lab.evaluate(
+                ZONE, [base64.b64encode(a).decode(), base64.b64encode(b).decode(), y, info["boxes"]])
     return info
 
 
@@ -212,15 +281,10 @@ def is_large(line):
     return line["size"] >= 66 or (line["size"] >= 52 and line["weight"] >= 700)
 
 
-def judge(info, min_contrast=4.5, max_words=80, keep_clear=None):
-    """Turn the measurements of one slide into gate failures. Empty lists mean pass.
-
-    keep_clear is (top, bottom): the first and last slide rows text may occupy.
-    """
+def judge(info, min_contrast=4.5, max_words=80):
+    """Turn the measurements of one slide into gate failures. Empty lists mean pass."""
     bad = {"contrast": [], "hidden": [], "overlap": [], "density": [], "safe": []}
-    for line in info["lines"] + info.get("cut", []):
-        if keep_clear and (line["top"] < keep_clear[0] - 1 or line["bottom"] > keep_clear[1] + 1):
-            bad["safe"].append(f"'{line['text']}'")
+    bad["safe"] = [f"'{t}'" for t in dict.fromkeys(info.get("unsafe", []))]
     for line in info["lines"]:
         need = min(min_contrast, 3.0) if is_large(line) else min_contrast
         if min_contrast and round(line["contrast"], 2) < need:

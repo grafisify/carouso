@@ -266,7 +266,7 @@ async def main() -> int:
                 bad_word.append(f"{i + 1} {wide[:3]}")
 
             # Legibility gates: contrast, covered or colliding text, density.
-            verdict = gates.judge(await gates.measure(page, lab, i), args.min_contrast, args.max_words, keep_clear)
+            verdict = gates.judge(await gates.measure(page, lab, i, keep_clear), args.min_contrast, args.max_words)
             for gate, found in verdict.items():
                 if found:
                     bad_look[gate].append(f"{i + 1} {found[:3]}")
