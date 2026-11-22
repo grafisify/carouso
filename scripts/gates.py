@@ -74,11 +74,21 @@ COLLECT = """
     words += text.split(/\\s+/).filter(t => /[\\p{L}\\p{N}]/u.test(t)).length;
     // decoration opts out, and so do marks with no letter or digit (quote marks, arrows)
     if (el.closest(decor) || !/[\\p{L}\\p{N}]/u.test(text)) continue;
+    // Where the glyphs really are inside the line box: a 300px numeral has a
+    // tall box but its ink stops well short of the label under it.
+    pen.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    const shown = cs.textTransform === 'uppercase' ? text.toUpperCase() : text;
+    const m = pen.measureText(shown);
+    const box = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
+    // scaled to the rect, which is taller than the line box on rotated text
+    const ink = (q) => { const k = q.height / box;
+      return [q.top - b.top + k * (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent),
+              q.top - b.top + k * (m.fontBoundingBoxAscent + m.actualBoundingBoxDescent)]; };
     if (el.closest(bleed)) {
       for (const q of rects) {
         const x = Math.max(0, q.left - b.left), x2 = Math.min(b.width, q.right - b.left);
-        const top = Math.max(0, q.top - b.top), bottom = Math.min(b.height, q.bottom - b.top);
-        if (x2 - x >= 6 && bottom - top >= 6) cut.push({text: text.slice(0, 28), top, bottom});
+        const [top, bottom] = ink(q).map(v => Math.min(b.height, Math.max(0, v)));
+        if (x2 - x >= 6 && bottom - top >= 2) cut.push({text: text.slice(0, 28), top, bottom});
       }
       continue;
     }
@@ -86,21 +96,12 @@ COLLECT = """
     while (block !== s && /^(inline|contents)/.test(getComputedStyle(block).display)) block = block.parentElement;
     let blockId = blocks.indexOf(block);
     if (blockId < 0) blockId = blocks.push(block) - 1;
-    // Where the glyphs really are inside the line box: a 300px numeral has a
-    // tall box but its ink stops well short of the label under it.
-    pen.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-    const shown = cs.textTransform === 'uppercase' ? text.toUpperCase() : text;
-    const m = pen.measureText(shown);
-    const box = m.fontBoundingBoxAscent + m.fontBoundingBoxDescent;
     for (const q of rects) {
       if (q.width < 6 || q.height < 6) continue;
       const x = Math.max(0, q.left - b.left), y = Math.max(0, q.top - b.top);
       const x2 = Math.min(b.width, q.right - b.left), y2 = Math.min(b.height, q.bottom - b.top);
       if (x2 - x < 6 || y2 - y < 6) continue;
-      // scaled to the rect, which is taller than the line box on rotated text
-      const k = q.height / box;
-      const top = q.top - b.top + k * (m.fontBoundingBoxAscent - m.actualBoundingBoxAscent);
-      const bottom = q.top - b.top + k * (m.fontBoundingBoxAscent + m.actualBoundingBoxDescent);
+      const [top, bottom] = ink(q);
       lines.push({text: text.slice(0, 28), block: blockId, x, y, w: x2 - x, h: y2 - y, top, bottom,
                   color: [fill[0], fill[1], fill[2]], alpha: fill[3] * opacity,
                   size: parseFloat(cs.fontSize), weight: parseInt(cs.fontWeight) || 400});
