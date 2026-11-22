@@ -110,7 +110,7 @@ Three more gates judge the rendered pixels, so they also catch what a photo or a
 | `hidden` / `overlap` | An image or shape covers text, or two text elements sit on each other. Long copy pushing a headline under the cover art is the usual cause. | Shorten the copy to the `headline` budget. Do not shrink the type or nudge elements with inline offsets. |
 | `density` | A slide holds more than 80 visible words, counting the topbar and footer. | Cut the copy or split the slide in two. |
 
-A fourth pixel gate runs on `--format story` only: `safe` fails when a line of text sits in the top or bottom 250px of the slide (see Output formats).
+A fourth pixel gate runs on `--format story` only: `safe` fails when a line of text sits in the top or bottom 250px of the slide (see Output formats). Text inside `.peek` and `[data-bleed]` cards counts here, even though the other gates let those cards run off the slide.
 
 Text that is decoration on purpose (a watermark numeral, a ghost word behind the headline) opts out of `contrast`, `hidden`, `overlap` and `safe` with `data-decor` on the element. Never put `data-decor` on copy the reader is meant to read.
 
