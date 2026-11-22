@@ -32,6 +32,7 @@ KEYS = {"name", "handle", "url", "logo", "logo_on_dark", "logo_type", "logo_tint
         "accent", "accent_on_dark", "language", "address"}
 LOGO_FILES = {".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp"}
 # What a template with no template.json (a custom system) calls its brand.
+BASE = {"--bg", "--bg2", "--panel", "--text", "--muted", "--soft", "--line", "--line2"}
 PLACEHOLDERS = {"brand_placeholder": "Your Brand", "handle_placeholder": "@yourhandle"}
 
 
@@ -64,8 +65,9 @@ def load(path):
         raise KitError(f'{path.name}: "logo_type" is "mark" or "wordmark"')
     if not isinstance(kit.get("logo_tint", False), bool):
         raise KitError(f'{path.name}: "logo_tint" is true or false')
-    if "logo_on_dark" in kit and "logo" not in kit:
-        raise KitError(f'{path.name}: "logo_on_dark" needs "logo" as well')
+    for key in ("logo", "accent"):
+        if f"{key}_on_dark" in kit and key not in kit:
+            raise KitError(f'{path.name}: "{key}_on_dark" needs "{key}" as well')
     for key in ("logo", "logo_on_dark"):
         if key not in kit:
             continue
@@ -91,7 +93,9 @@ def tokens(html):
         if "://" not in href and file.is_file():
             text += file.read_text(encoding="utf-8")
     names = set(re.findall(r"(--[\w-]+)\s*:", text))
-    return sorted(names - {"--accent", "--news-accent", "--on-accent"})
+    # the surfaces and text colours are not the accent, even where one matches it:
+    # a page whose background is the other mode's accent keeps its background
+    return sorted(names - {"--accent", "--news-accent", "--on-accent"} - BASE)
 
 
 def swaps(kit, html):
@@ -106,16 +110,17 @@ def swaps(kit, html):
         file = (Path(html).parent / link.group(1)).resolve().parent / "template.json"
         if file.is_file():
             meta.update({k: v for k, v in json.loads(file.read_text(encoding="utf-8")).items() if k in PLACEHOLDERS})
-    url = re.sub(r"^(https?://)?(www\.)?", "", kit.get("url", "").strip()).rstrip("/")
+    # the address as the kit writes it, with or without www, in every template
+    url = re.sub(r"^https?://", "", kit.get("url", "").strip()).rstrip("/")
+    # with no address in the kit, the handle stands where the template shows one
+    address = [url, "addresses"] if url else [kit["handle"], "handles"]
     pairs = [
         [meta["brand_placeholder"], kit["name"], "names"],
         [meta["handle_placeholder"], kit["handle"], "handles"],
         ["your-brand", slug(kit["name"]), "names"],
-        # with no address in the kit, the handle stands where the template shows one
-        ["yourbrand.com", url, "addresses"] if url else ["www.yourbrand.com", kit["handle"], "handles"],
+        ["www.yourbrand.com", *address],
+        ["yourbrand.com", *address],
     ]
-    if not url:
-        pairs.append(["yourbrand.com", kit["handle"], "handles"])
     # the longer placeholder first, in case one contains the other
     pairs.sort(key=lambda p: -len(p[0]))
     return pairs
@@ -201,8 +206,16 @@ async ({pairs, name, handle, logo, logoOnDark, wordmark, tint, accent, accentOnD
       const alone = (text) => [...s.querySelectorAll('*')].find(e => !e.children.length && e.textContent.trim() === text);
       const named = alone(name), host = named || alone(handle);
       if (!host) { report.bare.push(i + 1); return; }
+      // Light text means a dark surface. A mid-tone label (a link blue) reads on
+      // both, so there the fill behind it decides.
       const ink = rgba(getComputedStyle(host).color);
-      const src = logoOnDark && ink && lum(ink) > 0.4 ? logoOnDark : logo;
+      let behind = null;
+      for (let n = host; n && !behind; n = n.parentElement) {
+        const c = rgba(getComputedStyle(n).backgroundColor);
+        if (c && c[3] > 0.5) behind = c;
+      }
+      const onDark = ink && (lum(ink) > 0.4 || (lum(ink) > 0.175 && behind && lum(behind) < lum(ink)));
+      const src = logoOnDark && onDark ? logoOnDark : logo;
       // a tag of its own, so no template rule for span or i lands on it
       const el = document.createElement(tint ? 'brand-logo' : 'img');
       el.className = 'brand-logo' + (tint ? ' is-tint' : '');

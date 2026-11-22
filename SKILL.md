@@ -152,12 +152,12 @@ A brand kit puts one brand on any template at render time. It is a `brand.json` 
 | Key | Effect |
 |---|---|
 | `name`, `handle` | Required. Replace the template's brand and handle placeholders (`brand_placeholder` and `handle_placeholder` in `template.json`) on every slide. |
-| `url` | Shown where a template has an address (`yourbrand.com`). Without it the handle stands there. |
+| `url` | Shown where a template has an address (`yourbrand.com`), written as the kit writes it, without `https://`. Without it the handle stands there. |
 | `logo` | SVG, PNG, JPG or WebP. Drawn beside the name on each slide, or beside the handle where the name is not shown. |
 | `logo_on_dark` | The version for dark surfaces. Used wherever the text beside the logo is light. |
 | `logo_type` | `"mark"` (default) sits before the name. `"wordmark"` takes the place of the name. |
 | `logo_tint` | `true` draws a one-colour logo in the colour of the text beside it, so one file works on every surface. |
-| `accent`, `accent_on_dark` | Replace the template's accent colour, on light and on dark slides. |
+| `accent`, `accent_on_dark` | Replace the template's accent colour, on light and on dark slides. `accent_on_dark` needs `accent`. |
 | `language`, `address` | Read at the brief: the carousel language, and for Indonesian the form of address (`kamu`, `Anda`, `kita`). They change nothing in the render. |
 
 Render with `--brand`:
