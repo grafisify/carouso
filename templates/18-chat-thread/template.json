@@ -17,42 +17,74 @@
     {
       "slide": 1,
       "pattern": "cover-big-type",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 14,
+        "lines": 3
+      }
     },
     {
       "slide": 2,
       "pattern": "kicker-statement",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 13,
+        "lines": 2
+      }
     },
     {
       "slide": 3,
       "pattern": "myth-fact",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 19,
+        "lines": 2
+      }
     },
     {
       "slide": 4,
       "pattern": "process-steps",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 19,
+        "lines": 2
+      }
     },
     {
       "slide": 5,
       "pattern": "two-cards",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 19,
+        "lines": 1
+      }
     },
     {
       "slide": 6,
       "pattern": "quote",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 13,
+        "lines": 4
+      }
     },
     {
       "slide": 7,
       "pattern": "concept-number",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 19,
+        "lines": 1
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 19,
+        "lines": 1
+      }
     }
   ],
   "preview": "assets/templates/18-chat-thread.jpg"

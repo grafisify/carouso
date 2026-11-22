@@ -11,6 +11,8 @@ Quality gates (exit 1 on failure):
   6. every <img> on a slide must load (no broken or missing files)
   7. no text may be cut off by the slide edge (except inside .peek or [data-bleed],
      which bleed off the edge on purpose)
+  8. no word may be wider than the line it sits on (a long word in a big
+     headline spills out of its column instead of wrapping)
 
 Example:
   python3 scripts/render_carousel.py --html topic.html --out out/ \
@@ -140,7 +142,7 @@ async def main() -> int:
             await browser.close()
             return 1
 
-        bad_overflow, bad_size, bad_edge = [], [], []
+        bad_overflow, bad_size, bad_edge, bad_word = [], [], [], []
         for i in range(n):
             await page.evaluate(
                 f"""document.querySelectorAll('.slide').forEach((c,idx)=>{{
@@ -197,6 +199,36 @@ async def main() -> int:
             )
             if cut:
                 bad_edge.append(f"{i + 1} {cut[:3]}")
+            # Word gate: a word wider than its line cannot wrap, so it spills out
+            # of its column. Long Indonesian words in display type do this.
+            wide = await page.evaluate(
+                f"""(()=>{{
+                    const s = document.querySelectorAll('.slide')[{i}], out = [];
+                    for (const el of s.querySelectorAll('h1,h2,h3,h4,p,li,blockquote,.quote')) {{
+                      if (el.closest('.peek,[data-bleed]')) continue;
+                      const cs = getComputedStyle(el);
+                      if (cs.display==='none' || cs.visibility==='hidden' || cs.whiteSpace==='nowrap') continue;
+                      const room = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+                      if (room <= 0) continue;
+                      // A min-content copy is as wide as its longest unbreakable piece,
+                      // in the real font of each span and with hyphens free to break.
+                      const copy = el.cloneNode(true);
+                      copy.removeAttribute('id');
+                      copy.style.cssText += ';position:absolute;visibility:hidden;width:min-content;'
+                        + 'min-width:0;max-width:none;padding:0;border:0;margin:0';
+                      el.after(copy);
+                      const need = copy.offsetWidth;
+                      copy.remove();
+                      if (need > room + 2) {{
+                        const words = el.innerText.split(/\\s+/).sort((a, b) => b.length - a.length);
+                        out.push(words[0]);
+                      }}
+                    }}
+                    return out;
+                }})()"""
+            )
+            if wide:
+                bad_word.append(f"{i + 1} {wide[:3]}")
             print(f"slide {i+1:02d}: box={box['width']:.0f}x{box['height']:.0f} overflow={ovf}", flush=True)
 
         await browser.close()
@@ -210,6 +242,10 @@ async def main() -> int:
         failed = True
     if bad_edge:
         print(f"GATE FAILED (edge): text cut off by the slide edge: {bad_edge}", flush=True)
+        failed = True
+    if bad_word:
+        print(f"GATE FAILED (word): word wider than its line: {bad_word} "
+              f"(use a shorter word or break it across lines)", flush=True)
         failed = True
     if failed:
         return 1

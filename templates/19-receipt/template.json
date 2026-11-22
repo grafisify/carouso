@@ -17,42 +17,74 @@
     {
       "slide": 1,
       "pattern": "cover-big-type",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 13,
+        "lines": 3
+      }
     },
     {
       "slide": 2,
       "pattern": "process-steps",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 1
+      }
     },
     {
       "slide": 3,
       "pattern": "big-number",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 1
+      }
     },
     {
       "slide": 4,
       "pattern": "stat-band",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 1
+      }
     },
     {
       "slide": 5,
       "pattern": "myth-fact",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 1
+      }
     },
     {
       "slide": 6,
       "pattern": "concept-number",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 1
+      }
     },
     {
       "slide": 7,
       "pattern": "quote",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 15,
+        "lines": 2
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 2
+      }
     }
   ],
   "preview": "assets/templates/19-receipt.jpg"

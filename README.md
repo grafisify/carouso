@@ -20,7 +20,7 @@ Pick a ready-made template or lock your own design system. Real images only. No 
 | **Or your own look** | Want a custom brand instead? A 7-question dialog (or a reference screenshot) locks your own design system. |
 | **Real images only** | Images come from user uploads or URLs and every one passes visual verification. Four photo layouts ship with the skill. Generative AI imagery is banned, no exceptions. |
 | **Built for phones** | Body copy is 28 to 32px, nothing is under 20px, and text keeps WCAG AA contrast (4.5:1) in both modes. |
-| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, text under 20px, a missing font, a broken image, or text cut off by the slide edge. Defects never ship silently. |
+| **Quality gates** | The render fails on wrong slide count, overflowing content, wrong dimensions, text under 20px, a missing font, a broken image, text cut off by the slide edge, or a word too wide for its line. Defects never ship silently. |
 
 ## Pick a template
 
@@ -351,6 +351,7 @@ carouso/
 ├── scripts/
 │   ├── render_carousel.py    ← Playwright render with quality gates
 │   ├── check_templates.py    ← consistency check for every template (runs in CI)
+│   ├── copy_budget.py        ← measures how many characters each slide's headline holds
 │   └── build_preview.py      ← compose rendered slides into a README preview sheet
 └── examples/
     └── brief-example.md      ← a complete brief and how the skill handles it
@@ -365,7 +366,7 @@ Output goes to `carousels/<name>/` (git-ignored).
 
 ## Changing a template
 
-1. Edit `templates/NN-slug/sample.html` and keep `template.json` in step (each `<section>` carries `data-pattern`, its `p-*` class, and `mode-dark` for dark slides).
+1. Edit `templates/NN-slug/sample.html` and keep `template.json` in step (each `<section>` carries `data-pattern`, its `p-*` class, and `mode-dark` for dark slides). After any change to a headline, font or size, run `python3 scripts/copy_budget.py --write` so the `headline` budgets match.
 2. `python3 scripts/check_templates.py` must report OK. CI runs it and renders every template on each pull request.
 3. Refresh the preview: render the sample to `out/NN-slug/`, then `python3 scripts/build_preview.py --slides out/NN-slug --out assets/templates/NN-slug.jpg`.
 

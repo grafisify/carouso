@@ -17,42 +17,74 @@
     {
       "slide": 1,
       "pattern": "cover-big-type",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 17,
+        "lines": 2
+      }
     },
     {
       "slide": 2,
       "pattern": "kicker-statement",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 17,
+        "lines": 2
+      }
     },
     {
       "slide": 3,
       "pattern": "stat-band",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 2
+      }
     },
     {
       "slide": 4,
       "pattern": "process-steps",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 2
+      }
     },
     {
       "slide": 5,
       "pattern": "big-number",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 1
+      }
     },
     {
       "slide": 6,
       "pattern": "two-cards",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 2
+      }
     },
     {
       "slide": 7,
       "pattern": "quote",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 21,
+        "lines": 3
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 1
+      }
     }
   ],
   "preview": "assets/templates/36-glass-widgets.jpg"

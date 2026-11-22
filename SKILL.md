@@ -15,12 +15,12 @@ Thirty-six ready-made templates ship in `templates/`. Each is a locked look (col
 
 Triggers: "template 3", "template no 3", "pakai template 3", "use template 2 for ...", or a template name ("morning cup"). Match the number or name against `templates/NN-slug/template.json`.
 
-Files per template: `tokens.css` (the skin), `template.json` (name, fonts, size, slide sequence with patterns and modes), `sample.html` (the finished sample carousel to copy from).
+Files per template: `tokens.css` (the skin), `template.json` (name, fonts, size, slide sequence with patterns, modes and a `headline` budget per slide), `sample.html` (the finished sample carousel to copy from).
 
 1. **Resolve the template.** Read `templates/NN-slug/template.json`. If the person gave no number and no custom system exists, list every template (number, name, vibe) from the `template.json` files and ask which one. An unknown number gets the same list.
-2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle (the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change.
+2. **Collect the brief.** Ask once, in one message, for whatever is missing: topic and angle (required), brand name and handle (the template placeholders are used when they decline), slide count (default is the sequence length, allowed 5 to 10), images with a placement map (optional, see step 6). The carousel language follows the language of the brief. Translate every fixed string in the markup too: "Myth", "Fact", "Save this", and the `NN / TT` footer stay, the words change. Set `<html lang>` to the carousel language. For Indonesian, use the fixed-string table under "Indonesian copy".
 3. **Plan from the sequence.** Start from the template `sequence`. Keep the cover first, the takeaway last, and the mode of each slide as listed. For a different slide count, drop or repeat middle slides in sequence order, keeping modes alternating and no two adjacent slides on the same pattern. Swap a middle pattern when the content fits another one better (numbers to `stat-band` or `big-number`, steps to `process-steps`, one line to `quote`), keeping that slide's mode. Use `cover-split` only when a verified cover image is supplied. A placed image goes on the slide as a `.photo` slot (see below), or on an `image-hero` slide when the photo is the point. Write the plan as a list (slide number, pattern, mode, one-line content) before building.
-4. **Write the copy** under the copy standards below. Replace every sample line. Nothing from the sample topic may remain.
+4. **Write the copy** under the copy standards below. Replace every sample line. Nothing from the sample topic may remain. Write each headline to the slide's `headline` budget in `template.json`: `lines` is how many lines the layout was drawn for, `chars_per_line` is how many characters fit on one line and so the longest word that fits. A slide with `"lines": 2, "chars_per_line": 9` takes "Cari cahaya", never "Pencahayaan". Display templates are tight (21 Bauhaus and 23 Pixel Quest hold 8 to 11 characters a line), so choose the words to fit before building. Keep the sample's `<br>` rhythm and its one `.accent` span.
 5. **Build the HTML.** Create `carousels/<slug>/index.html` by copying the chosen template's `sample.html`. Change only the `tokens.css` link to `../../templates/NN-slug/tokens.css`. The `fonts.css` and `system.css` links already resolve from that depth. Keep or remove `<section>` blocks per the plan, copy pattern blocks from `design-system/patterns.html` (or another template's `sample.html` for the newer patterns; the name-to-class table is in `design-system/PATTERNS.md`) for added slides, apply the `mode-dark` class per the plan, fill in brand, handle, and the `NN / TT` counters.
 6. **Images** pass the hard gate in Phase 2 step 4 below. Put local copies in `carousels/<slug>/images/` and log provenance in `carousels/<slug>/provenance.log`.
 7. **Render** with the template's size and fonts from `template.json`:
@@ -100,7 +100,7 @@ python3 scripts/render_carousel.py --html <file.html> --out <dir-output> \
     --check-fonts "Plus Jakarta Sans"
 ```
 (Adjust width, height, slides, and fonts to the brief and the system tokens.)
-The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, when a checked font failed to load, when an `<img>` failed to load, or when text is cut off by the slide edge (elements inside `.peek` or `[data-bleed]` may bleed on purpose). Fix the HTML and re-render until it passes. Never waive the gate manually.
+The script exits 1 when the `.slide` count differs from the request, when content overflows its zone, when a slide bounding box differs from the requested size, when text is smaller than 20px, when a checked font failed to load, when an `<img>` failed to load, when text is cut off by the slide edge (elements inside `.peek` or `[data-bleed]` may bleed on purpose), or when a word is wider than the line it sits on. For that last one, pick a shorter word; do not shrink the type. Fix the HTML and re-render until it passes. Never waive the gate manually.
 
 ### 7. Final visual check and record
 Open slide 1, one middle slide, and the last slide. Confirm the display font rendered, no text is clipped, no elements overlap, images are undistorted with subjects intact, and brand, handle, and CTA stay consistent. Then update the system's `last-used.json` with this carousel's cover pattern, full pattern sequence, and the mode of each slide (for example `{"cover": "cover-big-type", "sequence": ["cover-big-type", "two-cards", "takeaway"], "modes": ["light", "dark", "light"]}`).
@@ -127,6 +127,45 @@ Apply this reasoning at every step. It is what keeps the output from reading as 
 - Hooks use one of three patterns: a curiosity gap, a specific number, or direct address.
 - The subhead makes a promise, not a summary. It says what the reader gets from swiping.
 - No decorative emojis in headings. No title case headlines.
+
+### Indonesian copy
+When the brief is in Indonesian, every rule above still applies. These rules replace the English examples.
+
+- **Write in Indonesian from the first draft.** Never translate an English draft line by line. "Level up your savings" becomes "Dana darurat pertama", not "Tingkatkan level tabunganmu".
+- **Mind word length.** Affixes make Indonesian words long: "menyelesaikan" is 13 characters, "pengeluaran" is 11. Check the longest word of each headline against `chars_per_line`. Reach for the root or the everyday word first: "selesai" for "menyelesaikan", "biaya" for "pengeluaran", "pakai" for "menggunakan", "cek" for "memeriksa". Never hyphenate a word, abbreviate it, or shrink the type to make it fit.
+- **One form of address, fixed at the brief.** "kamu" for casual consumer content (the default), "Anda" (always capitalized) for formal or B2B, "kita" for community voices. Never mix them in one carousel. Use "lo/gue" only when the brand already does.
+- **Start with the verb.** Imperatives read fastest: "Cari cahaya jendela." "Sisihkan Rp50 ribu tiap Senin." The "di-" passive is natural in news headlines ("Mercusuar tua dibuka lagi") and weak everywhere else.
+- **Be specific.** A rupiah amount, a day, a count, a place. "Sisihkan Rp50 ribu tiap Senin" beats "Mulailah menabung secara konsisten".
+- **Banned openers and filler:** "Di era digital ini", "Tahukah kamu", "Pernahkah kamu merasa", "Yuk, simak", "Simak sampai habis", "Tanpa disadari", "Jangan sampai ketinggalan", "Nah,", "Jadi, tunggu apa lagi".
+- **Banned constructions:** "bukan sekadar X, tapi Y", "bukan hanya X, melainkan Y", "tidak hanya X, tetapi juga Y", and their reversed forms.
+- **Banned inflation:** "solusi terbaik", "wajib tahu", "rahasia sukses", "kunci utama", "game changer", "next level", and poster aphorisms such as "Sukses dimulai dari langkah kecil".
+- **No English sprinkled in for style** ("which is", "literally", "somehow", "relate"). Keep English only for terms the audience already uses as the normal word: email, deadline, invoice, brief, feed.
+- **Spelling and numbers follow EYD.** Preposition "di" stands apart ("di rumah"), prefix "di-" attaches ("dibuka"). Rupiah has no space: "Rp50.000". Thousands take a period, decimals a comma: "1.250", "2,5 juta". In tight slots write "Rp50 ribu", "Rp2,5 juta", "40 rb". Time is "09.41" or "pukul 9". Dates are day first: "8 Nov 2026". Sentence case, never Title Case Di Tiap Kata.
+
+Fixed strings (translate these in every template, including `data-btn`, `alt` and `aria-label` values):
+
+| Sample | Indonesian |
+|---|---|
+| Myth / Fact | Mitos / Fakta |
+| Save this | Simpan dulu |
+| Swipe | Geser |
+| Read this | Baca ini |
+| Takeaway, Recap | Ringkasan, Intinya |
+| Step 1, Rule one | Langkah 1, Aturan satu |
+| Before / After | Sebelum / Sesudah |
+| Do / Don't | Lakukan / Hindari |
+| Latest, Just in | Terbaru, Baru saja |
+| 5 min read | 5 menit baca |
+| Follow for more | Ikuti untuk kabar berikutnya |
+| OK / Cancel / Open | Oke / Batal / Buka |
+
+A rewrite, for calibration:
+
+| Slop | Fixed |
+|---|---|
+| Di era digital ini, mengatur keuangan bukan sekadar pilihan, tapi kebutuhan. | Gajian tanggal 25. Tanggal 5 sudah habis? |
+| Yuk, simak 5 tips jitu yang wajib kamu tahu! | Lima pos uang yang bocor tiap bulan. |
+| Mulailah menabung secara konsisten demi masa depan. | Sisihkan Rp50 ribu tiap Senin. |
 
 ### Layout fundamentals
 - Hierarchy: the headline is the largest, boldest element. One accent-colored word or phrase per headline, nothing more.

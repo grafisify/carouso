@@ -17,42 +17,74 @@
     {
       "slide": 1,
       "pattern": "cover-big-type",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 21,
+        "lines": 1
+      }
     },
     {
       "slide": 2,
       "pattern": "kicker-statement",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 1
+      }
     },
     {
       "slide": 3,
       "pattern": "process-steps",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 25,
+        "lines": 2
+      }
     },
     {
       "slide": 4,
       "pattern": "big-number",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 25,
+        "lines": 1
+      }
     },
     {
       "slide": 5,
       "pattern": "two-cards",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 25,
+        "lines": 1
+      }
     },
     {
       "slide": 6,
       "pattern": "myth-fact",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 25,
+        "lines": 1
+      }
     },
     {
       "slide": 7,
       "pattern": "quote",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 18,
+        "lines": 4
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 25,
+        "lines": 1
+      }
     }
   ],
   "preview": "assets/templates/27-search-results.jpg"

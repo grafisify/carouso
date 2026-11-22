@@ -18,42 +18,74 @@
     {
       "slide": 1,
       "pattern": "cover-poster",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 20,
+        "lines": 2
+      }
     },
     {
       "slide": 2,
       "pattern": "concept-number",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 2
+      }
     },
     {
       "slide": 3,
       "pattern": "process-steps",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 2
+      }
     },
     {
       "slide": 4,
       "pattern": "stat-band",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 2
+      }
     },
     {
       "slide": 5,
       "pattern": "myth-fact",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 2
+      }
     },
     {
       "slide": 6,
       "pattern": "big-number",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 2
+      }
     },
     {
       "slide": 7,
       "pattern": "two-cards",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 2
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 23,
+        "lines": 2
+      }
     }
   ],
   "preview": "assets/templates/16-blueprint.jpg"

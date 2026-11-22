@@ -18,42 +18,74 @@
     {
       "slide": 1,
       "pattern": "cover-hook",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 11,
+        "lines": 3
+      }
     },
     {
       "slide": 2,
       "pattern": "kicker-statement",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 8,
+        "lines": 2
+      }
     },
     {
       "slide": 3,
       "pattern": "process-steps",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 16,
+        "lines": 2
+      }
     },
     {
       "slide": 4,
       "pattern": "stat-band",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 16,
+        "lines": 2
+      }
     },
     {
       "slide": 5,
       "pattern": "myth-fact",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 16,
+        "lines": 2
+      }
     },
     {
       "slide": 6,
       "pattern": "big-number",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 16,
+        "lines": 2
+      }
     },
     {
       "slide": 7,
       "pattern": "quote",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 14,
+        "lines": 3
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 16,
+        "lines": 2
+      }
     }
   ],
   "preview": "assets/templates/23-pixel-quest.jpg"

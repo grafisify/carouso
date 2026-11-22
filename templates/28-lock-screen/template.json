@@ -17,42 +17,74 @@
     {
       "slide": 1,
       "pattern": "cover-big-type",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 17,
+        "lines": 2
+      }
     },
     {
       "slide": 2,
       "pattern": "big-number",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 24,
+        "lines": 1
+      }
     },
     {
       "slide": 3,
       "pattern": "process-steps",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 24,
+        "lines": 1
+      }
     },
     {
       "slide": 4,
       "pattern": "myth-fact",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 24,
+        "lines": 2
+      }
     },
     {
       "slide": 5,
       "pattern": "stat-band",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 24,
+        "lines": 2
+      }
     },
     {
       "slide": 6,
       "pattern": "two-cards",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 24,
+        "lines": 1
+      }
     },
     {
       "slide": 7,
       "pattern": "quote",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 20,
+        "lines": 4
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 24,
+        "lines": 1
+      }
     }
   ],
   "preview": "assets/templates/28-lock-screen.jpg"

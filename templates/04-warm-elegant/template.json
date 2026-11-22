@@ -18,42 +18,74 @@
     {
       "slide": 1,
       "pattern": "cover-big-type",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 21,
+        "lines": 2
+      }
     },
     {
       "slide": 2,
       "pattern": "quote",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 31,
+        "lines": 3
+      }
     },
     {
       "slide": 3,
       "pattern": "kicker-statement",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 2
+      }
     },
     {
       "slide": 4,
       "pattern": "concept-number",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 2
+      }
     },
     {
       "slide": 5,
       "pattern": "two-cards",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 1
+      }
     },
     {
       "slide": 6,
       "pattern": "process-steps",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 2
+      }
     },
     {
       "slide": 7,
       "pattern": "stat-band",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 2
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 1
+      }
     }
   ],
   "preview": "assets/templates/04-warm-elegant.jpg"
