@@ -57,7 +57,7 @@ h3{font-size:46px;line-height:1}
 /* cover-news: tall photo that fades into the dark panel, condensed uppercase headline, orange band */
 .p-news{background:var(--bg)}
 .p-news .news-photo{bottom:auto;height:980px}
-.p-news .news-photo::after{background:linear-gradient(180deg,rgba(28,20,16,.55) 0,rgba(28,20,16,0) 22%,rgba(28,20,16,0) 50%,rgba(28,20,16,.9) 86%,#1c1410 100%)}
+.p-news .news-photo::after{background:linear-gradient(180deg,rgba(28,20,16,.82) 0,rgba(28,20,16,.55) 10%,rgba(28,20,16,0) 26%,rgba(28,20,16,0) 50%,rgba(28,20,16,.9) 86%,#1c1410 100%)}
 .p-news .inner{padding:60px 82px 136px}
 .p-news .news-head .b{display:inline-flex;align-items:center;gap:14px;padding:8px 20px;border:3px solid #fff;border-radius:999px}
 .p-news .news-head .b::before{content:"";width:14px;height:14px;border-radius:50%;background:#ff4a44}
