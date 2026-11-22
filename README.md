@@ -366,7 +366,7 @@ Output goes to `carousels/<name>/` (git-ignored).
 
 ## Changing a template
 
-1. Edit `templates/NN-slug/sample.html` and keep `template.json` in step (run `python3 scripts/copy_budget.py --write` after any change to a headline, font or size, so the `headline` budgets match) (each `<section>` carries `data-pattern`, its `p-*` class, and `mode-dark` for dark slides).
+1. Edit `templates/NN-slug/sample.html` and keep `template.json` in step (each `<section>` carries `data-pattern`, its `p-*` class, and `mode-dark` for dark slides). After any change to a headline, font or size, run `python3 scripts/copy_budget.py --write` so the `headline` budgets match.
 2. `python3 scripts/check_templates.py` must report OK. CI runs it and renders every template on each pull request.
 3. Refresh the preview: render the sample to `out/NN-slug/`, then `python3 scripts/build_preview.py --slides out/NN-slug --out assets/templates/NN-slug.jpg`.
 

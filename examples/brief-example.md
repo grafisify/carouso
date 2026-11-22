@@ -12,7 +12,24 @@ python3 scripts/render_carousel.py --html carousels/turkish-coffee/index.html \
     --check-fonts "Baloo 2,Quicksand"
 ```
 
-No onboarding, no font install. The rest of this file shows the custom path.
+No onboarding, no font install.
+
+## Fast path in Indonesian
+
+> "pakai template 21, topik: foto produk pakai HP untuk jualan online"
+
+The brief is in Indonesian, so the carousel is too. The agent reads the `headline` budget of each slide in `templates/21-bauhaus/template.json` (the cover holds 3 lines of 9 characters) and writes to it:
+
+| Slide | Sample | Indonesian |
+|---|---|---|
+| 1 cover | Form / follows / function. | Foto / produk / pakai HP. |
+| 2 statement | Start / with the / job. | Cari / cahaya / jendela. |
+| 7 quote | Decoration is not a function. | Rapi dulu, baru kreatif. |
+| footer | Save this, Swipe | Simpan dulu, Geser |
+
+"Pencahayaan" (11 characters) would not fit a 9-character line, so the headline uses "cahaya". The render gate rejects a word that is wider than its line.
+
+The rest of this file shows the custom path.
 
 ---
 
