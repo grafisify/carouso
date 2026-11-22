@@ -17,42 +17,74 @@
     {
       "slide": 1,
       "pattern": "cover-big-type",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 18,
+        "lines": 2
+      }
     },
     {
       "slide": 2,
       "pattern": "note",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 27,
+        "lines": 1
+      }
     },
     {
       "slide": 3,
       "pattern": "process-steps",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 27,
+        "lines": 2
+      }
     },
     {
       "slide": 4,
       "pattern": "note",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 27,
+        "lines": 1
+      }
     },
     {
       "slide": 5,
       "pattern": "myth-fact",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 27,
+        "lines": 2
+      }
     },
     {
       "slide": 6,
       "pattern": "two-cards",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 27,
+        "lines": 2
+      }
     },
     {
       "slide": 7,
       "pattern": "quote",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 26,
+        "lines": 2
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 27,
+        "lines": 1
+      }
     }
   ],
   "preview": "assets/templates/10-sticky-mono.jpg"

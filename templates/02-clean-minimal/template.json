@@ -17,42 +17,74 @@
     {
       "slide": 1,
       "pattern": "kicker-statement",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 22,
+        "lines": 2
+      }
     },
     {
       "slide": 2,
       "pattern": "stat-band",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 2
+      }
     },
     {
       "slide": 3,
       "pattern": "concept-number",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 1
+      }
     },
     {
       "slide": 4,
       "pattern": "two-cards",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 2
+      }
     },
     {
       "slide": 5,
       "pattern": "process-steps",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 2
+      }
     },
     {
       "slide": 6,
       "pattern": "quote",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 30,
+        "lines": 3
+      }
     },
     {
       "slide": 7,
       "pattern": "myth-fact",
-      "mode": "light"
+      "mode": "light",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 1
+      }
     },
     {
       "slide": 8,
       "pattern": "takeaway",
-      "mode": "dark"
+      "mode": "dark",
+      "headline": {
+        "chars_per_line": 28,
+        "lines": 2
+      }
     }
   ],
   "preview": "assets/templates/02-clean-minimal.jpg"

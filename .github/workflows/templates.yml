@@ -24,6 +24,8 @@ jobs:
           set -e
           python3 scripts/check_templates.py --render-cmd > render.sh
           bash -e render.sh
+      - name: Check the headline budgets in template.json
+        run: python3 scripts/copy_budget.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:

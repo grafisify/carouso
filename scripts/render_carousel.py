@@ -11,6 +11,8 @@ Quality gates (exit 1 on failure):
   6. every <img> on a slide must load (no broken or missing files)
   7. no text may be cut off by the slide edge (except inside .peek or [data-bleed],
      which bleed off the edge on purpose)
+  8. no word may be wider than the line it sits on (a long word in a big
+     headline spills out of its column instead of wrapping)
 
 Example:
   python3 scripts/render_carousel.py --html topic.html --out out/ \
@@ -140,7 +142,7 @@ async def main() -> int:
             await browser.close()
             return 1
 
-        bad_overflow, bad_size, bad_edge = [], [], []
+        bad_overflow, bad_size, bad_edge, bad_word = [], [], [], []
         for i in range(n):
             await page.evaluate(
                 f"""document.querySelectorAll('.slide').forEach((c,idx)=>{{
@@ -197,6 +199,33 @@ async def main() -> int:
             )
             if cut:
                 bad_edge.append(f"{i + 1} {cut[:3]}")
+            # Word gate: a word wider than its line cannot wrap, so it spills out
+            # of its column. Long Indonesian words in display type do this.
+            wide = await page.evaluate(
+                f"""(()=>{{
+                    const s = document.querySelectorAll('.slide')[{i}], out = [];
+                    for (const el of s.querySelectorAll('h1,h2,h3,h4,p,li,blockquote,.quote')) {{
+                      if (el.closest('.peek,[data-bleed]')) continue;
+                      const cs = getComputedStyle(el);
+                      if (cs.display==='none' || cs.visibility==='hidden' || cs.whiteSpace==='nowrap') continue;
+                      const pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+                      const room = el.clientWidth - pad;
+                      if (room <= 0) continue;
+                      const probe = document.createElement('span');
+                      probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap';
+                      el.appendChild(probe);
+                      for (const word of el.innerText.split(/\\s+/)) {{
+                        if (word.length < 6) continue;
+                        probe.textContent = word;
+                        if (probe.getBoundingClientRect().width > room + 2) {{ out.push(word); break; }}
+                      }}
+                      probe.remove();
+                    }}
+                    return out;
+                }})()"""
+            )
+            if wide:
+                bad_word.append(f"{i + 1} {wide[:3]}")
             print(f"slide {i+1:02d}: box={box['width']:.0f}x{box['height']:.0f} overflow={ovf}", flush=True)
 
         await browser.close()
@@ -210,6 +239,10 @@ async def main() -> int:
         failed = True
     if bad_edge:
         print(f"GATE FAILED (edge): text cut off by the slide edge: {bad_edge}", flush=True)
+        failed = True
+    if bad_word:
+        print(f"GATE FAILED (word): word wider than its line: {bad_word} "
+              f"(use a shorter word or break it across lines)", flush=True)
         failed = True
     if failed:
         return 1
