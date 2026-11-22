@@ -60,7 +60,7 @@ p{font-size:29px;line-height:1.4}
 .p-cover-bt{background:var(--bg)}
 .p-cover-bt .ring,.p-cover-bt .cover-line{display:none}
 .p-cover-bt .inner{inset:60px 64px 116px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
-.p-cover-bt .board{flex:1;margin:36px 0 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;overflow:hidden}
+.p-cover-bt .board{flex:1;min-height:0;margin:36px 0 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch;overflow:hidden}
 .p-cover-bt .col{padding:22px 20px 20px;display:flex;flex-direction:column;gap:14px}
 .p-cover-bt .col b{font-size:24px;font-weight:700;color:var(--muted);padding:0 6px 4px}
 .p-cover-bt .col i{display:block;flex:none;height:128px;background-image:linear-gradient(var(--c,var(--l4)),var(--c,var(--l4))),linear-gradient(var(--line),var(--line)),linear-gradient(var(--line2),var(--line2));
@@ -70,7 +70,7 @@ p{font-size:29px;line-height:1.4}
 .p-cover-bt .col:nth-child(2) i{--c:var(--l3)}
 .p-cover-bt .col:nth-child(2) i:nth-child(3){--c:var(--l5)}
 .p-cover-bt .col:nth-child(3) i{--c:var(--l1)}
-.p-cover-bt .title{position:absolute;left:0;right:0;top:50%;transform:translateY(-46%) rotate(-2deg);display:flex;flex-direction:column;align-items:center;text-align:center;
+.p-cover-bt .title{position:absolute;left:24px;right:24px;top:50%;transform:translateY(-46%) rotate(-2deg);display:flex;flex-direction:column;align-items:center;text-align:center;
   padding:64px 40px 68px;border-radius:36px;background:var(--panel);box-shadow:0 0 0 2px var(--line),0 50px 90px rgba(30,24,10,.28)}
 .p-cover-bt .kicker{margin:0;align-self:center}
 .p-cover-bt h1{font-size:120px;line-height:.9;letter-spacing:-6.5px;margin-top:34px}
