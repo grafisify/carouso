@@ -122,7 +122,7 @@ p{color:var(--muted);font-size:32px;line-height:1.45;margin-top:26px;max-width:8
 
 /* ---------- 09 process-steps ---------- */
 .p-process .process{margin-top:60px}
-.p-process .process-item{display:grid;grid-template-columns:70px 1fr 210px;gap:25px;align-items:center;
+.p-process .process-item{display:grid;grid-template-columns:70px 1fr minmax(210px,max-content);gap:25px;align-items:center;
   padding:28px 0;border-bottom:1px solid var(--line)}
 .p-process .process-item:first-child{border-top:1px solid var(--line)}
 .p-process .process-no{color:var(--accent);font-size:24px;font-weight:800;letter-spacing:1px}

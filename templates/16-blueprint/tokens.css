@@ -86,7 +86,7 @@ p{font-size:30px;line-height:1.45}
 /* process: numbered callouts on a dashed spine */
 .p-process .process{margin-top:54px;position:relative}
 .p-process .process::before{content:"";position:absolute;left:36px;top:40px;bottom:40px;border-left:2px dashed var(--line)}
-.p-process .process-item{grid-template-columns:74px 1fr 210px;gap:30px;border:0 !important;padding:26px 0}
+.p-process .process-item{grid-template-columns:74px 1fr minmax(210px,max-content);gap:30px;border:0 !important;padding:26px 0}
 .p-process .process-no{position:relative;width:74px;height:74px;border:2px solid var(--text);border-radius:50%;background:var(--bg);color:var(--text);
   display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:26px;font-weight:700;letter-spacing:0}
 .p-process .process-item h3{font-size:36px}

@@ -90,7 +90,7 @@ h2{font-size:76px;letter-spacing:-3px;line-height:1.02}
 .p-mythfact .myth:first-child{border-right:4px solid var(--text)}
 .p-process .process-item{border-bottom:3px solid var(--text)}
 .p-process .process-item:first-child{border-top:3px solid var(--text)}
-.p-process .process-item{grid-template-columns:84px 1fr 200px}
+.p-process .process-item{grid-template-columns:84px 1fr minmax(200px,max-content)}
 .p-process .process-no{display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:6px;background:var(--kb);color:var(--kf);font-weight:800}
 .p-process .process-tag{background:none;color:var(--text);border:3px solid var(--text);border-radius:6px;font-weight:800}
 .p-stats .stat-row{border-top:4px solid var(--text);border-bottom:4px solid var(--text)}
