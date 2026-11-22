@@ -259,7 +259,9 @@ async def measure(page, lab, i, keep_clear=None):
     if keep_clear:
         box = await el.bounding_box()
         # one row of grace on each side, for anti-aliasing
-        strips = [(0, keep_clear[0] - 1), (keep_clear[1] + 1, box["height"])]
+        strips = [(0, min(keep_clear[0] - 1, box["height"])), (keep_clear[1] + 1, box["height"])]
+        # a slide of the wrong height (the size gate reports it) may end before a zone starts
+        strips = [(y, y2) for y, y2 in strips if y2 > y]
         clips = [{"x": box["x"], "y": box["y"] + y, "width": box["width"], "height": y2 - y} for y, y2 in strips]
         await page.evaluate(
             """i => { for (const e of document.querySelectorAll('.slide')[i].querySelectorAll('*'))

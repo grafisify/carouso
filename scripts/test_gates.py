@@ -50,6 +50,8 @@ CASES = [
      BODY + '<p style="position:absolute;left:0;top:-60px">Posted this morning</p>', "--format", "story"),
     ("the same text is fine at 3:4", None, BODY,
      BODY + '<p style="position:absolute;left:0;top:-60px">Posted this morning</p>'),
+    ("a stylesheet that keeps the slide at 1440px is told so, not crashed on", "size", "</head>",
+     "<style>:root.fmt-story{--slide-h:1440px}</style></head>", "--format", "story"),
     ("a caption resting on the 9:16 zone: its line box crosses the edge, its letters do not", None, BODY,
      BODY + '<div data-bleed style="position:absolute;left:0;bottom:-45px;font-size:60px;line-height:1"><span>Color</span></div>',
      "--format", "story"),
