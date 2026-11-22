@@ -208,18 +208,21 @@ async def main() -> int:
                       if (el.closest('.peek,[data-bleed]')) continue;
                       const cs = getComputedStyle(el);
                       if (cs.display==='none' || cs.visibility==='hidden' || cs.whiteSpace==='nowrap') continue;
-                      const pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
-                      const room = el.clientWidth - pad;
+                      const room = el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
                       if (room <= 0) continue;
-                      const probe = document.createElement('span');
-                      probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap';
-                      el.appendChild(probe);
-                      for (const word of el.innerText.split(/\\s+/)) {{
-                        if (word.length < 6) continue;
-                        probe.textContent = word;
-                        if (probe.getBoundingClientRect().width > room + 2) {{ out.push(word); break; }}
+                      // A min-content copy is as wide as its longest unbreakable piece,
+                      // in the real font of each span and with hyphens free to break.
+                      const copy = el.cloneNode(true);
+                      copy.removeAttribute('id');
+                      copy.style.cssText += ';position:absolute;visibility:hidden;width:min-content;'
+                        + 'min-width:0;max-width:none;padding:0;border:0;margin:0';
+                      el.after(copy);
+                      const need = copy.offsetWidth;
+                      copy.remove();
+                      if (need > room + 2) {{
+                        const words = el.innerText.split(/\\s+/).sort((a, b) => b.length - a.length);
+                        out.push(words[0]);
                       }}
-                      probe.remove();
                     }}
                     return out;
                 }})()"""
