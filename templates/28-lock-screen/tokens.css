@@ -60,7 +60,7 @@ p{font-size:29px;line-height:1.4;font-weight:500}
 .p-cover-bt .inner{inset:56px 60px 130px;padding:0;align-items:stretch;justify-content:flex-start;text-align:left}
 .p-cover-bt .date{margin-top:44px;text-align:center;font-size:36px;font-weight:600;letter-spacing:-.4px;color:var(--text)}
 .p-cover-bt .clock{text-align:center;font-size:250px;font-weight:300;line-height:.92;letter-spacing:-12px;color:var(--text)}
-.p-cover-bt .note{position:relative;margin:96px 0 auto;padding:44px 48px 52px}
+.p-cover-bt .note{position:relative;margin:auto 0;padding:44px 48px 52px}
 /* flashlight and camera buttons close the lock screen */
 .p-cover-bt .inner::after{content:"";flex:none;height:116px;margin:0 30px 30px;
   background:radial-gradient(circle at 58px 50%,var(--panel) 0 57px,transparent 58px),radial-gradient(circle at calc(100% - 58px) 50%,var(--panel) 0 57px,transparent 58px)}
