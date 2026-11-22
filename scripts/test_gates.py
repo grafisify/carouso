@@ -61,6 +61,9 @@ CASES = [
     ("the same caption drawn as an outline that crosses the edge", "safe", BODY,
      BODY + '<div data-bleed style="position:absolute;left:0;bottom:-45px;font-size:60px;line-height:1;white-space:nowrap;-webkit-text-fill-color:transparent;-webkit-text-stroke:16px #111"><span>Color</span></div>',
      "--format", "story"),
+    ("an outline that a class forces with !important still counts", "safe", BODY,
+     BODY + '<style>.kept{-webkit-text-fill-color:transparent!important;-webkit-text-stroke:3px #111!important}</style>'
+     '<div class="kept" style="position:absolute;left:0;top:-60px;font-size:60px">Draft</div>', "--format", "story"),
     ("the same caption lowercased, so its descenders cross the edge", "safe", BODY,
      BODY + '<div data-bleed style="position:absolute;left:0;bottom:-45px;font-size:60px;line-height:1;white-space:nowrap;text-transform:lowercase"><span>TYPOGRAPHY</span></div>',
      "--format", "story"),

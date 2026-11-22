@@ -31,10 +31,14 @@ BLEED = '.peek,[data-bleed]'
 
 def _hide_all_text(scopes):
     """CSS that hides whatever the text in these scopes paints: fill, outline, shadow,
-    underline, and the gradient fills and SVG text that measure() tags."""
+    underline, and the gradient fills and SVG text that measure() tags.
+
+    In a cascade layer, because an !important declaration in a layer beats one in
+    the page's own unlayered styles whatever its selector: a class that sets an
+    !important outline would otherwise survive in both captures."""
     def each(tail):
         return ','.join(f'{scope}{tail}' for scope in scopes)
-    return (
+    return "@layer gate{%s}" % (
         each('') + ',' + each('::before') + ',' + each('::after') + ',' + each('::marker') +
         "{-webkit-text-fill-color:transparent!important;text-shadow:none!important;"
         "-webkit-text-stroke-color:transparent!important;text-decoration-color:transparent!important}"
